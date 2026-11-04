@@ -26,8 +26,8 @@ def configuration_errors() -> list[str]:
     if os.getenv("VOICE_PIPELINE", "realtime") not in ("realtime", "chained"):
         errors.append("VOICE_PIPELINE must be realtime or chained")
     url = os.getenv("LIVEKIT_URL", "")
-    if url and (urlparse(url).scheme != "wss" or not urlparse(url).hostname):
-        errors.append("LIVEKIT_URL must be a valid wss:// URL")
+    if url and (urlparse(url).scheme not in ("wss", "https") or not urlparse(url).hostname):
+        errors.append("LIVEKIT_URL must be a valid secure wss:// or https:// URL")
     if not os.getenv("LIVEKIT_AGENT_NAME", "bangla-receptionist").strip():
         errors.append("LIVEKIT_AGENT_NAME cannot be empty")
     backend = os.getenv("BACKEND_URL", "")

@@ -13,6 +13,14 @@ class ConfigurationTests(unittest.TestCase):
         with patch.dict(os.environ, self.base(), clear=True):
             self.assertEqual(configuration_errors(), [])
 
+    def test_cloud_injected_https_livekit_url_is_supported(self):
+        with patch.dict(os.environ, self.base() | {"LIVEKIT_URL": "https://example.livekit.cloud"}, clear=True):
+            self.assertEqual(configuration_errors(), [])
+
+    def test_insecure_livekit_url_is_rejected(self):
+        with patch.dict(os.environ, self.base() | {"LIVEKIT_URL": "http://example.livekit.cloud"}, clear=True):
+            self.assertTrue(any("LIVEKIT_URL" in value for value in configuration_errors()))
+
     def test_chained_pipeline_requires_external_provider_credentials(self):
         with patch.dict(os.environ, self.base() | {"VOICE_PIPELINE": "chained"}, clear=True):
             errors = configuration_errors()
