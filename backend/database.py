@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 from sqlalchemy import create_engine, event
+from sqlalchemy.engine import make_url
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 from agent.config import ROOT
@@ -21,6 +22,11 @@ def make_engine(url: str | None = None):
     if url.startswith("sqlite:"):
         (ROOT / ".local").mkdir(exist_ok=True)
         kwargs["connect_args"] = {"check_same_thread": False, "timeout": 30}
+    elif url.startswith("postgresql+psycopg:"):
+        # Provider/Prisma metadata is not a libpq connection option. Explicitly
+        # disable prepared statements for transaction-mode hosted poolers.
+        url = make_url(url).difference_update_query(["supa", "pgbouncer", "connection_limit", "pool_timeout"])
+        kwargs["connect_args"] = {"prepare_threshold": None, "connect_timeout": 10}
     engine = create_engine(url, **kwargs)
     if engine.dialect.name == "sqlite":
         @event.listens_for(engine, "connect")
