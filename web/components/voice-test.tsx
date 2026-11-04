@@ -230,7 +230,7 @@ export default function VoiceTest() {
   }
   return (
       <div className="test-layout">
-        <header className="voice-page-heading"><div><h1>{t("Talk to Fariya")}</h1>
+        <header className="voice-page-heading"><div><h1>{t("Talk to your receptionist")}</h1>
         <p>
           {t("Speak naturally in Bangla. You can ask about the demo clinic, book a visit, or change an existing appointment using its reference and phone number.")}</p>
         </div></header>
