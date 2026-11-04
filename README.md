@@ -18,7 +18,7 @@ transactional appointment tools and an authenticated call-record portal.
 - Hosted browser reviewer sign-in, call list, transcript, extracted details and
   action history verified. Production Secure/HttpOnly cookies, CSRF, origin checks,
   logout and unauthenticated access rejection passed.
-- 47 hermetic Python tests and 18 PostgreSQL booking tests passed, including
+- 50 hermetic Python tests and 18 PostgreSQL booking tests passed, including
   concurrency protection and failed-reschedule rollback. Linux GitHub CI passed.
 - A human Safari microphone booking succeeded after the stalled-turn recovery
   update; the tester reported a good overall experience.
@@ -29,13 +29,17 @@ transactional appointment tools and an authenticated call-record portal.
   ROOM_DELETED disconnect reason. The browser treats this as a normal ending.
 - A silent WebRTC caller received one check-in and a farewell before automatic
   closure; no appointment or callback was created.
+- Dedicated Bengali STT now supplies caller captions and stored caller transcript
+  segments. A live synthetic test confirmed matching displayed/saved text.
+- An isolated audio-path test forced three booking-write failures. The agent
+  explained the booking had not succeeded; no appointment was created.
 - Synthetic client-observed response timing was roughly 1.3-2.4 seconds in recent
   tests; this is not a calibrated human end-of-speech benchmark.
 - Scripted fixture rows and synthetic voice calls are labelled separately.
 
 **Still unverified or incomplete:** consistent real-speaker Bengali captions, formal
 accent review,
-voice-level backend failure recovery, final mobile visual sign-off, reviewer
+final mobile visual sign-off, reviewer
 repository access and demonstration video. The landing page is excluded by the
 user's instruction. Detailed evidence and limits are in `docs/verification.md`.
 

@@ -44,7 +44,7 @@ async def main():
             user_turns = [turn for turn in stored["transcript"] if turn["speaker"] == "user"]
             received = [turn for turn in caller.turns if turn["speaker"] == "user"]
             assert len(user_turns) >= 2, "Dedicated STT did not persist both spoken inputs"
-            assert all(turn["id"].endswith(turn["id"].split(":")[-1]) and "stt-" in turn["id"] for turn in user_turns)
+            assert all(turn["id"].split(":")[-1].startswith("stt-") for turn in user_turns), "Native caller transcript leaked into storage"
             assert {turn["text"] for turn in user_turns} == {turn["text"] for turn in received}, "Displayed caller captions differ from saved caller text"
             assert all(any("\u0980" <= c <= "\u09ff" for c in turn["text"]) for turn in user_turns)
             assert not any("\u0900" <= c <= "\u0963" or "\u0966" <= c <= "\u097f" for turn in user_turns for c in turn["text"]), "Devanagari letters leaked into caller captions"

@@ -2,7 +2,7 @@
 
 ## Passed
 
-- 47 hermetic Python tests: phone/reference formats and pipeline configuration; confirmation required; invalid dates,
+- 50 hermetic Python tests: phone/reference formats and pipeline configuration; confirmation required; invalid dates,
   doctors, hours and slots; idempotency; concurrent slot collision; cross-call
   booking/reschedule/cancel; wrong-phone lookup rejection; atomic rollback; stale
   version rejection; partial records; callback storage; crash reconciliation;
@@ -167,3 +167,51 @@ including closed Fridays, after a wrong weekday was observed in the human call.
 The voice prompt instructs the agent to use those labels. Bengali-script consistency
 still needs real-speaker review; native captions in the original human call included
 Hindi script despite the configured parallel Bengali STT.
+
+## Dedicated caller captions and failed booking writes
+
+The SDK still processed native realtime input-transcription events even when the
+model's native transcription capability was configured off. The agent now uses
+final Speechmatics Bengali segments as the source for saved caller turns and the
+custom clinic.caller_transcript text stream. Native input events remain available
+to the model context and reply guard but are excluded from saved caller text; the
+browser ignores duplicate native caller captions when dedicated captions are active.
+Assistant captions continue using the standard LiveKit stream. Historical records
+were not rewritten. STT segment timestamps use audio origin plus speech-start
+offset, rather than the late arrival of the final transcript.
+
+Live hosted call bca574dd-2465-4531-ac5f-7ba745212256 on worker WV9ewqewoQBT passed:
+mixed Bangla/service words and a phone correction produced Bengali caller segments,
+every stored caller ID came from dedicated STT, and client caller text matched saved
+caller text. No Devanagari letters were present and no business action was saved.
+Evidence: .local/audio-captions-e2e.json. This proves the source routing and these
+synthetic samples, not universally accurate recognition. STT split the spoken phone
+across segments and omitted a digit in the separate failure-test request. The voice
+model read back the complete phone correctly. Keep exact raw STT text; do not
+silently replace it with an inferred number or claim perfect number transcription.
+
+An isolated local API and uniquely named local worker exercised the real RTC/audio
+path with the same agent and HTTP bridge. Test-only middleware rejected booking
+writes with 503; it was never installed on the hosted API. Call
+06ed3acf-dd10-4387-b241-d8cb2650964e attempted the confirmed write three times,
+retained zero appointment actions and ended incomplete. Its final assistant
+transcript explicitly said the appointment could not be booked and asked the caller
+to retry later. Evidence: .local/audio-failure-e2e.json. The fake SQLite database and
+local worker log are ignored, and both test processes stopped. This is an isolated
+fault-injection result, not a production outage or a hosted PostgreSQL fault test.
+The test was rerun after adding date-relative sample generation and an assertion
+that no write is attempted before the confirmation clip. Latest call
+93053c2d-42f9-47fb-a032-e2971780cc40 passed with three rejected requests, incomplete
+status, no saved action and an explicit failure explanation. The current ignored
+audio-failure-e2e.json report describes this second run.
+
+The 50 Python checks and Node 24 portal production build passed. GitHub CI and both
+Vercel deployment statuses passed commit 1ca5ef0. Human review of the new caller
+caption path, microphone-denial recovery and final mobile visuals remain open.
+
+The final mobile screenshot attempt timed out, then browser access became disabled
+in Work settings. A responsive accessibility tree was observed at 390x844, but no
+usable screenshot was obtained; this is not visual sign-off. The browser viewport
+override could not be reset after access was disabled. Reset it on reconnection
+before normal browser work. Repository access remains private by the user's latest
+instruction; the user plans to make it public before submission.

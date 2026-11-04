@@ -14,7 +14,7 @@ assessment demonstration, not a real healthcare service.
 - Consultation BDT 500, scaling BDT 1,500, follow-up BDT 300, all demo fees.
 - Both doctors support those services. Actual available slots must come from the backend.
 
-## Booking contract for the next implementation stage
+## Booking contract
 
 Collect patient name, mobile, reason, service/doctor preference and preferred time.
 Normalize Bangla/English digits to canonical +880 mobile format. Read phone digits
@@ -39,8 +39,11 @@ request is not a promise that staff have already contacted them.
 ## Current implementation boundary
 
 Booking, rescheduling, cancellation, callback, call and transcript storage are
-implemented in the backend. Registered agent tools use those APIs; automated tests
-verify the integration without speech generation. The browser portal reads real
-backend records. A synthetic spoken booking also passed through LiveKit's native
-Gemini Live path. Human microphone, interruption and accent verification remain
-open. The alternative Soniox/Azure path is not connected.
+implemented in the backend. Registered agent tools use those APIs. Automated
+database tests and actual synthetic WebRTC audio calls verify separate parts of the
+integration. A human Safari booking succeeded and the tester reported a good
+overall experience. Audible interruption, corrected contact details, silence and
+explicit goodbye have separate synthetic evidence. Dedicated Bengali caller STT
+segments are displayed and saved independently of the voice model's native input
+captions. Exact recognition and formal accent review still need human assessment;
+see docs/verification.md. The alternative Soniox/Azure path is not connected.

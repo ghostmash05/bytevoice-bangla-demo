@@ -30,6 +30,10 @@ tests or claim checks that are still pending. Review voice quality before record
 ## Submission readiness
 
 The portal and direct caller are deployed. The repository is currently private;
-reviewer access must be resolved before submission. The landing page remains
+the user will make it public before submission. Keep it private until then. The landing page remains
 outside the user's active implementation scope. Do not send an HR submission
 until the required links and the video are actually accessible.
+
+See docs/submission-readiness.md for the requirement/evidence checklist and unsent
+email draft. It explicitly records the excluded landing page rather than claiming
+that the direct voice page satisfies that item.
