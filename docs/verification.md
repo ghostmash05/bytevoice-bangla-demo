@@ -231,3 +231,24 @@ rendering guarantee. Normal viewport sizing was restored after review.
 Ignored evidence: .local/mobile-voice-final.png, mobile-portal-final.png,
 mobile-details-final.png, mobile-activity-final.png and mobile-call-list-final.png.
 Only fictional/synthetic record screens were saved. No visual fix was needed.
+
+## Browser error view and recording attempt
+
+An isolated hosted /try tab was instrumented through the browser's development
+protocol to make getUserMedia reject with NotAllowedError. The real UI connection
+flow reached Error, displayed the permission guidance and an enabled Start another
+call button. Screenshot: .local/microphone-denial-final.png. This verifies the
+browser API rejection path, not a real browser settings toggle or successful retry
+after changing permissions. The page was reloaded to remove the override, visibly
+returned to Idle, then the temporary tab was closed.
+
+A separate local video attempt used a labelled synthetic-microphone stream and
+browser screencast. The browser connection was lost during capture; no usable video
+was produced. That call (560b2632-2828-48a8-a822-cd4acd1e1018) reached the greeting
+and idle check-in, but no caller booking audio was delivered. It was manually ended
+during cleanup. The capture session was stopped and all temporary page audio/media
+overrides and the recording banner were removed by reload. No source or hosted
+application changes were made for recording. The generated sample and partial
+frames remain ignored under .local; they are not submission evidence. imageio-ffmpeg
+was installed only in the local venv as an optional recording utility, not added
+to production requirements. A fresh successful video recording remains required.

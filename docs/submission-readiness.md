@@ -7,7 +7,7 @@ still requests one; the direct caller does not satisfy that marketing-page item.
 | Requirement | Evidence | Remaining action |
 |---|---|---|
 | Public browser caller | https://bytevoice-bangla-portal.vercel.app/try; human Safari booking succeeded | Human retest of automatic ending and dedicated caller captions |
-| Connecting/live/ended and error states | Implemented in web/app/try/page.tsx; deployed build passed; mobile voice layout inspected | Microphone-denial retry remains unverified |
+| Connecting/live/ended and error states | Implemented in web/app/try/page.tsx; deployed build passed; mobile layout and injected NotAllowedError guidance/retry button inspected | Actual permission-settings toggle and successful retry not tested |
 | Natural Bangla conversation | Human reported good overall experience; synthetic calls exercise actual audio | Formal real-speaker accent/recognition review remains subjective and pending |
 | Confirmed booking | Human Safari call and eight-turn name-correction regression saved exactly one appointment | No known functional blocker |
 | Cross-call reschedule/cancel | Three hosted calls changed DDC-36063772, versions 1/2/3 | No known functional blocker |
