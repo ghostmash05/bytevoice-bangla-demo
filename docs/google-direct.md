@@ -1,4 +1,4 @@
-# Direct Google Gemini Live — November 4 migration
+# Direct Google Gemini Live — November 4–5 migration
 
 The free LiveKit realtime gateway credits were exhausted. Transport, managed
 worker hosting and speech recognition use separate allowances, so moving the
@@ -15,9 +15,11 @@ worker to another server would not solve that particular rejection.
 - `GOOGLE_API_KEY` is required in Google mode. Explicit `vertexai=False` ensures
   the plugin uses the Gemini API rather than ambient Vertex credentials.
 - LiveKit remains responsible for WebRTC transport and worker hosting.
-  `REALTIME_STT_MODEL=` selects Google-native captions with Bengali/English
+  `REALTIME_STT_MODEL=native` (or empty) selects Google-native captions with Bengali/English
   language hints. The first hosted migration test retained Speechmatics, but
-  that LiveKit STT connection also returned HTTP 429 and closed the call. It was
+  that LiveKit STT connection also returned HTTP 429 and closed the call. A
+  gateway diagnostic confirmed STT credits were exhausted with remaining limit
+  zero. It was
   removed from this configuration; the failed run is not a passed audio test.
 - `REALTIME_PROVIDER=livekit` preserves the old integration for explicit use.
   There is no automatic fallback that could hide quota failures or change billing.
@@ -40,8 +42,19 @@ automatic contact, immediate transfer and a promised contact time. These checks
 establish connectivity and stored actions, not speech recognition or accent.
 
 All 53 Python regression tests passed, and `pip check` found no broken package
-requirements. Worker source commit `a777af8` deployed as `Tk393h52g2S9` and
-reached Running. Provider keys are absent from Git and the browser bundle.
+requirements. GitHub backend and portal checks passed for source commit
+`3ccb870`. The final native-caption worker deployed as `sM7Bu8rhP2vp`.
+Provider keys are absent from Git and the browser bundle.
+
+At 00:03 Bangladesh time on November 5, the hosted synthetic WebRTC call completed
+with one confirmed callback, the exact corrected phone and no appointment
+actions. The request was not saved before confirmation. Caller captions were
+retained in Bengali script; assistant transcript included the correction readback,
+explicit demo/no-actual-call disclosure and farewell. The database call finalized
+as completed. Ignored evidence: `.local/audio-callback-e2e.json`,
+`.local/call-review/google-native-callback.log` and synthetic received audio.
+This proves the tested audio/tools/storage path, not real-microphone recognition
+or subjective Bangladeshi accent quality. Human device review is pending.
 
 ## References
 

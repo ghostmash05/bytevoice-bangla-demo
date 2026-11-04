@@ -26,7 +26,7 @@ Gemini Live using a dedicated free-tier ByteVoice project. See
 - Hosted browser reviewer sign-in, call list, transcript, extracted details and
   action history verified. Production Secure/HttpOnly cookies, CSRF, origin checks,
   logout and unauthenticated access rejection passed.
-- 50 hermetic Python tests and 18 PostgreSQL booking tests passed, including
+- 53 hermetic Python tests and 18 PostgreSQL booking tests passed, including
   concurrency protection and failed-reschedule rollback. Linux GitHub CI passed.
 - A human Safari microphone booking succeeded after the stalled-turn recovery
   update; the tester reported a good overall experience.
