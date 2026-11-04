@@ -41,10 +41,20 @@ confirmation. That is a useful existing safeguard and remains in place.
 - `scripts/agent_review_scenarios.py` exercises fictional text inputs against the
   configured realtime model with isolated local tools and storage. The initial
   run was blocked by HTTP 429; it is not a passed voice or prompt evaluation.
-- LiveKit showed the free Build plan, peak agent concurrency of 3/5, and no
-  current concurrent agent sessions when inspected. Billing listed realtime
-  usage but did not expose a definitive reason for the 429. No plan change or
-  payment was made.
+- A focused realtime-gateway diagnostic established the rejection reason:
+  `inference_quota_exceeded`, `Realtime credit quota exceeded`, category
+  `MaxGatewayCredits`, remaining limit `0`, free tier `true`. The free realtime
+  credit allowance is exhausted; this is not just a concurrency guess. No plan
+  change or payment was made. Further voice tests need restored credits or a
+  separately configured, authorized provider.
+- All 51 Python tests passed. The hosted portal passed 17 checks covering
+  anonymous, forged, valid and revoked sessions; protected-route no-store;
+  safe deep-link returns; and the separate public caller. An unsigned browser
+  visit to the data-model page visibly redirected to login.
+- Both Vercel services deployed commit `5eaf0b5`. The revised worker deployed as
+  `eTGrq5HhXXYR` and reached Running. Deployment does not establish model
+  availability or prove the revised prompt's behavior. The post-deploy model
+  check stopped before any reply because realtime credits were exhausted.
 - Next human review: short/ambiguous names; a corrected 11-digit phone; phone
   refusal; non-dental enquiry; repeated requests for immediate staff contact;
   afternoon versus noon; past-time request; and a goodbye at the time limit.
