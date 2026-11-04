@@ -3,11 +3,11 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { bangla } from "@/lib/translations";
 
 type Language = "en" | "bn";
-const LocaleContext = createContext({ language: "en" as Language, toggleLanguage: () => {}, t: (value: string) => value });
+const LocaleContext = createContext({ language: "bn" as Language, toggleLanguage: () => {}, t: (value: string) => bangla[value] || value });
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>("en");
+  const [language, setLanguage] = useState<Language>("bn");
   useEffect(() => {
-    try { setLanguage(localStorage.getItem("bytevoice-language") === "bn" ? "bn" : "en"); } catch { /* Storage is optional. */ }
+    try { setLanguage(localStorage.getItem("bytevoice-language") === "en" ? "en" : "bn"); } catch { /* Storage is optional. */ }
   }, []);
   useEffect(() => { document.documentElement.lang = language; }, [language]);
   function toggleLanguage() {

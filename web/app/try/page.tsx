@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Mic, MicOff, Phone, PhoneOff, CalendarCheck2, RefreshCw, MessageSquareText, ShieldCheck, ArrowUpRight } from "lucide-react";
+import { Mic, MicOff, Phone, PhoneOff, CalendarCheck2, RefreshCw, MessageSquareText } from "lucide-react";
 import { Brand } from "@/components/brand";
 import { useLocale } from "@/components/locale";
 import {
@@ -235,8 +235,9 @@ export default function VoiceTest() {
         <header className="voice-page-heading"><div><h1>{t("Talk to your receptionist")}</h1>
         <p>
           {t("Speak naturally in Bangla. You can ask about the demo clinic, book a visit, or change an existing appointment using its reference and phone number.")}</p>
-        </div><span className="language-label">বাংলা <span>· {t("Bangladesh")}</span></span></header>
+        </div></header>
         <div className="voice-workspace">
+        <div className="voice-column">
         <section className={`call-console console-${state}`} aria-label={t("Browser voice call")}>
           <div className="call-console-head">
             <h2>{t("Dhaka Dental Care")}</h2>
@@ -305,16 +306,6 @@ export default function VoiceTest() {
             </div>
           )}
         </section>
-        <aside className="call-guide" aria-label={t("Conversation guide")}>
-          <h2>{t("A real conversation.")}<br />{t("A useful outcome.")}</h2>
-          <p>{t("Try one of these conversations in natural Bangla.")}</p>
-          <div className="guide-item"><CalendarCheck2 size={19} aria-hidden="true" /><div><h3>{t("Book an appointment")}</h3><p lang="bn">“কাল সকালে স্কেলিংয়ের জন্য সময় হবে?”</p></div></div>
-          <div className="guide-item"><RefreshCw size={18} aria-hidden="true" /><div><h3>{t("Change an existing visit")}</h3><p>{t("Have your booking reference and phone number ready.")}</p></div></div>
-          <div className="guide-item"><MessageSquareText size={19} aria-hidden="true" /><div><h3>{t("Ask about the clinic")}</h3><p>{t("Opening hours, services, demo fees or a staff callback.")}</p></div></div>
-          <div className="guide-note"><ShieldCheck size={17} aria-hidden="true" /><p>{t("Fictional clinic. Real workflow.")}<br />{t("Use made-up patient details.")}</p></div>
-          <Link className="text-link" href="/portal">{t("Open call records")}<ArrowUpRight size={16} aria-hidden="true" /></Link>
-        </aside>
-        </div>
         <p className="consent-note">
           {t("This is a fictional clinic for an assessment demo. Use fake patient details only. Starting a call sends microphone audio to the configured speech providers and stores the transcript and captured details for review. Demo calls end after five minutes.")}</p>
         {callId && (
@@ -324,6 +315,14 @@ export default function VoiceTest() {
           >
             {t("View this call in the staff portal")}</Link>
         )}
+        </div>
+        <aside className="call-guide" aria-label={t("Conversation guide")}>
+          <h2>{t("Try a conversation")}</h2>
+          <div className="guide-item"><CalendarCheck2 size={19} aria-hidden="true" /><div><h3>{t("Book an appointment")}</h3><p lang="bn">“কাল সকালে স্কেলিংয়ের জন্য সময় হবে?”</p></div></div>
+          <div className="guide-item"><RefreshCw size={18} aria-hidden="true" /><div><h3>{t("Change an existing visit")}</h3><p>{t("Have your booking reference and phone number ready.")}</p></div></div>
+          <div className="guide-item"><MessageSquareText size={19} aria-hidden="true" /><div><h3>{t("Ask about the clinic")}</h3><p>{t("Opening hours, services, demo fees or a staff callback.")}</p></div></div>
+        </aside>
+        </div>
         <div ref={audio} aria-hidden="true" />
       </div>
     </Shell>

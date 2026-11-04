@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-04T16:02:03.291000+00:00",
+  "generatedAt": "2026-11-04T16:36:19.121193+00:00",
   "title": "Design System: ByteVoice Bangla workspace",
   "extensions": {
     "colorMeta": {
@@ -1026,7 +1026,7 @@
   ],
   "narrative": {
     "northStar": "The Silver Record Frame",
-    "overview": "The silver glass frame turns conversations into clear, actionable clinic records. Cool translucent navigation surrounds a clear white sheet; restrained slate actions, fine rules and generous Bengali transcript leading make the workspace feel modern, classy and composed. The authentic ByteVoice waveform anchors the identity.\n\nLight is the default, with an explicit dark toggle and BN/EN dashboard controls. Glass is an intentional user-brief override: use it for the framing and voice emblem, while records remain readable solid surfaces. This replaces the former teal system. The visual language serves a fictional clinic operating interface and its browser voice test.",
+    "overview": "The silver glass frame turns conversations into clear, actionable clinic records. Cool translucent navigation surrounds a clear white sheet; restrained slate actions, fine rules and generous Bengali transcript leading make the workspace feel modern, classy and composed. The authentic ByteVoice waveform anchors the identity.\n\nLight and Bangla are the defaults, with an explicit dark toggle and BN/EN controls. A saved English language choice takes precedence. Glass is an intentional user-brief override: use it for the framing and voice emblem, while records remain readable solid surfaces. This replaces the former teal system. The visual language serves a fictional clinic operating interface and its browser voice test.",
     "keyCharacteristics": [
       "Cool silver framing and clear record sheets.",
       "Authentic ByteVoice emblem, preserved from the supplied asset.",

@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Shell } from "@/components/shell";
+import { CopyValue } from "@/components/copy-value";
 import { api, ApiError, dateTime as formatDateTime, duration, label as formatLabel } from "@/lib/api";
 import { useLocale } from "@/components/locale";
 import {
@@ -263,9 +264,7 @@ export default function Portal() {
       <header className="page-header">
         <div>
           <h1>{t("Call records")}</h1>
-          <p>
-            {t("Every conversation, with the details your team needs.")}<span className="mobile-timezone">{t("Bangladesh time · UTC+6")}</span>
-          </p>
+          <p className="mobile-timezone">{t("Bangladesh time · UTC+6")}</p>
         </div>
         <div className="header-actions">
           <span className="subtle">
@@ -339,6 +338,7 @@ export default function Portal() {
             )}
           </select>
         </label>
+        {(q || outcome || status) && <button className="text-link clear-filters" onClick={() => { setQ(""); setOutcome(""); setStatus(""); setOffset(0); }}>{t("Clear filters")}</button>}
       </div>
       {error && (
         <div className="page-error error" role="alert">
@@ -635,6 +635,7 @@ export default function Portal() {
                                 {value || (
                                   <span className="subtle">{t("Not captured")}</span>
                                 )}
+                                {value && key === "Phone number" && <CopyValue value={String(value)} label="Copy phone number" />}
                               </dd>
                             </div>
                           ))}
@@ -678,7 +679,7 @@ export default function Portal() {
                                                     ? t("Appointment")
                                                     : label(key)}
                                             </dt>
-                                            <dd>{actionValue(key, value)}</dd>
+                                            <dd>{actionValue(key, value)}{key === "reference" && <CopyValue value={String(value)} label="Copy booking reference" />}</dd>
                                           </div>
                                         ))}
                                     </dl>

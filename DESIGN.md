@@ -156,7 +156,7 @@ components:
 
 The silver glass frame turns conversations into clear, actionable clinic records. Cool translucent navigation surrounds a clear white sheet; restrained slate actions, fine rules and generous Bengali transcript leading make the workspace feel modern, classy and composed. The authentic ByteVoice waveform anchors the identity.
 
-Light is the default, with an explicit dark toggle and BN/EN dashboard controls. Glass is an intentional user-brief override: use it for the framing and voice emblem, while records remain readable solid surfaces. This replaces the former teal system. The visual language serves a fictional clinic operating interface and its browser voice test.
+Light and Bangla are the defaults, with an explicit dark toggle and BN/EN controls. A saved English language choice takes precedence. Glass is an intentional user-brief override: use it for the framing and voice emblem, while records remain readable solid surfaces. This replaces the former teal system. The visual language serves a fictional clinic operating interface and its browser voice test.
 
 **Key Characteristics:**
 
@@ -198,7 +198,7 @@ The call index starts at (`minmax(300px, 34%)`). At (1800px) and wider it become
 
 At (760px) and below, the shell becomes sticky top navigation, the sheet loses its outer border/radius/shadow, and content gutters become (20px). Call list and selected record become separate views with an explicit return action and focus restoration. Filters disclose from a button. Navigation and theme/language controls retain (44px) minimum targets; compact header/filter/icon controls also have (44px) phone targets. These describe responsive patterns, not a universal call-record composition for every future screen.
 
-Voice-test content is bounded to (1280px), with a main console and (270px) guide separated by (38px); compact desktop uses a (225px) guide and (25px) gap. Record transcripts are bounded to (780px). Data-model content is bounded to (1150px).
+Voice-test content is bounded to (1280px), with a main console and (270px) guide separated by (38px); compact desktop uses a (225px) guide and (25px) gap. Record transcripts are bounded to (780px). Data-model content is bounded to (1280px). Its flow precedes an entity selector and field/relationship view; at (980px) and below a native picker replaces the entity list. Storage and validation use one readable column at that breakpoint.
 
 ## Elevation & Depth
 
@@ -230,7 +230,7 @@ Fields use the sheet, control border, (8px) corners, (10px 12px) padding and (42
 
 ### Navigation
 
-Fine line icons (generally 18px, stroke 1.65) accompany labels. The active page gains a clear surface, glass seam, subtle shadow and weight (650); hover uses raised mist. Retain `aria-current`, the skip link and explicit accessible names when compact controls omit visible text. Theme/language toggles persist preferences when storage is available; light and English are the implemented defaults. Sign out is an outlined session action on every working route while authenticated; signed-out views offer Sign in. The desktop icon rail retains accessible names and tooltips. Mobile keeps labelled navigation and an outlined logout icon in its top control row. Short desktop sidebars scroll rather than clipping session controls.
+Fine line icons (generally 18px, stroke 1.65) accompany labels. The active page gains a clear surface, glass seam, subtle shadow and weight (650); hover uses raised mist. Retain `aria-current`, the skip link and explicit accessible names when compact controls omit visible text. Theme/language toggles persist preferences when storage is available; light and Bangla are the implemented defaults, with an explicit saved English choice respected. Sign out is an outlined session action on every working route while authenticated; signed-out views offer Sign in. The desktop icon rail retains accessible names and tooltips. Mobile keeps labelled navigation and an outlined logout icon in its top control row. Short desktop sidebars scroll rather than clipping session controls.
 
 **The Shared Session Rule.** Show Sign out on every authenticated working route and Sign in when signed out. Compact navigation retains accessible labels.
 
@@ -245,6 +245,10 @@ The sheet is one continuous solid record surface with a light seam and ambient s
 ### Call rows and record tabs
 
 Rows are full-width buttons with (20px 24px) desktop padding, fine bottom rules and selected fill; hover returns to paper. Metadata uses two-sided alignment and tabular numbers. Tabs use an accent underline, (44px) minimum height and arrow/Home/End navigation. Preserve the phone list/detail handoff and focus restoration.
+
+### Copy controls
+
+Inline phone/reference copy controls use (32px) desktop and (44px) phone targets, a fine control border and (7px) corners. A check icon and announced status confirm a copy; failure gives a visible recovery message. Copy the stored value exactly.
 
 ### Transcript turns and voice emblem
 

@@ -37,8 +37,9 @@ error, empty and permission-denied states; support mobile and desktop and keyboa
 ## Appearance and language
 The user requested a modern, restrained silver-glass workspace inspired by
 ByteVoice's actual product identity, using its original wordmark and waveform.
-Light is the default, with an explicit dark-mode toggle. Bangla and English
-interface language is selectable and persists locally; original patient names,
+Light is the default, with an explicit dark-mode toggle. Bangla is the default
+interface language; an explicit saved English choice is respected. Language is
+selectable and persists locally; original patient names,
 phone numbers, booking references and transcript text retain their source values.
 The staff portal, sign-in, data-model view and browser voice test share the system.
 Keep the direct working routes; a marketing landing page remains outside scope.
