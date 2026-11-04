@@ -2,6 +2,7 @@
 import asyncio
 import logging
 import os
+import time
 from datetime import datetime, timezone
 from openai.types.realtime import AudioTranscription
 
@@ -12,6 +13,7 @@ from agent.bridge import BackendBridge
 from agent.config import require_configuration
 from agent.prompt import build_instructions
 from agent.validation import normalize_bd_mobile
+from agent.recovery import TurnRecovery
 
 logger = logging.getLogger("clinic-agent")
 
@@ -135,12 +137,60 @@ async def entrypoint(ctx: agents.JobContext):
                 queue.task_done()
 
     writer = asyncio.create_task(persist_turns())
+    last_reply_started = {"at": 0.0}
+
+    async def recover_reply():
+        logger.warning("Recovering stalled reply call_id=%s", call_id)
+        generation = recovery.generation
+        await asyncio.wait_for(session.interrupt(force=True), timeout=3)
+        if not recovery.pending or recovery.generation != generation:
+            return
+        session.generate_reply(instructions=(
+            "The previous response stalled. Respond to the latest caller turn using the existing conversation. "
+            "If the caller confirmed a readback, finish the requested tool operation. Verify actual tool results; "
+            "never claim an unverified booking or callback succeeded. Do not repeat a successful write. "
+            "If a required detail is missing, ask one short clarifying question in Bangla."
+        ))
+
+    async def failed_reply():
+        state.update(failed=True, error_code="reply_timeout")
+        logger.error("Reply recovery failed call_id=%s", call_id)
+        ctx.shutdown(reason="voice reply timeout")
+
+    recovery = TurnRecovery(recover_reply, failed_reply)
+
+    @session.on("agent_state_changed")
+    def on_agent_state(event):
+        logger.info("Agent state call_id=%s state=%s", call_id, event.new_state)
+        if event.new_state == "speaking":
+            last_reply_started["at"] = time.time()
+            recovery.activity()
+
+    @session.on("user_state_changed")
+    def on_user_state(event):
+        if event.new_state == "speaking":
+            recovery.activity()
+
+    @session.on("function_tools_executed")
+    def on_tools(event):
+        # Names and error flags only. Never log tool arguments, results or PII.
+        for call, output in event.zipped():
+            logger.info("Tool completed call_id=%s tool=%s error=%s", call_id, call.name, output.is_error)
+
+    async def watch_replies():
+        while True:
+            await asyncio.sleep(1)
+            await recovery.check()
+
+    reply_watcher = asyncio.create_task(watch_replies())
 
     @session.on("conversation_item_added")
     def on_item(event):
         item = event.item
         if getattr(item, "role", None) not in ("user", "assistant") or not item.text_content:
             return
+        if item.role == "user" and item.created_at > last_reply_started["at"]:
+            recovery.user_turn()
         try:
             queue.put_nowait({"id": item.id, "speaker": item.role, "text": item.text_content,
                 "timestamp": datetime.fromtimestamp(item.created_at, timezone.utc).isoformat(), "interrupted": item.interrupted})
@@ -172,6 +222,7 @@ async def entrypoint(ctx: agents.JobContext):
 
     async def shutdown():
         timer.cancel()
+        reply_watcher.cancel()
         try:
             await session.aclose()
             await asyncio.wait_for(queue.join(), timeout=20)
@@ -179,7 +230,7 @@ async def entrypoint(ctx: agents.JobContext):
             state.update(failed=True, error_code="transcript_flush_timeout")
         finally:
             writer.cancel()
-            await asyncio.gather(writer, timer, return_exceptions=True)
+            await asyncio.gather(writer, timer, reply_watcher, return_exceptions=True)
             try:
                 await backend.request("POST", f"/internal/calls/{call_id}/end", state)
             finally:

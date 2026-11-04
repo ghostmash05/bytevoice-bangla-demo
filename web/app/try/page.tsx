@@ -51,8 +51,8 @@ export default function VoiceTest() {
     cleanup();
     const current = room.current;
     room.current = null;
-    await current?.disconnect();
     setState("ended");
+    await current?.disconnect();
   }
   function observeAgent(participant: Participant) {
     if (participant.kind === ParticipantKind.AGENT) {
@@ -97,6 +97,16 @@ export default function VoiceTest() {
         track.detach().forEach((element) => element.remove()),
       );
       current.on(RoomEvent.ParticipantConnected, observeAgent);
+      current.on(RoomEvent.ParticipantDisconnected, (participant) => {
+        if (participant.kind !== ParticipantKind.AGENT || room.current !== current || cancelled.current) return;
+        cancelled.current = true;
+        joining.current = false;
+        room.current = null;
+        cleanup();
+        setError("The receptionist disconnected. Reconnect to continue; any saved details are retained.");
+        setState("error");
+        void current.disconnect();
+      });
       current.on(
         RoomEvent.ParticipantAttributesChanged,
         (_attributes, participant) => observeAgent(participant),
@@ -136,6 +146,8 @@ export default function VoiceTest() {
         },
       );
       current.on(RoomEvent.Disconnected, () => {
+        if (room.current !== current) return;
+        room.current = null;
         cleanup();
         joining.current = false;
         setState((previous) => (previous === "error" ? "error" : "ended"));
