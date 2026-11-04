@@ -11,15 +11,18 @@ import {
   RefreshCw,
   Search,
   ShieldCheck,
+  SlidersHorizontal,
+  Phone,
 } from "lucide-react";
 import Link from "next/link";
 import { Shell } from "@/components/shell";
-import { api, ApiError, dateTime, duration, label } from "@/lib/api";
+import { api, ApiError, dateTime as formatDateTime, duration, label as formatLabel } from "@/lib/api";
+import { useLocale } from "@/components/locale";
 import {
-  actionValue,
-  appointmentTime,
-  doctorName,
-  serviceName,
+  actionValue as formatActionValue,
+  appointmentTime as formatAppointmentTime,
+  doctorName as formatDoctorName,
+  serviceName as formatServiceName,
 } from "@/lib/clinic";
 import type { CallDetail, CallList } from "@/lib/types";
 
@@ -27,6 +30,14 @@ type Session = { username: string; csrf_token: string };
 const emptyList: CallList = { items: [], total: 0, limit: 30, offset: 0 };
 
 export default function Portal() {
+  const { t, language } = useLocale();
+  const label = (value: string) => t(formatLabel(value));
+  const dateTime = (value: string) => formatDateTime(value, language);
+  const number = (value: number) => new Intl.NumberFormat(language === "bn" ? "bn-BD" : "en-GB").format(value);
+  const appointmentTime = (value: string | null) => formatAppointmentTime(value, language);
+  const doctorName = (id: string | null) => formatDoctorName(id, language);
+  const serviceName = (id: string | null) => formatServiceName(id, language);
+  const actionValue = (key: string, value: string | number) => t(formatActionValue(key, value, language) || "");
   const [session, setSession] = useState<Session | null>(null),
     [checking, setChecking] = useState(true);
   const [username, setUsername] = useState("reviewer"),
@@ -48,6 +59,7 @@ export default function Portal() {
     [refresh, setRefresh] = useState(0),
     [updated, setUpdated] = useState("");
   const pendingFocus = useRef<string | null>(null);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   useEffect(() => {
     if (
       !pendingFocus.current ||
@@ -192,7 +204,7 @@ export default function Portal() {
         <div className="loading-page" role="status">
           <div className="skeleton wide" />
           <div className="skeleton" />
-          <p>Opening clinic workspace…</p>
+          <p>{t("Opening clinic workspace…")}</p>
         </div>
       </Shell>
     );
@@ -203,22 +215,17 @@ export default function Portal() {
           <div className="login-intro">
             <ShieldCheck size={30} />
             <h1>
-              Your clinic’s calls,
-              <br />
-              clearly recorded.
-            </h1>
+              {t("Your clinic’s calls,")}<br />
+              {t("clearly recorded.")}</h1>
             <p>
-              Review conversations, patient requests and appointment outcomes in
-              one place.
-            </p>
+              {t("Review conversations, patient requests and appointment outcomes in one place.")}</p>
             <p className="quiet">
-              Assessment demo. Use fictional patient details only.
-            </p>
+              {t("Assessment demo. Use fictional patient details only.")}</p>
           </div>
           <form className="login-form" onSubmit={login}>
-            <h2>Sign in to the workspace</h2>
-            <p>Use the reviewer credentials provided with the demo.</p>
-            <label htmlFor="username">Username</label>
+            <h2>{t("Sign in to the workspace")}</h2>
+            <p>{t("Use the reviewer credentials provided with the demo.")}</p>
+            <label htmlFor="username">{t("Username")}</label>
             <input
               id="username"
               autoComplete="username"
@@ -226,7 +233,7 @@ export default function Portal() {
               onChange={(e) => setUsername(e.target.value)}
               required
             />
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t("Password")}</label>
             <input
               id="password"
               type="password"
@@ -241,12 +248,11 @@ export default function Portal() {
               </p>
             )}
             <button className="primary" disabled={loggingIn}>
-              {loggingIn ? "Signing in…" : "Sign in"}
+              {loggingIn ? t("Signing in…") : t("Sign in")}
               <ArrowRight size={17} />
             </button>
             <Link href="/try" className="text-link">
-              Try the Bangla voice demo
-            </Link>
+              {t("Try the Bangla voice demo")}</Link>
           </form>
         </div>
       </Shell>
@@ -256,15 +262,14 @@ export default function Portal() {
     <Shell onLogout={logout}>
       <header className="page-header">
         <div>
-          <h1>Call records</h1>
+          <h1>{t("Call records")}</h1>
           <p>
-            Every conversation, with the details your team needs.
-            <span className="mobile-timezone">Bangladesh time · UTC+6</span>
+            {t("Every conversation, with the details your team needs.")}<span className="mobile-timezone">{t("Bangladesh time · UTC+6")}</span>
           </p>
         </div>
         <div className="header-actions">
           <span className="subtle">
-            {updated ? `Updated ${updated}` : "Waiting for records"}
+            {updated ? `${t("Updated")} ${updated}` : t("Waiting for records" )}
           </span>
           <button
             className="secondary"
@@ -272,23 +277,27 @@ export default function Portal() {
             disabled={loading}
           >
             <RefreshCw size={16} />
-            Refresh
-          </button>
+            {t("Refresh")}</button>
+          <Link className="primary header-call" href="/try"><Phone size={16} aria-hidden="true" />{t("Test a call")}</Link>
         </div>
       </header>
-      <div className="filters">
+      <div className={`filters ${filtersOpen ? "filters-open" : ""}`}>
         <label className="search-field">
           <Search size={17} />
-          <span className="sr-only">Search by name, phone or call ID</span>
+          <span className="sr-only">{t("Search by name, phone or call ID")}</span>
           <input
             type="search"
-            placeholder="Search name, phone or call ID"
+            placeholder={t("Search name, phone or call ID")}
             value={q}
             onChange={(e) => setQ(e.target.value)}
           />
         </label>
-        <label>
-          <span className="sr-only">Filter by outcome</span>
+        <button className="secondary mobile-filters" aria-expanded={filtersOpen} aria-controls="outcome-filter status-filter" onClick={() => setFiltersOpen(!filtersOpen)}>
+          <SlidersHorizontal size={17} aria-hidden="true" />
+          {t("Filters")}{outcome || status ? t(" · On") : ""}
+        </button>
+        <label className="filter-select" id="outcome-filter">
+          <span className="sr-only">{t("Filter by outcome")}</span>
           <select
             value={outcome}
             onChange={(e) => {
@@ -296,7 +305,7 @@ export default function Portal() {
               setOffset(0);
             }}
           >
-            <option value="">All outcomes</option>
+            <option value="">{t("All outcomes")}</option>
             {[
               "booked",
               "rescheduled",
@@ -311,8 +320,8 @@ export default function Portal() {
             ))}
           </select>
         </label>
-        <label>
-          <span className="sr-only">Filter by call status</span>
+        <label className="filter-select" id="status-filter">
+          <span className="sr-only">{t("Filter by call status")}</span>
           <select
             value={status}
             onChange={(e) => {
@@ -320,7 +329,7 @@ export default function Portal() {
               setOffset(0);
             }}
           >
-            <option value="">All statuses</option>
+            <option value="">{t("All statuses")}</option>
             {["connecting", "live", "completed", "incomplete", "failed"].map(
               (v) => (
                 <option key={v} value={v}>
@@ -338,23 +347,22 @@ export default function Portal() {
             className="text-link"
             onClick={() => setRefresh((r) => r + 1)}
           >
-            Try again
-          </button>
+            {t("Try again")}</button>
         </div>
       )}
       <div className={`records-layout ${selected ? "has-selection" : ""}`}>
-        <section className="call-index" aria-label="Call list">
+        <section className="call-index" aria-label={t("Call list")}>
           <div className="index-heading">
             <span>
-              {list.total} {list.total === 1 ? "record" : "records"}
+              {number(list.total)} {list.total === 1 ? t("record") : t("records")}
             </span>
-            <span className="subtle">Newest first</span>
+            <span className="subtle">{t("Newest first")}</span>
           </div>
           {loading && list.items.length === 0 ? (
             <div
               className="list-loading"
               role="status"
-              aria-label="Loading calls"
+              aria-label={t("Loading calls")}
             >
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="skeleton" />
@@ -365,17 +373,16 @@ export default function Portal() {
               <AudioLines size={30} />
               <h2>
                 {search || outcome || status
-                  ? "No matching calls"
-                  : "No calls yet"}
+                  ? t("No matching calls")
+                  : t("No calls yet")}
               </h2>
               <p>
                 {search || outcome || status
-                  ? "Try another search or clear the filters."
-                  : "Start a voice test. The call and its captured details will appear here."}
+                  ? t("Try another search or clear the filters.")
+                  : t("Start a voice test. The call and its captured details will appear here.")}
               </p>
               <Link className="text-link" href="/try">
-                Open voice test
-                <ArrowRight size={16} />
+                {t("Open voice test")}<ArrowRight size={16} />
               </Link>
             </div>
           ) : (
@@ -390,7 +397,7 @@ export default function Portal() {
                 >
                   <div className="row-top">
                     <strong>
-                      {call.extraction.patient_name || "Unidentified caller"}
+                      {call.extraction.patient_name || t("Unidentified caller")}
                     </strong>
                     <span className={`badge ${call.outcome}`}>
                       {label(call.outcome)}
@@ -402,12 +409,12 @@ export default function Portal() {
                     ) && (
                       <span className="fixture-label">
                         {call.source === "scripted_test"
-                          ? "Scripted test"
-                          : "Synthetic voice test"}{" "}
+                          ? t("Scripted test")
+                          : t("Synthetic voice test")}{" "}
                         ·{" "}
                       </span>
                     )}
-                    {call.extraction.phone || "Phone not captured"}
+                    {call.extraction.phone || t("Phone not captured")}
                   </span>
                   <div className="row-meta">
                     <span>{dateTime(call.started_at)}</span>
@@ -424,13 +431,13 @@ export default function Portal() {
           <div className="pagination">
             <span>
               {list.total
-                ? `${offset + 1}–${Math.min(offset + 30, list.total)} of ${list.total}`
-                : "0 records"}
+                ? `${number(offset + 1)}–${number(Math.min(offset + 30, list.total))} ${language === "bn" ? "/" : "of"} ${number(list.total)}`
+                : t("0 records")}
             </span>
             <div>
               <button
                 className="icon-button"
-                aria-label="Previous page"
+                aria-label={t("Previous page")}
                 disabled={offset === 0 || loading}
                 onClick={() => setOffset(Math.max(0, offset - 30))}
               >
@@ -438,7 +445,7 @@ export default function Portal() {
               </button>
               <button
                 className="icon-button"
-                aria-label="Next page"
+                aria-label={t("Next page")}
                 disabled={offset + 30 >= list.total || loading}
                 onClick={() => setOffset(offset + 30)}
               >
@@ -447,32 +454,29 @@ export default function Portal() {
             </div>
           </div>
         </section>
-        <section className="record-detail" aria-label="Selected call">
+        <section className="record-detail" aria-label={t("Selected call")}>
           {!selected ? (
             <div className="detail-placeholder">
               <AudioLines size={38} />
-              <h2>Take a closer look.</h2>
+              <h2>{t("Take a closer look.")}</h2>
               <p>
-                Select a call to see the conversation,
-                <br />
-                captured details and saved actions.
-              </p>
+                {t("Select a call to see the conversation,")}<br />
+                {t("captured details and saved actions.")}</p>
             </div>
           ) : (
             <>
               <button className="back-to-list" onClick={() => select(null)}>
                 <ArrowLeft size={16} />
-                All calls
-              </button>
+                {t("All calls")}</button>
               {detailLoading && !detail ? (
                 <div className="detail-loading" role="status">
                   <div className="skeleton wide" />
                   <div className="skeleton" />
-                  <p>Loading call record…</p>
+                  <p>{t("Loading call record…")}</p>
                 </div>
               ) : detailError ? (
                 <div className="empty-state">
-                  <h2>Couldn’t open this call</h2>
+                  <h2>{t("Couldn’t open this call")}</h2>
                   <p className="error" role="alert">
                     {detailError}
                   </p>
@@ -480,8 +484,7 @@ export default function Portal() {
                     className="secondary"
                     onClick={() => setRefresh((r) => r + 1)}
                   >
-                    Try again
-                  </button>
+                    {t("Try again")}</button>
                 </div>
               ) : (
                 detail && (
@@ -490,9 +493,9 @@ export default function Portal() {
                       <div>
                         <h2 id="record-title" tabIndex={-1}>
                           {detail.extraction.patient_name ||
-                            "Unidentified caller"}
+                            t("Unidentified caller")}
                         </h2>
-                        <p>{detail.extraction.phone || "Phone not captured"}</p>
+                        <p>{detail.extraction.phone || t("Phone not captured")}</p>
                       </div>
                       <span className={`badge ${detail.outcome}`}>
                         {label(detail.outcome)}
@@ -501,7 +504,7 @@ export default function Portal() {
                     <div className="record-meta">
                       <span>
                         {detail.source === "scripted_test"
-                          ? "Scripted test fixture"
+                          ? t("Scripted test fixture")
                           : label(detail.source)}
                       </span>
                       <span>
@@ -511,21 +514,19 @@ export default function Portal() {
                       <span>
                         {detail.ended_at
                           ? duration(detail.duration_s)
-                          : "Call in progress"}
+                          : t("Call in progress")}
                       </span>
                       <span>{label(detail.status)}</span>
                     </div>
                     {detail.error_code && (
                       <p className="error record-error">
-                        The call encountered an issue:{" "}
-                        {label(detail.error_code)}. Captured records are
-                        preserved.
-                      </p>
+                        {t("The call encountered an issue:")}{" "}
+                        {label(detail.error_code)}{t(". Captured records are preserved.")}</p>
                     )}
                     <div
                       className="tabs"
                       role="tablist"
-                      aria-label="Call record views"
+                      aria-label={t("Call record views")}
                     >
                       {["conversation", "details", "activity"].map((t) => (
                         <button
@@ -568,7 +569,7 @@ export default function Portal() {
                         >
                           {label(t)}
                           {t === "conversation" && (
-                            <span>{detail.transcript.length}</span>
+                            <span>{number(detail.transcript.length)}</span>
                           )}
                         </button>
                       ))}
@@ -590,11 +591,11 @@ export default function Portal() {
                                 <div className="turn-heading">
                                   <strong>
                                     {turn.speaker === "assistant"
-                                      ? "AI receptionist"
-                                      : "Caller"}
+                                      ? t("AI receptionist")
+                                      : t("Caller")}
                                   </strong>
                                   <time>{duration(turn.offset_s)}</time>
-                                  {turn.interrupted && <span>Interrupted</span>}
+                                  {turn.interrupted && <span>{t("Interrupted")}</span>}
                                 </div>
                                 <p lang="bn">{turn.text}</p>
                               </article>
@@ -602,11 +603,11 @@ export default function Portal() {
                           </div>
                         ) : (
                           <div className="empty-state compact">
-                            <h3>No transcript captured</h3>
+                            <h3>{t("No transcript captured")}</h3>
                             <p>
                               {detail.ended_at
-                                ? "This call ended before a transcript was captured."
-                                : "Conversation turns will appear as the call progresses."}
+                                ? t("This call ended before a transcript was captured.")
+                                : t("Conversation turns will appear as the call progresses.")}
                             </p>
                           </div>
                         )
@@ -629,10 +630,10 @@ export default function Portal() {
                             "Call ID": detail.id,
                           }).map(([key, value]) => (
                             <div key={key}>
-                              <dt>{key}</dt>
+                              <dt>{t(key)}</dt>
                               <dd>
                                 {value || (
-                                  <span className="subtle">Not captured</span>
+                                  <span className="subtle">{t("Not captured")}</span>
                                 )}
                               </dd>
                             </div>
@@ -643,11 +644,9 @@ export default function Portal() {
                           {detail.actions.length === 0 &&
                           detail.follow_ups.length === 0 ? (
                             <div className="empty-state compact">
-                              <h3>No saved actions</h3>
+                              <h3>{t("No saved actions")}</h3>
                               <p>
-                                Booking changes and staff follow-ups will appear
-                                here when saved.
-                              </p>
+                                {t("Booking changes and staff follow-ups will appear here when saved.")}</p>
                             </div>
                           ) : (
                             <>
@@ -672,11 +671,11 @@ export default function Portal() {
                                           <div key={key}>
                                             <dt>
                                               {key === "doctor_id"
-                                                ? "Doctor"
+                                                ? t("Doctor")
                                                 : key === "service_id"
-                                                  ? "Service"
+                                                  ? t("Service")
                                                   : key === "slot"
-                                                    ? "Appointment"
+                                                    ? t("Appointment")
                                                     : label(key)}
                                             </dt>
                                             <dd>{actionValue(key, value)}</dd>
@@ -690,7 +689,7 @@ export default function Portal() {
                                 <article className="action-entry" key={f.id}>
                                   <Clock3 size={18} />
                                   <div>
-                                    <h3>Staff follow-up · {label(f.status)}</h3>
+                                    <h3>{t("Staff follow-up ·")}{label(f.status)}</h3>
                                     <p>{f.reason}</p>
                                     <p>
                                       {f.patient_name} · {f.phone}

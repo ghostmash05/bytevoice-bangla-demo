@@ -1,7 +1,10 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AudioLines, Database, Headphones, List, LogOut } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Database, Headphones, List, LogOut, Moon, Sun, Globe2, ChevronRight } from "lucide-react";
+import { Brand } from "./brand";
+import { useLocale } from "./locale";
 
 export function Shell({
   children,
@@ -11,29 +14,36 @@ export function Shell({
   onLogout?: () => void;
 }) {
   const path = usePathname();
+  const { t, language, toggleLanguage } = useLocale();
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
+  }, []);
+  function toggleTheme() {
+    const next = theme === "light" ? "dark" : "light";
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem("bytevoice-theme", next); } catch { /* Theme remains usable without storage. */ }
+    setTheme(next);
+  }
   const links = [
-    { href: "/portal", label: "Call records", Icon: List },
-    { href: "/try", label: "Voice test", Icon: Headphones },
-    { href: "/portal/data-model", label: "Data model", Icon: Database },
+    { href: "/portal", label: t("Call records"), Icon: List },
+    { href: "/try", label: t("Voice test"), Icon: Headphones },
+    { href: "/portal/data-model", label: t("Data model"), Icon: Database },
   ];
   return (
     <div className="workspace">
       <a className="skip-link" href="#main">
-        Skip to content
-      </a>
+        {t("Skip to content")}</a>
       <aside className="sidebar">
         <Link className="brand" href="/portal">
-          <span className="brand-symbol">
-            <AudioLines size={23} />
-          </span>
-          <span>
-            ByteVoice<span className="brand-region">Bangla</span>
-          </span>
+          <Brand />
         </Link>
         <div className="clinic-label">
-          Dhaka Dental Care<span>Fictional clinic · Demo workspace</span>
+          <span className="clinic-avatar">DC</span>
+          <div>{t("Dhaka Dental Care")}<span>{t("Assessment workspace")}</span></div>
+          <ChevronRight size={14} aria-hidden="true" />
         </div>
-        <nav aria-label="Workspace navigation">
+        <nav aria-label={t("Workspace navigation")}>
           {links.map(({ href, label, Icon }) => (
             <Link
               key={href}
@@ -41,22 +51,28 @@ export function Shell({
               aria-current={path === href ? "page" : undefined}
               className={path === href ? "nav-link active" : "nav-link"}
             >
-              <Icon size={18} />
+              <Icon size={18} strokeWidth={1.65} aria-hidden="true" />
               {label}
             </Link>
           ))}
         </nav>
         <div className="sidebar-bottom">
+          <button className="locale-toggle nav-link" onClick={toggleLanguage} aria-label={language === "en" ? "বাংলায় দেখুন" : "View in English"}>
+            <span className="locale-glyph" aria-hidden="true">{language === "en" ? "বাং" : "EN"}</span>
+            <span>{language === "en" ? "বাংলা" : "English"}</span>
+          </button>
+          <button className="theme-toggle nav-link" onClick={toggleTheme} aria-label={t(theme === "light" ? "Switch to dark mode" : "Switch to light mode")}>
+            {theme === "light" ? <Moon size={17} aria-hidden="true" /> : <Sun size={17} aria-hidden="true" />}
+            <span>{theme === "light" ? t("Dark mode") : t("Light mode")}</span>
+          </button>
           <span className="timezone">
-            All times in Bangladesh
-            <br />
-            <strong>Asia/Dhaka · UTC+6</strong>
+            <Globe2 size={14} aria-hidden="true" />
+            <span>{t("Bangladesh time")}<strong>{t("Asia/Dhaka · UTC+6")}</strong></span>
           </span>
           {onLogout && (
             <button className="nav-link" onClick={onLogout}>
               <LogOut size={17} />
-              Sign out
-            </button>
+              {t("Sign out")}</button>
           )}
         </div>
       </aside>

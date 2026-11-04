@@ -33,8 +33,8 @@ export async function api<T>(path: string, init?: RequestInit): Promise<T> {
     );
   return data as T;
 }
-export const dateTime = (value: string) =>
-  new Intl.DateTimeFormat("en-GB", {
+export const dateTime = (value: string, language = "en") =>
+  new Intl.DateTimeFormat(language === "bn" ? "bn-BD" : "en-GB", {
     timeZone: "Asia/Dhaka",
     day: "numeric",
     month: "short",

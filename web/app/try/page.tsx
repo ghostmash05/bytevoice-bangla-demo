@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { AudioLines, Mic, MicOff, Phone, PhoneOff } from "lucide-react";
+import { Mic, MicOff, Phone, PhoneOff, CalendarCheck2, RefreshCw, MessageSquareText, ShieldCheck, ArrowUpRight } from "lucide-react";
+import { Brand } from "@/components/brand";
+import { useLocale } from "@/components/locale";
 import {
   ParticipantKind,
   Room,
@@ -11,12 +13,14 @@ import {
   type RemoteTrack,
 } from "livekit-client";
 import { Shell } from "@/components/shell";
-import { api, label } from "@/lib/api";
+import { api, label as formatLabel } from "@/lib/api";
 
 type State = "idle" | "connecting" | "live" | "ended" | "error";
 type Turn = { id: string; text: string; speaker: string };
 
 export default function VoiceTest() {
+  const { t } = useLocale();
+  const label = (value: string) => t(formatLabel(value));
   const [state, setState] = useState<State>("idle"),
     [error, setError] = useState(""),
     [muted, setMuted] = useState(false),
@@ -228,15 +232,14 @@ export default function VoiceTest() {
   return (
     <Shell>
       <div className="test-layout">
-        <h1>Test the Bangla receptionist</h1>
+        <header className="voice-page-heading"><div><h1>{t("Talk to your receptionist")}</h1>
         <p>
-          Speak naturally in Bangla. You can ask about the demo clinic, book a
-          visit, or change an existing appointment using its reference and phone
-          number.
-        </p>
-        <section className="call-console" aria-label="Browser voice call">
+          {t("Speak naturally in Bangla. You can ask about the demo clinic, book a visit, or change an existing appointment using its reference and phone number.")}</p>
+        </div><span className="language-label">বাংলা <span>· {t("Bangladesh")}</span></span></header>
+        <div className="voice-workspace">
+        <section className={`call-console console-${state}`} aria-label={t("Browser voice call")}>
           <div className="call-console-head">
-            <h2>Dhaka Dental Care</h2>
+            <h2>{t("Dhaka Dental Care")}</h2>
             <span className="call-state" role="status">
               <span className={`state-dot ${state === "live" ? "live" : ""}`} />
               {label(state)}
@@ -244,25 +247,25 @@ export default function VoiceTest() {
           </div>
           <div className="call-stage">
             <div className="voice-mark">
-              <AudioLines size={37} />
+              <Brand mark />
             </div>
             <h3>
               {state === "live"
-                ? agentState
+                ? t(agentState)
                 : state === "connecting"
-                  ? "Connecting your call…"
+                  ? t("Connecting your call…")
                   : state === "ended"
-                    ? "The call has ended"
+                    ? t("The call has ended")
                     : state === "error"
-                      ? "Let’s try that again"
+                      ? t("Let’s try that again")
                       : "কীভাবে সাহায্য করতে পারি?"}
             </h3>
             <p>
               {state === "live"
-                ? "Speak when you’re ready. You can interrupt the receptionist to correct a detail."
+                ? t("Speak when you’re ready. You can interrupt the receptionist to correct a detail.")
                 : state === "ended"
-                  ? "Your captured conversation and appointment actions will appear in the staff portal."
-                  : "Use your microphone to talk to our AI receptionist."}
+                  ? t("Your captured conversation and appointment actions will appear in the staff portal.")
+                  : t("Use your microphone to talk to our AI receptionist.")}
             </p>
             {error && (
               <p className="error" role="alert">
@@ -275,48 +278,51 @@ export default function VoiceTest() {
               <>
                 <button className="secondary" onClick={toggleMute}>
                   {muted ? <MicOff size={17} /> : <Mic size={17} />}
-                  {muted ? "Unmute microphone" : "Mute microphone"}
+                  {muted ? t("Unmute microphone") : t("Mute microphone")}
                 </button>
                 <button className="primary danger" onClick={end}>
                   <PhoneOff size={17} />
-                  End call
-                </button>
+                  {t("End call")}</button>
               </>
             ) : state === "connecting" ? (
               <button className="secondary" onClick={end}>
-                Cancel connection
-              </button>
+                {t("Cancel connection")}</button>
             ) : (
               <button className="primary" onClick={start}>
                 <Phone size={17} />
-                {state === "idle" ? "Start voice call" : "Start another call"}
+                {state === "idle" ? t("Start voice call") : t("Start another call")}
               </button>
             )}
           </div>
           {turns.length > 0 && (
-            <div className="test-transcript" aria-label="Live transcript">
-              {turns.map((t) => (
-                <article key={t.id}>
-                  <h3>{t.speaker}</h3>
-                  <p lang="bn">{t.text}</p>
+            <div className="test-transcript" aria-label={t("Live transcript")}>
+              {turns.map((turn) => (
+                <article key={turn.id}>
+                  <h3>{t(turn.speaker)}</h3>
+                  <p lang="bn">{turn.text}</p>
                 </article>
               ))}
             </div>
           )}
         </section>
+        <aside className="call-guide" aria-label={t("Conversation guide")}>
+          <h2>{t("A real conversation.")}<br />{t("A useful outcome.")}</h2>
+          <p>{t("Try one of these conversations in natural Bangla.")}</p>
+          <div className="guide-item"><CalendarCheck2 size={19} aria-hidden="true" /><div><h3>{t("Book an appointment")}</h3><p lang="bn">“কাল সকালে স্কেলিংয়ের জন্য সময় হবে?”</p></div></div>
+          <div className="guide-item"><RefreshCw size={18} aria-hidden="true" /><div><h3>{t("Change an existing visit")}</h3><p>{t("Have your booking reference and phone number ready.")}</p></div></div>
+          <div className="guide-item"><MessageSquareText size={19} aria-hidden="true" /><div><h3>{t("Ask about the clinic")}</h3><p>{t("Opening hours, services, demo fees or a staff callback.")}</p></div></div>
+          <div className="guide-note"><ShieldCheck size={17} aria-hidden="true" /><p>{t("Fictional clinic. Real workflow.")}<br />{t("Use made-up patient details.")}</p></div>
+          <Link className="text-link" href="/portal">{t("Open call records")}<ArrowUpRight size={16} aria-hidden="true" /></Link>
+        </aside>
+        </div>
         <p className="consent-note">
-          This is a fictional clinic for an assessment demo. Use fake patient
-          details only. Starting a call sends microphone audio to the configured
-          speech providers and stores the transcript and captured details for
-          review. Demo calls end after five minutes.
-        </p>
+          {t("This is a fictional clinic for an assessment demo. Use fake patient details only. Starting a call sends microphone audio to the configured speech providers and stores the transcript and captured details for review. Demo calls end after five minutes.")}</p>
         {callId && (
           <Link
             className="text-link"
             href={`/portal?call=${encodeURIComponent(callId)}`}
           >
-            View this call in the staff portal
-          </Link>
+            {t("View this call in the staff portal")}</Link>
         )}
         <div ref={audio} aria-hidden="true" />
       </div>
