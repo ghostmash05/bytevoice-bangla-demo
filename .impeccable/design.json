@@ -1,67 +1,1068 @@
 {
-  "title": "Design System: ByteVoice Bangla workspace",
-  "generatedAt": "2026-11-04T07:54:15.0247989Z",
-  "components": [
-    {
-      "refersTo": "button-primary",
-      "kind": "button",
-      "name": "Primary button",
-      "description": "Primary operating action",
-      "css": ".ds-primary{font:600 .88rem Arial,sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:43px;padding:10px 16px;border:1px solid var(--accent);border-radius:6px;background:var(--accent);color:white;cursor:pointer;transition:background-color .15s ease,color .15s ease}.ds-primary:hover:not(:disabled){background:var(--accent-dark)}.ds-primary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}.ds-primary:disabled{opacity:.52;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}",
-      "html": "<button class=\"ds-primary\">Start voice call</button>"
-    }
-  ],
   "schemaVersion": 2,
-  "narrative": {
-    "keyCharacteristics": [
-      "Aligned labels",
-      "Readable Bengali transcripts",
-      "Explicit record states"
-    ],
-    "overview": "White records, blue-grey navigation, dark ink and restrained teal states form a compact operating interface.",
-    "dos": [
-      "Preserve visible keyboard focus",
-      "Label fictional and scripted data"
-    ],
-    "donts": [
-      "Introduce invented metrics or decorative charts",
-      "Claim visual sign-off from source extraction"
-    ],
-    "northStar": "Civil registry"
-  },
+  "generatedAt": "2026-11-04T15:29:07.292320+00:00",
+  "title": "Design System: ByteVoice Bangla workspace",
   "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0.02731 257.53)",
+          "oklch(26% 0.02731 257.53)",
+          "oklch(38% 0.02731 257.53)",
+          "oklch(49% 0.02731 257.53)",
+          "oklch(61% 0.02731 257.53)",
+          "oklch(72% 0.02731 257.53)",
+          "oklch(84% 0.02731 257.53)",
+          "oklch(95% 0.02731 257.53)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "tonalRamp": [
+          "oklch(15% 0.02601 254.51)",
+          "oklch(26% 0.02601 254.51)",
+          "oklch(38% 0.02601 254.51)",
+          "oklch(49% 0.02601 254.51)",
+          "oklch(61% 0.02601 254.51)",
+          "oklch(72% 0.02601 254.51)",
+          "oklch(84% 0.02601 254.51)",
+          "oklch(95% 0.02601 254.51)"
+        ]
+      },
+      "faint": {
+        "role": "neutral",
+        "displayName": "Faint",
+        "tonalRamp": [
+          "oklch(15% 0.03013 251.85)",
+          "oklch(26% 0.03013 251.85)",
+          "oklch(38% 0.03013 251.85)",
+          "oklch(49% 0.03013 251.85)",
+          "oklch(61% 0.03013 251.85)",
+          "oklch(72% 0.03013 251.85)",
+          "oklch(84% 0.03013 251.85)",
+          "oklch(95% 0.03013 251.85)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "tonalRamp": [
+          "oklch(15% 0.00975 252.81)",
+          "oklch(26% 0.00975 252.81)",
+          "oklch(38% 0.00975 252.81)",
+          "oklch(49% 0.00975 252.81)",
+          "oklch(61% 0.00975 252.81)",
+          "oklch(72% 0.00975 252.81)",
+          "oklch(84% 0.00975 252.81)",
+          "oklch(95% 0.00975 252.81)"
+        ]
+      },
+      "control": {
+        "role": "neutral",
+        "displayName": "Control",
+        "tonalRamp": [
+          "oklch(15% 0.01817 253.36)",
+          "oklch(26% 0.01817 253.36)",
+          "oklch(38% 0.01817 253.36)",
+          "oklch(49% 0.01817 253.36)",
+          "oklch(61% 0.01817 253.36)",
+          "oklch(72% 0.01817 253.36)",
+          "oklch(84% 0.01817 253.36)",
+          "oklch(95% 0.01817 253.36)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15% 0.00000 89.88)",
+          "oklch(26% 0.00000 89.88)",
+          "oklch(38% 0.00000 89.88)",
+          "oklch(49% 0.00000 89.88)",
+          "oklch(61% 0.00000 89.88)",
+          "oklch(72% 0.00000 89.88)",
+          "oklch(84% 0.00000 89.88)",
+          "oklch(95% 0.00000 89.88)"
+        ]
+      },
+      "workspace": {
+        "role": "neutral",
+        "displayName": "Workspace",
+        "tonalRamp": [
+          "oklch(15% 0.00625 255.48)",
+          "oklch(26% 0.00625 255.48)",
+          "oklch(38% 0.00625 255.48)",
+          "oklch(49% 0.00625 255.48)",
+          "oklch(61% 0.00625 255.48)",
+          "oklch(72% 0.00625 255.48)",
+          "oklch(84% 0.00625 255.48)",
+          "oklch(95% 0.00625 255.48)"
+        ]
+      },
+      "nav": {
+        "role": "neutral",
+        "displayName": "Nav",
+        "tonalRamp": [
+          "oklch(15% 0.00452 258.32)",
+          "oklch(26% 0.00452 258.32)",
+          "oklch(38% 0.00452 258.32)",
+          "oklch(49% 0.00452 258.32)",
+          "oklch(61% 0.00452 258.32)",
+          "oklch(72% 0.00452 258.32)",
+          "oklch(84% 0.00452 258.32)",
+          "oklch(95% 0.00452 258.32)"
+        ]
+      },
+      "raised": {
+        "role": "neutral",
+        "displayName": "Raised",
+        "tonalRamp": [
+          "oklch(15% 0.00453 258.32)",
+          "oklch(26% 0.00453 258.32)",
+          "oklch(38% 0.00453 258.32)",
+          "oklch(49% 0.00453 258.32)",
+          "oklch(61% 0.00453 258.32)",
+          "oklch(72% 0.00453 258.32)",
+          "oklch(84% 0.00453 258.32)",
+          "oklch(95% 0.00453 258.32)"
+        ]
+      },
+      "selected": {
+        "role": "neutral",
+        "displayName": "Selected",
+        "tonalRamp": [
+          "oklch(15% 0.01140 252.09)",
+          "oklch(26% 0.01140 252.09)",
+          "oklch(38% 0.01140 252.09)",
+          "oklch(49% 0.01140 252.09)",
+          "oklch(61% 0.01140 252.09)",
+          "oklch(72% 0.01140 252.09)",
+          "oklch(84% 0.01140 252.09)",
+          "oklch(95% 0.01140 252.09)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Accent",
+        "tonalRamp": [
+          "oklch(15% 0.07167 243.95)",
+          "oklch(26% 0.07167 243.95)",
+          "oklch(38% 0.07167 243.95)",
+          "oklch(49% 0.07167 243.95)",
+          "oklch(61% 0.07167 243.95)",
+          "oklch(72% 0.07167 243.95)",
+          "oklch(84% 0.07167 243.95)",
+          "oklch(95% 0.07167 243.95)"
+        ]
+      },
+      "accent-dark": {
+        "role": "primary",
+        "displayName": "Accent Dark",
+        "tonalRamp": [
+          "oklch(15% 0.06140 241.34)",
+          "oklch(26% 0.06140 241.34)",
+          "oklch(38% 0.06140 241.34)",
+          "oklch(49% 0.06140 241.34)",
+          "oklch(61% 0.06140 241.34)",
+          "oklch(72% 0.06140 241.34)",
+          "oklch(84% 0.06140 241.34)",
+          "oklch(95% 0.06140 241.34)"
+        ]
+      },
+      "primary": {
+        "role": "primary",
+        "displayName": "Primary",
+        "tonalRamp": [
+          "oklch(15% 0.03839 251.90)",
+          "oklch(26% 0.03839 251.90)",
+          "oklch(38% 0.03839 251.90)",
+          "oklch(49% 0.03839 251.90)",
+          "oklch(61% 0.03839 251.90)",
+          "oklch(72% 0.03839 251.90)",
+          "oklch(84% 0.03839 251.90)",
+          "oklch(95% 0.03839 251.90)"
+        ]
+      },
+      "primary-ink": {
+        "role": "neutral",
+        "displayName": "Primary Ink",
+        "tonalRamp": [
+          "oklch(15% 0.00000 89.88)",
+          "oklch(26% 0.00000 89.88)",
+          "oklch(38% 0.00000 89.88)",
+          "oklch(49% 0.00000 89.88)",
+          "oklch(61% 0.00000 89.88)",
+          "oklch(72% 0.00000 89.88)",
+          "oklch(84% 0.00000 89.88)",
+          "oklch(95% 0.00000 89.88)"
+        ]
+      },
+      "error": {
+        "role": "neutral",
+        "displayName": "Error",
+        "tonalRamp": [
+          "oklch(15% 0.15430 16.58)",
+          "oklch(26% 0.15430 16.58)",
+          "oklch(38% 0.15430 16.58)",
+          "oklch(49% 0.15430 16.58)",
+          "oklch(61% 0.15430 16.58)",
+          "oklch(72% 0.15430 16.58)",
+          "oklch(84% 0.15430 16.58)",
+          "oklch(95% 0.15430 16.58)"
+        ]
+      },
+      "error-bg": {
+        "role": "neutral",
+        "displayName": "Error Bg",
+        "tonalRamp": [
+          "oklch(15% 0.01298 11.54)",
+          "oklch(26% 0.01298 11.54)",
+          "oklch(38% 0.01298 11.54)",
+          "oklch(49% 0.01298 11.54)",
+          "oklch(61% 0.01298 11.54)",
+          "oklch(72% 0.01298 11.54)",
+          "oklch(84% 0.01298 11.54)",
+          "oklch(95% 0.01298 11.54)"
+        ]
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "Focus",
+        "tonalRamp": [
+          "oklch(15% 0.09805 248.64)",
+          "oklch(26% 0.09805 248.64)",
+          "oklch(38% 0.09805 248.64)",
+          "oklch(49% 0.09805 248.64)",
+          "oklch(61% 0.09805 248.64)",
+          "oklch(72% 0.09805 248.64)",
+          "oklch(84% 0.09805 248.64)",
+          "oklch(95% 0.09805 248.64)"
+        ]
+      },
+      "glass-edge": {
+        "role": "neutral",
+        "displayName": "Glass Edge",
+        "tonalRamp": [
+          "oklch(15% 0.00000 89.88)",
+          "oklch(26% 0.00000 89.88)",
+          "oklch(38% 0.00000 89.88)",
+          "oklch(49% 0.00000 89.88)",
+          "oklch(61% 0.00000 89.88)",
+          "oklch(72% 0.00000 89.88)",
+          "oklch(84% 0.00000 89.88)",
+          "oklch(95% 0.00000 89.88)"
+        ]
+      },
+      "assistant": {
+        "role": "neutral",
+        "displayName": "Assistant",
+        "tonalRamp": [
+          "oklch(15% 0.00624 255.47)",
+          "oklch(26% 0.00624 255.47)",
+          "oklch(38% 0.00624 255.47)",
+          "oklch(49% 0.00624 255.47)",
+          "oklch(61% 0.00624 255.47)",
+          "oklch(72% 0.00624 255.47)",
+          "oklch(84% 0.00624 255.47)",
+          "oklch(95% 0.00624 255.47)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "tonalRamp": [
+          "oklch(15% 0.00626 255.48)",
+          "oklch(26% 0.00626 255.48)",
+          "oklch(38% 0.00626 255.48)",
+          "oklch(49% 0.00626 255.48)",
+          "oklch(61% 0.00626 255.48)",
+          "oklch(72% 0.00626 255.48)",
+          "oklch(84% 0.00626 255.48)",
+          "oklch(95% 0.00626 255.48)"
+        ]
+      },
+      "dark-ink": {
+        "role": "neutral",
+        "displayName": "Dark Ink",
+        "tonalRamp": [
+          "oklch(15% 0.00912 258.34)",
+          "oklch(26% 0.00912 258.34)",
+          "oklch(38% 0.00912 258.34)",
+          "oklch(49% 0.00912 258.34)",
+          "oklch(61% 0.00912 258.34)",
+          "oklch(72% 0.00912 258.34)",
+          "oklch(84% 0.00912 258.34)",
+          "oklch(95% 0.00912 258.34)"
+        ]
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "Dark Muted",
+        "tonalRamp": [
+          "oklch(15% 0.02272 256.75)",
+          "oklch(26% 0.02272 256.75)",
+          "oklch(38% 0.02272 256.75)",
+          "oklch(49% 0.02272 256.75)",
+          "oklch(61% 0.02272 256.75)",
+          "oklch(72% 0.02272 256.75)",
+          "oklch(84% 0.02272 256.75)",
+          "oklch(95% 0.02272 256.75)"
+        ]
+      },
+      "dark-faint": {
+        "role": "neutral",
+        "displayName": "Dark Faint",
+        "tonalRamp": [
+          "oklch(15% 0.02851 255.13)",
+          "oklch(26% 0.02851 255.13)",
+          "oklch(38% 0.02851 255.13)",
+          "oklch(49% 0.02851 255.13)",
+          "oklch(61% 0.02851 255.13)",
+          "oklch(72% 0.02851 255.13)",
+          "oklch(84% 0.02851 255.13)",
+          "oklch(95% 0.02851 255.13)"
+        ]
+      },
+      "dark-line": {
+        "role": "neutral",
+        "displayName": "Dark Line",
+        "tonalRamp": [
+          "oklch(15% 0.02864 254.63)",
+          "oklch(26% 0.02864 254.63)",
+          "oklch(38% 0.02864 254.63)",
+          "oklch(49% 0.02864 254.63)",
+          "oklch(61% 0.02864 254.63)",
+          "oklch(72% 0.02864 254.63)",
+          "oklch(84% 0.02864 254.63)",
+          "oklch(95% 0.02864 254.63)"
+        ]
+      },
+      "dark-control": {
+        "role": "neutral",
+        "displayName": "Dark Control",
+        "tonalRamp": [
+          "oklch(15% 0.03422 254.84)",
+          "oklch(26% 0.03422 254.84)",
+          "oklch(38% 0.03422 254.84)",
+          "oklch(49% 0.03422 254.84)",
+          "oklch(61% 0.03422 254.84)",
+          "oklch(72% 0.03422 254.84)",
+          "oklch(84% 0.03422 254.84)",
+          "oklch(95% 0.03422 254.84)"
+        ]
+      },
+      "dark-paper": {
+        "role": "neutral",
+        "displayName": "Dark Paper",
+        "tonalRamp": [
+          "oklch(15% 0.02569 258.33)",
+          "oklch(26% 0.02569 258.33)",
+          "oklch(38% 0.02569 258.33)",
+          "oklch(49% 0.02569 258.33)",
+          "oklch(61% 0.02569 258.33)",
+          "oklch(72% 0.02569 258.33)",
+          "oklch(84% 0.02569 258.33)",
+          "oklch(95% 0.02569 258.33)"
+        ]
+      },
+      "dark-workspace": {
+        "role": "neutral",
+        "displayName": "Dark Workspace",
+        "tonalRamp": [
+          "oklch(15% 0.02457 259.26)",
+          "oklch(26% 0.02457 259.26)",
+          "oklch(38% 0.02457 259.26)",
+          "oklch(49% 0.02457 259.26)",
+          "oklch(61% 0.02457 259.26)",
+          "oklch(72% 0.02457 259.26)",
+          "oklch(84% 0.02457 259.26)",
+          "oklch(95% 0.02457 259.26)"
+        ]
+      },
+      "dark-nav": {
+        "role": "neutral",
+        "displayName": "Dark Nav",
+        "tonalRamp": [
+          "oklch(15% 0.02975 259.06)",
+          "oklch(26% 0.02975 259.06)",
+          "oklch(38% 0.02975 259.06)",
+          "oklch(49% 0.02975 259.06)",
+          "oklch(61% 0.02975 259.06)",
+          "oklch(72% 0.02975 259.06)",
+          "oklch(84% 0.02975 259.06)",
+          "oklch(95% 0.02975 259.06)"
+        ]
+      },
+      "dark-raised": {
+        "role": "neutral",
+        "displayName": "Dark Raised",
+        "tonalRamp": [
+          "oklch(15% 0.03145 256.27)",
+          "oklch(26% 0.03145 256.27)",
+          "oklch(38% 0.03145 256.27)",
+          "oklch(49% 0.03145 256.27)",
+          "oklch(61% 0.03145 256.27)",
+          "oklch(72% 0.03145 256.27)",
+          "oklch(84% 0.03145 256.27)",
+          "oklch(95% 0.03145 256.27)"
+        ]
+      },
+      "dark-selected": {
+        "role": "neutral",
+        "displayName": "Dark Selected",
+        "tonalRamp": [
+          "oklch(15% 0.04089 254.35)",
+          "oklch(26% 0.04089 254.35)",
+          "oklch(38% 0.04089 254.35)",
+          "oklch(49% 0.04089 254.35)",
+          "oklch(61% 0.04089 254.35)",
+          "oklch(72% 0.04089 254.35)",
+          "oklch(84% 0.04089 254.35)",
+          "oklch(95% 0.04089 254.35)"
+        ]
+      },
+      "dark-accent": {
+        "role": "neutral",
+        "displayName": "Dark Accent",
+        "tonalRamp": [
+          "oklch(15% 0.05337 245.85)",
+          "oklch(26% 0.05337 245.85)",
+          "oklch(38% 0.05337 245.85)",
+          "oklch(49% 0.05337 245.85)",
+          "oklch(61% 0.05337 245.85)",
+          "oklch(72% 0.05337 245.85)",
+          "oklch(84% 0.05337 245.85)",
+          "oklch(95% 0.05337 245.85)"
+        ]
+      },
+      "dark-accent-dark": {
+        "role": "neutral",
+        "displayName": "Dark Accent Dark",
+        "tonalRamp": [
+          "oklch(15% 0.03366 246.81)",
+          "oklch(26% 0.03366 246.81)",
+          "oklch(38% 0.03366 246.81)",
+          "oklch(49% 0.03366 246.81)",
+          "oklch(61% 0.03366 246.81)",
+          "oklch(72% 0.03366 246.81)",
+          "oklch(84% 0.03366 246.81)",
+          "oklch(95% 0.03366 246.81)"
+        ]
+      },
+      "dark-primary": {
+        "role": "neutral",
+        "displayName": "Dark Primary",
+        "tonalRamp": [
+          "oklch(15% 0.02079 248.05)",
+          "oklch(26% 0.02079 248.05)",
+          "oklch(38% 0.02079 248.05)",
+          "oklch(49% 0.02079 248.05)",
+          "oklch(61% 0.02079 248.05)",
+          "oklch(72% 0.02079 248.05)",
+          "oklch(84% 0.02079 248.05)",
+          "oklch(95% 0.02079 248.05)"
+        ]
+      },
+      "dark-primary-ink": {
+        "role": "neutral",
+        "displayName": "Dark Primary Ink",
+        "tonalRamp": [
+          "oklch(15% 0.03435 250.91)",
+          "oklch(26% 0.03435 250.91)",
+          "oklch(38% 0.03435 250.91)",
+          "oklch(49% 0.03435 250.91)",
+          "oklch(61% 0.03435 250.91)",
+          "oklch(72% 0.03435 250.91)",
+          "oklch(84% 0.03435 250.91)",
+          "oklch(95% 0.03435 250.91)"
+        ]
+      },
+      "dark-error": {
+        "role": "neutral",
+        "displayName": "Dark Error",
+        "tonalRamp": [
+          "oklch(15% 0.08689 10.15)",
+          "oklch(26% 0.08689 10.15)",
+          "oklch(38% 0.08689 10.15)",
+          "oklch(49% 0.08689 10.15)",
+          "oklch(61% 0.08689 10.15)",
+          "oklch(72% 0.08689 10.15)",
+          "oklch(84% 0.08689 10.15)",
+          "oklch(95% 0.08689 10.15)"
+        ]
+      },
+      "dark-error-bg": {
+        "role": "neutral",
+        "displayName": "Dark Error Bg",
+        "tonalRamp": [
+          "oklch(15% 0.03502 345.32)",
+          "oklch(26% 0.03502 345.32)",
+          "oklch(38% 0.03502 345.32)",
+          "oklch(49% 0.03502 345.32)",
+          "oklch(61% 0.03502 345.32)",
+          "oklch(72% 0.03502 345.32)",
+          "oklch(84% 0.03502 345.32)",
+          "oklch(95% 0.03502 345.32)"
+        ]
+      },
+      "dark-focus": {
+        "role": "neutral",
+        "displayName": "Dark Focus",
+        "tonalRamp": [
+          "oklch(15% 0.07166 249.32)",
+          "oklch(26% 0.07166 249.32)",
+          "oklch(38% 0.07166 249.32)",
+          "oklch(49% 0.07166 249.32)",
+          "oklch(61% 0.07166 249.32)",
+          "oklch(72% 0.07166 249.32)",
+          "oklch(84% 0.07166 249.32)",
+          "oklch(95% 0.07166 249.32)"
+        ]
+      },
+      "dark-glass-edge": {
+        "role": "neutral",
+        "displayName": "Dark Glass Edge",
+        "tonalRamp": [
+          "oklch(15% 0.04368 252.68)",
+          "oklch(26% 0.04368 252.68)",
+          "oklch(38% 0.04368 252.68)",
+          "oklch(49% 0.04368 252.68)",
+          "oklch(61% 0.04368 252.68)",
+          "oklch(72% 0.04368 252.68)",
+          "oklch(84% 0.04368 252.68)",
+          "oklch(95% 0.04368 252.68)"
+        ]
+      },
+      "dark-assistant": {
+        "role": "neutral",
+        "displayName": "Dark Assistant",
+        "tonalRamp": [
+          "oklch(15% 0.03201 254.31)",
+          "oklch(26% 0.03201 254.31)",
+          "oklch(38% 0.03201 254.31)",
+          "oklch(49% 0.03201 254.31)",
+          "oklch(61% 0.03201 254.31)",
+          "oklch(72% 0.03201 254.31)",
+          "oklch(84% 0.03201 254.31)",
+          "oklch(95% 0.03201 254.31)"
+        ]
+      },
+      "dark-rule": {
+        "role": "neutral",
+        "displayName": "Dark Rule",
+        "tonalRamp": [
+          "oklch(15% 0.02847 256.83)",
+          "oklch(26% 0.02847 256.83)",
+          "oklch(38% 0.02847 256.83)",
+          "oklch(49% 0.02847 256.83)",
+          "oklch(61% 0.02847 256.83)",
+          "oklch(72% 0.02847 256.83)",
+          "oklch(84% 0.02847 256.83)",
+          "oklch(95% 0.02847 256.83)"
+        ]
+      },
+      "booked-surface": {
+        "role": "neutral",
+        "displayName": "Booked Surface",
+        "tonalRamp": [
+          "oklch(15% 0.01407 162.47)",
+          "oklch(26% 0.01407 162.47)",
+          "oklch(38% 0.01407 162.47)",
+          "oklch(49% 0.01407 162.47)",
+          "oklch(61% 0.01407 162.47)",
+          "oklch(72% 0.01407 162.47)",
+          "oklch(84% 0.01407 162.47)",
+          "oklch(95% 0.01407 162.47)"
+        ]
+      },
+      "booked-ink": {
+        "role": "neutral",
+        "displayName": "Booked Ink",
+        "tonalRamp": [
+          "oklch(15% 0.07354 158.61)",
+          "oklch(26% 0.07354 158.61)",
+          "oklch(38% 0.07354 158.61)",
+          "oklch(49% 0.07354 158.61)",
+          "oklch(61% 0.07354 158.61)",
+          "oklch(72% 0.07354 158.61)",
+          "oklch(84% 0.07354 158.61)",
+          "oklch(95% 0.07354 158.61)"
+        ]
+      },
+      "rescheduled-surface": {
+        "role": "neutral",
+        "displayName": "Rescheduled Surface",
+        "tonalRamp": [
+          "oklch(15% 0.01491 260.73)",
+          "oklch(26% 0.01491 260.73)",
+          "oklch(38% 0.01491 260.73)",
+          "oklch(49% 0.01491 260.73)",
+          "oklch(61% 0.01491 260.73)",
+          "oklch(72% 0.01491 260.73)",
+          "oklch(84% 0.01491 260.73)",
+          "oklch(95% 0.01491 260.73)"
+        ]
+      },
+      "rescheduled-ink": {
+        "role": "neutral",
+        "displayName": "Rescheduled Ink",
+        "tonalRamp": [
+          "oklch(15% 0.07884 255.01)",
+          "oklch(26% 0.07884 255.01)",
+          "oklch(38% 0.07884 255.01)",
+          "oklch(49% 0.07884 255.01)",
+          "oklch(61% 0.07884 255.01)",
+          "oklch(72% 0.07884 255.01)",
+          "oklch(84% 0.07884 255.01)",
+          "oklch(95% 0.07884 255.01)"
+        ]
+      },
+      "cancelled-surface": {
+        "role": "neutral",
+        "displayName": "Cancelled Surface",
+        "tonalRamp": [
+          "oklch(15% 0.01215 4.75)",
+          "oklch(26% 0.01215 4.75)",
+          "oklch(38% 0.01215 4.75)",
+          "oklch(49% 0.01215 4.75)",
+          "oklch(61% 0.01215 4.75)",
+          "oklch(72% 0.01215 4.75)",
+          "oklch(84% 0.01215 4.75)",
+          "oklch(95% 0.01215 4.75)"
+        ]
+      },
+      "cancelled-ink": {
+        "role": "neutral",
+        "displayName": "Cancelled Ink",
+        "tonalRamp": [
+          "oklch(15% 0.08999 11.21)",
+          "oklch(26% 0.08999 11.21)",
+          "oklch(38% 0.08999 11.21)",
+          "oklch(49% 0.08999 11.21)",
+          "oklch(61% 0.08999 11.21)",
+          "oklch(72% 0.08999 11.21)",
+          "oklch(84% 0.08999 11.21)",
+          "oklch(95% 0.08999 11.21)"
+        ]
+      },
+      "follow-up-surface": {
+        "role": "neutral",
+        "displayName": "Follow Up Surface",
+        "tonalRamp": [
+          "oklch(15% 0.01270 86.83)",
+          "oklch(26% 0.01270 86.83)",
+          "oklch(38% 0.01270 86.83)",
+          "oklch(49% 0.01270 86.83)",
+          "oklch(61% 0.01270 86.83)",
+          "oklch(72% 0.01270 86.83)",
+          "oklch(84% 0.01270 86.83)",
+          "oklch(95% 0.01270 86.83)"
+        ]
+      },
+      "follow-up-ink": {
+        "role": "neutral",
+        "displayName": "Follow Up Ink",
+        "tonalRamp": [
+          "oklch(15% 0.05836 72.55)",
+          "oklch(26% 0.05836 72.55)",
+          "oklch(38% 0.05836 72.55)",
+          "oklch(49% 0.05836 72.55)",
+          "oklch(61% 0.05836 72.55)",
+          "oklch(72% 0.05836 72.55)",
+          "oklch(84% 0.05836 72.55)",
+          "oklch(95% 0.05836 72.55)"
+        ]
+      },
+      "enquiry-surface": {
+        "role": "neutral",
+        "displayName": "Enquiry Surface",
+        "tonalRamp": [
+          "oklch(15% 0.00626 255.48)",
+          "oklch(26% 0.00626 255.48)",
+          "oklch(38% 0.00626 255.48)",
+          "oklch(49% 0.00626 255.48)",
+          "oklch(61% 0.00626 255.48)",
+          "oklch(72% 0.00626 255.48)",
+          "oklch(84% 0.00626 255.48)",
+          "oklch(95% 0.00626 255.48)"
+        ]
+      },
+      "enquiry-ink": {
+        "role": "neutral",
+        "displayName": "Enquiry Ink",
+        "tonalRamp": [
+          "oklch(15% 0.03926 259.36)",
+          "oklch(26% 0.03926 259.36)",
+          "oklch(38% 0.03926 259.36)",
+          "oklch(49% 0.03926 259.36)",
+          "oklch(61% 0.03926 259.36)",
+          "oklch(72% 0.03926 259.36)",
+          "oklch(84% 0.03926 259.36)",
+          "oklch(95% 0.03926 259.36)"
+        ]
+      },
+      "dark-booked-surface": {
+        "role": "neutral",
+        "displayName": "Dark Booked Surface",
+        "tonalRamp": [
+          "oklch(15% 0.03228 170.51)",
+          "oklch(26% 0.03228 170.51)",
+          "oklch(38% 0.03228 170.51)",
+          "oklch(49% 0.03228 170.51)",
+          "oklch(61% 0.03228 170.51)",
+          "oklch(72% 0.03228 170.51)",
+          "oklch(84% 0.03228 170.51)",
+          "oklch(95% 0.03228 170.51)"
+        ]
+      },
+      "dark-booked-ink": {
+        "role": "neutral",
+        "displayName": "Dark Booked Ink",
+        "tonalRamp": [
+          "oklch(15% 0.06757 161.42)",
+          "oklch(26% 0.06757 161.42)",
+          "oklch(38% 0.06757 161.42)",
+          "oklch(49% 0.06757 161.42)",
+          "oklch(61% 0.06757 161.42)",
+          "oklch(72% 0.06757 161.42)",
+          "oklch(84% 0.06757 161.42)",
+          "oklch(95% 0.06757 161.42)"
+        ]
+      },
+      "dark-rescheduled-surface": {
+        "role": "neutral",
+        "displayName": "Dark Rescheduled Surface",
+        "tonalRamp": [
+          "oklch(15% 0.04785 257.06)",
+          "oklch(26% 0.04785 257.06)",
+          "oklch(38% 0.04785 257.06)",
+          "oklch(49% 0.04785 257.06)",
+          "oklch(61% 0.04785 257.06)",
+          "oklch(72% 0.04785 257.06)",
+          "oklch(84% 0.04785 257.06)",
+          "oklch(95% 0.04785 257.06)"
+        ]
+      },
+      "dark-rescheduled-ink": {
+        "role": "neutral",
+        "displayName": "Dark Rescheduled Ink",
+        "tonalRamp": [
+          "oklch(15% 0.05492 256.14)",
+          "oklch(26% 0.05492 256.14)",
+          "oklch(38% 0.05492 256.14)",
+          "oklch(49% 0.05492 256.14)",
+          "oklch(61% 0.05492 256.14)",
+          "oklch(72% 0.05492 256.14)",
+          "oklch(84% 0.05492 256.14)",
+          "oklch(95% 0.05492 256.14)"
+        ]
+      },
+      "dark-cancelled-surface": {
+        "role": "neutral",
+        "displayName": "Dark Cancelled Surface",
+        "tonalRamp": [
+          "oklch(15% 0.03201 346.10)",
+          "oklch(26% 0.03201 346.10)",
+          "oklch(38% 0.03201 346.10)",
+          "oklch(49% 0.03201 346.10)",
+          "oklch(61% 0.03201 346.10)",
+          "oklch(72% 0.03201 346.10)",
+          "oklch(84% 0.03201 346.10)",
+          "oklch(95% 0.03201 346.10)"
+        ]
+      },
+      "dark-cancelled-ink": {
+        "role": "neutral",
+        "displayName": "Dark Cancelled Ink",
+        "tonalRamp": [
+          "oklch(15% 0.05957 7.91)",
+          "oklch(26% 0.05957 7.91)",
+          "oklch(38% 0.05957 7.91)",
+          "oklch(49% 0.05957 7.91)",
+          "oklch(61% 0.05957 7.91)",
+          "oklch(72% 0.05957 7.91)",
+          "oklch(84% 0.05957 7.91)",
+          "oklch(95% 0.05957 7.91)"
+        ]
+      },
+      "dark-follow-up-surface": {
+        "role": "neutral",
+        "displayName": "Dark Follow Up Surface",
+        "tonalRamp": [
+          "oklch(15% 0.01821 84.55)",
+          "oklch(26% 0.01821 84.55)",
+          "oklch(38% 0.01821 84.55)",
+          "oklch(49% 0.01821 84.55)",
+          "oklch(61% 0.01821 84.55)",
+          "oklch(72% 0.01821 84.55)",
+          "oklch(84% 0.01821 84.55)",
+          "oklch(95% 0.01821 84.55)"
+        ]
+      },
+      "dark-follow-up-ink": {
+        "role": "neutral",
+        "displayName": "Dark Follow Up Ink",
+        "tonalRamp": [
+          "oklch(15% 0.04800 83.91)",
+          "oklch(26% 0.04800 83.91)",
+          "oklch(38% 0.04800 83.91)",
+          "oklch(49% 0.04800 83.91)",
+          "oklch(61% 0.04800 83.91)",
+          "oklch(72% 0.04800 83.91)",
+          "oklch(84% 0.04800 83.91)",
+          "oklch(95% 0.04800 83.91)"
+        ]
+      },
+      "dark-enquiry-surface": {
+        "role": "neutral",
+        "displayName": "Dark Enquiry Surface",
+        "tonalRamp": [
+          "oklch(15% 0.02143 259.39)",
+          "oklch(26% 0.02143 259.39)",
+          "oklch(38% 0.02143 259.39)",
+          "oklch(49% 0.02143 259.39)",
+          "oklch(61% 0.02143 259.39)",
+          "oklch(72% 0.02143 259.39)",
+          "oklch(84% 0.02143 259.39)",
+          "oklch(95% 0.02143 259.39)"
+        ]
+      },
+      "dark-enquiry-ink": {
+        "role": "neutral",
+        "displayName": "Dark Enquiry Ink",
+        "tonalRamp": [
+          "oklch(15% 0.02137 261.76)",
+          "oklch(26% 0.02137 261.76)",
+          "oklch(38% 0.02137 261.76)",
+          "oklch(49% 0.02137 261.76)",
+          "oklch(61% 0.02137 261.76)",
+          "oklch(72% 0.02137 261.76)",
+          "oklch(84% 0.02137 261.76)",
+          "oklch(95% 0.02137 261.76)"
+        ]
+      },
+      "live": {
+        "role": "neutral",
+        "displayName": "Live",
+        "tonalRamp": [
+          "oklch(15% 0.08497 163.37)",
+          "oklch(26% 0.08497 163.37)",
+          "oklch(38% 0.08497 163.37)",
+          "oklch(49% 0.08497 163.37)",
+          "oklch(61% 0.08497 163.37)",
+          "oklch(72% 0.08497 163.37)",
+          "oklch(84% 0.08497 163.37)",
+          "oklch(95% 0.08497 163.37)"
+        ]
+      },
+      "danger": {
+        "role": "neutral",
+        "displayName": "Danger",
+        "tonalRamp": [
+          "oklch(15% 0.11568 13.44)",
+          "oklch(26% 0.11568 13.44)",
+          "oklch(38% 0.11568 13.44)",
+          "oklch(49% 0.11568 13.44)",
+          "oklch(61% 0.11568 13.44)",
+          "oklch(72% 0.11568 13.44)",
+          "oklch(84% 0.11568 13.44)",
+          "oklch(95% 0.11568 13.44)"
+        ]
+      },
+      "danger-hover": {
+        "role": "neutral",
+        "displayName": "Danger Hover",
+        "tonalRamp": [
+          "oklch(15% 0.10539 13.52)",
+          "oklch(26% 0.10539 13.52)",
+          "oklch(38% 0.10539 13.52)",
+          "oklch(49% 0.10539 13.52)",
+          "oklch(61% 0.10539 13.52)",
+          "oklch(72% 0.10539 13.52)",
+          "oklch(84% 0.10539 13.52)",
+          "oklch(95% 0.10539 13.52)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Page headline",
+        "purpose": "Primary operational page title."
+      },
+      "transcript": {
+        "displayName": "Bengali conversation",
+        "purpose": "Generous Bengali conversation leading."
+      }
+    },
     "shadows": [
       {
+        "name": "sheet-light",
+        "value": "0 8px 28px rgba(30,50,72,.05)",
+        "purpose": "Ambient sheet separation."
+      },
+      {
+        "name": "sheet-dark",
+        "value": "0 8px 28px rgba(0,0,0,.12)",
+        "purpose": "Dark sheet separation."
+      },
+      {
         "name": "active-navigation",
-        "value": "0 2px 5px #243c4408",
-        "purpose": "Subtle separation of the active navigation item"
+        "value": "0 2px 5px rgba(32,45,63,.03)",
+        "purpose": "Selected desktop navigation."
       },
       {
-        "name": "selected-record",
-        "value": "inset 2px 0 var(--accent)",
-        "purpose": "Marks the selected call row"
-      }
-    ],
-    "breakpoints": [
-      {
-        "value": "760px",
-        "name": "mobile"
-      },
-      {
-        "value": "1150px",
-        "name": "compact-desktop"
-      },
-      {
-        "value": "1600px",
-        "name": "wide-desktop"
+        "name": "voice-emblem",
+        "value": "0 5px 18px rgba(45,64,91,.04)",
+        "purpose": "Quiet emblem material."
       }
     ],
     "motion": [
       {
-        "name": "button-state",
-        "value": "background-color 0.15s ease, color 0.15s ease",
-        "purpose": "Button hover state transitions; disabled for reduced motion"
+        "name": "interactive-state",
+        "value": "background-color .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease",
+        "purpose": "State transitions; disabled for reduced motion."
+      },
+      {
+        "name": "voice-connecting",
+        "value": "voice-breathe 2s ease-in-out infinite",
+        "purpose": "Connecting opacity reaches .55 at midpoint; disabled for reduced motion."
       }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone-max",
+        "value": "760px"
+      },
+      {
+        "name": "compact-tablet-max",
+        "value": "980px"
+      },
+      {
+        "name": "compact-desktop-max",
+        "value": "1180px"
+      },
+      {
+        "name": "wide-desktop-min",
+        "value": "1800px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary button from the implemented silver-frame workspace.",
+      "html": "<button class=\"ds-primary\">Start voice call</button>",
+      "css": ".ds-primary{font-family:\"Manrope\",\"Noto Sans Bengali\",sans-serif; font-size:12px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:10px 15px;border:1px solid var(--primary, #273749);border-radius:9px;background:var(--primary, #273749);color:var(--primary-ink, #fff);cursor:pointer;transition:background-color .18s ease,border-color .18s ease}.ds-primary:hover:not(:disabled){background:var(--ink, #202936)}.ds-primary:focus-visible{outline:3px solid var(--focus, #467caf);outline-offset:3px;}.ds-primary:disabled{opacity:.5;cursor:not-allowed}@media(max-width:760px){.ds-primary{min-height:44px}}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "Secondary button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary button from the implemented silver-frame workspace.",
+      "html": "<button class=\"ds-secondary\">Start voice call</button>",
+      "css": ".ds-secondary{font-family:\"Manrope\",\"Noto Sans Bengali\",sans-serif; font-size:12px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:10px 15px;border:1px solid var(--control, #c7d0db);border-radius:9px;background:var(--paper, #fff);color:var(--ink, #202936);cursor:pointer;transition:background-color .18s ease,border-color .18s ease}.ds-secondary:hover:not(:disabled){background:var(--raised, #f7f9fc)}.ds-secondary:focus-visible{outline:3px solid var(--focus, #467caf);outline-offset:3px;}.ds-secondary:disabled{opacity:.5;cursor:not-allowed}@media(max-width:760px){.ds-secondary{min-height:44px}}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "name": "Search field",
+      "kind": "input",
+      "refersTo": "search",
+      "description": "Search field from the implemented silver-frame workspace.",
+      "html": "<label class=\"ds-search\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.3-4.3\"/></svg><input aria-label=\"Search name, phone or call ID\" placeholder=\"Search name, phone or call ID\" type=\"search\"></label>",
+      "css": ".ds-search{font-family:\"Manrope\",\"Noto Sans Bengali\",sans-serif; display:flex;align-items:center;gap:10px;max-width:470px;padding:0 12px;border:1px solid var(--control, #c7d0db);border-radius:8px;background:var(--raised, #f7f9fc);color:var(--muted, #5d6876)}.ds-search input{font-family:\"Manrope\",\"Noto Sans Bengali\",sans-serif; font-size:12px;min-height:42px;width:100%;min-width:0;padding:10px 0;border:0;background:transparent;color:var(--ink, #202936);caret-color:var(--accent, #335d7e)}.ds-search input::placeholder{color:var(--faint, #657383)}.ds-search:hover{border-color:var(--muted, #5d6876)}.ds-search:focus-within{outline:3px solid var(--focus, #467caf);outline-offset:2px}.ds-search input:focus-visible{outline:none}@media(max-width:760px){.ds-search input{font-size:16px;min-height:44px}}"
+    },
+    {
+      "name": "Active navigation",
+      "kind": "nav",
+      "refersTo": "navigation-active",
+      "description": "Active navigation from the implemented silver-frame workspace.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Workspace\"><a class=\"ds-nav-link\" href=\"#records\" aria-current=\"page\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.65\" aria-hidden=\"true\"><path d=\"M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01\"/></svg>Call records</a></nav>",
+      "css": ".ds-nav{padding:14px;background:var(--nav, rgba(248,250,253,.66));backdrop-filter:blur(18px)}.ds-nav-link{font-family:\"Manrope\",\"Noto Sans Bengali\",sans-serif; display:flex;align-items:center;gap:11px;min-height:44px;padding:11px 13px;font-size:13px;font-weight:650;text-decoration:none;border:1px solid var(--glass-edge, rgba(255,255,255,.9));border-radius:10px;background:var(--paper, #fff);color:var(--ink, #202936);box-shadow:0 2px 5px rgba(32,45,63,.03)}.ds-nav-link:hover{background:var(--raised, #f7f9fc)}.ds-nav-link:focus-visible{outline:3px solid var(--focus, #467caf);outline-offset:3px;}"
+    },
+    {
+      "name": "Booked outcome",
+      "kind": "chip",
+      "refersTo": "badge-booked",
+      "description": "Booked outcome from the implemented silver-frame workspace.",
+      "html": "<span class=\"ds-badge\">Booked</span>",
+      "css": ".ds-badge{font-family:\"Manrope\",\"Noto Sans Bengali\",sans-serif; display:inline-flex;align-items:center;white-space:nowrap;font-size:11px;font-weight:600;line-height:1.4;border-radius:6px;background:var(--booked-surface, #eaf5ef);color:var(--booked-ink, #31664a);padding:4px 7px}:host-context([data-theme=\"dark\"]) .ds-badge{background:var(--dark-booked-surface, #263d35);color:var(--dark-booked-ink, #a0d5b9)}"
+    },
+    {
+      "name": "Framed sheet",
+      "kind": "card",
+      "refersTo": "sheet",
+      "description": "Framed sheet from the implemented silver-frame workspace.",
+      "html": "<section class=\"ds-frame\"><div class=\"ds-sheet\"><h2 class=\"ds-sheet-title\">Call records</h2><p class=\"ds-sheet-copy\">Every conversation, with the details your team needs.</p></div></section>",
+      "css": ".ds-frame{background:var(--workspace, #f0f3f7);padding:16px}.ds-sheet{font-family:\"Manrope\",\"Noto Sans Bengali\",sans-serif; padding:30px 32px;background:var(--paper, #fff);color:var(--ink, #202936);border:1px solid var(--glass-edge, rgba(255,255,255,.9));border-radius:20px;box-shadow:var(--shadow,0 8px 28px rgba(30,50,72,.05))}.ds-sheet-title{margin:0 0 8px;font-size:28px;line-height:1.3;letter-spacing:-.035em;font-weight:650}.ds-sheet-copy{margin:0;font-size:13px;color:var(--muted, #5d6876)}"
+    },
+    {
+      "name": "Selected call row",
+      "kind": "custom",
+      "refersTo": "call-row-selected",
+      "description": "Selected call row from the implemented silver-frame workspace.",
+      "html": "<button class=\"ds-row\" aria-pressed=\"true\"><strong class=\"ds-row-name\">Demo caller</strong><span class=\"ds-row-phone\">01XXXXXXXXX</span><span class=\"ds-row-meta\"><span>Fictional fixture</span><span>10:32</span></span></button>",
+      "css": ".ds-row{font-family:\"Manrope\",\"Noto Sans Bengali\",sans-serif; display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line, #e3e8ee);padding:20px 24px;background:var(--selected, #eaf0f7);color:var(--ink, #202936);cursor:pointer;transition:background-color .18s ease}.ds-row:hover{background:var(--paper, #fff)}.ds-row:focus-visible{outline:3px solid var(--focus, #467caf);outline-offset:3px;}.ds-row-name{font-size:14px;font-weight:600;line-height:1.6}.ds-row-phone{display:block;font-size:12px;color:var(--muted, #5d6876);margin-top:5px;font-variant-numeric:tabular-nums}.ds-row-meta{display:flex;justify-content:space-between;gap:12px;margin-top:13px;font-size:11px;color:var(--muted, #5d6876);font-variant-numeric:tabular-nums}@media(prefers-reduced-motion:reduce){.ds-row{transition:none}}"
+    },
+    {
+      "name": "Assistant transcript turn",
+      "kind": "custom",
+      "refersTo": "transcript-assistant",
+      "description": "Assistant transcript turn from the implemented silver-frame workspace.",
+      "html": "<article class=\"ds-turn\"><header class=\"ds-turn-head\"><strong>AI receptionist</strong><time>00:12</time></header><p lang=\"bn\">কীভাবে সাহায্য করতে পারি?</p></article>",
+      "css": ".ds-turn{font-family:\"Manrope\",\"Noto Sans Bengali\",sans-serif; background:var(--assistant, #f2f5f9);color:var(--ink, #202936);padding:17px 20px;border-radius:12px}.ds-turn-head{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted, #5d6876);margin-bottom:9px}.ds-turn-head strong{font-weight:600;color:var(--ink, #202936)}.ds-turn-head time{margin-left:auto;font-variant-numeric:tabular-nums}.ds-turn p{font-family:\"Noto Sans Bengali\",\"Manrope\",sans-serif;font-size:15px;line-height:1.95;margin:0;overflow-wrap:anywhere}"
+    },
+    {
+      "name": "Record tabs",
+      "kind": "nav",
+      "refersTo": "sheet",
+      "description": "Record tabs from the implemented silver-frame workspace.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\" aria-label=\"Record details\"><button class=\"ds-tab\" role=\"tab\" aria-selected=\"true\">Conversation</button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\" tabindex=\"-1\">Captured details</button></div>",
+      "css": ".ds-tabs{display:flex;gap:24px;border-bottom:1px solid var(--line, #e3e8ee);padding:0 32px}.ds-tab{font-family:\"Manrope\",\"Noto Sans Bengali\",sans-serif; background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:14px 0;color:var(--muted, #5d6876);font-size:12px;min-height:44px;cursor:pointer}.ds-tab[aria-selected=\"true\"]{color:var(--ink, #202936);border-bottom-color:var(--accent, #335d7e);font-weight:650}.ds-tab:hover{color:var(--ink, #202936)}.ds-tab:focus-visible{outline:3px solid var(--focus, #467caf);outline-offset:3px;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Silver Record Frame",
+    "overview": "The silver glass frame turns conversations into clear, actionable clinic records. Cool translucent navigation surrounds a clear white sheet; restrained slate actions, fine rules and generous Bengali transcript leading make the workspace feel modern, classy and composed. The authentic ByteVoice waveform anchors the identity.\n\nLight is the default, with an explicit dark toggle and BN/EN dashboard controls. Glass is an intentional user-brief override: use it for the framing and voice emblem, while records remain readable solid surfaces. This replaces the former teal system. The visual language serves a fictional clinic operating interface and its browser voice test.",
+    "keyCharacteristics": [
+      "Cool silver framing and clear record sheets.",
+      "Authentic ByteVoice emblem, preserved from the supplied asset.",
+      "Manrope interface text with Noto Sans Bengali conversations.",
+      "Light by default; deliberate dark and BN/EN controls.",
+      "Quiet depth, explicit statuses and visible keyboard focus."
+    ],
+    "rules": [
+      {
+        "name": "The Status Label Rule",
+        "body": "Always pair outcome color with a readable label.",
+        "section": "colors"
+      },
+      {
+        "name": "The Bilingual Reading Rule",
+        "body": "Preserve Bengali shaping and generous transcript leading; do not force English label metrics onto conversations.",
+        "section": "typography"
+      },
+      {
+        "name": "The Clear Record Rule",
+        "body": "Keep the record reading surface solid; confine translucent glass to framing and the voice emblem.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve the original ByteVoice asset and its waveform crop.",
+      "Do use the theme variables so light and dark remain coherent.",
+      "Do keep focus outlines, explicit state labels and readable Bengali transcripts.",
+      "Do maintain the phone input size and touch targets already implemented.",
+      "Do label fictional clinic data and scripted fixtures clearly."
+    ],
+    "donts": [
+      "Don't restore the obsolete teal palette or Arial/Nirmala typography.",
+      "Don't spread glass blur onto transcript or field reading surfaces.",
+      "Don't introduce invented business metrics or medical claims.",
+      "Don't treat documentation as proof of deployment or speech quality."
     ]
   }
 }

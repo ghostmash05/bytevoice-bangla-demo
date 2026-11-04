@@ -1,116 +1,266 @@
 ---
 name: ByteVoice Bangla workspace
-description: A quiet, legible operating interface for clinic call records.
+description: Cool silver glass framing clear, actionable clinic records.
 colors:
-  ink: "#172c38"
-  muted: "#5d6d77"
-  line: "#dce3e7"
+  ink: "#202936"
+  muted: "#5d6876"
+  faint: "#657383"
+  line: "#e3e8ee"
+  control: "#c7d0db"
   paper: "#fff"
-  workspace: "#f6f8f9"
-  nav: "#edf2f4"
-  accent: "#076b68"
-  accent-dark: "#045653"
-  selected: "#e5f3f0"
-  error: "#a12929"
-  focus: "#07847e"
+  workspace: "#f0f3f7"
+  nav: "rgba(248,250,253,.66)"
+  raised: "#f7f9fc"
+  selected: "#eaf0f7"
+  accent: "#335d7e"
+  accent-dark: "#244963"
+  primary: "#273749"
+  primary-ink: "#fff"
+  error: "#a52e40"
+  error-bg: "#fff3f4"
+  focus: "#467caf"
+  glass-edge: "rgba(255,255,255,.9)"
+  assistant: "#f2f5f9"
+  rule: "#edf0f4"
+  dark-ink: "#edf1f7"
+  dark-muted: "#b3bdcb"
+  dark-faint: "#a2afc0"
+  dark-line: "#303b49"
+  dark-control: "#4c5a6c"
+  dark-paper: "#1a222e"
+  dark-workspace: "#101722"
+  dark-nav: "rgba(25,34,48,.78)"
+  dark-raised: "#222d3c"
+  dark-selected: "#2c3c50"
+  dark-accent: "#accce9"
+  dark-accent-dark: "#d1e5f8"
+  dark-primary: "#dce8f4"
+  dark-primary-ink: "#172534"
+  dark-error: "#ffb5bf"
+  dark-error-bg: "#3a2631"
+  dark-focus: "#a7cff8"
+  dark-glass-edge: "rgba(181,203,229,.12)"
+  dark-assistant: "#222e3d"
+  dark-rule: "#2b3543"
+  booked-surface: "#eaf5ef"
+  booked-ink: "#31664a"
+  rescheduled-surface: "#eaf0fa"
+  rescheduled-ink: "#3b5c86"
+  cancelled-surface: "#f8edef"
+  cancelled-ink: "#93505a"
+  follow-up-surface: "#f5f1e8"
+  follow-up-ink: "#7b6140"
+  enquiry-surface: "#edf0f4"
+  enquiry-ink: "#56647a"
+  dark-booked-surface: "#263d35"
+  dark-booked-ink: "#a0d5b9"
+  dark-rescheduled-surface: "#293a52"
+  dark-rescheduled-ink: "#b4cdef"
+  dark-cancelled-surface: "#422f39"
+  dark-cancelled-ink: "#eebbc3"
+  dark-follow-up-surface: "#3d382e"
+  dark-follow-up-ink: "#ddccab"
+  dark-enquiry-surface: "#343b46"
+  dark-enquiry-ink: "#c4ccda"
+  live: "#44896b"
+  danger: "#8e3946"
+  danger-hover: "#762b37"
 typography:
   headline:
-    fontFamily: 'Arial, "Nirmala UI", "Vrinda", sans-serif'
-    fontSize: "1.85rem"
+    fontFamily: '"Manrope", "Noto Sans Bengali", sans-serif'
+    fontSize: "28px"
     fontWeight: 650
-    lineHeight: 1.2
+    lineHeight: 1.3
     letterSpacing: "-0.035em"
   title:
-    fontSize: "1.25rem"
+    fontFamily: '"Manrope", "Noto Sans Bengali", sans-serif'
+    fontSize: "18px"
     fontWeight: 650
-    lineHeight: 1.35
+    lineHeight: 1.45
     letterSpacing: "-0.02em"
   body:
-    fontFamily: 'Arial, "Nirmala UI", "Vrinda", sans-serif'
-    fontSize: "15px"
-    lineHeight: 1.5
+    fontFamily: '"Manrope", "Noto Sans Bengali", sans-serif'
+    fontSize: "14px"
+    lineHeight: 1.55
+  label:
+    fontFamily: '"Manrope", "Noto Sans Bengali", sans-serif'
+    fontSize: "13px"
+    fontWeight: 500
   transcript:
-    fontFamily: '"Nirmala UI", "Vrinda", Arial, sans-serif'
-    fontSize: "1rem"
-    lineHeight: 1.85
+    fontFamily: '"Noto Sans Bengali", "Manrope", sans-serif'
+    fontSize: "15px"
+    lineHeight: 1.95
 rounded:
-  badge: "4px"
-  field: "5px"
-  control: "6px"
-  transcript: "7px"
-  container: "8px"
+  badge: "6px"
+  field: "8px"
+  button: "9px"
+  navigation: "10px"
+  transcript: "12px"
+  container: "16px"
+  sheet: "20px"
 spacing:
+  tight: "8px"
   compact: "12px"
-  control: "16px"
+  regular: "16px"
+  phone-gutter: "20px"
   section: "24px"
-  record: "32px"
+  sheet-gutter: "32px"
 components:
   button-primary:
-    backgroundColor: "{colors.accent}"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.control}"
-    padding: "10px 16px"
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.primary-ink}"
+    rounded: "{rounded.button}"
+    padding: "10px 15px"
   button-primary-hover:
-    backgroundColor: "{colors.accent-dark}"
+    backgroundColor: "{colors.ink}"
   button-secondary:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.control}"
-    padding: "10px 16px"
+    rounded: "{rounded.button}"
+    padding: "10px 15px"
+  search:
+    backgroundColor: "{colors.raised}"
+    textColor: "{colors.muted}"
+    rounded: "{rounded.field}"
+    padding: "0 12px"
+  navigation-active:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.navigation}"
+    padding: "11px 13px"
+  badge-booked:
+    backgroundColor: "{colors.booked-surface}"
+    textColor: "{colors.booked-ink}"
+    rounded: "{rounded.badge}"
+    padding: "4px 7px"
+  sheet:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.sheet}"
+  call-row-selected:
+    backgroundColor: "{colors.selected}"
+    textColor: "{colors.ink}"
+    padding: "20px 24px"
+  transcript-assistant:
+    backgroundColor: "{colors.assistant}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.transcript}"
+    padding: "17px 20px"
 ---
 
 # Design System: ByteVoice Bangla workspace
 
 ## Overview
 
-**Creative North Star: Civil registry.** White records sit beside a blue-grey index and navigation. Compact labels, strong alignment and restrained teal states support prolonged staff use. This is an operating interface; familiar controls and a system sans are intentional.
+**Creative North Star: "The Silver Record Frame"**
 
-This document extracts the current source, not a visual completion certificate. Final mobile visual sign-off remains pending a reliable capture; see `.impeccable/review/fix-review.md`.
+The silver glass frame turns conversations into clear, actionable clinic records. Cool translucent navigation surrounds a clear white sheet; restrained slate actions, fine rules and generous Bengali transcript leading make the workspace feel modern, classy and composed. The authentic ByteVoice waveform anchors the identity.
+
+Light is the default, with an explicit dark toggle and BN/EN dashboard controls. Glass is an intentional user-brief override: use it for the framing and voice emblem, while records remain readable solid surfaces. This replaces the former teal system. The visual language serves a fictional clinic operating interface and its browser voice test.
+
+**Key Characteristics:**
+
+- Cool silver framing and clear record sheets.
+- Authentic ByteVoice emblem, preserved from the supplied asset.
+- Manrope interface text with Noto Sans Bengali conversations.
+- Light by default; deliberate dark and BN/EN controls.
+- Quiet depth, explicit statuses and visible keyboard focus.
 
 ## Colors
 
+The palette is cool neutral: slate actions, blue-grey metadata and translucent silver framing. Frontmatter values are normative, extracted from `web/app/globals.css`; `dark-` entries map to the same role under `data-theme="dark"`.
+
 ### Primary
 
-Teal accent marks primary actions, selected tabs, links and the brand symbol. Its darker variant is the primary hover state; pale selected teal identifies the active record.
+**Slate action** (`primary` / `primary-ink`) carries principal buttons, with `ink` on hover. **Steel blue** (`accent` / `accent-dark`) marks text links, tab underlines and action icons. **Focus blue** (`focus`) identifies keyboard position.
 
 ### Neutral
 
-Ink carries primary text; muted blue-grey carries metadata. Paper is the record surface, workspace is the surrounding field, nav separates navigation, and line divides records and controls. Error red identifies failure; focus teal identifies keyboard position.
+**Clear sheet** (`paper`) holds records. **Silver workspace** (`workspace`) frames it; **translucent navigation** (`nav`) admits restrained glass. **Raised mist** (`raised`) separates the index, search and call stage; **selected mist** (`selected`) identifies the current call. `ink`, `muted` and `faint` distinguish primary text, metadata and quieter cues. `line` divides sections, `rule` divides fields, and `control` outlines fields. `glass-edge` supplies the frame seam; `assistant` distinguishes receptionist turns.
 
-Outcome badges retain distinct background/text pairs: booked (`#dff2e9` / `#1d6047`), rescheduled (`#e4edf9` / `#28588a`), cancelled (`#f5e9e9` / `#8d3737`), follow-up (`#fbefda` / `#85551d`), enquiry (`#eae7f5` / `#655092`). Generic badges use (`#e9edf0` / `#52636e`). Labels always accompany color.
+Outcome pairs remain semantic: booked is muted green, rescheduled steel blue, cancelled dusty rose, follow-up warm sand and enquiry grey. Their dark pairs preserve those meanings. Errors use `error` on `error-bg`; ending a call uses `danger` / `danger-hover`. The live dot uses `live`. Semantic hues stay small status cues rather than competing brand accents.
+
+**The Status Label Rule.** Always pair outcome color with a readable label.
 
 ## Typography
 
-Use the frontmatter's operational sans stack and Bengali transcript stack. There is no separate display face. Main headings reduce to (`1.6rem`) on mobile; record headings use (`1.4rem`). Transcript text has a generous line height for Bengali readability. Metadata typically uses (`0.75–0.88rem`); badges use (`0.69rem`, weight `600`). Dates, phone numbers and durations use tabular numerals.
+The interface uses locally hosted variable **Manrope** (400–800), followed by **Noto Sans Bengali** (400–700), then sans-serif. Conversation text reverses those first two families. Both font faces use `font-display: swap`. No separate display face is established.
+
+Frontmatter records the headline, title, body, label and transcript roles. Main headings reduce to (24px) on phones; record headings use (21px). Operational metadata is commonly (11–13px). Buttons use (12px, weight 600), and badges use (11px, weight 600). Transcript leading is deliberately open. Dates, phone numbers and durations use tabular numerals. Phone inputs use (16px) to keep focus stable in Safari.
+
+**The Bilingual Reading Rule.** Preserve Bengali shaping and generous transcript leading; do not force English label metrics onto conversations.
 
 ## Layout
 
-Desktop uses a sticky full-height navigation column (`230px`) and a flexible workspace. The call index occupies (`minmax(290px, 36%)`) beside the record. At widths above (`1600px`), the index becomes (`390px`) and transcripts are bounded to (`800px`). Below (`1150px`), navigation becomes (`190px`) and the index uses (`minmax(270px, 43%)`).
+The shared grammar is a framed sheet beside narrow navigation, with aligned rules and consistent interior gutters. Desktop navigation is (232px), the outer inset (16px), and primary content gutters (32px). Navigation remains sticky. For call records above (760px), the sheet is viewport-height with a minimum (560px); the call list and detail scroll independently inside it.
 
-At (`760px`) and below, navigation becomes a top area with horizontally scrollable links. The index and selected record become separate views with an explicit return action. Search occupies a full row above two filters. Desktop page gutters are (`36px`), intermediate gutters (`24px`), and mobile gutters (`20–22px`). Voice-test content is bounded to (`960px`); data-model content to (`1100px`).
+The call index starts at (`minmax(300px, 34%)`). At (1800px) and wider it becomes (390px). At (1180px) and below navigation becomes (205px), outer inset (12px), interior gutters (24px), and index (`minmax(285px, 41%)`). Between (761px) and (980px), navigation becomes (175px), the index (`minmax(240px, 42%)`), search takes a full row and the voice guide wraps below its console.
+
+At (760px) and below, the shell becomes sticky top navigation, the sheet loses its outer border/radius/shadow, and content gutters become (20px). Call list and selected record become separate views with an explicit return action and focus restoration. Filters disclose from a button. Navigation and theme/language controls retain (44px) minimum targets; compact header/filter/icon controls also have (44px) phone targets. These describe responsive patterns, not a universal call-record composition for every future screen.
+
+Voice-test content is bounded to (1280px), with a main console and (270px) guide separated by (38px); compact desktop uses a (225px) guide and (25px) gap. Record transcripts are bounded to (780px). Data-model content is bounded to (1150px).
 
 ## Elevation & Depth
 
-Tonal surfaces and thin dividing lines establish depth. Active navigation has a slight shadow (`0 2px 5px #243c4408`); the selected record has an inset teal marker (`inset 2px 0 var(--accent)`). There is no general floating-card shadow system.
+Glass, tonal layering and restrained ambient shadows work together. Navigation uses an (18px) backdrop blur, increasing to (20px) on phones; unsupported blur falls back to the solid workspace. The white sheet stays stable. Translucency is an intentional user-selected material, not a blanket content treatment.
+
+### Shadow Vocabulary
+
+- **Sheet ambient:** `0 8px 28px rgba(30,50,72,.05)`; dark mode uses `0 8px 28px rgba(0,0,0,.12)`.
+- **Active navigation:** `0 2px 5px rgba(32,45,63,.03)`; removed on phones.
+- **Voice emblem:** `0 5px 18px rgba(45,64,91,.04)`.
+
+**The Clear Record Rule.** Keep the record reading surface solid; confine translucent glass to framing and the voice emblem.
+
+Background, border, text and shadow transition over (.18s ease). Only the connecting voice emblem breathes (2s ease-in-out, opacity .55 at midpoint). Reduced-motion preference disables animations and transitions.
 
 ## Shapes
 
-Controls have modest curved corners. Inputs use the field radius, buttons the control radius, transcript turns their own radius, and login/voice containers the container radius. Badges are compact rounded labels. Brand and voice marks are the more rounded exceptions (`9px` and `22px`). Borders are generally (`1px`).
+The sheet is the broadest rectangle (20px corners). Login and voice containers use (16px), assistant turns (12px), navigation (10px), buttons (9px), fields/icon controls (8px), and badges (6px). Thin (1px) rules keep interiors precise; active tabs use a (2px) underline. Voice marks alone are circular, (112px) on desktop and (90px) on phones. The emblem is a CSS crop of the authentic supplied ByteVoice asset, not a redrawn waveform.
 
 ## Components
 
-**Buttons and fields.** Primary and secondary controls have a minimum height (`43px`), weight (`600`) and compact type (`0.88rem`). Secondary buttons use a pale navigation hover surface. Disabled buttons use opacity (`0.52`) and a disabled cursor. Inputs use white surfaces, a border (`#bfcbd2`), padding (`10px 12px`) and minimum height (`43px`).
+### Buttons
 
-**Focus and browser surfaces.** Interactive controls use a focus outline (`3px`) with offset (`3px`); grouped search uses focus-within with offset (`2px`). Selection uses (`#c3e9df`) behind text (`#123a35`); carets use accent teal. Links have underline offset (`4px`). Buttons transition background and text color (`0.15s ease`); reduced-motion preference disables transitions and animation.
+Primary is slate with contrasting text; secondary is sheet-colored with a control border. Both use (10px 15px) padding and desktop minimum height (42px). Primary hover uses ink; secondary hover uses raised mist and a muted border. Icon controls are (36px) minimum on desktop. Voice start controls are (46px) minimum high. Disabled buttons use (.5) opacity and a disabled cursor. Focus is a (3px) outline with (3px) offset.
 
-**Navigation and records.** Navigation combines Lucide line icons with text and identifies the active page through a white surface and teal label. Call rows are full-width buttons, separated by rules, with hover tint (`#edf4f4`) and a selected surface. Tabs use an active teal underline (`2px`), roving focus and arrow/Home/End navigation. On mobile, selecting a record focuses its heading; returning restores focus to the originating row.
+### Inputs / Fields
 
-**Transcript and activity.** Assistant turns use a pale surface (`#f2f6f6`) and padding (`15px 18px`); caller turns remain on paper. Turns are separated by (`26px`). Speaker labels and elapsed timestamps precede the transcript. Details use label/value rows; activity uses ruled entries and plain action fields. Doctor/service names and appointment dates are human readable. Bangladesh timezone context is visible in desktop navigation and the mobile records heading.
+Fields use the sheet, control border, (8px) corners, (10px 12px) padding and (42px) minimum height. Search groups icon and input on raised mist, with desktop maximum width (470px); focus outlines the group with (2px) offset. Phone search inputs are (44px) minimum high with (16px) text. Errors have explicit text/alert states.
+
+### Navigation
+
+Fine line icons (generally 18px, stroke 1.65) accompany labels. The active page gains a clear surface, glass seam, subtle shadow and weight (650); hover uses raised mist. Retain `aria-current`, the skip link and explicit accessible names when compact controls omit visible text. Theme/language toggles persist preferences when storage is available; light and English are the implemented defaults.
+
+### Chips / Outcome badges
+
+Compact, softly squared labels use semantic color pairs, (4px 7px) padding and readable labels. Generic outcomes use line/muted. Avoid a pill silhouette.
+
+### Cards / Containers
+
+The sheet is one continuous solid record surface with a light seam and ambient shadow. Login and console containers use line borders and (16px) corners. Avoid making every row or field another floating card.
+
+### Call rows and record tabs
+
+Rows are full-width buttons with (20px 24px) desktop padding, fine bottom rules and selected fill; hover returns to paper. Metadata uses two-sided alignment and tabular numbers. Tabs use an accent underline, (44px) minimum height and arrow/Home/End navigation. Preserve the phone list/detail handoff and focus restoration.
+
+### Transcript turns and voice emblem
+
+Assistant turns use a raised surface and (17px 20px) padding; caller turns remain on paper. Turns are separated by (22px). Speaker and timestamp precede Bangla text. The voice-stage emblem crops the authentic brand asset inside a circular material frame; connection/live states change material and opacity subtly. Keep loading, empty, connection and failure messages explicit.
 
 ## Do's and Don'ts
 
-- **Do** preserve Bengali text readability, explicit status labels, keyboard focus and tabular metadata.
-- **Do** use real Lucide icons consistently and retain labelled loading, error and empty states.
-- **Do** identify fictional clinic data and scripted fixtures clearly.
-- **Don't** introduce decorative charts, invented metrics or ornamental material effects into this operating interface.
-- **Don't** treat this source extraction as proof of deployment, speech quality or completed mobile visual review.
+### Do:
+
+- Do preserve the original ByteVoice asset and its waveform crop.
+- Do use the theme variables so light and dark remain coherent.
+- Do keep focus outlines, explicit state labels and readable Bengali transcripts.
+- Do maintain the phone input size and touch targets already implemented.
+- Do label fictional clinic data and scripted fixtures clearly.
+
+### Don't:
+
+- Don't restore the obsolete teal palette or Arial/Nirmala typography.
+- Don't spread glass blur onto transcript or field reading surfaces.
+- Don't introduce invented business metrics or medical claims.
+- Don't treat documentation as proof of deployment or speech quality.
