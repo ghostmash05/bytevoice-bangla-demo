@@ -85,6 +85,10 @@ class ClinicService:
             record.last_activity_at = self.clock()
             if values.get("intent") == "enquiry" and record.outcome == "incomplete":
                 record.outcome = "enquiry"
+            elif values.get("intent") in ("booking", "reschedule", "cancellation", "follow_up") and record.outcome == "enquiry":
+                # Answering an earlier question does not complete a later,
+                # unconfirmed booking/change/callback request in the same call.
+                record.outcome = "incomplete"
         return {"saved": True}
 
     def add_turn(self, call_id, data: TurnInput):

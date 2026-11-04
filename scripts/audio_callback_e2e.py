@@ -63,6 +63,8 @@ async def main():
             report["passed"] = True
         finally:
             report["client_transcripts"] = caller.turns
+            report["response_latency_s"] = caller.response_latencies
+            report["latency_definition"] = "End of published synthetic recording to first received voiced sample; approximate, not human end-of-speech."
             await caller.close()
             for _ in range(20):
                 response = await client.get(f"/api/calls/{call_id}")

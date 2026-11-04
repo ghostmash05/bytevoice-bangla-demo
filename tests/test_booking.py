@@ -44,6 +44,24 @@ class BookingTests(unittest.TestCase):
             self.service.book(self.call, self.booking(confirmed=False))
         self.assertEqual(raised.exception.code, "confirmation_required")
 
+    def test_enquiry_then_unconfirmed_callback_stays_incomplete(self):
+        self.service.capture(self.call, ExtractionInput(intent="enquiry"))
+        self.service.capture(self.call, ExtractionInput(intent="follow_up", patient_name="Demo patient", phone="01712345679"))
+        self.service.end_call(self.call)
+        detail = self.service.call_detail(self.call)
+        self.assertEqual(detail["status"], "incomplete")
+        self.assertEqual(detail["outcome"], "incomplete")
+        self.assertEqual(detail["extraction"]["phone"], "+8801712345679")
+        self.assertEqual(detail["follow_ups"], [])
+
+    def test_partial_intent_does_not_erase_a_saved_action(self):
+        self.service.book(self.call, self.booking())
+        self.service.capture(self.call, ExtractionInput(intent="follow_up"))
+        self.service.end_call(self.call)
+        detail = self.service.call_detail(self.call)
+        self.assertEqual(detail["outcome"], "booked")
+        self.assertEqual(len(detail["actions"]), 1)
+
     def test_retry_is_idempotent(self):
         first = self.service.book(self.call, self.booking())
         second = self.service.book(self.call, self.booking())

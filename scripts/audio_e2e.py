@@ -28,6 +28,9 @@ class AudioCaller:
         self.changed = asyncio.Event()
         self.audio = []
         self.last_agent_speech = 0.0
+        self.response_latencies = []
+        self.pending_response_at = None
+        self.agent_voice_started = asyncio.Event()
         self.source = rtc.AudioSource(24000, 1)
 
         @self.room.on("track_subscribed")
@@ -40,6 +43,10 @@ class AudioCaller:
                             self.audio.append(bytes(event.frame.data))
                             if max((abs(value) for value in array('h', bytes(event.frame.data))), default=0) > 300:
                                 self.last_agent_speech = time.monotonic()
+                                self.agent_voice_started.set()
+                                if self.pending_response_at is not None:
+                                    self.response_latencies.append(round(self.last_agent_speech - self.pending_response_at, 3))
+                                    self.pending_response_at = None
                     finally:
                         await stream.aclose()
                 self.tasks.append(asyncio.create_task(record()))
@@ -90,11 +97,16 @@ class AudioCaller:
         await self.room.local_participant.publish_track(track, rtc.TrackPublishOptions(source=rtc.TrackSource.SOURCE_MICROPHONE))
 
     async def send(self, path):
+        self.pending_response_at = None
         with wave.open(str(path), "rb") as audio:
             if (audio.getframerate(), audio.getnchannels(), audio.getsampwidth()) != (24000, 1, 2):
                 raise RuntimeError("Expected 24 kHz mono PCM16 test audio")
             while chunk := audio.readframes(480):
                 await self.source.capture_frame(rtc.AudioFrame(data=chunk, sample_rate=24000, num_channels=1, samples_per_channel=len(chunk)//2))
+        await self.source.wait_for_playout()
+        # Approximate client-observed latency: end of published synthetic file to
+        # first received voiced sample. Not a human end-of-speech benchmark.
+        self.pending_response_at = time.monotonic()
         # Real silence lets server VAD finish the utterance naturally.
         for _ in range(60):
             await self.source.capture_frame(rtc.AudioFrame(data=bytes(960), sample_rate=24000, num_channels=1, samples_per_channel=480))
