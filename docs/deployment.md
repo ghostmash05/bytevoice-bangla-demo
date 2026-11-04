@@ -39,8 +39,8 @@ GOOGLE_API_KEY as a server secret. LiveKit supplies its project credentials.
 The configuration accepts its injected HTTPS service URL as well as WSS.
 The worker does not receive database credentials or the reviewer password/hash.
 VOICE_PIPELINE=realtime with REALTIME_PROVIDER=google uses the Google plugin,
-GOOGLE_REALTIME_MODEL=gemini-3.8-live and Kore, plus Speechmatics/linden-1 Bengali
-captions. The dedicated Google project is ByteVoice Bangla, on the free tier;
+GOOGLE_REALTIME_MODEL=gemini-3.8-live and Kore, plus Google-native captions
+with REALTIME_STT_MODEL empty. The dedicated Google project is ByteVoice Bangla, on the free tier;
 no billing is enabled. REALTIME_PROVIDER=livekit is the previous connection, not
 an automatic fallback when Google fails. VOICE_PIPELINE=chained remains an optional Soniox/Azure alternative
 requiring separate accounts. Usage consumes provider/LiveKit inference credits.

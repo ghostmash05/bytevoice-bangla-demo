@@ -8,9 +8,10 @@ transactional appointment tools and an authenticated call-record portal.
 The November 4 call review and dashboard authentication boundary are documented
 in [docs/call-review-2026-11-04.md](docs/call-review-2026-11-04.md). `/portal`,
 its data-model explorer and its internal voice test require server-validated
-reviewer sessions; `/try` is a separate public caller. Historical successful
-voice tests below do not establish current provider availability: the latest
-realtime verification was blocked by HTTP 429 from LiveKit Inference.
+reviewer sessions; `/try` is a separate public caller. The LiveKit-billed realtime
+allowance was exhausted on November 4; the agent now supports direct Google
+Gemini Live using a dedicated free-tier ByteVoice project. See
+[docs/google-direct.md](docs/google-direct.md) for migration evidence and limits.
 
 - Hosted portal: https://bytevoice-bangla-portal.vercel.app/portal
 - Direct browser caller: https://bytevoice-bangla-portal.vercel.app/try
@@ -67,9 +68,9 @@ Staff portal /portal                        PostgreSQL (deployment)
 ```
 
 The direct Google path uses Gemini Live speech-to-speech through Google's Gemini
-API (`VOICE_PIPELINE=realtime`, `REALTIME_PROVIDER=google`), paired with
-Speechmatics Linden-1 Bengali STT for
-caller captions using LiveKit's separate STT inference allowance. Google's key
+API (`VOICE_PIPELINE=realtime`, `REALTIME_PROVIDER=google`), with Google-native
+caller captions (`REALTIME_STT_MODEL=`) and Bengali/English transcription hints.
+This avoids the exhausted LiveKit inference allowances. Google's key
 stays server-side; billing is not enabled for the assessment Google project.
 `REALTIME_PROVIDER=livekit` retains the previous LiveKit-billed realtime path,
 whose free realtime credits were exhausted on November 4. Native transcription had

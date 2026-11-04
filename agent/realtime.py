@@ -14,7 +14,8 @@ def create_realtime_model(*, dedicated_transcript=True, conn_options=None, voice
         return google.realtime.RealtimeModel(
             model=os.getenv("GOOGLE_REALTIME_MODEL", "gemini-3.8-live"),
             api_key=os.environ["GOOGLE_API_KEY"], vertexai=False, voice=voice,
-            input_audio_transcription=None if dedicated_transcript else types.AudioTranscriptionConfig(),
+            language="bn",
+            input_audio_transcription=None if dedicated_transcript else types.AudioTranscriptionConfig(language_codes=["bn-BD", "en"]),
             output_audio_transcription=types.AudioTranscriptionConfig(),
             **options,
         )

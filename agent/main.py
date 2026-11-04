@@ -144,7 +144,8 @@ async def entrypoint(ctx: agents.JobContext):
     realtime = os.getenv("VOICE_PIPELINE", "realtime") == "realtime"
     dedicated_transcript = False
     if realtime:
-        transcript_model = os.getenv("REALTIME_STT_MODEL", "speechmatics/linden-1").strip()
+        default_stt = "" if os.getenv("REALTIME_PROVIDER", "livekit") == "google" else "speechmatics/linden-1"
+        transcript_model = os.getenv("REALTIME_STT_MODEL", default_stt).strip()
         dedicated_transcript = bool(transcript_model)
         session = AgentSession(llm=create_realtime_model(dedicated_transcript=dedicated_transcript),
             stt=inference.STT(model=transcript_model, language="bn") if transcript_model else None,
