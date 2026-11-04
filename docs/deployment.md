@@ -1,74 +1,78 @@
-# Deployment plan and current evidence
+# Deployment state and operations
 
-## Current state
+## Live services
 
-Local backend/portal and LiveKit authorization are verified. A Supabase Free
-PostgreSQL database is provisioned in Mumbai, with 15 booking tests and RLS checks
-passed. No public website, backend or hosted agent has been deployed. Docker is
-not installed on this development machine, so Dockerfiles are unbuilt starting points.
-Do not claim container verification based on passing local Python/Next.js checks.
+- Portal/caller: https://bytevoice-bangla-portal.vercel.app (`web` root, Next.js,
+  Node 24). Explicit web/vercel.json overrides the root FastAPI preset.
+- API: https://bytevoice-bangla-api.vercel.app (root FastAPI entrypoint
+  backend.server:app, Python 3.13, Mumbai/bom1).
+- Database: Supabase Free bytevoice-bangla, project tnwcqjoetnttebzuyrlq,
+  Mumbai. ORM schema created and RLS enabled on all nine application tables with
+  no anonymous read policies. No public browser DB connection is used.
+- Voice worker: CA_zNpyeqdHLhd2, LiveKit project p_62otl5m7sxf, ap-south/Mumbai,
+  dispatch name bangla-receptionist. LiveKit project data region was United States,
+  which is separate from agent compute and database regions.
 
-## Services
+Hosted synthetic booking/rescheduling/cancellation passed with the local worker,
+API and portal processes stopped. Human browser microphone quality is pending.
+No paid plan, telephony number, custom domain or voice clone was enabled.
+Included quotas and inference credits are finite; this is not unlimited free usage.
 
-1. PostgreSQL, optionally Supabase. Apply the initial SQL in
-   `supabase/migrations/202611040001_initial.sql`. It enables RLS without browser
-   policies: direct anonymous/authenticated browser access must stay denied. The
-   backend connects with a trusted server-side role. Record the actual database
-   region. Local SQLite is not a substitute for persistent cloud storage.
-2. Backend container from `Dockerfile.backend`, HTTPS public endpoint. Configure
-   DATABASE_URL, AGENT_API_SECRET, REVIEWER_USERNAME, REVIEWER_PASSWORD_HASH,
-   APP_ENV=production, COOKIE_SECURE=true, WEB_ORIGINS=<exact HTTPS frontend origin>,
-   LIVEKIT_URL, LIVEKIT_API_KEY, LIVEKIT_API_SECRET, LIVEKIT_AGENT_NAME and the three
-   speech settings used by readiness checking. No secrets belong in image build args.
-3. Next.js portal/browser caller from `web`, Node 24. Its backend proxy destination
-   is a **nonsecret** BACKEND_URL build-time setting. Root repository/shared must be
-   available during build; the web app imports shared/clinic.json. A container option
-   is `Dockerfile.web` built from the repository root. Browser calls need HTTPS.
-4. Python agent via the authenticated project-local LiveKit CLI. Configure
-   BACKEND_URL, AGENT_API_SECRET and speech/model settings as deployment secrets.
-   `lk agent create` uses `Dockerfile`. Keep the dispatch name bangla-receptionist.
-   Choose an available nearby compute region after checking the free plan supports it;
-   do not claim or enable paid region pinning. LiveKit project data region observed
-   in the dashboard is United States, separate from compute/database regions.
+## Configuration
 
-The same AGENT_API_SECRET must be set on the backend and worker. Backend DATABASE_URL
-and reviewer password hash are not needed by the worker or browser. HTTPS backend
-origins/cookie checks fail closed in production. ASGI forwarded-header trust must be
-configured for the actual hosting proxy; do not trust arbitrary client forwarding headers.
+The API uses DATABASE_URL, AGENT_API_SECRET, REVIEWER_USERNAME,
+REVIEWER_PASSWORD_HASH, APP_ENV=production, COOKIE_SECURE=true,
+WEB_ORIGINS=https://bytevoice-bangla-portal.vercel.app, LIVEKIT_URL,
+LIVEKIT_API_KEY, LIVEKIT_API_SECRET, LIVEKIT_AGENT_NAME, and VOICE_PIPELINE.
+User approved storing these project credentials in sensitive Vercel variables.
+Production fails closed without PostgreSQL, secure cookies and HTTPS origins.
+The transaction pool URL requires TLS; provider metadata is stripped before libpq,
+and psycopg prepared statements are disabled for transaction-pool compatibility.
 
-## Credential and account gates
+The portal only has the nonsecret BACKEND_URL build-time setting. Never add API
+keys, database passwords or reviewer secrets to NEXT_PUBLIC_ variables.
 
-LiveKit access is authorized and its Gemini Live realtime path has produced audio
-and a synthetic spoken booking locally. Soniox/Azure Speech are optional for the
-alternative chained path and are not connected. Trial/credit
-balances must be verified before testing; the consumer Soniox app free plan is not
-the API plan. Do not buy credits or upgrade plans without specific approval.
-New account agreements or expanded persistent access may require action-time
-approval even while routine work has been delegated. Continue independent local
-work when a provider signup cannot be completed.
+The worker receives only BACKEND_URL, AGENT_API_SECRET, APP_ENV, dispatch name and
+voice/transcription model settings. LiveKit supplies its project credentials.
+The configuration accepts its injected HTTPS service URL as well as WSS.
+The worker does not receive database credentials or the reviewer password/hash.
+VOICE_PIPELINE=realtime uses Gemini Live/Kore plus Speechmatics/linden-1 Bengali
+captions. VOICE_PIPELINE=chained remains an optional Soniox/Azure alternative
+requiring separate accounts. Usage consumes provider/LiveKit inference credits.
 
-The current Vercel CLI authentication is invalid (`vercel whoami` failed). Routine
-re-authentication or browser deployment is still needed; no deployment is claimed.
+Application audio recording is disabled with session.start(record=False).
+The first historical local fake-audio test ran before that override. Test scripts
+save synthetic recordings locally on purpose. Verify provider/observability
+retention before handling real data; use fictional details only for this demo.
 
-For VOICE_PIPELINE=realtime, the worker needs REALTIME_MODEL and REALTIME_VOICE
-instead of external speech keys. Model usage consumes LiveKit inference credits.
-The current agent explicitly sets `record=False` on its session. The first fake
-audio test ran before that override and LiveKit's default observability recording
-was enabled; do not claim that historical test was unrecorded.
+## Update the hosted worker
 
-## Hosted verification gate
+The LiveKit CLI expects to find livekit-agents in its root dependency manifest.
+The repository root is the lightweight API, so export the worker build context:
 
-- Health check must confirm persistent PostgreSQL, then rerun booking/concurrency
-  scenarios against a dedicated fake-data test environment.
-- Login through the final frontend origin; verify Secure/HttpOnly cookies, CSRF,
-  logout and that unauthenticated API requests cannot read patient details.
-- Complete actual Bangla browser calls for booking, rescheduling and cancellation,
-  including a new session between operations. Check the real stored records.
-- Audition Bangladesh accent, mixed speech, interruptions, wrong numbers, dates,
-  silence, unavailable slots, provider failures and medical-question boundaries.
-- Turn the local machine off or disconnect local workers and confirm the hosted
-  agent and portal remain usable. Keep them up through assessment.
-- Preload actual fake-patient voice-call records; scripted fixtures alone do not
-  fulfil the brief's test-call evidence.
-- Prepare accessible repository/README, <=3-minute demonstration video and the four
-  final submission links. Do not send the HR submission automatically.
+```powershell
+.\.venv\Scripts\python.exe -m scripts.prepare_agent_deploy
+.\.tools\livekit\lk.exe agent deploy .local\agent-deploy --secrets-file .local\agent-production.env --yes
+.\.tools\livekit\lk.exe agent status --config .local\agent-deploy\livekit.toml
+```
+
+The ignored context contains only worker source, clinic facts, Dockerfile and
+requirements. A SHA-256 source manifest records exactly what was exported.
+Container builds have passed remotely on LiveKit; Docker is not installed locally.
+Dockerfile.backend and Dockerfile.web remain unbuilt alternatives to Vercel.
+Never commit .env files, local credentials, recordings or livekit.toml.
+
+Git pushes trigger Vercel and GitHub CI. This repository uses the authenticated
+GitHub account noreply commit address so Vercel can associate commits correctly.
+A transient GitHub HTTP/2 push failure was resolved using HTTP/1.1; do not rewrite
+history or weaken repository access controls to fix deployment failures.
+
+## Final verification and submission gates
+
+- Human microphone, playback and captions through the final HTTPS caller.
+- Bangladesh-accent review, mixed speech, deliberate interruptions, phone/time
+  corrections, silence, unavailable slots and voice-level backend failure recovery.
+- Final mobile visual review and full reviewer login/logout from the final origin.
+- Accessible source/reviewer credentials and <=3-minute demonstration video.
+- Keep hosted services within available quotas and running during assessment.
+- Do not send the HR submission automatically. Landing page remains deferred.

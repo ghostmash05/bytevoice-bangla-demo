@@ -5,36 +5,28 @@ transactional appointment tools and an authenticated call-record portal.
 
 ## Verified state
 
-- LiveKit CLI authorized for ByteVoice Bangla; credentials stored only locally.
-- Python backend and Next.js staff portal run locally.
-- 33 automated tests pass, including concurrent booking protection, cross-call
-  changes, failed-reschedule rollback, authentication and actual agent-tool/API integration.
-- Portal production build and TypeScript check pass.
-- Browser checks exercised sign-in, phone search, record selection, saved-action
-  history, mobile navigation and the unavailable-provider error state.
-- LiveKit text inference and a real-model booking-tool scenario passed; no booking
-  occurred before confirmation and the correct appointment was saved afterward.
-- Generated a Bangla speech sample and completed a synthetic spoken booking through
-  actual LiveKit WebRTC/native speech. The requested phone, doctor, service and slot
-  were persisted, with caller/assistant transcript turns. Human accent review is pending.
-- Separate synthetic spoken rescheduling and cancellation calls also passed,
-  updating the same appointment and preserving its history across sessions.
-- HTTPS backend deployed at https://bytevoice-bangla-api.vercel.app with PostgreSQL;
-  production cookie, CSRF, logout and anonymous-read checks passed.
-- LiveKit worker container built and deployed in Mumbai; cloud voice validation is in progress.
-- Private GitHub repository pushed; Linux CI passed backend tests and the portal build.
-- Supabase Free database created in Mumbai; 15 booking tests passed in isolated
-  PostgreSQL schemas, and RLS is enabled on all nine public application tables.
-- Synthetic spoken callback saved a corrected phone only after confirmation.
-  Native transcription sometimes used Hindi script. Dedicated Bengali STT has been
-  added; one further local callback test retained Bengali caller transcripts.
-- Three records are explicitly labelled **scripted test fixtures**, not voice calls.
+- Hosted portal: https://bytevoice-bangla-portal.vercel.app/portal
+- Direct browser caller: https://bytevoice-bangla-portal.vercel.app/try
+- Hosted API: https://bytevoice-bangla-api.vercel.app/api/health
+- Supabase Free PostgreSQL in Mumbai; all nine application tables have RLS enabled.
+- Custom Python worker deployed on LiveKit Cloud in Mumbai, dispatch name
+  `bangla-receptionist`. All local app services are stopped.
+- Three separate synthetic audio calls booked, rescheduled and cancelled the same
+  appointment through the hosted worker/API/database. All calls completed, each
+  retained five transcript turns, and appointment versions advanced 1 → 2 → 3.
+  Bengali caller transcripts were retained in these runs.
+- Hosted browser reviewer sign-in, call list, transcript, extracted details and
+  action history verified. Production Secure/HttpOnly cookies, CSRF, origin checks,
+  logout and unauthenticated access rejection passed.
+- 33 hermetic Python tests and 15 PostgreSQL booking tests passed, including
+  concurrency protection and failed-reschedule rollback. Linux GitHub CI passed.
+- Scripted fixture rows and synthetic voice calls are labelled separately.
 
-**Not verified or complete:** human-microphone conversations, listener-rated
-Bangladeshi accent/latency, audio interruption/correction scenarios, full browser-to-cloud voice workflows, portal deployment,
-video and submission. Dockerfiles and PostgreSQL DDL are prepared
-but have not been built/applied. The landing page is excluded by the user's instruction.
-Detailed evidence and remaining verification limits are in `docs/verification.md`.
+**Still unverified or incomplete:** human microphone/captions playback, listener-rated
+Bangladeshi accent, measured latency, deliberate interruption/silence recovery,
+voice-level backend failure recovery, final mobile visual sign-off, reviewer
+repository access and demonstration video. The landing page is excluded by the
+user's instruction. Detailed evidence and limits are in `docs/verification.md`.
 
 ## Architecture
 
@@ -49,8 +41,11 @@ Staff portal /portal                        PostgreSQL (deployment)
                                              SQLite (local development)
 ```
 
-The current audition path is Gemini Live speech-to-speech through existing LiveKit
-Inference credentials (`VOICE_PIPELINE=realtime`). A configurable alternative,
+The current path is Gemini Live speech-to-speech through LiveKit Inference
+(`VOICE_PIPELINE=realtime`), paired with Speechmatics Linden-1 Bengali STT for
+caller captions using the same LiveKit credentials. Native transcription had
+occasionally rendered Bengali speech in Hindi script; original test evidence is
+retained rather than translated or overwritten. A configurable alternative,
 `VOICE_PIPELINE=chained`, uses Soniox STT → LiveKit Inference LLM → Azure Bangladesh
 Bangla TTS, with Silero VAD/STT endpointing; that alternative still needs separate
 provider accounts. Voice choice remains provisional until a Bangladeshi listener
@@ -76,7 +71,8 @@ Copy-Item .env.example .env.local
 
 `backend.setup_local` creates a strong agent API secret and hashes a generated
 reviewer password. The local login is in ignored `.local/reviewer-credentials.txt`.
-It does not overwrite existing credentials. Add speech keys directly to `.env.local`.
+It does not overwrite existing credentials. Add the LiveKit project credentials directly to `.env.local`. Separate speech keys
+are only needed for the optional chained pipeline.
 
 In one terminal:
 

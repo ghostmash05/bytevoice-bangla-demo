@@ -39,10 +39,11 @@
 - Human-rated Bangladesh accent, measured latency, interruptions/corrections,
   silence recovery and microphone-denial behavior. The chained Soniox/Azure option
   still lacks credentials; the LiveKit-native realtime path is now usable.
-- Hosted PostgreSQL behavior (including actual concurrent writes), public TLS,
-  production cookies, provider retention and storage/compute regions.
-- Container builds or hosted deployment: Docker is not available locally.
-- Reviewer-accessible URLs and final video.
+- Provider retention details and a full human browser call; PostgreSQL concurrency,
+  public TLS and production authentication were subsequently checked below.
+- Alternative backend/web Dockerfiles are unbuilt; the agent container subsequently
+  built successfully on LiveKit Cloud.
+- Final demonstration video and reviewer access to the private repository.
 - Final mobile visual sign-off: functional DOM checks show no horizontal page
   overflow at client width375, but the browser capture API intermittently cropped
   or timed out during screenshot collection. Reviewer correctly left visual approval
@@ -84,3 +85,29 @@ actual calls and do not replace the brief's requirement for real voice-test reco
   Next.js configuration and Node 24 setting added. Git-triggered builds also
   identified an unrecognized old commit email; local repository author identity
   is being corrected to the authenticated GitHub account noreply address.
+
+## Hosted end-to-end results
+
+All local API, web and voice-worker processes are stopped. Hosted portal and API
+are live, and the worker is registered on LiveKit Cloud in ap-south. Cloud agent
+version after the secure-URL fix was deployed from commit 5f08fe6.
+
+| Synthetic voice call | Call ID | Result |
+|---|---|---|
+| Booking | fa0cae44-4c3a-46cc-a9fa-e8f77240f528 | Completed; version 1 |
+| Reschedule | 73900101-cafc-4a6f-b92f-5b1fabc31589 | Completed; version 2 |
+| Cancellation | e2a8d9cb-a0e5-49ca-8fe5-191a7fbf19cb | Completed; cancelled, version 3 |
+
+These calls changed the same appointment, reference DDC-36063772. Each retained
+five speaker/timestamp transcript turns. Stored transcripts contained no Devanagari
+letters in these runs. This is limited synthetic evidence, not a guarantee of
+all-speaker transcription quality or human-rated Bangladeshi accent.
+
+Hosted browser sign-in and the rescheduling record's Conversation, Details and
+Activity tabs were directly inspected. The saved activity showed the returned
+reference, doctor, scaling service and 5 November 10:30 Bangladesh appointment.
+The five rows created by the first PostgreSQL test-harness attempt were explicitly
+labelled scripted fixtures; real WebRTC synthetic calls are labelled separately.
+Evidence screenshot: .local/hosted-portal-activity.png (ignored, fake details only).
+Original local voice reports are archived in .local/local-voice-evidence; current
+three operation reports reflect the cloud tests. Private GitHub CI passed fe23d6f.
