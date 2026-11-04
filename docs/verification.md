@@ -259,3 +259,16 @@ booking audio. The test call 0667f33d-f1d9-4d90-995c-97698a0ea2ac was manually e
 screen/audio capture was stopped, and reload removed the temporary microphone,
 audio observer and banner before the test tab was closed. No finished video was
 produced or uploaded. Recording is now excluded from autonomous work.
+
+## Final stored-state audit
+
+At 19:04 Bangladesh time on 4 November, an authenticated read-only audit retrieved
+seven hosted synthetic-call records: booking, reschedule, cancellation, late-name
+correction booking, staff callback, interrupted unconfirmed callback and silence.
+All seven were finalized and retained the expected business outcome, transcript
+speaker/text/timestamps and action counts. The callback had one follow-up; the
+interrupted unconfirmed callback had none. Booking/change/cancellation and corrected
+booking each had one appointment action. Health reported PostgreSQL. Unauthenticated
+record access returned 401 before sign-in and again after explicit CSRF-protected
+sign-out. Ignored report: .local/final-state-audit.json. This audit did not create
+bookings or modify patient details; sign-in/out created and revoked its own session.

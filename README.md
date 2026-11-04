@@ -37,11 +37,11 @@ transactional appointment tools and an authenticated call-record portal.
   tests; this is not a calibrated human end-of-speech benchmark.
 - Scripted fixture rows and synthetic voice calls are labelled separately.
 
-**Still unverified or incomplete:** consistent real-speaker Bengali captions, formal
-accent review,
-reviewer
-repository access and demonstration video. The landing page is excluded by the
-user's instruction. Detailed evidence and limits are in `docs/verification.md`.
+**Remaining review and handoff:** consistent real-speaker Bengali captions and
+formal accent review remain unverified. The repository stays private until the
+user makes it public before submission. Landing-page work and video recording are
+excluded by the user's instructions; neither is claimed complete against the
+original assessment. Detailed evidence and limits are in `docs/verification.md`.
 
 ## Architecture
 
