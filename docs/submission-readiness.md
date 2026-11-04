@@ -7,14 +7,14 @@ still requests one; the direct caller does not satisfy that marketing-page item.
 | Requirement | Evidence | Remaining action |
 |---|---|---|
 | Public browser caller | https://bytevoice-bangla-portal.vercel.app/try; human Safari booking succeeded | Human retest of automatic ending and dedicated caller captions |
-| Connecting/live/ended and error states | Implemented in web/app/try/page.tsx; deployed build passed | Microphone-denial retry and final mobile visual review |
+| Connecting/live/ended and error states | Implemented in web/app/try/page.tsx; deployed build passed; mobile voice layout inspected | Microphone-denial retry remains unverified |
 | Natural Bangla conversation | Human reported good overall experience; synthetic calls exercise actual audio | Formal real-speaker accent/recognition review remains subjective and pending |
 | Confirmed booking | Human Safari call and eight-turn name-correction regression saved exactly one appointment | No known functional blocker |
 | Cross-call reschedule/cancel | Three hosted calls changed DDC-36063772, versions 1/2/3 | No known functional blocker |
 | Interruptions and correction | Audible interruption retained interrupted assistant text and corrected phone; no unconfirmed callback | Review on human microphone if possible |
 | Silence and ending | Check-in/farewell/ROOM_DELETED test; explicit goodbye test passed | Safari retest pending |
 | Failed write behavior | Isolated audio call caused three 503 retries, no appointment, explicit spoken failure | No hosted fault injection performed |
-| Staff portal and real call data | https://bytevoice-bangla-portal.vercel.app/portal; protected login and Conversation/Details/Activity inspected | Final mobile screenshot review unavailable while browser control is disabled |
+| Staff portal and real call data | https://bytevoice-bangla-portal.vercel.app/portal; protected login and Conversation/Details/Activity inspected on desktop and 390px mobile layout | No visible defect in reviewed views; actual Safari rendering not separately audited |
 | Schema/storage explanation | /portal/data-model, README and docs/deployment.md; Supabase PostgreSQL Mumbai | Explain why native audio and dedicated STT have separate roles |
 | Validation and persistence | 50 Python tests, 18 PostgreSQL booking tests; SQL constraints, idempotency and atomic changes | Real-speaker digits may still be mistranscribed; readback remains essential |
 | Repository and README | https://github.com/ghostmash05/bytevoice-bangla-demo; CI passed | User will make repository public before submission; keep private until then |

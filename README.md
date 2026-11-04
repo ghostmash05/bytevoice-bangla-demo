@@ -39,7 +39,7 @@ transactional appointment tools and an authenticated call-record portal.
 
 **Still unverified or incomplete:** consistent real-speaker Bengali captions, formal
 accent review,
-final mobile visual sign-off, reviewer
+reviewer
 repository access and demonstration video. The landing page is excluded by the
 user's instruction. Detailed evidence and limits are in `docs/verification.md`.
 

@@ -215,3 +215,19 @@ usable screenshot was obtained; this is not visual sign-off. The browser viewpor
 override could not be reset after access was disabled. Reset it on reconnection
 before normal browser work. Repository access remains private by the user's latest
 instruction; the user plans to make it public before submission.
+
+## Reconnected browser mobile review
+
+After browser access was restored, the temporary viewport override was reset and
+then explicitly set to 390x844 for one bounded review. Full-page screenshots of
+the hosted voice page, selected synthetic call Conversation, Details and Activity,
+and the filtered call list were inspected. Bengali text, reference, doctor/service,
+appointment time, fields and navigation remained readable without visible clipping.
+Activity view document width equalled the 390px viewport, with no horizontal
+overflow. All calls returned to the list and a fictional-phone search showed four
+matching records. This is responsive Chromium evidence, not an iPhone Safari
+rendering guarantee. Normal viewport sizing was restored after review.
+
+Ignored evidence: .local/mobile-voice-final.png, mobile-portal-final.png,
+mobile-details-final.png, mobile-activity-final.png and mobile-call-list-final.png.
+Only fictional/synthetic record screens were saved. No visual fix was needed.
