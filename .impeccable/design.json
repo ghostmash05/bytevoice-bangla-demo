@@ -1,0 +1,67 @@
+{
+  "title": "Design System: ByteVoice Bangla workspace",
+  "generatedAt": "2026-11-04T07:54:15.0247989Z",
+  "components": [
+    {
+      "refersTo": "button-primary",
+      "kind": "button",
+      "name": "Primary button",
+      "description": "Primary operating action",
+      "css": ".ds-primary{font:600 .88rem Arial,sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:43px;padding:10px 16px;border:1px solid var(--accent);border-radius:6px;background:var(--accent);color:white;cursor:pointer;transition:background-color .15s ease,color .15s ease}.ds-primary:hover:not(:disabled){background:var(--accent-dark)}.ds-primary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}.ds-primary:disabled{opacity:.52;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}",
+      "html": "<button class=\"ds-primary\">Start voice call</button>"
+    }
+  ],
+  "schemaVersion": 2,
+  "narrative": {
+    "keyCharacteristics": [
+      "Aligned labels",
+      "Readable Bengali transcripts",
+      "Explicit record states"
+    ],
+    "overview": "White records, blue-grey navigation, dark ink and restrained teal states form a compact operating interface.",
+    "dos": [
+      "Preserve visible keyboard focus",
+      "Label fictional and scripted data"
+    ],
+    "donts": [
+      "Introduce invented metrics or decorative charts",
+      "Claim visual sign-off from source extraction"
+    ],
+    "northStar": "Civil registry"
+  },
+  "extensions": {
+    "shadows": [
+      {
+        "name": "active-navigation",
+        "value": "0 2px 5px #243c4408",
+        "purpose": "Subtle separation of the active navigation item"
+      },
+      {
+        "name": "selected-record",
+        "value": "inset 2px 0 var(--accent)",
+        "purpose": "Marks the selected call row"
+      }
+    ],
+    "breakpoints": [
+      {
+        "value": "760px",
+        "name": "mobile"
+      },
+      {
+        "value": "1150px",
+        "name": "compact-desktop"
+      },
+      {
+        "value": "1600px",
+        "name": "wide-desktop"
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-state",
+        "value": "background-color 0.15s ease, color 0.15s ease",
+        "purpose": "Button hover state transitions; disabled for reduced motion"
+      }
+    ]
+  }
+}

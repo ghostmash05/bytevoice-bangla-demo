@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+.venv
+.tools
+.local
+.git
+__pycache__
+node_modules
+.next
+**/node_modules
+**/.next
+**/__pycache__
+tests
