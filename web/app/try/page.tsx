@@ -121,6 +121,12 @@ export default function VoiceTest() {
       current.registerTextStreamHandler(
         "lk.transcription",
         async (reader, participantInfo) => {
+          if (participantInfo.identity === current.localParticipant.identity &&
+              [...current.remoteParticipants.values()].some((participant) =>
+                participant.kind === ParticipantKind.AGENT && participant.attributes["clinic.caller_transcript"] === "dedicated")) {
+            await reader.readAll();
+            return;
+          }
           const id =
             reader.info.attributes?.["lk.segment_id"] || reader.info.id;
           const final =
@@ -152,6 +158,19 @@ export default function VoiceTest() {
           }
         },
       );
+      current.registerTextStreamHandler("clinic.caller_transcript", async (reader, participantInfo) => {
+        const sender = current.remoteParticipants.get(participantInfo.identity);
+        if (sender?.kind !== ParticipantKind.AGENT) return;
+        try {
+          const text = await reader.readAll();
+          if (room.current !== current) return;
+          const id = reader.info.attributes?.segment_id || reader.info.id;
+          setTurns((previous) => previous.some((turn) => turn.id === id)
+            ? previous : [...previous, { id, text, speaker: "Caller" }]);
+        } catch {
+          setError("Caller captions were interrupted. You can continue speaking or reconnect.");
+        }
+      });
       current.on(RoomEvent.Disconnected, () => {
         if (room.current !== current) return;
         room.current = null;

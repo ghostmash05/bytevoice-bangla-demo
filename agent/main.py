@@ -15,25 +15,31 @@ from agent.prompt import build_instructions
 from agent.validation import normalize_bd_mobile
 from agent.recovery import TurnRecovery
 from agent.presence import CallerPresence
+from agent.transcription import CallerTranscript
 
 logger = logging.getLogger("clinic-agent")
 
 
 class Receptionist(Agent):
-    def __init__(self, backend: BackendBridge, call_id: str, finish=None, presence=None) -> None:
+    def __init__(self, backend: BackendBridge, call_id: str, finish=None, presence=None, transcript=None) -> None:
         super().__init__(instructions=build_instructions())
         self.backend, self.call_id = backend, call_id
         self.finish = finish
         self.presence = presence
+        self.transcript = transcript
 
     async def stt_node(self, audio, model_settings):
         async def observed_audio():
             async for frame in audio:
+                if self.transcript:
+                    self.transcript.audio_started(frame.duration)
                 if self.presence:
                     self.presence.observe_pcm(frame.data)
                 yield frame
 
         async for event in Agent.default.stt_node(self, observed_audio(), model_settings):
+            if self.transcript:
+                self.transcript.speech_event(event)
             yield event
 
     async def operation(self, name, data):
@@ -132,8 +138,10 @@ async def entrypoint(ctx: agents.JobContext):
     queue = asyncio.Queue(maxsize=512)
     state = {"failed": False, "error_code": None}
     realtime = os.getenv("VOICE_PIPELINE", "realtime") == "realtime"
+    dedicated_transcript = False
     if realtime:
         transcript_model = os.getenv("REALTIME_STT_MODEL", "speechmatics/linden-1").strip()
+        dedicated_transcript = bool(transcript_model)
         session = AgentSession(llm=inference.RealtimeModel(
             model=os.getenv("REALTIME_MODEL", "google/gemini-3.8-live"),
             voice=os.getenv("REALTIME_VOICE", "Kore"), max_session_duration=310,
@@ -154,15 +162,30 @@ async def entrypoint(ctx: agents.JobContext):
     async def persist_turns():
         while True:
             data = await queue.get()
+            caller_caption = data.pop("_caller_caption", False)
             try:
                 await backend.request("POST", f"/internal/calls/{call_id}/turn", data)
             except Exception:
                 state.update(failed=True, error_code="transcript_write_failed")
                 logger.error("Transcript persistence failed for call %s", call_id)
             finally:
+                if caller_caption:
+                    try:
+                        await asyncio.wait_for(ctx.room.local_participant.send_text(data["text"],
+                            topic="clinic.caller_transcript", attributes={"segment_id": data["id"], "timestamp": data["timestamp"]}), timeout=3)
+                    except Exception:
+                        logger.warning("Caller caption delivery failed call_id=%s", call_id)
                 queue.task_done()
 
     writer = asyncio.create_task(persist_turns())
+
+    def queue_caller_caption(data):
+        try:
+            queue.put_nowait({**data, "_caller_caption": True})
+        except asyncio.QueueFull:
+            state.update(failed=True, error_code="transcript_queue_full")
+
+    caller_transcript = CallerTranscript(queue_caller_caption) if dedicated_transcript else None
     last_reply_started = {"at": 0.0}
 
     async def recover_reply():
@@ -251,6 +274,10 @@ async def entrypoint(ctx: agents.JobContext):
         if item.role == "user" and item.created_at > last_reply_started["at"]:
             recovery.user_turn()
             presence.caller_activity()
+        if item.role == "user" and dedicated_transcript:
+            # Native transcripts still serve model context/reply recovery. Only
+            # the dedicated STT segments are displayed and persisted as caller text.
+            return
         try:
             queue.put_nowait({"id": item.id, "speaker": item.role, "text": item.text_content,
                 "timestamp": datetime.fromtimestamp(item.created_at, timezone.utc).isoformat(), "interrupted": item.interrupted})
@@ -300,8 +327,10 @@ async def entrypoint(ctx: agents.JobContext):
 
     ctx.add_shutdown_callback(shutdown)
     try:
-        await session.start(room=ctx.room, agent=Receptionist(backend, call_id, finish_session, presence),
+        await session.start(room=ctx.room, agent=Receptionist(backend, call_id, finish_session, presence, caller_transcript),
                             room_options=room_io.RoomOptions(delete_room_on_close=True), record=False)
+        if dedicated_transcript:
+            await ctx.room.local_participant.set_attributes({"clinic.caller_transcript": "dedicated"})
         if realtime:
             await session.generate_reply(instructions="Greet once in natural Bangladeshi Bangla: আসসালামু আলাইকুম। ঢাকা ডেন্টাল কেয়ারের ডেমোতে স্বাগতম। আমি এআই সহকারী। কীভাবে সাহায্য করতে পারি? Do not call any tools before the caller speaks.")
         else:

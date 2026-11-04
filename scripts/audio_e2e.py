@@ -56,6 +56,11 @@ class AudioCaller:
                 try:
                     message = await reader.read_all()
                     attrs = reader.info.attributes
+                    if identity == self.room.local_participant.identity and any(
+                        p.attributes.get("clinic.caller_transcript") == "dedicated"
+                        for p in self.room.remote_participants.values()
+                    ):
+                        return
                     if attrs.get("lk.transcription_final") == "false":
                         return
                     self.turns.append({"speaker": "user" if identity == self.room.local_participant.identity else "assistant", "text": message, "received_at": time.time(), "attributes": dict(attrs)})
@@ -64,6 +69,18 @@ class AudioCaller:
                     self.turns.append({"speaker": "system", "text": "transcription stream interrupted"})
             self.tasks.append(asyncio.create_task(receive()))
         self.room.register_text_stream_handler("lk.transcription", transcription)
+
+        def caller_transcription(reader, identity):
+            async def receive():
+                participant = self.room.remote_participants.get(identity)
+                if participant is None or participant.attributes.get("clinic.caller_transcript") != "dedicated":
+                    return
+                message = await reader.read_all()
+                self.turns.append({"speaker": "user", "text": message, "received_at": time.time(),
+                                   "attributes": dict(reader.info.attributes)})
+                self.changed.set()
+            self.tasks.append(asyncio.create_task(receive()))
+        self.room.register_text_stream_handler("clinic.caller_transcript", caller_transcription)
 
     def assistant_count(self):
         return sum(t["speaker"] == "assistant" for t in self.turns)
