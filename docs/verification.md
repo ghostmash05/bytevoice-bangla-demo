@@ -2,7 +2,7 @@
 
 ## Passed
 
-- 30 hermetic Python tests: phone/reference formats and pipeline configuration; confirmation required; invalid dates,
+- 31 hermetic Python tests: phone/reference formats and pipeline configuration; confirmation required; invalid dates,
   doctors, hours and slots; idempotency; concurrent slot collision; cross-call
   booking/reschedule/cancel; wrong-phone lookup rejection; atomic rollback; stale
   version rejection; partial records; callback storage; crash reconciliation;
@@ -42,7 +42,7 @@
 - Hosted PostgreSQL behavior (including actual concurrent writes), public TLS,
   production cookies, provider retention and storage/compute regions.
 - Container builds or hosted deployment: Docker is not available locally.
-- Public GitHub/CI, reviewer-accessible URLs and final video.
+- Reviewer-accessible URLs and final video.
 - Final mobile visual sign-off: functional DOM checks show no horizontal page
   overflow at client width375, but the browser capture API intermittently cropped
   or timed out during screenshot collection. Reviewer correctly left visual approval
@@ -50,3 +50,19 @@
 
 The three local portal samples are explicitly **scripted fixtures**. They are not
 actual calls and do not replace the brief's requirement for real voice-test records.
+
+## Additional checks
+
+- Private repository ghostmash05/bytevoice-bangla-demo pushed. GitHub Actions run
+  41800760558 passed Linux Python checks and Node 24 portal build at commit 4ad2988.
+- Supabase Free database bytevoice-bangla created in Mumbai (bom1). PostgreSQL 17.11
+  connectivity verified. All 15 booking tests passed using explicit per-test schemas;
+  startup search_path options are ignored by the Supabase pooler and must not be
+  used for test isolation. The first attempt consequently shared fake test data.
+- All nine public application tables have RLS enabled, with zero public policies.
+- Callback/corrected-phone synthetic call passed with four user turns; saved phone
+  +8801712345679. Reviewed response declined medication/dosage advice. Original
+  confirmation transcript was rendered in Hindi despite Bengali speech/hint, so
+  reliable Bengali-script transcription remains an open issue.
+- Test caller now waits for agent listening state and quiet audio before the next
+  turn; previous fixed delay accidentally interrupted long spoken responses.

@@ -4,6 +4,7 @@ Uses the running local backend and worker, existing LiveKit credits, and fiction
 details. This tests the actual audio path, not a human microphone or accent quality.
 """
 import asyncio
+from array import array
 import json
 import os
 import time
@@ -26,6 +27,7 @@ class AudioCaller:
         self.turns = []
         self.changed = asyncio.Event()
         self.audio = []
+        self.last_agent_speech = 0.0
         self.source = rtc.AudioSource(24000, 1)
 
         @self.room.on("track_subscribed")
@@ -36,6 +38,8 @@ class AudioCaller:
                     try:
                         async for event in stream:
                             self.audio.append(bytes(event.frame.data))
+                            if max((abs(value) for value in array('h', bytes(event.frame.data))), default=0) > 300:
+                                self.last_agent_speech = time.monotonic()
                     finally:
                         await stream.aclose()
                 self.tasks.append(asyncio.create_task(record()))
@@ -64,7 +68,17 @@ class AudioCaller:
             await asyncio.wait_for(self.changed.wait(), max(0.1, deadline - time.monotonic()))
             if time.monotonic() > deadline:
                 raise TimeoutError("No finalized agent reply was received")
-        await asyncio.sleep(0.7)
+        # Transcription text can finish before voice playout. Sending the next
+        # utterance then would accidentally interrupt every long response.
+        text_received = time.monotonic()
+        while True:
+            states = [p.attributes.get('lk.agent.state') for p in self.room.remote_participants.values()]
+            now = time.monotonic()
+            if 'listening' in states and now - text_received >= 1 and now - self.last_agent_speech >= 0.7:
+                return
+            if now >= deadline:
+                raise TimeoutError('Agent did not finish voice playout before the next turn')
+            await asyncio.sleep(0.1)
 
     async def connect(self, room_name):
         token = api.AccessToken(os.environ["LIVEKIT_API_KEY"], os.environ["LIVEKIT_API_SECRET"]).with_identity("audio-test-" + uuid4().hex).with_ttl(timedelta(minutes=5))

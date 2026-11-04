@@ -37,7 +37,10 @@ class StartCallInput(Input):
 def create_app(database_url=None, settings=None, clock=None):
     settings = settings or dict(os.environ)
     clock = clock or (lambda: datetime.now(timezone.utc))
-    engine = make_engine(database_url or settings.get("DATABASE_URL"))
+    database_url = database_url or settings.get("DATABASE_URL")
+    if settings.get("APP_ENV") == "production" and not (database_url or "").startswith(("postgres://", "postgresql://", "postgresql+psycopg://")):
+        raise RuntimeError("Production requires a persistent PostgreSQL DATABASE_URL")
+    engine = make_engine(database_url)
     sessions = make_sessions(engine)
     service = ClinicService(sessions, clock)
     origins = [s.strip() for s in settings.get("WEB_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",") if s.strip()]

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "fastapi",
+  "regions": ["bom1"],
+  "functions": {
+    "backend/server.py": {
+      "excludeFiles": "{.local/**,.venv/**,.tools/**,web/**,tests/**,scripts/**,.impeccable/**,.git/**,agent/main.py,requirements-lock.txt}"
+    }
+  }
+}

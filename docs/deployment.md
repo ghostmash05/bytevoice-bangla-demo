@@ -2,8 +2,9 @@
 
 ## Current state
 
-Only local backend/portal and LiveKit project authorization are verified. No public
-website, backend, PostgreSQL instance or hosted agent has been deployed. Docker is
+Local backend/portal and LiveKit authorization are verified. A Supabase Free
+PostgreSQL database is provisioned in Mumbai, with 15 booking tests and RLS checks
+passed. No public website, backend or hosted agent has been deployed. Docker is
 not installed on this development machine, so Dockerfiles are unbuilt starting points.
 Do not claim container verification based on passing local Python/Next.js checks.
 

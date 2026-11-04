@@ -1,0 +1,17 @@
+[project]
+name = "bytevoice-bangla-backend"
+version = "0.1.0"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+  "fastapi==0.162.0",
+  "uvicorn[standard]==0.54.0",
+  "SQLAlchemy==2.0.57",
+  "psycopg[binary]==3.3.7",
+  "argon2-cffi==25.1.0",
+  "python-dotenv==1.2.4",
+  "tzdata==2026.6",
+  "livekit-api==1.2.2",
+]
+
+[tool.vercel]
+entrypoint = "backend.server:app"

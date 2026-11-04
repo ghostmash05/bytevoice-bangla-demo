@@ -7,7 +7,7 @@ transactional appointment tools and an authenticated call-record portal.
 
 - LiveKit CLI authorized for ByteVoice Bangla; credentials stored only locally.
 - Python backend and Next.js staff portal run locally.
-- 30 automated tests pass, including concurrent booking protection, cross-call
+- 31 automated tests pass, including concurrent booking protection, cross-call
   changes, failed-reschedule rollback, authentication and actual agent-tool/API integration.
 - Portal production build and TypeScript check pass.
 - Browser checks exercised sign-in, phone search, record selection, saved-action
@@ -19,11 +19,16 @@ transactional appointment tools and an authenticated call-record portal.
   were persisted, with caller/assistant transcript turns. Human accent review is pending.
 - Separate synthetic spoken rescheduling and cancellation calls also passed,
   updating the same appointment and preserving its history across sessions.
+- Private GitHub repository pushed; Linux CI passed backend tests and the portal build.
+- Supabase Free database created in Mumbai; 15 booking tests passed in isolated
+  PostgreSQL schemas, and RLS is enabled on all nine public application tables.
+- Synthetic spoken callback saved a corrected phone only after confirmation.
+  A native-model transcription still occasionally uses Hindi script; unresolved.
 - Three records are explicitly labelled **scripted test fixtures**, not voice calls.
 
 **Not verified or complete:** human-microphone conversations, listener-rated
 Bangladeshi accent/latency, audio interruption/correction scenarios, hosted PostgreSQL, public hosting, cloud agent deployment,
-GitHub publication, video and submission. Dockerfiles and PostgreSQL DDL are prepared
+video and submission. Dockerfiles and PostgreSQL DDL are prepared
 but have not been built/applied. The landing page is excluded by the user's instruction.
 Detailed evidence and remaining verification limits are in `docs/verification.md`.
 
@@ -59,7 +64,7 @@ for the production build. GitHub Actions is configured with Node 24/Python 3.13.
 Set-Location 'F:\Projects\Agentic\bangla-receptionist'
 # For a fresh checkout:
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements-agent.txt
 # Copy only if it does not exist:
 Copy-Item .env.example .env.local
 .\.venv\Scripts\python.exe -m backend.setup_local

@@ -42,6 +42,10 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(self.client.get("/api/calls").status_code, 401)
         self.assertEqual(self.client.post("/internal/calls/start", json={"room_name": "test"}).status_code, 401)
 
+    def test_production_rejects_ephemeral_sqlite_storage(self):
+        with self.assertRaisesRegex(RuntimeError, "persistent PostgreSQL"):
+            create_app("sqlite://", self.settings | {"APP_ENV": "production", "COOKIE_SECURE": "true", "WEB_ORIGINS": "https://clinic.example"})
+
     def test_login_cookie_csrf_and_logout(self):
         logged_in = self.login()
         self.assertEqual(logged_in.status_code, 200)
