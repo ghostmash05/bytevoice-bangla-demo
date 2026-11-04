@@ -6,7 +6,7 @@ assessment demonstration, not a real healthcare service.
 
 ## Clinic
 
-- Dhaka Dental Care / ঢাকা ডেন্টাল কেয়ার, demo clinic in Dhanmondi, Dhaka.
+- Mashrafi’s Dental / মাশরাফি’স ডেন্টাল, demo clinic in Dhanmondi, Dhaka.
 - No real street address, phone contact or clinical credentials are invented.
 - Asia/Dhaka; Saturday–Thursday 10:00–20:00, closed Friday.
 - 30-minute appointments; last start 19:30; maximum 14-day booking horizon.
@@ -47,3 +47,5 @@ explicit goodbye have separate synthetic evidence. Dedicated Bengali caller STT
 segments are displayed and saved independently of the voice model's native input
 captions. Exact recognition and formal accent review still need human assessment;
 see docs/verification.md. The alternative Soniox/Azure path is not connected.
+
+The AI receptionist is Fariya / ফারিয়া, with warm, natural Bangladeshi Bangla delivery.

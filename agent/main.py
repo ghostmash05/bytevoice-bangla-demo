@@ -10,7 +10,7 @@ from livekit.agents import Agent, AgentServer, AgentSession, RunContext, StopRes
 
 from agent.bridge import BackendBridge
 from agent.config import require_configuration
-from agent.prompt import build_instructions
+from agent.prompt import build_instructions, build_greeting
 from agent.validation import normalize_bd_mobile
 from agent.recovery import TurnRecovery
 from agent.presence import CallerPresence
@@ -339,9 +339,9 @@ async def entrypoint(ctx: agents.JobContext):
         if dedicated_transcript:
             await ctx.room.local_participant.set_attributes({"clinic.caller_transcript": "dedicated"})
         if realtime:
-            await session.generate_reply(instructions="Greet once in natural Bangladeshi Bangla: আসসালামু আলাইকুম। ঢাকা ডেন্টাল কেয়ারের ডেমোতে স্বাগতম। আমি এআই সহকারী। কীভাবে সাহায্য করতে পারি? Do not call any tools before the caller speaks.")
+            await session.generate_reply(instructions="Greet once with gentle warmth and natural Bangladeshi cadence, using these words: " + build_greeting() + " Do not call any tools before the caller speaks. Do not add stage directions or repeat the introduction.")
         else:
-            await session.say("আসসালামু আলাইকুম। ঢাকা ডেন্টাল কেয়ারের ডেমোতে স্বাগতম। আমি এআই সহকারী। কীভাবে সাহায্য করতে পারি?", allow_interruptions=True)
+            await session.say(build_greeting(), allow_interruptions=True)
     except Exception:
         state.update(failed=True, error_code="voice_start_failed")
         ctx.shutdown(reason="voice startup failed")

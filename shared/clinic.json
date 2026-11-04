@@ -1,8 +1,9 @@
 {
   "id": "demo-dhaka-dental",
   "is_fictional": true,
-  "name_bn": "ঢাকা ডেন্টাল কেয়ার",
-  "name_en": "Dhaka Dental Care",
+  "name_bn": "মাশরাফি’স ডেন্টাল",
+  "name_en": "Mashrafi’s Dental",
+  "receptionist": {"name_bn": "ফারিয়া", "name_en": "Fariya"},
   "timezone": "Asia/Dhaka",
   "location_bn": "ডেমো ক্লিনিক, ধানমন্ডি, ঢাকা। এটি একটি কাল্পনিক ঠিকানা।",
   "directions_bn": "এটি একটি অনলাইন ডেমো। এখানে সরাসরি যাওয়ার জন্য কোনো বাস্তব ঠিকানা দেওয়া হয়নি।",

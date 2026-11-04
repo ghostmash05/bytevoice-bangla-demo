@@ -230,7 +230,7 @@ export default function VoiceTest() {
   }
   return (
       <div className="test-layout">
-        <header className="voice-page-heading"><div><h1>{t("Talk to your receptionist")}</h1>
+        <header className="voice-page-heading"><div><h1>{t("Talk to Fariya")}</h1>
         <p>
           {t("Speak naturally in Bangla. You can ask about the demo clinic, book a visit, or change an existing appointment using its reference and phone number.")}</p>
         </div></header>
@@ -238,7 +238,7 @@ export default function VoiceTest() {
         <div className="voice-column">
         <section className={`call-console console-${state}`} aria-label={t("Browser voice call")}>
           <div className="call-console-head">
-            <h2>{t("Dhaka Dental Care")}</h2>
+            <h2>{t("Mashrafi’s Dental")}</h2>
             <span className="call-state" role="status">
               <span className={`state-dot ${state === "live" ? "live" : ""}`} />
               {label(state)}

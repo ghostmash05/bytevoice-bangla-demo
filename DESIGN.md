@@ -67,27 +67,27 @@ colors:
   danger-hover: "#762b37"
 typography:
   headline:
-    fontFamily: '"Manrope", "Noto Sans Bengali", sans-serif'
+    fontFamily: '"Manrope", "Hind Siliguri", sans-serif'
     fontSize: "28px"
     fontWeight: 650
     lineHeight: 1.3
     letterSpacing: "-0.035em"
   title:
-    fontFamily: '"Manrope", "Noto Sans Bengali", sans-serif'
+    fontFamily: '"Manrope", "Hind Siliguri", sans-serif'
     fontSize: "18px"
     fontWeight: 650
     lineHeight: 1.45
     letterSpacing: "-0.02em"
   body:
-    fontFamily: '"Manrope", "Noto Sans Bengali", sans-serif'
+    fontFamily: '"Manrope", "Hind Siliguri", sans-serif'
     fontSize: "14px"
     lineHeight: 1.55
   label:
-    fontFamily: '"Manrope", "Noto Sans Bengali", sans-serif'
+    fontFamily: '"Manrope", "Hind Siliguri", sans-serif'
     fontSize: "13px"
     fontWeight: 500
   transcript:
-    fontFamily: '"Noto Sans Bengali", "Manrope", sans-serif'
+    fontFamily: '"Hind Siliguri", "Manrope", sans-serif'
     fontSize: "15px"
     lineHeight: 1.95
 rounded:
@@ -162,7 +162,7 @@ Light and Bangla are the defaults, with an explicit dark toggle and BN/EN contro
 
 - Cool silver framing and clear record sheets.
 - Authentic ByteVoice emblem, preserved from the supplied asset.
-- Manrope interface text with Noto Sans Bengali conversations.
+- Manrope interface text with Hind Siliguri conversations.
 - Light by default; deliberate dark and BN/EN controls.
 - Quiet depth, explicit statuses and visible keyboard focus.
 
@@ -184,7 +184,7 @@ Outcome pairs remain semantic: booked is muted green, rescheduled steel blue, ca
 
 ## Typography
 
-The interface uses locally hosted variable **Manrope** (400–800), followed by **Noto Sans Bengali** (400–700), then sans-serif. Conversation text reverses those first two families. Both font faces use `font-display: swap`. No separate display face is established.
+The interface uses locally hosted variable **Manrope** (400–800), followed by **Hind Siliguri** (static 400, 500, 600 and 700; Bengali subset), then sans-serif. Conversation text reverses those first two families. Both font faces use `font-display: swap`. No separate display face is established.
 
 Frontmatter records the headline, title, body, label and transcript roles. Main headings reduce to (24px) on phones; record headings use (21px). Operational metadata is commonly (11–13px). Buttons use (12px, weight 600), and badges use (11px, weight 600). Transcript leading is deliberately open. Dates, phone numbers and durations use tabular numerals. Phone inputs use (16px) to keep focus stable in Safari.
 
