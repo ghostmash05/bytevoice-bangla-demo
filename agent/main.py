@@ -4,7 +4,6 @@ import logging
 import os
 import time
 from datetime import datetime, timezone
-from openai.types.realtime import AudioTranscription
 
 from livekit import agents
 from livekit.agents import Agent, AgentServer, AgentSession, RunContext, StopResponse, ToolError, TurnHandlingOptions, function_tool, inference, room_io
@@ -16,6 +15,7 @@ from agent.validation import normalize_bd_mobile
 from agent.recovery import TurnRecovery
 from agent.presence import CallerPresence
 from agent.transcription import CallerTranscript
+from agent.realtime import create_realtime_model
 
 logger = logging.getLogger("clinic-agent")
 
@@ -146,11 +146,8 @@ async def entrypoint(ctx: agents.JobContext):
     if realtime:
         transcript_model = os.getenv("REALTIME_STT_MODEL", "speechmatics/linden-1").strip()
         dedicated_transcript = bool(transcript_model)
-        session = AgentSession(llm=inference.RealtimeModel(
-            model=os.getenv("REALTIME_MODEL", "google/gemini-3.8-live"),
-            voice=os.getenv("REALTIME_VOICE", "Kore"), max_session_duration=310,
-            input_audio_transcription=None if transcript_model else AudioTranscription(language="bn", prompt="The caller speaks Bangladeshi Bangla. Transcribe Bangla in Bengali script, preserving English code-switching."),
-        ), stt=inference.STT(model=transcript_model, language="bn") if transcript_model else None,
+        session = AgentSession(llm=create_realtime_model(dedicated_transcript=dedicated_transcript),
+            stt=inference.STT(model=transcript_model, language="bn") if transcript_model else None,
             max_tool_steps=6)
     else:
         from livekit.plugins import azure, silero, soniox

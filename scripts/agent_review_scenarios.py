@@ -14,6 +14,7 @@ from agent.bridge import BackendBridge
 from backend.app import create_app
 from backend.models import Appointment, FollowUp
 from scripts.realtime_smoke import CaptureAudio
+from agent.realtime import create_realtime_model
 
 async def main():
     (ROOT / ".local/call-review").mkdir(parents=True, exist_ok=True)
@@ -32,7 +33,7 @@ async def main():
                 call = (await bridge.request("POST", "/internal/calls/start", {"room_name": "review-" + name}))["call_id"]
                 result = {"name": name, "replies": []}
                 try:
-                    model = inference.RealtimeModel(model=os.getenv("REALTIME_MODEL", "google/gemini-3.8-live"), voice="Kore", conn_options=APIConnectOptions(max_retry=0, timeout=20))
+                    model = create_realtime_model(conn_options=APIConnectOptions(max_retry=0, timeout=20))
                     async with model, AgentSession(llm=model, max_tool_steps=6) as session:
                         session.output.audio = CaptureAudio()
                         provider_failed = asyncio.Event()

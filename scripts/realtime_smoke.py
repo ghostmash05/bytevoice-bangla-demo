@@ -7,6 +7,7 @@ import wave
 from livekit.agents import Agent, AgentSession, APIConnectOptions, inference
 from livekit.agents.voice import io
 from agent.config import ROOT
+from agent.realtime import create_realtime_model
 
 
 class CaptureAudio(io.AudioOutput):
@@ -41,8 +42,7 @@ class CaptureAudio(io.AudioOutput):
 
 async def generate_sample(text, output_path, voice="Kore"):
     sink = CaptureAudio()
-    model = inference.RealtimeModel(model="google/gemini-3.8-live", voice=voice,
-        conn_options=APIConnectOptions(max_retry=0, timeout=20))
+    model = create_realtime_model(voice=voice, conn_options=APIConnectOptions(max_retry=0, timeout=20))
     async with model, AgentSession(llm=model) as session:
         session.output.audio = sink
         await session.start(Agent(instructions="Read supplied audition text verbatim in everyday Bangladeshi Bangla with natural Dhaka/Bangladesh pronunciation. Do not add an introduction, answer the text or make a booking. This is a fictional voice test. Keep numbers and names accurate."))
@@ -51,7 +51,9 @@ async def generate_sample(text, output_path, voice="Kore"):
             raise RuntimeError("No audio frames were returned")
         sink.save(output_path)
         transcript = [item.text_content for item in session.history.items if getattr(item, "role", None) == "assistant"]
-        report = {"model": "google/gemini-3.8-live", "voice": voice, "transcript": transcript,
+        provider = os.getenv("REALTIME_PROVIDER", "livekit")
+        model_name = os.getenv("GOOGLE_REALTIME_MODEL", "gemini-3.8-live") if provider == "google" else os.getenv("REALTIME_MODEL", "google/gemini-3.8-live")
+        report = {"provider": provider, "model": model_name, "voice": voice, "transcript": transcript,
             "audio_seconds": sum(len(b) for b in sink.frames) / (2 * sink.channels * sink.rate), "human_accent_review": "pending"}
         output_path.with_suffix(".json").write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
         return report

@@ -1,3 +1,3 @@
 -r requirements-backend.txt
-livekit-agents[azure,soniox,silero]==1.8.10
+livekit-agents[azure,google,soniox,silero]==1.8.10
 httpx==0.28.1

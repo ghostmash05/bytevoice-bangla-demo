@@ -66,9 +66,13 @@ Staff portal /portal                        PostgreSQL (deployment)
                                              SQLite (local development)
 ```
 
-The current path is Gemini Live speech-to-speech through LiveKit Inference
-(`VOICE_PIPELINE=realtime`), paired with Speechmatics Linden-1 Bengali STT for
-caller captions using the same LiveKit credentials. Native transcription had
+The direct Google path uses Gemini Live speech-to-speech through Google's Gemini
+API (`VOICE_PIPELINE=realtime`, `REALTIME_PROVIDER=google`), paired with
+Speechmatics Linden-1 Bengali STT for
+caller captions using LiveKit's separate STT inference allowance. Google's key
+stays server-side; billing is not enabled for the assessment Google project.
+`REALTIME_PROVIDER=livekit` retains the previous LiveKit-billed realtime path,
+whose free realtime credits were exhausted on November 4. Native transcription had
 occasionally rendered Bengali speech in Hindi script; original test evidence is
 retained rather than translated or overwritten. A configurable alternative,
 `VOICE_PIPELINE=chained`, uses Soniox STT → LiveKit Inference LLM → Azure Bangladesh

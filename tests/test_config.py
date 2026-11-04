@@ -30,3 +30,13 @@ class ConfigurationTests(unittest.TestCase):
     def test_unknown_pipeline_is_rejected(self):
         with patch.dict(os.environ, self.base() | {"VOICE_PIPELINE": "typo"}, clear=True):
             self.assertIn("VOICE_PIPELINE must be realtime or chained", configuration_errors())
+
+    def test_direct_google_requires_its_own_key(self):
+        with patch.dict(os.environ, self.base() | {"REALTIME_PROVIDER": "google"}, clear=True):
+            self.assertIn("Missing: GOOGLE_API_KEY", configuration_errors())
+        with patch.dict(os.environ, self.base() | {"REALTIME_PROVIDER": "google", "GOOGLE_API_KEY": "test"}, clear=True):
+            self.assertEqual(configuration_errors(), [])
+
+    def test_unknown_realtime_provider_is_rejected(self):
+        with patch.dict(os.environ, self.base() | {"REALTIME_PROVIDER": "typo"}, clear=True):
+            self.assertIn("REALTIME_PROVIDER must be livekit or google", configuration_errors())

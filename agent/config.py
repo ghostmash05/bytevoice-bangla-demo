@@ -18,6 +18,8 @@ REQUIRED = (
 def required_variables():
     if os.getenv("VOICE_PIPELINE", "realtime") == "chained":
         return REQUIRED + ("SONIOX_API_KEY", "AZURE_SPEECH_KEY", "AZURE_SPEECH_REGION")
+    if os.getenv("REALTIME_PROVIDER", "livekit") == "google":
+        return REQUIRED + ("GOOGLE_API_KEY",)
     return REQUIRED
 
 
@@ -25,6 +27,8 @@ def configuration_errors() -> list[str]:
     errors = [f"Missing: {name}" for name in required_variables() if not os.getenv(name, "").strip()]
     if os.getenv("VOICE_PIPELINE", "realtime") not in ("realtime", "chained"):
         errors.append("VOICE_PIPELINE must be realtime or chained")
+    if os.getenv("VOICE_PIPELINE", "realtime") == "realtime" and os.getenv("REALTIME_PROVIDER", "livekit") not in ("livekit", "google"):
+        errors.append("REALTIME_PROVIDER must be livekit or google")
     url = os.getenv("LIVEKIT_URL", "")
     if url and (urlparse(url).scheme not in ("wss", "https") or not urlparse(url).hostname):
         errors.append("LIVEKIT_URL must be a valid secure wss:// or https:// URL")
