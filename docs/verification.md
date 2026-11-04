@@ -2,7 +2,7 @@
 
 ## Passed
 
-- 31 hermetic Python tests: phone/reference formats and pipeline configuration; confirmation required; invalid dates,
+- 33 hermetic Python tests: phone/reference formats and pipeline configuration; confirmation required; invalid dates,
   doctors, hours and slots; idempotency; concurrent slot collision; cross-call
   booking/reschedule/cancel; wrong-phone lookup rejection; atomic rollback; stale
   version rejection; partial records; callback storage; crash reconciliation;
@@ -66,3 +66,21 @@ actual calls and do not replace the brief's requirement for real voice-test reco
   reliable Bengali-script transcription remains an open issue.
 - Test caller now waits for agent listening state and quiet audio before the next
   turn; previous fixed delay accidentally interrupted long spoken responses.
+
+## Hosted deployment progress
+
+- API: https://bytevoice-bangla-api.vercel.app/api/health returns 200 and
+  storage=postgresql. Unauthenticated call-list and private-tool requests return 401.
+- Hosted reviewer login, Secure/HttpOnly/SameSite cookie flags, CSRF/origin rejection
+  and logout verified; Supabase anonymous REST read returned no call rows.
+- Agent CA_zNpyeqdHLhd2 deployed in ap-south. Container builds completed remotely;
+  the local worker has been stopped. Initial cloud call failed because LiveKit
+  injects an HTTPS URL; configuration now accepts both HTTPS and WSS securely,
+  with two additional tests. Cloud voice scenarios are being rerun.
+- Dedicated Speechmatics/linden-1 Bengali STT audited the same synthetic recording
+  that native transcription had rendered in Hindi. The subsequent local full
+  callback call retained Bengali caller turns and saved the corrected phone.
+- Portal project created, but first build inherited the API preset. Explicit web
+  Next.js configuration and Node 24 setting added. Git-triggered builds also
+  identified an unrecognized old commit email; local repository author identity
+  is being corrected to the authenticated GitHub account noreply address.

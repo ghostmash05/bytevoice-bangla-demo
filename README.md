@@ -7,7 +7,7 @@ transactional appointment tools and an authenticated call-record portal.
 
 - LiveKit CLI authorized for ByteVoice Bangla; credentials stored only locally.
 - Python backend and Next.js staff portal run locally.
-- 31 automated tests pass, including concurrent booking protection, cross-call
+- 33 automated tests pass, including concurrent booking protection, cross-call
   changes, failed-reschedule rollback, authentication and actual agent-tool/API integration.
 - Portal production build and TypeScript check pass.
 - Browser checks exercised sign-in, phone search, record selection, saved-action
@@ -19,15 +19,19 @@ transactional appointment tools and an authenticated call-record portal.
   were persisted, with caller/assistant transcript turns. Human accent review is pending.
 - Separate synthetic spoken rescheduling and cancellation calls also passed,
   updating the same appointment and preserving its history across sessions.
+- HTTPS backend deployed at https://bytevoice-bangla-api.vercel.app with PostgreSQL;
+  production cookie, CSRF, logout and anonymous-read checks passed.
+- LiveKit worker container built and deployed in Mumbai; cloud voice validation is in progress.
 - Private GitHub repository pushed; Linux CI passed backend tests and the portal build.
 - Supabase Free database created in Mumbai; 15 booking tests passed in isolated
   PostgreSQL schemas, and RLS is enabled on all nine public application tables.
 - Synthetic spoken callback saved a corrected phone only after confirmation.
-  A native-model transcription still occasionally uses Hindi script; unresolved.
+  Native transcription sometimes used Hindi script. Dedicated Bengali STT has been
+  added; one further local callback test retained Bengali caller transcripts.
 - Three records are explicitly labelled **scripted test fixtures**, not voice calls.
 
 **Not verified or complete:** human-microphone conversations, listener-rated
-Bangladeshi accent/latency, audio interruption/correction scenarios, hosted PostgreSQL, public hosting, cloud agent deployment,
+Bangladeshi accent/latency, audio interruption/correction scenarios, full browser-to-cloud voice workflows, portal deployment,
 video and submission. Dockerfiles and PostgreSQL DDL are prepared
 but have not been built/applied. The landing page is excluded by the user's instruction.
 Detailed evidence and remaining verification limits are in `docs/verification.md`.
