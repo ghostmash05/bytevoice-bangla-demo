@@ -105,11 +105,13 @@ async def entrypoint(ctx: agents.JobContext):
     state = {"failed": False, "error_code": None}
     realtime = os.getenv("VOICE_PIPELINE", "realtime") == "realtime"
     if realtime:
+        transcript_model = os.getenv("REALTIME_STT_MODEL", "speechmatics/linden-1").strip()
         session = AgentSession(llm=inference.RealtimeModel(
             model=os.getenv("REALTIME_MODEL", "google/gemini-3.8-live"),
             voice=os.getenv("REALTIME_VOICE", "Kore"), max_session_duration=310,
-            input_audio_transcription=AudioTranscription(language="bn", prompt="The caller speaks Bangladeshi Bangla. Transcribe Bangla in Bengali script, preserving English code-switching."),
-        ), max_tool_steps=6)
+            input_audio_transcription=None if transcript_model else AudioTranscription(language="bn", prompt="The caller speaks Bangladeshi Bangla. Transcribe Bangla in Bengali script, preserving English code-switching."),
+        ), stt=inference.STT(model=transcript_model, language="bn") if transcript_model else None,
+            max_tool_steps=6)
     else:
         from livekit.plugins import azure, silero, soniox
         session = AgentSession(
