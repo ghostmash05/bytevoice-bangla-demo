@@ -1,4 +1,7 @@
 export const bangla: Record<string, string> = {
+  "Collapse sidebar": "সাইডবার ছোট করুন", "Expand sidebar": "সাইডবার বড় করুন", "Signing out…": "সাইন আউট হচ্ছে…",
+  "Could not sign out. Please try again.": "সাইন আউট করা যায়নি। আবার চেষ্টা করুন।",
+  "Session could not be checked. Open Call records to sign in again.": "লগইন যাচাই করা যায়নি। আবার সাইন ইন করতে কলের বিবরণ খুলুন।",
   "How call data is connected": "কলের তথ্য কীভাবে যুক্ত থাকে", "Record": "রেকর্ড", "Relationship": "সম্পর্ক", "Stored information": "সংরক্ষিত তথ্য",
   "The conversation and its structured fields belong to the same call record. Appointment changes preserve the original booking and add an action to its history.": "কথোপকথন ও তার সংগৃহীত তথ্য একই কলের সঙ্গে যুক্ত থাকে। অ্যাপয়েন্টমেন্ট পরিবর্তনের সময় মূল বুকিং অক্ষুণ্ণ রেখে কার্যক্রমের ইতিহাস যোগ হয়।",
   "Reliable booking changes": "নির্ভরযোগ্য বুকিং পরিবর্তন", "A database constraint prevents two active bookings for the same doctor and slot. Rescheduling runs as one transaction, so a failed change preserves the previous appointment. Version checks stop an older request from overwriting a newer change.": "ডেটাবেসের নিয়ম একই চিকিৎসকের একই সময়ে দুটি সক্রিয় বুকিং হতে দেয় না। সময় পরিবর্তনের প্রক্রিয়া একসঙ্গে সম্পন্ন হয়, তাই ব্যর্থ হলে আগের অ্যাপয়েন্টমেন্ট অক্ষুণ্ণ থাকে। সংস্করণ যাচাই পুরোনো অনুরোধ দিয়ে নতুন পরিবর্তন মুছে যাওয়া রোধ করে।",

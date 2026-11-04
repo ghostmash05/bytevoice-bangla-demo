@@ -192,7 +192,7 @@ Frontmatter records the headline, title, body, label and transcript roles. Main 
 
 ## Layout
 
-The shared grammar is a framed sheet beside narrow navigation, with aligned rules and consistent interior gutters. Desktop navigation is (232px), the outer inset (16px), and primary content gutters (32px). Navigation remains sticky. For call records above (760px), the sheet is viewport-height with a minimum (560px); the call list and detail scroll independently inside it.
+The shared grammar is a framed sheet beside narrow navigation, with aligned rules and consistent interior gutters. Desktop navigation is (232px), the outer inset (16px), and primary content gutters (32px). Navigation remains sticky, with its own (18px) rounded edge, a fine seam and a (12px) gap from the working sheet. The redundant clinic switcher is omitted. A labelled header control collapses desktop navigation to an (80px) icon rail; this preference persists locally. For call records above (760px), the sheet is viewport-height with a minimum (560px); the call list and detail scroll independently inside it.
 
 The call index starts at (`minmax(300px, 34%)`). At (1800px) and wider it becomes (390px). At (1180px) and below navigation becomes (205px), outer inset (12px), interior gutters (24px), and index (`minmax(285px, 41%)`). Between (761px) and (980px), navigation becomes (175px), the index (`minmax(240px, 42%)`), search takes a full row and the voice guide wraps below its console.
 
@@ -230,7 +230,9 @@ Fields use the sheet, control border, (8px) corners, (10px 12px) padding and (42
 
 ### Navigation
 
-Fine line icons (generally 18px, stroke 1.65) accompany labels. The active page gains a clear surface, glass seam, subtle shadow and weight (650); hover uses raised mist. Retain `aria-current`, the skip link and explicit accessible names when compact controls omit visible text. Theme/language toggles persist preferences when storage is available; light and English are the implemented defaults.
+Fine line icons (generally 18px, stroke 1.65) accompany labels. The active page gains a clear surface, glass seam, subtle shadow and weight (650); hover uses raised mist. Retain `aria-current`, the skip link and explicit accessible names when compact controls omit visible text. Theme/language toggles persist preferences when storage is available; light and English are the implemented defaults. Sign out is an outlined session action on every working route while authenticated; signed-out views offer Sign in. The desktop icon rail retains accessible names and tooltips. Mobile keeps labelled navigation and an outlined logout icon in its top control row. Short desktop sidebars scroll rather than clipping session controls.
+
+**The Shared Session Rule.** Show Sign out on every authenticated working route and Sign in when signed out. Compact navigation retains accessible labels.
 
 ### Chips / Outcome badges
 

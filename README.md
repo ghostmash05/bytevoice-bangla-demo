@@ -42,6 +42,9 @@ formal accent review remain unverified. The repository stays private until the
 user makes it public before submission. Landing-page work and video recording are
 excluded by the user's instructions; neither is claimed complete against the
 original assessment. Detailed evidence and limits are in `docs/verification.md`.
+The requirement-by-requirement cross-check against the supplied four-page brief is
+in [docs/task-brief-audit.md](docs/task-brief-audit.md), including remaining
+submission deliverables and the exact deadline.
 
 ## Architecture
 

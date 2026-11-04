@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-04T15:29:07.292320+00:00",
+  "generatedAt": "2026-11-04T16:02:03.291000+00:00",
   "title": "Design System: ByteVoice Bangla workspace",
   "extensions": {
     "colorMeta": {
@@ -1049,6 +1049,11 @@
         "name": "The Clear Record Rule",
         "body": "Keep the record reading surface solid; confine translucent glass to framing and the voice emblem.",
         "section": "elevation"
+      },
+      {
+        "name": "The Shared Session Rule",
+        "body": "Show Sign out on every authenticated working route and Sign in when signed out. Compact navigation retains accessible labels.",
+        "section": "layout"
       }
     ],
     "dos": [
