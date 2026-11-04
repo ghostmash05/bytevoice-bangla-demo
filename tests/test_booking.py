@@ -87,6 +87,14 @@ class BookingTests(unittest.TestCase):
         self.assertNotIn("2026-11-05T11:00:00+06:00", result["slots"])
         self.assertIn("2026-11-05T11:30:00+06:00", result["slots"])
 
+    def test_calendar_labels_match_the_actual_day_including_closed_friday(self):
+        thursday = self.service.availability("2026-11-05", "dr-nadia", "scaling")
+        self.assertEqual(thursday["weekday_bn"], "বৃহস্পতিবার")
+        self.assertEqual(thursday["date_label_bn"], "৫ নভেম্বর ২০২৬")
+        friday = self.service.availability("2026-11-06", "dr-nadia", "scaling")
+        self.assertEqual(friday["weekday_bn"], "শুক্রবার")
+        self.assertTrue(friday["closed"])
+
     def test_booking_reschedule_cancel_across_calls(self):
         booked = self.service.book(self.call, self.booking())
         second = self.service.start_call("second-call")

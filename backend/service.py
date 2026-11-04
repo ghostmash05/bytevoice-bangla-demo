@@ -151,8 +151,13 @@ class ClinicService:
         if not doctor or service_id not in doctor["service_ids"]:
             raise RuleError("Doctor/service combination is not available", "invalid_service")
         hours = CLINIC["opening_hours"][target.strftime("%A").lower()]
+        bn_digits = str.maketrans("0123456789", "০১২৩৪৫৬৭৮৯")
+        months_bn = ("জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর")
+        weekdays_bn = ("সোমবার", "মঙ্গলবার", "বুধবার", "বৃহস্পতিবার", "শুক্রবার", "শনিবার", "রবিবার")
+        calendar = {"date": day, "timezone": "Asia/Dhaka", "weekday_bn": weekdays_bn[target.weekday()],
+                    "date_label_bn": f"{str(target.day).translate(bn_digits)} {months_bn[target.month - 1]} {str(target.year).translate(bn_digits)}"}
         if not hours:
-            return {"date": day, "timezone": "Asia/Dhaka", "slots": [], "closed": True}
+            return {**calendar, "slots": [], "closed": True}
         starts = datetime.combine(target, datetime.strptime(hours["opens"], "%H:%M").time(), DHaka)
         closes = datetime.combine(target, datetime.strptime(hours["closes"], "%H:%M").time(), DHaka)
         with self.sessions() as session:
@@ -163,7 +168,7 @@ class ClinicService:
             if starts > local_now and iso(starts) not in busy:
                 slots.append(starts.isoformat())
             starts += timedelta(minutes=30)
-        return {"date": day, "timezone": "Asia/Dhaka", "slots": slots, "closed": False}
+        return {**calendar, "slots": slots, "closed": False}
 
     def serialize_appointment(self, item, patient):
         return {"id": item.id, "reference": item.reference, "patient_name": patient.full_name,

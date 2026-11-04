@@ -28,6 +28,7 @@ export default function VoiceTest() {
     audio = useRef<HTMLDivElement>(null),
     joining = useRef(false),
     cancelled = useRef(false),
+    expectedEnding = useRef(false),
     timer = useRef<ReturnType<typeof setTimeout> | null>(null),
     agentTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(
@@ -57,6 +58,11 @@ export default function VoiceTest() {
   function observeAgent(participant: Participant) {
     if (participant.kind === ParticipantKind.AGENT) {
       if (agentTimer.current) clearTimeout(agentTimer.current);
+      if (participant.attributes["clinic.call_ending"] === "true") {
+        expectedEnding.current = true;
+        setAgentState("Finishing your call");
+        return;
+      }
       setAgentState(
         label(participant.attributes["lk.agent.state"] || "listening"),
       );
@@ -72,6 +78,7 @@ export default function VoiceTest() {
     finalizedSegments.current.clear();
     setCallId("");
     setMuted(false);
+    expectedEnding.current = false;
     try {
       if (!navigator.mediaDevices?.getUserMedia)
         throw new Error(
@@ -103,8 +110,8 @@ export default function VoiceTest() {
         joining.current = false;
         room.current = null;
         cleanup();
-        setError("The receptionist disconnected. Reconnect to continue; any saved details are retained.");
-        setState("error");
+        setError(expectedEnding.current ? "" : "The receptionist disconnected. Reconnect to continue; any saved details are retained.");
+        setState(expectedEnding.current ? "ended" : "error");
         void current.disconnect();
       });
       current.on(

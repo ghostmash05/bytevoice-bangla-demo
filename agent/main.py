@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from openai.types.realtime import AudioTranscription
 
 from livekit import agents
-from livekit.agents import Agent, AgentServer, AgentSession, TurnHandlingOptions, function_tool, inference
+from livekit.agents import Agent, AgentServer, AgentSession, RunContext, StopResponse, ToolError, TurnHandlingOptions, function_tool, inference, room_io
 
 from agent.bridge import BackendBridge
 from agent.config import require_configuration
@@ -19,9 +19,10 @@ logger = logging.getLogger("clinic-agent")
 
 
 class Receptionist(Agent):
-    def __init__(self, backend: BackendBridge, call_id: str) -> None:
+    def __init__(self, backend: BackendBridge, call_id: str, finish=None) -> None:
         super().__init__(instructions=build_instructions())
         self.backend, self.call_id = backend, call_id
+        self.finish = finish
 
     async def operation(self, name, data):
         return await self.backend.request("POST", f"/internal/calls/{self.call_id}/{name}", data)
@@ -88,6 +89,19 @@ class Receptionist(Agent):
     async def request_callback(self, patient_name: str, phone: str, reason: str, confirmed: bool = False) -> dict:
         """Record staff follow-up after confirming contact details. Do not promise a time."""
         return await self.operation("follow-up", {"patient_name": patient_name, "phone": phone, "reason": reason, "confirmed": confirmed})
+
+    @function_tool()
+    async def finish_call(self, context: RunContext, caller_done: bool = False):
+        """End the voice call when the caller says goodbye or needs nothing else.
+
+        Do not use for a booking confirmation, a pause, or an unresolved question.
+        A brief spoken farewell is drained before disconnecting.
+        """
+        if not caller_done or self.finish is None:
+            raise ToolError("Only finish a live call after the caller signals they are done.")
+        await context.wait_for_playout()
+        await self.finish()
+        raise StopResponse()
 
 
 server = AgentServer()
@@ -159,6 +173,21 @@ async def entrypoint(ctx: agents.JobContext):
 
     recovery = TurnRecovery(recover_reply, failed_reply)
 
+    async def finish_session():
+        recovery.activity()
+        await ctx.room.local_participant.set_attributes({"clinic.call_ending": "true"})
+        if realtime:
+            # Queue, then drain. Awaiting the owning SpeechHandle inside a tool
+            # would create a circular wait.
+            session.generate_reply(instructions=(
+                "The caller is finished. Say one short warm farewell in Bangladeshi Bangla, "
+                "such as ধন্যবাদ, ভালো থাকবেন। আল্লাহ হাফেজ। Do not ask questions or use tools. "
+                "Do not claim an appointment or callback that was not saved."
+            ), tool_choice="none", allow_interruptions=False)
+        else:
+            session.say("ধন্যবাদ, ভালো থাকবেন। আল্লাহ হাফেজ।", allow_interruptions=False)
+        session.shutdown(drain=True)
+
     @session.on("agent_state_changed")
     def on_agent_state(event):
         logger.info("Agent state call_id=%s state=%s", call_id, event.new_state)
@@ -209,14 +238,16 @@ async def entrypoint(ctx: agents.JobContext):
         ctx.shutdown(reason="voice session closed")
 
     async def limit_duration():
-        await asyncio.sleep(300)
+        await asyncio.sleep(285)
+        recovery.activity()
         try:
+            await ctx.room.local_participant.set_attributes({"clinic.call_ending": "true"})
             if realtime:
-                await session.generate_reply(instructions="Say briefly in Bangla that the five-minute demo limit has been reached and thank the caller. Do not use tools.")
+                session.generate_reply(instructions="Say briefly in Bangla that the demo time limit has been reached and thank the caller. Do not use tools.", tool_choice="none", allow_interruptions=False)
             else:
-                await session.say("ডেমো কলের সময় শেষ হয়েছে। ধন্যবাদ।", allow_interruptions=False)
+                session.say("ডেমো কলের সময় শেষ হয়েছে। ধন্যবাদ।", allow_interruptions=False)
         finally:
-            ctx.shutdown(reason="demo duration limit")
+            session.shutdown(drain=True)
 
     timer = asyncio.create_task(limit_duration())
 
@@ -238,7 +269,8 @@ async def entrypoint(ctx: agents.JobContext):
 
     ctx.add_shutdown_callback(shutdown)
     try:
-        await session.start(room=ctx.room, agent=Receptionist(backend, call_id), record=False)
+        await session.start(room=ctx.room, agent=Receptionist(backend, call_id, finish_session),
+                            room_options=room_io.RoomOptions(delete_room_on_close=True), record=False)
         if realtime:
             await session.generate_reply(instructions="Greet once in natural Bangladeshi Bangla: আসসালামু আলাইকুম। ঢাকা ডেন্টাল কেয়ারের ডেমোতে স্বাগতম। আমি এআই সহকারী। কীভাবে সাহায্য করতে পারি? Do not call any tools before the caller speaks.")
         else:
