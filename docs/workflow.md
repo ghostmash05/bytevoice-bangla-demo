@@ -54,5 +54,8 @@ Reserve final three hours for verification, recording and submission.
 The user excluded landing-page work from the active implementation goal. Stage 8
 and the marketing/3D elements of stage 9 remain deferred. A direct `/try` browser
 caller is included so the voice workflow can be tested without the landing page.
-Public deployment, actual voice calls, repository access and final video are still
-required before the remaining project can be considered complete.
+Public deployment, actual voice calls and repository access remain part of the
+project. The user subsequently excluded video recording from the agent's work.
+The original assessment still requests a video; this is a scope exclusion, not
+evidence that its video requirement has been met. Do not resume recording unless
+the user asks.

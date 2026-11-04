@@ -251,4 +251,11 @@ overrides and the recording banner were removed by reload. No source or hosted
 application changes were made for recording. The generated sample and partial
 frames remain ignored under .local; they are not submission evidence. imageio-ffmpeg
 was installed only in the local venv as an optional recording utility, not added
-to production requirements. A fresh successful video recording remains required.
+to production requirements. The original assessment requests a finished video.
+
+The user then instructed that no video recording was needed from the agent.
+The second attempt was stopped after the live greeting, without sending caller
+booking audio. The test call 0667f33d-f1d9-4d90-995c-97698a0ea2ac was manually ended;
+screen/audio capture was stopped, and reload removed the temporary microphone,
+audio observer and banner before the test tab was closed. No finished video was
+produced or uploaded. Recording is now excluded from autonomous work.

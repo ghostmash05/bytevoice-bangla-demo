@@ -19,7 +19,7 @@ still requests one; the direct caller does not satisfy that marketing-page item.
 | Validation and persistence | 50 Python tests, 18 PostgreSQL booking tests; SQL constraints, idempotency and atomic changes | Real-speaker digits may still be mistranscribed; readback remains essential |
 | Repository and README | https://github.com/ghostmash05/bytevoice-bangla-demo; CI passed | User will make repository public before submission; keep private until then |
 | Reviewer login | Generated account in ignored .local/reviewer-credentials.txt | Copy credentials privately into the actual submission; never commit the password |
-| Video, maximum 3 minutes | docs/demo-walkthrough.md is the recording plan | Record, review, upload and verify actual accessible video link |
+| Video, maximum 3 minutes | docs/demo-walkthrough.md is the recording plan; no finished video | Recording excluded from agent work by the user; original assessment requirement remains |
 | Landing page/hero | Excluded by user instruction | Not implemented; do not describe /try as a completed landing page |
 | Submission email | Draft below | User reviews and sends only after all supplied links work |
 
