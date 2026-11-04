@@ -14,15 +14,27 @@ from agent.config import require_configuration
 from agent.prompt import build_instructions
 from agent.validation import normalize_bd_mobile
 from agent.recovery import TurnRecovery
+from agent.presence import CallerPresence
 
 logger = logging.getLogger("clinic-agent")
 
 
 class Receptionist(Agent):
-    def __init__(self, backend: BackendBridge, call_id: str, finish=None) -> None:
+    def __init__(self, backend: BackendBridge, call_id: str, finish=None, presence=None) -> None:
         super().__init__(instructions=build_instructions())
         self.backend, self.call_id = backend, call_id
         self.finish = finish
+        self.presence = presence
+
+    async def stt_node(self, audio, model_settings):
+        async def observed_audio():
+            async for frame in audio:
+                if self.presence:
+                    self.presence.observe_pcm(frame.data)
+                yield frame
+
+        async for event in Agent.default.stt_node(self, observed_audio(), model_settings):
+            yield event
 
     async def operation(self, name, data):
         return await self.backend.request("POST", f"/internal/calls/{self.call_id}/{name}", data)
@@ -172,24 +184,33 @@ async def entrypoint(ctx: agents.JobContext):
         ctx.shutdown(reason="voice reply timeout")
 
     recovery = TurnRecovery(recover_reply, failed_reply)
+    presence = CallerPresence()
+    lifecycle = {"agent_state": "initializing", "ending": False}
 
-    async def finish_session():
+    async def finish_session(idle=False):
+        if lifecycle["ending"]:
+            return
+        lifecycle["ending"] = True
         recovery.activity()
         await ctx.room.local_participant.set_attributes({"clinic.call_ending": "true"})
         if realtime:
             # Queue, then drain. Awaiting the owning SpeechHandle inside a tool
             # would create a circular wait.
-            session.generate_reply(instructions=(
+            session.generate_reply(instructions=((
+                "The caller has not responded after a check-in. Briefly say in Bangla that you cannot hear them "
+                "and they can call again, then say goodbye. Do not use tools or claim any new booking."
+            ) if idle else (
                 "The caller is finished. Say one short warm farewell in Bangladeshi Bangla, "
                 "such as ধন্যবাদ, ভালো থাকবেন। আল্লাহ হাফেজ। Do not ask questions or use tools. "
                 "Do not claim an appointment or callback that was not saved."
-            ), tool_choice="none", allow_interruptions=False)
+            )), tool_choice="none", allow_interruptions=False)
         else:
             session.say("ধন্যবাদ, ভালো থাকবেন। আল্লাহ হাফেজ।", allow_interruptions=False)
         session.shutdown(drain=True)
 
     @session.on("agent_state_changed")
     def on_agent_state(event):
+        lifecycle["agent_state"] = event.new_state
         logger.info("Agent state call_id=%s state=%s", call_id, event.new_state)
         if event.new_state == "speaking":
             last_reply_started["at"] = time.time()
@@ -199,6 +220,7 @@ async def entrypoint(ctx: agents.JobContext):
     def on_user_state(event):
         if event.new_state == "speaking":
             recovery.activity()
+            presence.caller_activity()
 
     @session.on("function_tools_executed")
     def on_tools(event):
@@ -210,6 +232,14 @@ async def entrypoint(ctx: agents.JobContext):
         while True:
             await asyncio.sleep(1)
             await recovery.check()
+            action = presence.check(listening=lifecycle["agent_state"] == "listening",
+                                    pending_reply=recovery.pending or lifecycle["ending"])
+            if action == "check_in":
+                logger.info("Idle caller check-in call_id=%s", call_id)
+                session.generate_reply(instructions="The caller has been silent. Ask briefly in Bangla: আপনি কি লাইনে আছেন? Take no actions and use no tools.", tool_choice="none")
+            elif action == "end":
+                logger.info("Idle caller ending call_id=%s", call_id)
+                await finish_session(idle=True)
 
     reply_watcher = asyncio.create_task(watch_replies())
 
@@ -220,6 +250,7 @@ async def entrypoint(ctx: agents.JobContext):
             return
         if item.role == "user" and item.created_at > last_reply_started["at"]:
             recovery.user_turn()
+            presence.caller_activity()
         try:
             queue.put_nowait({"id": item.id, "speaker": item.role, "text": item.text_content,
                 "timestamp": datetime.fromtimestamp(item.created_at, timezone.utc).isoformat(), "interrupted": item.interrupted})
@@ -269,7 +300,7 @@ async def entrypoint(ctx: agents.JobContext):
 
     ctx.add_shutdown_callback(shutdown)
     try:
-        await session.start(room=ctx.room, agent=Receptionist(backend, call_id, finish_session),
+        await session.start(room=ctx.room, agent=Receptionist(backend, call_id, finish_session, presence),
                             room_options=room_io.RoomOptions(delete_room_on_close=True), record=False)
         if realtime:
             await session.generate_reply(instructions="Greet once in natural Bangladeshi Bangla: আসসালামু আলাইকুম। ঢাকা ডেন্টাল কেয়ারের ডেমোতে স্বাগতম। আমি এআই সহকারী। কীভাবে সাহায্য করতে পারি? Do not call any tools before the caller speaks.")

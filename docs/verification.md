@@ -2,7 +2,7 @@
 
 ## Passed
 
-- 42 hermetic Python tests: phone/reference formats and pipeline configuration; confirmation required; invalid dates,
+- 47 hermetic Python tests: phone/reference formats and pipeline configuration; confirmation required; invalid dates,
   doctors, hours and slots; idempotency; concurrent slot collision; cross-call
   booking/reschedule/cancel; wrong-phone lookup rejection; atomic rollback; stale
   version rejection; partial records; callback storage; crash reconciliation;
@@ -34,7 +34,7 @@
 - Git staging check found no local credential values, `.env.local`, reviewer login
   file, runtime directories or downloaded tools in staged source.
 
-## Not yet proved
+## Initial limitations (later verification recorded below)
 
 - Human-rated Bangladesh accent, measured latency, interruptions/corrections,
   silence recovery and microphone-denial behavior. The chained Soniox/Azure option
@@ -136,8 +136,10 @@ interrupted, retained an interrupted assistant turn and the corrected phone. It
 also exposed a sticky enquiry outcome: a subsequent unconfirmed callback was being
 marked completed. That state transition was fixed and covered by regression tests;
 all 18 PostgreSQL booking tests passed in isolated schemas. The full interruption
-scenario should be rerun against the updated backend before claiming its overall
-acceptance test passed.
+scenario then passed against the updated hosted backend: call
+87e2a603-af27-47f4-ae1d-b04ff9a77b3d retained one interrupted assistant turn and the
+corrected phone, with zero actions or callbacks before confirmation. The final
+business outcome was incomplete. Evidence: .local/audio-interruption-e2e.json.
 
 After the tester noted the missing automatic hang-up, finish_call was added. It
 waits for current speech, queues a short farewell, drains the session and deletes
@@ -147,6 +149,18 @@ ROOM_DELETED, then the saved call finalized without a failure. Evidence is in
 .local/audio-goodbye-e2e.json and .local/audio-goodbye-agent.wav. No appointment was
 requested in this goodbye-only test, so its business outcome remains incomplete.
 The production browser bundle was checked for the new ending-state handling.
+
+Silent WebRTC call e6893ab9-b373-4cb1-8f25-64a91e869c08 passed on worker version
+Q699gHYCkKkZ: greeting, one check-in after roughly 25 seconds of idle listening,
+then a spoken farewell after another idle interval, followed by ROOM_DELETED.
+The stored call ended as incomplete with zero appointment actions or callbacks.
+Evidence: .local/audio-silence-e2e.json. The first attempt was launched during
+rollout and timed out; it is retained separately as audio-silence-pre-rollout.json.
+The successful call was observed in the new worker's runtime logs. The audio energy
+gate postpones idle handling during incoming sound; it neither stores audio nor
+replaces provider turn detection. Five deterministic tests cover continuous audio,
+returning callers, background energy and pending replies. Human silence behavior
+on noisy microphones still needs real-device review.
 
 The API now supplies deterministic Bengali weekday and date labels for availability,
 including closed Fridays, after a wrong weekday was observed in the human call.
