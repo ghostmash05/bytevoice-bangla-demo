@@ -14,7 +14,8 @@
   which is separate from agent compute and database regions.
 
 Hosted synthetic booking/rescheduling/cancellation passed with the local worker,
-API and portal processes stopped. Human browser microphone quality is pending.
+API and portal processes stopped. A human Safari booking was subsequently confirmed successful; formal voice/caption
+quality review remains pending.
 No paid plan, telephony number, custom domain or voice clone was enabled.
 Included quotas and inference credits are finite; this is not unlimited free usage.
 
@@ -69,7 +70,7 @@ history or weaken repository access controls to fix deployment failures.
 
 ## Final verification and submission gates
 
-- Human microphone, playback and captions through the final HTTPS caller.
+- Confirm graceful hang-up in the human browser, and review real-speaker captions.
 - Bangladesh-accent review, mixed speech, deliberate interruptions, phone/time
   corrections, silence, unavailable slots and voice-level backend failure recovery.
 - Final mobile visual review and full reviewer login/logout from the final origin.

@@ -2,7 +2,7 @@
 
 ## Passed
 
-- 33 hermetic Python tests: phone/reference formats and pipeline configuration; confirmation required; invalid dates,
+- 42 hermetic Python tests: phone/reference formats and pipeline configuration; confirmation required; invalid dates,
   doctors, hours and slots; idempotency; concurrent slot collision; cross-call
   booking/reschedule/cancel; wrong-phone lookup rejection; atomic rollback; stale
   version rejection; partial records; callback storage; crash reconciliation;
@@ -111,3 +111,45 @@ labelled scripted fixtures; real WebRTC synthetic calls are labelled separately.
 Evidence screenshot: .local/hosted-portal-activity.png (ignored, fake details only).
 Original local voice reports are archived in .local/local-voice-evidence; current
 three operation reports reflect the cloud tests. Private GitHub CI passed fe23d6f.
+
+## Human-call regression and graceful ending
+
+A human tester reported a stall after the final booking confirmation. The saved
+record contained that confirmation but no appointment action. Original runtime
+logs did not reveal a cause; recording/observability was disabled. Do not claim a
+specific provider defect was proven. The agent now has a bounded stalled-reply
+retry, privacy-safe tool status logs and a failed-session exit if recovery fails.
+The browser surfaces unexpected agent departures and ends immediately on manual
+hang-up instead of waiting for the transport promise.
+
+The tester retried on Safari and reported that the call did not pause and the
+overall experience was good. The authoritative record contained one saved booking.
+A separate eight-turn synthetic field-by-field call with a late name correction
+also saved exactly one appointment after confirmation (17 transcript turns).
+Its measured synthetic response intervals were 1.273-2.143 seconds. A separate
+medical callback/corrected-phone call passed, with approximate intervals
+1.353-2.126 seconds. These are client test-file-publication-end to received voiced
+sample measurements, not calibrated human end-of-speech latency.
+
+The interruption test observed active agent audio 0.01 seconds before the caller
+interrupted, retained an interrupted assistant turn and the corrected phone. It
+also exposed a sticky enquiry outcome: a subsequent unconfirmed callback was being
+marked completed. That state transition was fixed and covered by regression tests;
+all 18 PostgreSQL booking tests passed in isolated schemas. The full interruption
+scenario should be rerun against the updated backend before claiming its overall
+acceptance test passed.
+
+After the tester noted the missing automatic hang-up, finish_call was added. It
+waits for current speech, queues a short farewell, drains the session and deletes
+the room. The caller receives a graceful-ending attribute so the browser shows a
+normal ending. Live synthetic verification received the farewell text/audio and
+ROOM_DELETED, then the saved call finalized without a failure. Evidence is in
+.local/audio-goodbye-e2e.json and .local/audio-goodbye-agent.wav. No appointment was
+requested in this goodbye-only test, so its business outcome remains incomplete.
+The production browser bundle was checked for the new ending-state handling.
+
+The API now supplies deterministic Bengali weekday and date labels for availability,
+including closed Fridays, after a wrong weekday was observed in the human call.
+The voice prompt instructs the agent to use those labels. Bengali-script consistency
+still needs real-speaker review; native captions in the original human call included
+Hindi script despite the configured parallel Bengali STT.
