@@ -70,6 +70,22 @@ history or weaken repository access controls to fix deployment failures.
 
 ## Final verification and submission gates
 
+### Dashboard route protection
+
+The public entry points are `/try` and `/login`. Every `/portal` page requires a
+backend-validated session on the server, including `/portal/data-model` and
+`/portal/voice-test`. The route proxy only redirects missing cookies early; it is
+not the authentication authority. The server session fetch uses `BACKEND_URL`
+and forwards the existing HttpOnly cookie without caching. A failed session
+service fails closed. Safe workspace deep links survive sign-in; external
+return URLs are rejected.
+
+After deploying, run `.venv\Scripts\python.exe -m scripts.verify_web_auth
+https://bytevoice-bangla-portal.vercel.app` to check anonymous, forged, valid and
+revoked sessions, public caller isolation and safe return paths. This script
+uses ignored reviewer credentials, creates its own session and revokes it; it
+does not modify call records.
+
 - Confirm graceful hang-up in the human browser, and review real-speaker captions.
 - Bangladesh-accent review, mixed speech, deliberate interruptions, phone/time
   corrections, silence, unavailable slots and voice-level backend failure recovery.

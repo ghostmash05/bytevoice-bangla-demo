@@ -5,6 +5,13 @@ transactional appointment tools and an authenticated call-record portal.
 
 ## Verified state
 
+The November 4 call review and dashboard authentication boundary are documented
+in [docs/call-review-2026-11-04.md](docs/call-review-2026-11-04.md). `/portal`,
+its data-model explorer and its internal voice test require server-validated
+reviewer sessions; `/try` is a separate public caller. Historical successful
+voice tests below do not establish current provider availability: the latest
+realtime verification was blocked by HTTP 429 from LiveKit Inference.
+
 - Hosted portal: https://bytevoice-bangla-portal.vercel.app/portal
 - Direct browser caller: https://bytevoice-bangla-portal.vercel.app/try
 - Hosted API: https://bytevoice-bangla-api.vercel.app/api/health

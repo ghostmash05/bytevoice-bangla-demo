@@ -1,7 +1,7 @@
 import tempfile
 import asyncio
 import unittest
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import jwt
@@ -59,6 +59,18 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(self.client.post("/api/auth/login", json={"username": "reviewer", "password": "wrong"}).status_code, 401)
         self.assertEqual(self.client.post("/api/auth/login", json={"username": "reviewer", "password": "test-password-only"},
             headers={"Origin": "https://untrusted.example"}).status_code, 403)
+
+    def test_expired_and_forged_sessions_are_rejected(self):
+        from sqlalchemy import select
+        from backend.models import StaffSession
+        self.login()
+        with self.app.state.sessions.begin() as session:
+            item = session.scalar(select(StaffSession))
+            item.expires_at = datetime(2026, 11, 4, 8, tzinfo=timezone.utc) - timedelta(seconds=1)
+        self.assertEqual(self.client.get("/api/auth/me").status_code, 401)
+        self.assertEqual(self.client.get("/api/calls").status_code, 401)
+        self.client.cookies.set("clinic_session", "forged-session")
+        self.assertEqual(self.client.get("/api/auth/me").status_code, 401)
 
     def test_login_rate_limit(self):
         for _ in range(8):

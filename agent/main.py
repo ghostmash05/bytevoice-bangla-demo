@@ -105,7 +105,11 @@ class Receptionist(Agent):
 
     @function_tool()
     async def request_callback(self, patient_name: str, phone: str, reason: str, confirmed: bool = False) -> dict:
-        """Record staff follow-up after confirming contact details. Do not promise a time."""
+        """Save a demo request after confirming details. No staff are contacted.
+
+        No calls, messages, notification or transfer are performed. No callback
+        time or actual future contact is promised. Use the returned facts.
+        """
         return await self.operation("follow-up", {"patient_name": patient_name, "phone": phone, "reason": reason, "confirmed": confirmed})
 
     @function_tool()
@@ -297,6 +301,9 @@ async def entrypoint(ctx: agents.JobContext):
 
     async def limit_duration():
         await asyncio.sleep(285)
+        if lifecycle["ending"]:
+            return
+        lifecycle["ending"] = True
         recovery.activity()
         try:
             await ctx.room.local_participant.set_attributes({"clinic.call_ending": "true"})

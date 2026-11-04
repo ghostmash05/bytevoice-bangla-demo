@@ -281,7 +281,9 @@ class ClinicService:
             extraction = session.get(Extraction, call_id)
             extraction.patient_name, extraction.phone, extraction.notes, extraction.intent = data.patient_name, mobile, data.reason, "follow_up"
             record.outcome = "follow_up_needed"
-            return {"id": item.id, "status": "pending", "saved": True}
+            return {"id": item.id, "status": "pending", "saved": True,
+                    "demo_only": True, "staff_contacted": False, "callback_time": None,
+                    "message_bn": "এই ডেমোতে অনুরোধটি সংরক্ষিত হয়েছে। এখান থেকে কাউকে স্বয়ংক্রিয়ভাবে কল বা বার্তা পাঠানো হয় না; কলব্যাকের কোনো নির্ধারিত সময় নেই।"}
 
     def list_calls(self, q="", status=None, outcome=None, limit=30, offset=0):
         self.reconcile_stale_calls()

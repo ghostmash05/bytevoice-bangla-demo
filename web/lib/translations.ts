@@ -1,4 +1,6 @@
 export const bangla: Record<string, string> = {
+  "Staff sign in": "কর্মীদের সাইন ইন",
+  "Session service is unavailable. Please try signing in again shortly.": "লগইন সেবা এখন পাওয়া যাচ্ছে না। কিছুক্ষণ পরে আবার সাইন ইন করুন।",
   "Try a conversation": "কথা বলে দেখুন",
   "Clear filters": "সব ফিল্টার সরান", "Copy phone number": "ফোন নম্বর কপি করুন", "Copy booking reference": "বুকিং রেফারেন্স কপি করুন", "Copied": "কপি হয়েছে", "Could not copy. Select and copy the text.": "কপি করা যায়নি। লেখাটি বেছে নিয়ে কপি করুন।",
   "From conversation to saved record": "কথোপকথন থেকে সংরক্ষিত তথ্য",

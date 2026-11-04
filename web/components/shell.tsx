@@ -38,6 +38,10 @@ export function Shell({
       .catch((error) => {
         if (!active) return;
         setSession(null);
+        if (path.startsWith("/portal") && error instanceof ApiError && error.status === 401) {
+          window.location.replace(`/login?next=${encodeURIComponent(window.location.pathname + window.location.search)}`);
+          return;
+        }
         if (!(error instanceof ApiError && error.status === 401)) {
           setSessionError("Session could not be checked. Open Call records to sign in again.");
         }
@@ -59,7 +63,7 @@ export function Shell({
         await api("/auth/logout", { method: "POST", headers: { "X-CSRF-Token": session.csrf_token } });
         setSession(null);
         // A full navigation also clears any protected view held in client state.
-        window.location.assign("/portal");
+        window.location.assign("/login");
       }
     } catch {
       setSessionError("Could not sign out. Please try again.");
@@ -73,7 +77,7 @@ export function Shell({
   }
   const links = [
     { href: "/portal", label: t("Call records"), Icon: List },
-    { href: "/try", label: t("Voice test"), Icon: Headphones },
+    { href: "/portal/voice-test", label: t("Voice test"), Icon: Headphones },
     { href: "/portal/data-model", label: t("Data model"), Icon: Database },
   ];
   return (
