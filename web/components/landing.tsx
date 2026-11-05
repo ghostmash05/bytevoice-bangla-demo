@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowUpRight, CalendarCheck2, Mic, Phone, ShieldCheck } from "lucide-react";
+import { ArrowDown, ArrowUpRight, CalendarCheck2, Menu, Mic, Phone, ShieldCheck, X } from "lucide-react";
 import { Brand } from "./brand";
 import { useLocale } from "./locale";
 import VoiceTest from "./voice-test";
@@ -117,6 +117,8 @@ const copy = {
 
 export default function Landing() {
   const { language, toggleLanguage } = useLocale();
+  const header = useRef<HTMLElement>(null);
+  const menuButton = useRef<HTMLButtonElement>(null);
   const hero = useRef<HTMLElement>(null);
   const walkthrough = useRef<HTMLElement>(null);
   const demoCall = useRef<HTMLDivElement>(null);
@@ -125,9 +127,27 @@ export default function Landing() {
   const [waveActive, setWaveActive] = useState(false);
   const [introActive, setIntroActive] = useState(false);
   const [flowerReady, setFlowerReady] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const active = visible && introActive;
   const text = copy[language];
+  const navLabel = language === "bn" ? "প্রধান নেভিগেশন" : "Main navigation";
+  const navItems = [["#how", text.how], ["#scenarios", text.scenarios], ["#pricing", text.pricing]];
   const stepIcons = [Mic, CalendarCheck2, ShieldCheck];
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const mobile = matchMedia("(max-width: 680px)");
+    const closeOnResize = () => { if (!mobile.matches) setMenuOpen(false); };
+    const closeOnOutsidePress = (event: PointerEvent) => {
+      if (event.target instanceof Node && !header.current?.contains(event.target)) setMenuOpen(false);
+    };
+    document.addEventListener("pointerdown", closeOnOutsidePress);
+    mobile.addEventListener("change", closeOnResize);
+    return () => {
+      document.removeEventListener("pointerdown", closeOnOutsidePress);
+      mobile.removeEventListener("change", closeOnResize);
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     const section = hero.current;
@@ -188,19 +208,33 @@ export default function Landing() {
   return (
     <div className="landing">
       <a className="skip-link" href="#main">{text.skip}</a>
-      <header className="landing-nav landing-width">
+      <header className="landing-nav landing-width" ref={header} onKeyDown={(event) => {
+        if (event.key === "Escape" && menuOpen) {
+          event.preventDefault();
+          setMenuOpen(false);
+          menuButton.current?.focus();
+        }
+      }} onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false);
+      }}>
         <Link href="/" className="landing-brand" aria-label="ByteVoice"><Brand /></Link>
-        <nav aria-label={language === "bn" ? "প্রধান নেভিগেশন" : "Main navigation"}>
-          <a href="#how">{text.how}</a>
-          <a href="#scenarios">{text.scenarios}</a>
-          <a href="#pricing">{text.pricing}</a>
+        <nav className="landing-desktop-nav" aria-label={navLabel}>
+          {navItems.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
         </nav>
         <div className="landing-nav-actions">
           <button className="landing-language" onClick={toggleLanguage} lang={language === "bn" ? "en" : "bn"}>
             {language === "bn" ? "English" : "বাংলা"}
           </button>
           <Link className="landing-portal" href="/portal">{text.portal}<ArrowUpRight size={15} aria-hidden="true" /></Link>
+          <button className="landing-menu-button" type="button" ref={menuButton} aria-label={navLabel}
+            aria-expanded={menuOpen} aria-controls="landing-mobile-nav" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
+          </button>
         </div>
+        <nav id="landing-mobile-nav" className="landing-mobile-nav" aria-label={navLabel} hidden={!menuOpen}>
+          {navItems.map(([href, label]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
+          <Link href="/portal" onClick={() => setMenuOpen(false)}>{text.portal}<ArrowUpRight size={15} aria-hidden="true" /></Link>
+        </nav>
       </header>
       <main id="main">
         <section className="landing-hero" aria-labelledby="landing-title" ref={hero}>
@@ -229,7 +263,7 @@ export default function Landing() {
           </div>
         </section>
 
-        <section id="how" className="landing-how" aria-labelledby="how-title" ref={walkthrough}>
+        <section id="how" className="landing-how" aria-labelledby="how-title" ref={walkthrough} tabIndex={-1}>
           {motionAllowed && <div className="landing-walkthrough-floor" aria-hidden="true"><PointsWaves active={waveActive} color={0x6e614c} /></div>}
           <div className="landing-how-inner landing-width">
             <div>
@@ -253,7 +287,7 @@ export default function Landing() {
           </div>
         </section>
 
-        <section id="scenarios" className="landing-scenarios" aria-labelledby="scenarios-title">
+        <section id="scenarios" className="landing-scenarios" aria-labelledby="scenarios-title" tabIndex={-1}>
           <div className="landing-scenarios-inner landing-width">
             <div className="landing-demo-intro">
               <h2 id="scenarios-title">{text.scenariosTitle}</h2>
@@ -270,7 +304,7 @@ export default function Landing() {
           </div>
         </section>
 
-        <section id="pricing" className="landing-pricing" aria-labelledby="pricing-title">
+        <section id="pricing" className="landing-pricing" aria-labelledby="pricing-title" tabIndex={-1}>
           <div className="landing-width landing-pricing-inner">
             <div>
               <h2 id="pricing-title">{text.valueTitle}</h2>
