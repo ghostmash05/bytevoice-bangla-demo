@@ -6,8 +6,8 @@ from openai.types.realtime import AudioTranscription
 
 def create_realtime_model(*, dedicated_transcript=True, conn_options=None, voice=None):
     options = {"conn_options": conn_options} if conn_options is not None else {}
-    voice = voice or os.getenv("REALTIME_VOICE", "Kore")
     provider = os.getenv("REALTIME_PROVIDER", "livekit")
+    voice = voice or os.getenv("REALTIME_VOICE") or ("Sulafat" if provider == "google" else "Kore")
     if provider == "google":
         from google.genai import types
         from livekit.plugins import google
@@ -15,6 +15,13 @@ def create_realtime_model(*, dedicated_transcript=True, conn_options=None, voice
             model=os.getenv("GOOGLE_REALTIME_MODEL", "gemini-3.8-live"),
             api_key=os.environ["GOOGLE_API_KEY"], vertexai=False, voice=voice,
             language="bn",
+            realtime_input_config=types.RealtimeInputConfig(
+                automatic_activity_detection=types.AutomaticActivityDetection(
+                    # A short gap between digit groups is still the caller's turn.
+                    silence_duration_ms=1400,
+                    end_of_speech_sensitivity=types.EndSensitivity.END_SENSITIVITY_LOW,
+                ),
+            ),
             input_audio_transcription=None if dedicated_transcript else types.AudioTranscriptionConfig(language_codes=["bn-BD", "en"]),
             output_audio_transcription=types.AudioTranscriptionConfig(),
             **options,
