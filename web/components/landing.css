@@ -79,8 +79,9 @@
   z-index: -1;
   inset: 0;
   background:
-    linear-gradient(90deg, #070d1bf2 5%, #070d1bd9 35%, #070d1b28 64%),
+    linear-gradient(90deg, #070d1bf2 5%, #070d1bd9 35%, #070d1b3d 64%),
     linear-gradient(0deg, #070d1bd9 0%, transparent 23%, transparent 79%, #070d1b48),
+    radial-gradient(ellipse at 75% 51%, #0e202c77, transparent 47%),
     url("/landing/dhaka-reception.webp") center 57% / cover no-repeat #080f20;
 }
 .landing-hero-inner {
@@ -107,29 +108,29 @@
   position: relative;
   min-width: 0;
   isolation: isolate;
-  margin: 23px -6% -53px -3%;
+  margin: 0 -6% -32px -3%;
 }
 .landing-hero-art::before {
   content: "";
   position: absolute;
   z-index: -1;
-  inset: auto 12% 1% 11%;
-  height: 15%;
-  background: radial-gradient(ellipse, #030610d9 12%, #080e20b3 36%, transparent 69%);
+  inset: auto 12% 12% 11%;
+  height: 12%;
+  background: radial-gradient(ellipse, #03061090 12%, #080e2060 36%, transparent 69%);
   transform: translateY(23%);
   pointer-events: none;
 }
-.landing-mascot {
+.landing-waveform {
   height: clamp(370px, min(49vw, 66svh), 695px);
   position: relative;
   display: grid;
   place-items: center;
   isolation: isolate;
 }
-.landing-mascot canvas, .mascot-still { position: absolute; inset: 0; width: 100%; height: 100%; }
-.mascot-still { object-fit: contain; padding: 10px 16px; }
-.landing-mascot[data-rendered="true"] .mascot-still { visibility: hidden; }
-.landing-mascot canvas { display: block; z-index: 1; }
+.landing-waveform canvas, .waveform-still { position: absolute; inset: 0; width: 100%; height: 100%; }
+.waveform-still { object-fit: contain; }
+.landing-waveform[data-rendered="true"] .waveform-still { visibility: hidden; }
+.landing-waveform canvas { display: block; z-index: 1; }
 .landing-motion-control {
   position: absolute;
   z-index: 2;
@@ -257,7 +258,7 @@
   .landing-motion-control { top: 4%; bottom: auto; right: 3%; }
   .landing h1 { font-size: clamp(41px, 10.6vw, 62px); line-height: 1.1; }
   .landing-lede { margin-bottom: 23px; }
-  .landing-mascot { height: clamp(280px, 84vw, 420px); }
+  .landing-waveform { height: clamp(205px, 65vw, 380px); }
   .landing-hero-foot { bottom: 18px; }
   .landing-how-inner, .landing-faq, .landing-scenarios-inner { grid-template-columns: 1fr; gap: 19px; }
   .landing-how, .landing-faq { padding-block: 59px; }

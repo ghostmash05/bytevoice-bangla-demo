@@ -18,7 +18,7 @@ Assessment reviewers must be able to use the browser caller and then find its re
 ## Scope and authorization
 The assessment includes a public Bangla-first landing page, its live browser
 caller and the authenticated staff portal. The landing hero uses ByteVoice as a
-visual reference and presents an original parrot receptionist. The user has
+visual reference and presents a folded glass waveform with a floating sound ribbon. The user has
 delegated routine implementation and design decisions.
 
 ## Success

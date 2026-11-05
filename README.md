@@ -127,8 +127,8 @@ It can run `web\node_modules\next\dist\bin\next` directly with `build` or `start
 - API health: http://127.0.0.1:8000/api/health
 - Development API documentation: http://127.0.0.1:8000/api/docs
 - `/` is the Bangla-first public landing page with an English switch and a live
-  Bangla call action. Its original mascot render sits in a Three.js scene with
-  a still fallback.
+  Bangla call action. A Three.js glass waveform and floating sound ribbon
+  respond to call state, with an SVG still for reduced motion and WebGL fallback.
 
 For optional **local-only scripted fixtures**, run:
 `.\.venv\Scripts\python.exe -m backend.fixtures --confirm-test-data`.

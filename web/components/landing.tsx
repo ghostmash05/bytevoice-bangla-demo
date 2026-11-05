@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { ArrowDown, ArrowUpRight, CalendarCheck2, Mic, Phone, ShieldCheck } from "lucide-react";
 import { Brand } from "./brand";
-import { LandingMascot } from "./landing-mascot";
+import { LandingWaveform } from "./landing-waveform";
 import { useLocale } from "./locale";
-import VoiceTest from "./voice-test";
+import VoiceTest, { type VoiceScenePhase } from "./voice-test";
 import "./landing.css";
 
 const copy = {
@@ -83,6 +84,7 @@ const copy = {
 
 export default function Landing() {
   const { language, toggleLanguage } = useLocale();
+  const [phase, setPhase] = useState<VoiceScenePhase>("idle");
   const text = copy[language];
   const stepIcons = [Mic, CalendarCheck2, ShieldCheck];
   return (
@@ -108,10 +110,10 @@ export default function Landing() {
             <div className="landing-hero-copy">
               <h1 id="landing-title">{text.title[0]}<br /><span>{text.title[1]}</span></h1>
               <p className="landing-lede">{text.intro}</p>
-              <VoiceTest hero />
+              <VoiceTest hero onScenePhase={setPhase} />
             </div>
             <div className="landing-hero-art">
-              <LandingMascot pauseLabel={text.pauseScene} playLabel={text.playScene} />
+              <LandingWaveform phase={phase} pauseLabel={text.pauseScene} playLabel={text.playScene} />
             </div>
           </div>
           <div className="landing-hero-foot landing-width">
