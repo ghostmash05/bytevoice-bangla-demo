@@ -42,6 +42,15 @@ VOICE_PIPELINE=realtime with REALTIME_PROVIDER=google uses the Google plugin,
 GOOGLE_REALTIME_MODEL=gemini-3.8-live and Sulafat, plus Google-native captions
 with REALTIME_STT_MODEL=native (empty is also accepted locally). Use the explicit
 native value for CLI secrets because the CLI rejects empty secret values.
+Google activity detection waits for 1,400 ms of silence with low end-of-speech
+sensitivity. The prompt asks for a calm, steady feminine voice and waits through
+digit groups before validating a complete phone number.
+
+The November 5 hosted synthetic test confirmed a one-second pause between phone
+groups produced no agent speech during the gap. The complete eleven-digit number
+was captured exactly, and the call remained unbooked without confirmation.
+All 53 unit tests passed. Subjective pitch, accent and voice consistency over a
+long human conversation still need listening review.
 The dedicated Google project is ByteVoice Bangla, on the free tier;
 no billing is enabled. REALTIME_PROVIDER=livekit is the previous connection, not
 an automatic fallback when Google fails. VOICE_PIPELINE=chained remains an optional Soniox/Azure alternative

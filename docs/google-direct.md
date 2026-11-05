@@ -11,7 +11,7 @@ worker to another server would not solve that particular rejection.
 - Dedicated key: **ByteVoice Bangla Agent**, stored only in ignored local files
   and the existing LiveKit worker's server secrets, with explicit user approval.
 - `VOICE_PIPELINE=realtime`, `REALTIME_PROVIDER=google`,
-  `GOOGLE_REALTIME_MODEL=gemini-3.8-live`, `REALTIME_VOICE=Kore`.
+  `GOOGLE_REALTIME_MODEL=gemini-3.8-live`, `REALTIME_VOICE=Sulafat`.
 - `GOOGLE_API_KEY` is required in Google mode. Explicit `vertexai=False` ensures
   the plugin uses the Gemini API rather than ambient Vertex credentials.
 - LiveKit remains responsible for WebRTC transport and worker hosting.
