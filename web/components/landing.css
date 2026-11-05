@@ -285,14 +285,14 @@
   .landing-nav-actions { gap: 4px; }
   .landing-portal { font-size: 12px; padding: 5px 0 5px 8px; }
   .landing-language { padding-inline: 7px; }
-  .landing-hero { min-height: 100dvh; align-items: stretch; padding-block: 100px 53px; }
-  .landing-hero-inner { grid-template-columns: 1fr; grid-template-rows: auto 1fr; gap: 12px; }
+  .landing-hero { min-height: 100dvh; align-items: stretch; padding-block: clamp(116px, 14.7dvh, 146px) 53px; }
+  .landing-hero-inner { grid-template-columns: 1fr; grid-template-rows: auto 1fr; gap: clamp(20px, 3.5dvh, 32px); }
   .landing-hero-light {
     background:
       linear-gradient(180deg, #080f20 8%, #080f20ed 40%, #080f20a8 64%, #070d1b 100%),
       url("/landing/fluted-glass-mobile.webp") center bottom / cover no-repeat #080f20;
   }
-  .landing-hero-art { display: grid; align-items: center; align-self: stretch; margin: 0; }
+  .landing-hero-art { display: grid; align-items: center; align-self: stretch; margin: 0 -8px; overflow: clip; }
   .landing-hero-art::before {
     content: "";
     position: absolute;
@@ -301,9 +301,9 @@
     pointer-events: none;
   }
   .landing h1 { font-size: clamp(41px, 10.6vw, 62px); line-height: 1.1; }
-  .landing-lede { margin-bottom: 23px; }
-  .landing-flower { height: clamp(196px, max(57vw, 30dvh), 310px); pointer-events: none; }
-  .landing-flower > * { scale: 1.1; }
+  .landing-lede { margin-bottom: 28px; }
+  .landing-flower { height: clamp(186px, max(54vw, 28dvh), 290px); pointer-events: none; }
+  .landing-flower canvas, .landing-flower .flower-still { scale: 1.36; }
   .landing-walkthrough-floor { height: 112px; opacity: .27; }
   .landing-hero-foot { bottom: 18px; }
   .landing-how-inner, .landing-faq, .landing-scenarios-inner { grid-template-columns: 1fr; gap: 19px; }
