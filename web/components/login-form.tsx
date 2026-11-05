@@ -24,7 +24,7 @@ export function LoginForm({ next, unavailable }: { next: string; unavailable: bo
     <div className="login-entry">
       <form className="login-form" onSubmit={login}>
         <h1>{t("Staff sign in")}</h1>
-        <p>{t("Use the reviewer credentials provided with the demo.")}</p>
+        <p>{t("For assessment reviewers. Use the password shared with the task submission.")}</p>
         <label htmlFor="username">{t("Username")}</label>
         <input id="username" autoComplete="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
         <label htmlFor="password">{t("Password")}</label>
