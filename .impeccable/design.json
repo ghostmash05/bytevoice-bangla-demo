@@ -1202,9 +1202,9 @@
         "purpose": "Connecting opacity reaches .55 at midpoint; disabled for reduced motion."
       },
       {
-        "name": "landing-waveform-motion",
+        "name": "landing-reference-motion",
         "value": "30 fps target with 0.08 call-phase energy interpolation",
-        "purpose": "Folded glass drifts and pulses as a fine sound filament and floating points curve around it. Idle, connecting, listening, thinking and speaking phase events control energy without microphone samples. The localized 44px pause/play button is lower right on desktop and upper right on phones. Rendering suspends offscreen and in hidden tabs. A static SVG covers loading, reduced motion at page load and unavailable or lost WebGL."
+        "purpose": "Glass Flower rotates slowly over a full-width Three.js Points Waves floor. The pause button controls both scenes. Motion suspends offscreen and in hidden tabs. The original Glass Flower thumbnail covers loading, reduced motion and WebGL failure."
       }
     ],
     "breakpoints": [
@@ -1334,7 +1334,7 @@
   ],
   "narrative": {
     "northStar": "The Silver Record Frame",
-    "overview": "The silver glass frame turns conversations into clear, actionable clinic records. Cool translucent navigation surrounds a clear white sheet; restrained slate actions, fine rules and generous Bengali transcript leading make the workspace feel modern, classy and composed. The authentic ByteVoice waveform anchors the identity.\n\nLight and Bangla are the defaults, with an explicit dark toggle and BN/EN controls. A saved English language choice takes precedence. Glass is an intentional user-brief override: use it for the framing and voice emblem, while records remain readable solid surfaces. This replaces the former teal system. The visual language serves a fictional clinic operating interface and its browser voice test.\n\nThe public demo at `/` opens on a full-viewport reception scene with a folded glass waveform, a large Bangla headline and a gold call pill. A floating glass header carries the ByteVoice wordmark, section links and language switch. A slim divider separates the staff portal link. A warm cream walkthrough follows the hero. Bangla is the default, and the English switch uses the shared saved language preference. The landing palette is independent of the workspace theme setting.",
+    "overview": "The silver glass frame turns conversations into clear, actionable clinic records. Cool translucent navigation surrounds a clear white sheet; restrained slate actions, fine rules and generous Bengali transcript leading make the workspace feel modern, classy and composed. The authentic ByteVoice waveform anchors the identity.\n\nLight and Bangla are the defaults, with an explicit dark toggle and BN/EN controls. A saved English language choice takes precedence. Glass is an intentional user-brief override: use it for the framing and voice emblem, while records remain readable solid surfaces. This replaces the former teal system. The visual language serves a fictional clinic operating interface and its browser voice test.\n\nThe public demo at `/` opens on a full-viewport reception scene with the Glass Flower scene, a large Bangla headline and a gold call pill. A floating glass header carries the ByteVoice wordmark, section links and language switch. A slim divider separates the staff portal link. A warm cream walkthrough follows the hero. Bangla is the default, and the English switch uses the shared saved language preference. The landing palette is independent of the workspace theme setting.",
     "keyCharacteristics": [
       "Cool silver framing and clear record sheets.",
       "Authentic ByteVoice emblem, preserved from the supplied asset.",

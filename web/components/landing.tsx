@@ -1,13 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useState } from "react";
-import { ArrowDown, ArrowUpRight, CalendarCheck2, Mic, Phone, ShieldCheck } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowDown, ArrowUpRight, CalendarCheck2, Mic, Pause, Phone, Play, ShieldCheck } from "lucide-react";
 import { Brand } from "./brand";
-import { LandingWaveform } from "./landing-waveform";
 import { useLocale } from "./locale";
-import VoiceTest, { type VoiceScenePhase } from "./voice-test";
+import VoiceTest from "./voice-test";
 import "./landing.css";
+
+const GlassFlower = dynamic(() => import("./landing-glass-flower"), { ssr: false });
+const PointsWaves = dynamic(() => import("./landing-points-waves"), { ssr: false });
 
 const copy = {
   bn: {
@@ -86,9 +89,37 @@ const copy = {
 
 export default function Landing() {
   const { language, toggleLanguage } = useLocale();
-  const [phase, setPhase] = useState<VoiceScenePhase>("idle");
+  const hero = useRef<HTMLElement>(null);
+  const [motionAllowed, setMotionAllowed] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [playing, setPlaying] = useState(true);
+  const [flowerReady, setFlowerReady] = useState(false);
+  const active = visible && playing;
   const text = copy[language];
   const stepIcons = [Mic, CalendarCheck2, ShieldCheck];
+
+  useEffect(() => {
+    const section = hero.current;
+    if (!section) return;
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    let inView = false;
+    const updateVisibility = () => setVisible(inView && !document.hidden);
+    const updateMotion = () => setMotionAllowed(!reducedMotion.matches);
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      updateVisibility();
+    });
+    observer.observe(section);
+    updateMotion();
+    reducedMotion.addEventListener("change", updateMotion);
+    document.addEventListener("visibilitychange", updateVisibility);
+    return () => {
+      observer.disconnect();
+      reducedMotion.removeEventListener("change", updateMotion);
+      document.removeEventListener("visibilitychange", updateVisibility);
+    };
+  }, []);
+
   return (
     <div className="landing">
       <a className="skip-link" href="#main">{text.skip}</a>
@@ -106,16 +137,28 @@ export default function Landing() {
         </div>
       </header>
       <main id="main">
-        <section className="landing-hero" aria-labelledby="landing-title">
+        <section className="landing-hero" aria-labelledby="landing-title" ref={hero}>
           <div className="landing-hero-light" aria-hidden="true" />
+          {motionAllowed && <div className="landing-hero-floor" aria-hidden="true"><PointsWaves active={active} /></div>}
           <div className="landing-hero-inner landing-width">
             <div className="landing-hero-copy">
               <h1 id="landing-title">{text.title[0]}<br /><span>{text.title[1]}</span></h1>
               <p className="landing-lede">{text.intro}</p>
-              <VoiceTest hero onScenePhase={setPhase} />
+              <VoiceTest hero />
             </div>
             <div className="landing-hero-art">
-              <LandingWaveform phase={phase} pauseLabel={text.pauseScene} playLabel={text.playScene} />
+              <div className="landing-flower" aria-hidden="true" data-ready={motionAllowed && flowerReady}>
+                <img className="flower-still" src="/landing/reference/glass-flower.webp" alt="" />
+                {motionAllowed && <GlassFlower active={active} onReady={setFlowerReady} />}
+              </div>
+              {motionAllowed && flowerReady && <button
+                type="button"
+                className="landing-motion-control"
+                aria-label={playing ? text.pauseScene : text.playScene}
+                onClick={() => setPlaying((value) => !value)}
+              >
+                {playing ? <Pause size={15} aria-hidden="true" /> : <Play size={15} aria-hidden="true" />}
+              </button>}
             </div>
           </div>
           <div className="landing-hero-foot landing-width">

@@ -85,6 +85,7 @@
     url("/landing/dhaka-reception.webp") center 57% / cover no-repeat #080f20;
 }
 .landing-hero-inner {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
   align-items: center;
@@ -113,27 +114,24 @@
   isolation: isolate;
   margin: 0 -6% -32px -3%;
 }
-.landing-hero-art::before {
-  content: "";
+.landing-hero-floor {
   position: absolute;
-  z-index: -1;
-  inset: auto 12% 12% 11%;
-  height: 12%;
-  background: radial-gradient(ellipse, #03061090 12%, #080e2060 36%, transparent 69%);
-  transform: translateY(23%);
+  inset: auto 0 0;
+  height: clamp(170px, 32svh, 320px);
+  opacity: .42;
+  mask-image: linear-gradient(transparent 5%, #000 54%, #000 83%, transparent);
   pointer-events: none;
 }
-.landing-waveform {
+.landing-flower {
   height: clamp(370px, min(49vw, 66svh), 695px);
   position: relative;
   display: grid;
   place-items: center;
   isolation: isolate;
 }
-.landing-waveform canvas, .waveform-still { position: absolute; inset: 0; width: 100%; height: 100%; }
-.waveform-still { object-fit: contain; }
-.landing-waveform[data-rendered="true"] .waveform-still { visibility: hidden; }
-.landing-waveform canvas { display: block; z-index: 1; }
+.flower-still { position: absolute; inset: 0; width: 100%; height: 100%; }
+.flower-still { object-fit: contain; mix-blend-mode: screen; mask-image: radial-gradient(ellipse, #000 30%, transparent 68%); }
+.landing-flower[data-ready="true"] .flower-still { visibility: hidden; }
 .landing-motion-control {
   position: absolute;
   z-index: 2;
@@ -262,7 +260,8 @@
   .landing-motion-control { top: 4%; bottom: auto; right: 3%; }
   .landing h1 { font-size: clamp(41px, 10.6vw, 62px); line-height: 1.1; }
   .landing-lede { margin-bottom: 23px; }
-  .landing-waveform { height: clamp(205px, 65vw, 380px); }
+  .landing-flower { height: clamp(225px, 69vw, 380px); pointer-events: none; }
+  .landing-hero-floor { height: 155px; opacity: .34; }
   .landing-hero-foot { bottom: 18px; }
   .landing-how-inner, .landing-faq, .landing-scenarios-inner { grid-template-columns: 1fr; gap: 19px; }
   .landing-how, .landing-faq { padding-block: 59px; }

@@ -127,8 +127,12 @@ It can run `web\node_modules\next\dist\bin\next` directly with `build` or `start
 - API health: http://127.0.0.1:8000/api/health
 - Development API documentation: http://127.0.0.1:8000/api/docs
 - `/` is the Bangla-first public landing page with an English switch and a live
-  Bangla call action. A Three.js glass waveform and floating sound ribbon
-  respond to call state, with an SVG still for reduced motion and WebGL fallback.
+  Bangla call action. The hero uses Paul Henschel’s
+  [Glass Flower scene](https://github.com/pmndrs/examples/tree/ca032218ce77b7ad4c752ddaa63b0d1625d2b9f3/examples/glass-flower)
+  and the [Three.js Points Waves example](https://github.com/mrdoob/three.js/blob/r187/examples/webgl_points_waves.html)
+  as a full-width floor layer. The original model, color lookup table and studio
+  lighting are served locally. The [Blue Photo Studio HDRI](https://polyhaven.com/a/blue_photo_studio)
+  is from Poly Haven. Source notices are in `web/public/landing/reference`.
 
 For optional **local-only scripted fixtures**, run:
 `.\.venv\Scripts\python.exe -m backend.fixtures --confirm-test-data`.

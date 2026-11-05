@@ -15,13 +15,9 @@ import {
 import { api, label as formatLabel } from "@/lib/api";
 
 type State = "idle" | "connecting" | "live" | "ended" | "error";
-export type VoiceScenePhase = "idle" | "connecting" | "listening" | "thinking" | "speaking";
 type Turn = { id: string; text: string; speaker: string };
 
-export default function VoiceTest({ hero = false, onScenePhase }: {
-  hero?: boolean;
-  onScenePhase?: (phase: VoiceScenePhase) => void;
-}) {
+export default function VoiceTest({ hero = false }: { hero?: boolean }) {
   const { t } = useLocale();
   const label = (value: string) => t(formatLabel(value));
   const [state, setState] = useState<State>("idle"),
@@ -38,17 +34,6 @@ export default function VoiceTest({ hero = false, onScenePhase }: {
     expectedEnding = useRef(false),
     timer = useRef<ReturnType<typeof setTimeout> | null>(null),
     agentTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(() => {
-    if (state === "live") {
-      if (agentState === "listening" || agentState === "thinking" || agentState === "speaking") {
-        onScenePhase?.(agentState);
-        return;
-      }
-      onScenePhase?.("connecting");
-    } else {
-      onScenePhase?.(state === "connecting" ? "connecting" : "idle");
-    }
-  }, [agentState, onScenePhase, state]);
   useEffect(
     () => () => {
       cancelled.current = true;
@@ -81,7 +66,9 @@ export default function VoiceTest({ hero = false, onScenePhase }: {
         setAgentState("Finishing your call");
         return;
       }
-      setAgentState(participant.attributes["lk.agent.state"] || "listening");
+      setAgentState(
+        label(participant.attributes["lk.agent.state"] || "listening"),
+      );
     }
   }
   async function start() {
@@ -263,7 +250,7 @@ export default function VoiceTest({ hero = false, onScenePhase }: {
             </div>
             <h3>
               {state === "live"
-                ? label(agentState)
+                ? t(agentState)
                 : state === "connecting"
                   ? t("Connecting your call…")
                   : state === "ended"

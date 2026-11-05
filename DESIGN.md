@@ -211,7 +211,7 @@ Light and Bangla are the defaults, with an explicit dark toggle and BN/EN contro
 
 ### Public landing page
 
-The public landing page at `/` introduces ByteVoice's Bangla voice agent to clinic and hospital teams in Bangladesh. The full-viewport reception scene pairs a folded glass waveform with a Bangla headline and a gold call button. A floating glass header carries the ByteVoice wordmark, section links and language switch. A slim divider separates the staff portal link. A warm cream product walkthrough follows the hero. Mashrafi’s Dental is the fictional clinic used in the live demo. Bangla is the default, and the English switch uses the shared saved language preference. The landing palette is independent of the workspace theme setting.
+The public landing page at `/` introduces ByteVoice's Bangla voice agent to clinic and hospital teams in Bangladesh. The full-viewport reception scene pairs the Glass Flower scene with a Bangla headline and a gold call button. A floating glass header carries the ByteVoice wordmark, section links and language switch. A slim divider separates the staff portal link. A warm cream product walkthrough follows the hero. Mashrafi’s Dental is the fictional clinic used in the live demo. Bangla is the default, and the English switch uses the shared saved language preference. The landing palette is independent of the workspace theme setting.
 
 ## Colors
 
@@ -257,7 +257,7 @@ Voice-test content is bounded to (1280px), with a main console and (270px) guide
 
 ### Landing layout
 
-The landing uses a (1540px) maximum content width and a full-bleed hero with a (100svh) minimum above phone widths. A (.9fr / 1.1fr) split keeps the localized promise, working call and consent text on the left and gives the unboxed waveform more room on the right. The cream walkthrough pairs a ruled step list with the sample booking. The navy scenario band places the heading and return-to-call link beside a column of example prompts. Side gutters use `clamp(32px, 5.5vw, 105px)`, then (32px) at (900px) and (18px) at (680px). At (680px), the hero stacks with copy and call controls above the waveform, and the lower sections stack. Language and staff portal controls remain visible in the compact header.
+The landing uses a (1540px) maximum content width and a full-bleed hero with a (100svh) minimum above phone widths. A (.9fr / 1.1fr) split keeps the localized promise, working call and consent text on the left and gives Glass Flower more room on the right. The cream walkthrough pairs a ruled step list with the sample booking. The navy scenario band places the heading and return-to-call link beside a column of example prompts. Side gutters use `clamp(32px, 5.5vw, 105px)`, then (32px) at (900px) and (18px) at (680px). At (680px), the hero stacks with copy and call controls above Glass Flower, and the lower sections stack. Language and staff portal controls remain visible in the compact header.
 
 ## Elevation & Depth
 
@@ -277,9 +277,9 @@ Background, border, text and shadow transition over (.18s ease). Only the connec
 
 The generated desktop and tablet backdrop (`web/public/landing/dhaka-reception.webp`) depicts a fictional Dhaka reception at dusk with a waterfront skyline. Navy scrims protect the copy. Phones use a portrait crop of the user-supplied Midnight Satin Folds image. The scenario band reuses the wider satin image under a navy gradient.
 
-Three.js builds a folded waveform from beveled smoked blue glass with a thin champagne rim. An independent sound ribbon pairs a fine filament with floating points as it curves around the glass. A generated studio light rig provides material reflections. Desktop uses glass transmission. The phone variant keeps the reflective finish with simpler geometry, fewer points and transmission disabled.
+The hero uses the original pmndrs Glass Flower model, transmission materials, lights and color grading. The Three.js Points Waves grid fills a separate full-width layer anchored to the bottom of the hero.
 
-The sculpture drifts gently and tilts with desktop pointer movement. The sculpture's pulse and ribbon activity respond to the call phase (idle, connecting, listening, thinking or speaking). Those signals come from the call UI's phase state and use no microphone samples. A localized circular pause/play control (44px) appears once the canvas is ready, at the lower right on desktop and upper right on phones. Rendering suspends offscreen and in hidden tabs. The SVG artwork (`web/public/landing/glass-waveform.svg`) covers loading, reduced motion at page load and unavailable or lost WebGL.
+Glass Flower rotates slowly and can be dragged on desktop. The localized pause/play control pauses both the flower and the floor. Motion suspends offscreen and in hidden tabs. The original Glass Flower thumbnail covers loading, reduced motion and WebGL failure.
 
 Landing glass combines a (16px) backdrop blur and (1.35) saturation with a cool translucent fill and a brighter top edge. Apply it to the floating header, circular motion control and active call console. The header has (18px) desktop corners and (17px) phone corners. The booking sample uses an upright ivory surface, a warm seam and a diffuse shadow (`6px 20px 46px #40321c24`).
 

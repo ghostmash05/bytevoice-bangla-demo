@@ -61,7 +61,7 @@ not constitute a new audio or production-database test.
 | GitHub repository and README, with reviewer access | Required, §7, p4 | Repository and README exist; repository remains **private** per user. Reviewer access/publication is pending |
 | Video overview, maximum three minutes, showing landing/call/record | Required, §7, p4; documentation/presentation is 10% | **Not produced.** User explicitly excluded recording from agent work; original requirement still stands |
 | Code quality, architecture and secrets | 15%, §8, p4 | Source, configuration separation and CI exist; this audit does not replace an independent security audit |
-| Bilingual landing page and 3D hero | Bonuses, §3/§8, p2/4 | Bangla by default with an English switch and a procedural Three.js glass waveform with a floating sound ribbon |
+| Bilingual landing page and 3D hero | Bonuses, §3/§8, p2/4 | Bangla by default with an English switch, the pmndrs Glass Flower scene and a Three.js Points Waves floor |
 | Fake patient data; keep secrets out; keep services live | §9, p4 | Demo labels and secret separation are implemented. User-controlled hosting must remain online until assessment ends |
 
 The deadline printed in §10 (p4) is **Thursday 5 November 2026, 11:59 PM
