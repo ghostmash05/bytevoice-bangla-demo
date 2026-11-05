@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-04T16:36:19.121193+00:00",
+  "generatedAt": "2026-11-05T09:12:05.386174+00:00",
   "title": "Design System: ByteVoice Bangla workspace",
   "extensions": {
     "colorMeta": {
@@ -885,6 +885,258 @@
           "oklch(84% 0.10539 13.52)",
           "oklch(95% 0.10539 13.52)"
         ]
+      },
+      "landing-navy": {
+        "role": "neutral",
+        "displayName": "Landing Navy",
+        "tonalRamp": [
+          "oklch(15% 0.03725 265.49)",
+          "oklch(26% 0.03725 265.49)",
+          "oklch(38% 0.03725 265.49)",
+          "oklch(49% 0.03725 265.49)",
+          "oklch(61% 0.03725 265.49)",
+          "oklch(72% 0.03725 265.49)",
+          "oklch(84% 0.03725 265.49)",
+          "oklch(95% 0.03725 265.49)"
+        ]
+      },
+      "landing-hero": {
+        "role": "neutral",
+        "displayName": "Landing Hero",
+        "tonalRamp": [
+          "oklch(15% 0.03146 264.72)",
+          "oklch(26% 0.03146 264.72)",
+          "oklch(38% 0.03146 264.72)",
+          "oklch(49% 0.03146 264.72)",
+          "oklch(61% 0.03146 264.72)",
+          "oklch(72% 0.03146 264.72)",
+          "oklch(84% 0.03146 264.72)",
+          "oklch(95% 0.03146 264.72)"
+        ]
+      },
+      "landing-console": {
+        "role": "neutral",
+        "displayName": "Landing Console",
+        "tonalRamp": [
+          "oklch(15% 0.04369 263.91)",
+          "oklch(26% 0.04369 263.91)",
+          "oklch(38% 0.04369 263.91)",
+          "oklch(49% 0.04369 263.91)",
+          "oklch(61% 0.04369 263.91)",
+          "oklch(72% 0.04369 263.91)",
+          "oklch(84% 0.04369 263.91)",
+          "oklch(95% 0.04369 263.91)"
+        ]
+      },
+      "landing-scenarios": {
+        "role": "neutral",
+        "displayName": "Landing Scenarios",
+        "tonalRamp": [
+          "oklch(15% 0.04922 263.08)",
+          "oklch(26% 0.04922 263.08)",
+          "oklch(38% 0.04922 263.08)",
+          "oklch(49% 0.04922 263.08)",
+          "oklch(61% 0.04922 263.08)",
+          "oklch(72% 0.04922 263.08)",
+          "oklch(84% 0.04922 263.08)",
+          "oklch(95% 0.04922 263.08)"
+        ]
+      },
+      "landing-ink": {
+        "role": "neutral",
+        "displayName": "Landing Ink",
+        "tonalRamp": [
+          "oklch(15% 0.01554 86.43)",
+          "oklch(26% 0.01554 86.43)",
+          "oklch(38% 0.01554 86.43)",
+          "oklch(49% 0.01554 86.43)",
+          "oklch(61% 0.01554 86.43)",
+          "oklch(72% 0.01554 86.43)",
+          "oklch(84% 0.01554 86.43)",
+          "oklch(95% 0.01554 86.43)"
+        ]
+      },
+      "landing-muted": {
+        "role": "neutral",
+        "displayName": "Landing Muted",
+        "tonalRamp": [
+          "oklch(15% 0.02622 261.14)",
+          "oklch(26% 0.02622 261.14)",
+          "oklch(38% 0.02622 261.14)",
+          "oklch(49% 0.02622 261.14)",
+          "oklch(61% 0.02622 261.14)",
+          "oklch(72% 0.02622 261.14)",
+          "oklch(84% 0.02622 261.14)",
+          "oklch(95% 0.02622 261.14)"
+        ]
+      },
+      "landing-line": {
+        "role": "neutral",
+        "displayName": "Landing Line",
+        "tonalRamp": [
+          "oklch(15% 0.04694 261.72)",
+          "oklch(26% 0.04694 261.72)",
+          "oklch(38% 0.04694 261.72)",
+          "oklch(49% 0.04694 261.72)",
+          "oklch(61% 0.04694 261.72)",
+          "oklch(72% 0.04694 261.72)",
+          "oklch(84% 0.04694 261.72)",
+          "oklch(95% 0.04694 261.72)"
+        ]
+      },
+      "landing-glass": {
+        "role": "neutral",
+        "displayName": "Landing Glass",
+        "tonalRamp": [
+          "oklch(15% 0.04273 264.49)",
+          "oklch(26% 0.04273 264.49)",
+          "oklch(38% 0.04273 264.49)",
+          "oklch(49% 0.04273 264.49)",
+          "oklch(61% 0.04273 264.49)",
+          "oklch(72% 0.04273 264.49)",
+          "oklch(84% 0.04273 264.49)",
+          "oklch(95% 0.04273 264.49)"
+        ]
+      },
+      "landing-glass-edge": {
+        "role": "neutral",
+        "displayName": "Landing Glass Edge",
+        "tonalRamp": [
+          "oklch(15% 0.07164 262.19)",
+          "oklch(26% 0.07164 262.19)",
+          "oklch(38% 0.07164 262.19)",
+          "oklch(49% 0.07164 262.19)",
+          "oklch(61% 0.07164 262.19)",
+          "oklch(72% 0.07164 262.19)",
+          "oklch(84% 0.07164 262.19)",
+          "oklch(95% 0.07164 262.19)"
+        ]
+      },
+      "landing-gold": {
+        "role": "primary",
+        "displayName": "Landing Gold",
+        "tonalRamp": [
+          "oklch(15% 0.11947 86.80)",
+          "oklch(26% 0.11947 86.80)",
+          "oklch(38% 0.11947 86.80)",
+          "oklch(49% 0.11947 86.80)",
+          "oklch(61% 0.11947 86.80)",
+          "oklch(72% 0.11947 86.80)",
+          "oklch(84% 0.11947 86.80)",
+          "oklch(95% 0.11947 86.80)"
+        ]
+      },
+      "landing-gold-light": {
+        "role": "primary",
+        "displayName": "Landing Gold Light",
+        "tonalRamp": [
+          "oklch(15% 0.08741 90.37)",
+          "oklch(26% 0.08741 90.37)",
+          "oklch(38% 0.08741 90.37)",
+          "oklch(49% 0.08741 90.37)",
+          "oklch(61% 0.08741 90.37)",
+          "oklch(72% 0.08741 90.37)",
+          "oklch(84% 0.08741 90.37)",
+          "oklch(95% 0.08741 90.37)"
+        ]
+      },
+      "landing-gold-deep": {
+        "role": "primary",
+        "displayName": "Landing Gold Deep",
+        "tonalRamp": [
+          "oklch(15% 0.13443 84.48)",
+          "oklch(26% 0.13443 84.48)",
+          "oklch(38% 0.13443 84.48)",
+          "oklch(49% 0.13443 84.48)",
+          "oklch(61% 0.13443 84.48)",
+          "oklch(72% 0.13443 84.48)",
+          "oklch(84% 0.13443 84.48)",
+          "oklch(95% 0.13443 84.48)"
+        ]
+      },
+      "landing-gold-hover": {
+        "role": "primary",
+        "displayName": "Landing Gold Hover",
+        "tonalRamp": [
+          "oklch(15% 0.10957 86.79)",
+          "oklch(26% 0.10957 86.79)",
+          "oklch(38% 0.10957 86.79)",
+          "oklch(49% 0.10957 86.79)",
+          "oklch(61% 0.10957 86.79)",
+          "oklch(72% 0.10957 86.79)",
+          "oklch(84% 0.10957 86.79)",
+          "oklch(95% 0.10957 86.79)"
+        ]
+      },
+      "landing-action-ink": {
+        "role": "neutral",
+        "displayName": "Landing Action Ink",
+        "tonalRamp": [
+          "oklch(15% 0.03926 264.25)",
+          "oklch(26% 0.03926 264.25)",
+          "oklch(38% 0.03926 264.25)",
+          "oklch(49% 0.03926 264.25)",
+          "oklch(61% 0.03926 264.25)",
+          "oklch(72% 0.03926 264.25)",
+          "oklch(84% 0.03926 264.25)",
+          "oklch(95% 0.03926 264.25)"
+        ]
+      },
+      "landing-walkthrough": {
+        "role": "neutral",
+        "displayName": "Landing Walkthrough",
+        "tonalRamp": [
+          "oklch(15% 0.01561 86.43)",
+          "oklch(26% 0.01561 86.43)",
+          "oklch(38% 0.01561 86.43)",
+          "oklch(49% 0.01561 86.43)",
+          "oklch(61% 0.01561 86.43)",
+          "oklch(72% 0.01561 86.43)",
+          "oklch(84% 0.01561 86.43)",
+          "oklch(95% 0.01561 86.43)"
+        ]
+      },
+      "landing-walkthrough-ink": {
+        "role": "neutral",
+        "displayName": "Landing Walkthrough Ink",
+        "tonalRamp": [
+          "oklch(15% 0.03796 263.34)",
+          "oklch(26% 0.03796 263.34)",
+          "oklch(38% 0.03796 263.34)",
+          "oklch(49% 0.03796 263.34)",
+          "oklch(61% 0.03796 263.34)",
+          "oklch(72% 0.03796 263.34)",
+          "oklch(84% 0.03796 263.34)",
+          "oklch(95% 0.03796 263.34)"
+        ]
+      },
+      "landing-receipt": {
+        "role": "neutral",
+        "displayName": "Landing Receipt",
+        "tonalRamp": [
+          "oklch(15% 0.01384 88.68)",
+          "oklch(26% 0.01384 88.68)",
+          "oklch(38% 0.01384 88.68)",
+          "oklch(49% 0.01384 88.68)",
+          "oklch(61% 0.01384 88.68)",
+          "oklch(72% 0.01384 88.68)",
+          "oklch(84% 0.01384 88.68)",
+          "oklch(95% 0.01384 88.68)"
+        ]
+      },
+      "landing-receipt-ink": {
+        "role": "neutral",
+        "displayName": "Landing Receipt Ink",
+        "tonalRamp": [
+          "oklch(15% 0.04820 264.55)",
+          "oklch(26% 0.04820 264.55)",
+          "oklch(38% 0.04820 264.55)",
+          "oklch(49% 0.04820 264.55)",
+          "oklch(61% 0.04820 264.55)",
+          "oklch(72% 0.04820 264.55)",
+          "oklch(84% 0.04820 264.55)",
+          "oklch(95% 0.04820 264.55)"
+        ]
       }
     },
     "typographyMeta": {
@@ -895,6 +1147,10 @@
       "transcript": {
         "displayName": "Bengali conversation",
         "purpose": "Generous Bengali conversation leading."
+      },
+      "landing-display": {
+        "displayName": "Landing display",
+        "purpose": "Bangla or English hero headline sized against the copy column."
       }
     },
     "shadows": [
@@ -917,6 +1173,21 @@
         "name": "voice-emblem",
         "value": "0 5px 18px rgba(45,64,91,.04)",
         "purpose": "Quiet emblem material."
+      },
+      {
+        "name": "landing-glass",
+        "value": "inset 0 1px #fffaeb14, 0 16px 38px #02061558",
+        "purpose": "Glass header, scene label and active call console."
+      },
+      {
+        "name": "landing-call-pill",
+        "value": "inset 0 1px #fffae5c2, 0 9px 22px #0005",
+        "purpose": "Gold primary call action."
+      },
+      {
+        "name": "landing-booking-sample",
+        "value": "6px 20px 46px #40321c24",
+        "purpose": "Diffuse shadow on cream walkthrough paper."
       }
     ],
     "motion": [
@@ -929,6 +1200,11 @@
         "name": "voice-connecting",
         "value": "voice-breathe 2s ease-in-out infinite",
         "purpose": "Connecting opacity reaches .55 at midpoint; disabled for reduced motion."
+      },
+      {
+        "name": "landing-portrait-parallax",
+        "value": "rotation interpolation .13 per frame",
+        "purpose": "Pointer tilt settles at rest. The still remains available with reduced motion or unavailable WebGL."
       }
     ],
     "breakpoints": [
@@ -947,6 +1223,14 @@
       {
         "name": "wide-desktop-min",
         "value": "1800px"
+      },
+      {
+        "name": "landing-tablet-max",
+        "value": "900px"
+      },
+      {
+        "name": "landing-phone-max",
+        "value": "680px"
       }
     ]
   },
@@ -1022,11 +1306,35 @@
       "description": "Record tabs from the implemented silver-frame workspace.",
       "html": "<div class=\"ds-tabs\" role=\"tablist\" aria-label=\"Record details\"><button class=\"ds-tab\" role=\"tab\" aria-selected=\"true\">Conversation</button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\" tabindex=\"-1\">Captured details</button></div>",
       "css": ".ds-tabs{display:flex;gap:24px;border-bottom:1px solid var(--line, #e3e8ee);padding:0 32px}.ds-tab{font-family:\"Manrope\",\"Noto Sans Bengali\",sans-serif; background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:14px 0;color:var(--muted, #5d6876);font-size:12px;min-height:44px;cursor:pointer}.ds-tab[aria-selected=\"true\"]{color:var(--ink, #202936);border-bottom-color:var(--accent, #335d7e);font-weight:650}.ds-tab:hover{color:var(--ink, #202936)}.ds-tab:focus-visible{outline:3px solid var(--focus, #467caf);outline-offset:3px;}"
+    },
+    {
+      "name": "Landing call pill",
+      "kind": "button",
+      "refersTo": "landing-call-button",
+      "description": "Primary action in the public voice demo hero.",
+      "html": "<div class=\"ds-landing-pill-stage\"><button type=\"button\" class=\"ds-landing-pill\"><svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3.09 5.18 2 2 0 0 1 5.08 3h3a2 2 0 0 1 2 1.72l.46 3.18a2 2 0 0 1-.57 1.81l-1.27 1.27a16 16 0 0 0 4.27 4.27l1.27-1.27a2 2 0 0 1 1.81-.57l3.18.46A2 2 0 0 1 22 16.92z\"/></svg><span lang=\"bn\">বাংলায় কথা বলুন</span></button></div>",
+      "css": ".ds-landing-pill-stage{padding:24px;background:#070d1b}.ds-landing-pill{font-family:Manrope,\"Anek Bangla\",sans-serif;display:inline-flex;align-items:center;gap:12px;min-height:59px;padding:7px 24px 7px 8px;border:1px solid #f0c96d;border-radius:99px;background:linear-gradient(155deg,#ffe7a5,#e9b94e);color:#141d30;box-shadow:inset 0 1px #fffae5c2,0 9px 22px #0005;font-size:17px;font-weight:600;cursor:pointer;transition:background-color .18s ease,border-color .18s ease}.ds-landing-pill:hover:not(:disabled){background:#ffdb88;border-color:#ffdb88}.ds-landing-pill:focus-visible{outline:3px solid #f0c96d;outline-offset:3px}.ds-landing-pill:disabled{opacity:.5;cursor:not-allowed}.ds-landing-pill svg{box-sizing:content-box;width:17px;height:17px;padding:10px;border-radius:50%;background:#1a1b21;color:#ffe3a1}@media(prefers-reduced-motion:reduce){.ds-landing-pill{transition:none}}"
+    },
+    {
+      "name": "Landing glass navigation",
+      "kind": "nav",
+      "refersTo": "landing-navigation",
+      "description": "Floating navigation with language and staff portal controls.",
+      "html": "<div class=\"ds-landing-nav-stage\"><nav class=\"ds-landing-nav\" aria-label=\"Landing navigation\"><strong>ByteVoice</strong><a class=\"ds-landing-nav-section\" href=\"#how\">How it works</a><span class=\"ds-landing-actions\"><button type=\"button\" lang=\"bn\">বাংলা</button><a class=\"ds-landing-portal\" href=\"/portal\">Staff portal <svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a></span></nav></div>",
+      "css": ".ds-landing-nav-stage{padding:18px;background:radial-gradient(ellipse at 78% 44%,#3c5682 0%,#1b2c4e 32%,#080f20 77%)}.ds-landing-nav,.ds-landing-portal{border:1px solid #b6d0ff40;border-top-color:#e8e7d66b;background:linear-gradient(155deg,#dbe9ff1f,transparent 58%),#0b1428a6;box-shadow:inset 0 1px #fffaeb14,0 16px 38px #02061558;backdrop-filter:blur(16px) saturate(1.35)}.ds-landing-nav{font-family:Manrope,\"Anek Bangla\",sans-serif;min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-inline:clamp(16px,2.3vw,36px);border-radius:22px;color:#f6f1e6}.ds-landing-nav a{color:#bec8d9;text-decoration:none}.ds-landing-nav a:hover,.ds-landing-nav .ds-landing-portal{color:#f6f1e6}.ds-landing-actions,.ds-landing-portal{display:inline-flex;align-items:center;gap:8px}.ds-landing-portal{border-radius:99px;padding:9px 16px}.ds-landing-actions button{font:inherit;min-height:42px;padding:7px 15px;border:0;border-radius:99px;background:transparent;color:inherit;cursor:pointer}.ds-landing-actions button:hover{background:#f0f4ff18}.ds-landing-nav :is(a,button):focus-visible{outline:3px solid #f0c96d;outline-offset:3px}@media(max-width:680px){.ds-landing-nav{min-height:59px;padding-inline:12px;border-radius:17px}.ds-landing-nav .ds-landing-nav-section{display:none}.ds-landing-portal{font-size:12px;padding:7px 9px}.ds-landing-actions button{padding-inline:7px}}"
+    },
+    {
+      "name": "Landing example booking",
+      "kind": "card",
+      "refersTo": "landing-example-booking",
+      "description": "Upright paper sample in the warm cream walkthrough.",
+      "html": "<div class=\"ds-landing-walkthrough\"><figure class=\"ds-landing-booking\"><div class=\"ds-landing-booking-top\"><svg width=\"26\" height=\"26\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M8 2v4m8-4v4M3 10h18M21 8v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2zM9 16l2 2 4-4\"/></svg><span>Example booking</span></div><p>Booking confirmed</p><div class=\"ds-landing-booking-details\"><span>Scaling</span><span>10:00 AM</span></div><figcaption>An example record for the demo clinic</figcaption></figure></div>",
+      "css": ".ds-landing-walkthrough{padding:24px;background:#f0ebe0}.ds-landing-booking{font-family:Manrope,\"Anek Bangla\",sans-serif;margin:0;background:#fffbf1;color:#17223a;padding:clamp(25px,4vw,52px);border:1px solid #b7a88c72;border-radius:18px;box-shadow:6px 20px 46px #40321c24}.ds-landing-booking-top,.ds-landing-booking-details{display:flex;justify-content:space-between;align-items:center;gap:16px}.ds-landing-booking-top{border-bottom:1px solid #a9a69e;padding-bottom:24px}.ds-landing-booking p{color:#182a43;font-size:clamp(31px,4vw,58px);line-height:1.12;font-weight:650;margin:26px 0}.ds-landing-booking-details{font-size:18px;border-top:1px solid #a9a69e;padding-top:14px}.ds-landing-booking figcaption{color:#4d5564;margin-top:24px}"
     }
   ],
   "narrative": {
     "northStar": "The Silver Record Frame",
-    "overview": "The silver glass frame turns conversations into clear, actionable clinic records. Cool translucent navigation surrounds a clear white sheet; restrained slate actions, fine rules and generous Bengali transcript leading make the workspace feel modern, classy and composed. The authentic ByteVoice waveform anchors the identity.\n\nLight and Bangla are the defaults, with an explicit dark toggle and BN/EN controls. A saved English language choice takes precedence. Glass is an intentional user-brief override: use it for the framing and voice emblem, while records remain readable solid surfaces. This replaces the former teal system. The visual language serves a fictional clinic operating interface and its browser voice test.",
+    "overview": "The silver glass frame turns conversations into clear, actionable clinic records. Cool translucent navigation surrounds a clear white sheet; restrained slate actions, fine rules and generous Bengali transcript leading make the workspace feel modern, classy and composed. The authentic ByteVoice waveform anchors the identity.\n\nLight and Bangla are the defaults, with an explicit dark toggle and BN/EN controls. A saved English language choice takes precedence. Glass is an intentional user-brief override: use it for the framing and voice emblem, while records remain readable solid surfaces. This replaces the former teal system. The visual language serves a fictional clinic operating interface and its browser voice test.\n\nThe public demo at `/` opens on a full-viewport navy scene. The original ByteVoice receptionist shares the scene with a large Bangla headline and a gold call pill. A floating glass header carries the ByteVoice wordmark, section links, language switch and staff portal link. A warm cream walkthrough follows the hero. Bangla is the default, and the English switch uses the shared saved language preference. The landing palette is independent of the workspace theme setting.",
     "keyCharacteristics": [
       "Cool silver framing and clear record sheets.",
       "Authentic ByteVoice emblem, preserved from the supplied asset.",

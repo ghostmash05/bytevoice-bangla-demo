@@ -65,23 +65,30 @@ colors:
   live: "#44896b"
   danger: "#8e3946"
   danger-hover: "#762b37"
-  landing-navy: "#0c1426"
+  landing-navy: "#080f20"
+  landing-hero: "#070d1b"
   landing-console: "#111b30"
-  landing-scenarios: "#1a2b48"
+  landing-scenarios: "#131f37"
   landing-ink: "#f6f1e6"
   landing-muted: "#bec8d9"
   landing-line: "#33415a"
+  landing-glass: "#0b1428a6"
+  landing-glass-edge: "#b6d0ff40"
   landing-gold: "#f0c96d"
+  landing-gold-light: "#ffe7a5"
+  landing-gold-deep: "#e9b94e"
   landing-gold-hover: "#ffdb88"
   landing-action-ink: "#141d30"
-  landing-receipt: "#e9e4d8"
+  landing-walkthrough: "#f0ebe0"
+  landing-walkthrough-ink: "#111a2c"
+  landing-receipt: "#fffbf1"
   landing-receipt-ink: "#17223a"
 typography:
   landing-display:
     fontFamily: '"Manrope", "Anek Bangla", sans-serif'
-    fontSize: "clamp(47px, 5.7vw, 84px)"
-    fontWeight: 650
-    lineHeight: 1.13
+    fontSize: "clamp(39px, 14cqi, 96px)"
+    fontWeight: 720
+    lineHeight: 1.04
   headline:
     fontFamily: '"Manrope", "Anek Bangla", sans-serif'
     fontSize: "28px"
@@ -114,7 +121,9 @@ rounded:
   transcript: "12px"
   container: "16px"
   sheet: "20px"
-  landing-art: "25px"
+  landing-glass-nav: "22px"
+  landing-pill: "99px"
+  landing-receipt: "18px"
 spacing:
   tight: "8px"
   compact: "12px"
@@ -126,15 +135,20 @@ components:
   landing-call-button:
     backgroundColor: "{colors.landing-gold}"
     textColor: "{colors.landing-action-ink}"
-    rounded: "{rounded.button}"
-    padding: "14px 21px"
+    rounded: "{rounded.landing-pill}"
+    padding: "7px 24px 7px 8px"
   landing-call-button-hover:
     backgroundColor: "{colors.landing-gold-hover}"
   landing-example-booking:
     backgroundColor: "{colors.landing-receipt}"
     textColor: "{colors.landing-receipt-ink}"
-    rounded: "{rounded.transcript}"
+    rounded: "{rounded.landing-receipt}"
     padding: "clamp(25px, 4vw, 52px)"
+  landing-navigation:
+    backgroundColor: "{colors.landing-glass}"
+    textColor: "{colors.landing-ink}"
+    rounded: "{rounded.landing-glass-nav}"
+    padding: "0 clamp(16px, 2.3vw, 36px)"
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.primary-ink}"
@@ -197,7 +211,7 @@ Light and Bangla are the defaults, with an explicit dark toggle and BN/EN contro
 
 ### Public landing page
 
-The public demo at `/` gives the voice experience a navy and gold identity. A large Bangla headline and a gold call button lead the hero beside the original illustrated ByteVoice receptionist. The same ByteVoice wordmark connects the landing to the staff workspace. Bangla is the default, and the English switch uses the shared saved language preference. The page uses a dark color scheme independently of the workspace theme setting.
+The public demo at `/` opens on a full-viewport navy scene. The original ByteVoice receptionist shares the scene with a large Bangla headline and a gold call pill. A floating glass header carries the ByteVoice wordmark, section links, language switch and staff portal link. A warm cream walkthrough follows the hero. Bangla is the default, and the English switch uses the shared saved language preference. The landing palette is independent of the workspace theme setting.
 
 ## Colors
 
@@ -217,7 +231,7 @@ Outcome pairs remain semantic: booked is muted green, rescheduled steel blue, ca
 
 ### Landing palette
 
-Use midnight navy for the page, lighter navy for the active call console and a blue band for scenario examples. Warm ivory carries headlines and cool grey carries explanations. Gold marks the second headline line, the main action and keyboard focus. A warm paper booking sample carries dark navy text. These values are scoped to the landing wrapper in `web/components/landing.css`.
+Use midnight navy across the hero, lighter navy in the scenario band and warm cream across the walkthrough. Ivory carries headlines and cool grey carries explanations in the dark sections. Gold marks the booking phrase, the main action and keyboard focus. The action gradient runs from light to deep gold above dark navy text. The walkthrough pairs navy copy with a lighter paper booking sample. These roles are scoped to the landing wrapper in `web/components/landing.css`.
 
 ## Typography
 
@@ -229,7 +243,7 @@ Frontmatter records the headline, title, body, label and transcript roles. Main 
 
 ### Landing typography
 
-Anek Bangla handles Bengali glyphs, and Manrope handles Latin. The landing display uses weight (650) and line height (1.13). The two localized headline phrases carry equal typographic weight and can wrap naturally. Gold highlights the booking phrase. The hero introduction is bounded to (39ch). At phone widths the headline uses `clamp(40px, 10vw, 61px)`.
+Anek Bangla handles Bengali glyphs, and Manrope handles Latin. The landing display uses weight (720) and line height (1.04). It scales against the width of its copy column. The two localized headline phrases carry equal typographic weight and can wrap naturally. Gold highlights the booking phrase. The hero introduction is bounded to (43ch). At phone widths the headline uses `clamp(41px, 10.6vw, 62px)` with a line height of (1.1).
 
 ## Layout
 
@@ -243,7 +257,7 @@ Voice-test content is bounded to (1280px), with a main console and (270px) guide
 
 ### Landing layout
 
-The public page uses a (1260px) maximum content width and starts with a near-even hero split. Keep the localized promise, working call and consent text together on the left, with art in its own panel on the right. A ruled sequence follows with the call-to-booking steps, a labelled sample booking, example prompts and expandable FAQs. Side gutters narrow from (56px) to (32px) at (900px) and (18px) at (680px). At the smallest breakpoint the hero, steps and FAQ stack. Language and staff portal controls remain in the header while the section links move out of the compact navigation.
+The landing uses a (1540px) maximum content width and a full-bleed hero with a (100svh) minimum above phone widths. A (.9fr / 1.1fr) split keeps the localized promise, working call and consent text on the left and gives the unboxed mascot more room on the right. The cream walkthrough pairs a ruled step list with the sample booking. The navy scenario band places the heading and return-to-call link beside a column of example prompts. Side gutters use `clamp(32px, 5.5vw, 105px)`, then (32px) at (900px) and (18px) at (680px). The small scene label hides at (900px). At (680px), the hero stacks with copy and call controls above the mascot, and the lower sections stack. Language and staff portal controls remain visible in the compact header.
 
 ## Elevation & Depth
 
@@ -261,9 +275,9 @@ Background, border, text and shadow transition over (.18s ease). Only the connec
 
 ### Landing art and motion
 
-The original mascot render shows a blue parrot in a headset at a gold-trimmed reception desk. It lives at `web/public/landing/byte-mascot.webp`. The art panel pairs a radial navy backdrop with a quiet gold waveform. Three.js places the portrait texture on a plane in a perspective scene with three gold rings at different depths. Pointer movement tilts the portrait gently, then it eases back to center. Touch input keeps a steady composition. Rendering settles when the motion does. The still uses the same artwork and remains available during loading, with reduced motion or if WebGL cannot initialize or loses context.
+The original mascot render shows a blue parrot in a headset at a gold-trimmed reception desk. It lives at `web/public/landing/byte-mascot.webp`. The user-supplied Midnight Satin Folds backdrop fills the viewport, with a navy scrim behind the copy and a tighter portrait crop on phones. Three.js places the portrait texture on a plane in a perspective scene with three gold rings at different depths. Pointer movement tilts the portrait gently, then it eases back to center. Touch input keeps a steady composition. Rendering settles when the motion does. The still uses the same artwork and remains available during loading, with reduced motion or if WebGL cannot initialize or loses context.
 
-The example booking sits on warm paper, tilted (−2°) above a solid navy offset shadow (`12px 18px 0 #1b2a46`). Keep this depth treatment with the sample and reserve the portal sheet's glass edges for the workspace.
+Landing glass combines a (16px) backdrop blur and (1.35) saturation with a cool translucent fill and a brighter top edge. Apply it to the floating header, portal link, scene label and active call console. The booking sample uses an upright ivory surface, a warm seam and a diffuse shadow (`6px 20px 46px #40321c24`).
 
 ## Shapes
 
@@ -307,7 +321,7 @@ Assistant turns use a raised surface and (17px 20px) padding; caller turns remai
 
 ### Landing caller and booking sample
 
-The gold hero action starts the real embedded `VoiceTest` call. At rest it sits above concise permission and data-use copy. During a call, the hero shows connection state, microphone and end-call controls, errors and live captions as they become available. Keep keyboard focus visible and preserve localized control labels. The booking receipt farther down the page always carries an explicit sample label.
+The gold hero action starts the real embedded `VoiceTest` call. At rest it is a (59px) minimum-height pill with a dark circular phone icon and sits above permission and data-use copy. During a call, the hero shows connection state, microphone and end-call controls, errors and live captions as they become available. Keep keyboard focus visible and preserve localized control labels. The booking receipt farther down the page always carries an explicit sample label.
 
 ## Do's and Don'ts
 

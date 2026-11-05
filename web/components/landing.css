@@ -77,19 +77,10 @@
   z-index: -1;
   inset: 0;
   background:
-    linear-gradient(90deg, #070d1b 4%, #070d1bef 31%, #070d1b28 69%),
-    linear-gradient(0deg, #070d1b 0%, transparent 31%),
-    radial-gradient(ellipse at 78% 44%, #3c5682 0%, #1b2c4e 32%, transparent 66%),
-    #080f20;
-}
-.landing-hero-light::after {
-  content: "";
-  position: absolute;
-  inset: 56% -8% -42% 35%;
-  border: 1px solid #bfcde426;
-  border-radius: 50%;
-  transform: rotate(-13deg);
-  box-shadow: 0 0 0 34px #c3d2f10c, 0 0 0 72px #b2c7ec09;
+    linear-gradient(90deg, #070d1b 4%, #070d1bd9 31%, transparent 65%),
+    linear-gradient(0deg, #070d1b 0%, transparent 27%),
+    radial-gradient(ellipse at 74% 48%, #4267984d, transparent 58%),
+    url("/landing/midnight-satin.webp") center 56% / cover no-repeat #080f20;
 }
 .landing-hero-inner {
   display: grid;
@@ -238,8 +229,12 @@
   .landing-language { padding-inline: 7px; }
   .landing-hero { min-height: 0; padding-block: 112px 58px; }
   .landing-hero-inner { grid-template-columns: 1fr; gap: 26px; }
-  .landing-hero-light { background: radial-gradient(ellipse at 58% 75%, #293f68, transparent 57%), #080f20; }
-  .landing-hero-light::after { inset: 69% -38% -21% -35%; }
+  .landing-hero-light {
+    background:
+      linear-gradient(180deg, #080f20 8%, #080f20db 43%, transparent 74%, #070d1b),
+      radial-gradient(ellipse at 58% 75%, #42679845, transparent 59%),
+      url("/landing/midnight-satin-mobile.webp") center / cover no-repeat #080f20;
+  }
   .landing-hero-art { margin: -8px -6px -9px; }
   .landing h1 { font-size: clamp(41px, 10.6vw, 62px); line-height: 1.1; }
   .landing-lede { margin-bottom: 23px; }
