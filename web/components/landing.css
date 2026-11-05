@@ -139,7 +139,7 @@
 .landing-scroll { color: var(--muted); text-decoration: none; }
 .landing-scroll:hover { color: var(--ink); }
 
-.landing-call-button, .demo-caller .landing-call-button {
+.landing-call-button {
   display: inline-flex;
   align-items: center;
   padding: 7px 24px 7px 8px;
@@ -153,7 +153,7 @@
   background: linear-gradient(155deg, #ffe7a5, #e9b94e);
   box-shadow: inset 0 1px #fffae5c2, 0 9px 22px #0005;
 }
-.landing-call-button:hover, .demo-caller .landing-call-button:hover { background: #ffdb88; }
+.landing-call-button:hover { background: #ffdb88; }
 .landing-call-button svg {
   box-sizing: content-box;
   width: 17px;
@@ -206,30 +206,12 @@
 .landing-example-list { grid-area: examples; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
 #demo-call { grid-area: caller; }
 .landing-scenarios-intro { max-width: 58ch; margin: -10px auto 0; color: var(--muted); }
-.demo-caller .call-console {
-  display: grid;
-  grid-template-columns: minmax(0, .75fr) minmax(0, 1fr);
-  grid-template-areas: "head chat" "stage chat" "controls chat";
-  padding: clamp(14px, 2.5vw, 26px);
-  column-gap: clamp(12px, 3vw, 32px);
-  border: 1px solid #b6d0ff38;
-  border-radius: 21px;
-  background: #0c1428;
-}
-.demo-caller .call-console-head { grid-area: head; padding: 8px 4px; border: 0; }
-.demo-caller .call-stage { grid-area: stage; min-height: 225px; background: transparent; padding: 15px 0; }
-.demo-caller .call-controls, .demo-caller .console-idle .call-controls {
-  grid-area: controls;
-  background: transparent;
-  border: 0;
-  padding: 12px 0 0;
-  justify-content: center;
-}
-.demo-caller .call-conversation { grid-area: chat; border: 1px solid var(--line); border-radius: 15px; background: #141f35; }
-.demo-caller .call-conversation[data-preview="true"] .conversation-title { color: #efcd81; }
-.demo-caller .conversation-messages .conversation-caller { color: #17233b; background: #eadfca; border-color: #eadfca; }
-.demo-caller .conversation-caller p { color: #17233b; }
-.demo-caller .conversation-caller span { color: #60502f; }
+.landing .demo-caller .call-console { border-color: #b6d0ff38; background: #0c1428; }
+.landing .demo-caller .call-conversation { background: #141f35; }
+.landing .demo-caller .call-conversation[data-preview="true"] .conversation-title { color: #efcd81; }
+.landing .demo-caller .conversation-messages .conversation-caller { color: #17233b; background: #eadfca; border-color: #eadfca; }
+.landing .demo-caller .conversation-caller p { color: #17233b; }
+.landing .demo-caller .conversation-caller span { color: #60502f; }
 #demo-call { scroll-margin-top: 24px; min-width: 0; }
 .landing-example-list article {
   padding: 21px 0 24px;
@@ -351,9 +333,6 @@
   .landing-faq { padding-block: 59px; }
   .landing-record { margin-top: 8px; }
   .landing-scenarios { padding-block: 59px; }
-  .demo-caller .call-console { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "stage" "controls" "chat"; gap: 10px; }
-  .demo-caller .call-stage { min-height: 0; }
-  .demo-caller .call-controls, .demo-caller .console-idle .call-controls { padding: 0 0 5px; }
   .landing-example-list { grid-template-columns: 1fr; gap: 12px; }
   .landing-pricing-inner { grid-template-columns: 1fr; }
   .landing-example-list article { padding-block: 13px; }

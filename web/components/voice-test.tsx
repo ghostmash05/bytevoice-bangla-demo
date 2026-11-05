@@ -3,7 +3,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Mic, MicOff, Phone, PhoneOff, CalendarCheck2, RefreshCw, MessageSquareText } from "lucide-react";
-import { Brand } from "@/components/brand";
 import { useLocale } from "@/components/locale";
 import {
   ParticipantKind,
@@ -300,13 +299,13 @@ export default function VoiceTest({ demo = false }: { demo?: boolean }) {
       );
     }
   }
-  const previewTurns: Turn[] = demo && state === "idle" ? [
+  const previewTurns: Turn[] = state === "idle" ? [
     { id: "welcome", speaker: "AI receptionist", text: "মাশরাফি’স ডেন্টাল থেকে বলছি। কীভাবে সাহায্য করতে পারি?" },
     { id: "request", speaker: "Caller", text: "শনিবার বিকেলে স্কেলিংয়ের জন্য সময় আছে?" },
     { id: "reply", speaker: "AI receptionist", text: "অবশ্যই, শনিবার বিকেলে খালি সময় আছে কি না দেখে বলছি" },
   ] : [];
   return (
-      <div className={demo ? "demo-caller" : "test-layout"}>
+      <div className={demo ? "demo-caller" : "test-layout demo-caller"}>
         {!demo && <header className="voice-page-heading"><div><h1>{t("Talk to your receptionist")}</h1>
         <p>
           {t("Speak naturally in Bangla. You can ask about the demo clinic, book a visit, or change an existing appointment using its reference and phone number.")}</p>
@@ -322,9 +321,7 @@ export default function VoiceTest({ demo = false }: { demo?: boolean }) {
             </span>
           </div>
           <div className="call-stage">
-            {demo ? <div className="voice-orb" aria-hidden="true"><MercuryOrb state={orbState} size={144} speed={0.85} levelRef={orbLevel} /></div> : <div className="voice-mark">
-              <Brand mark />
-            </div>}
+            <div className="voice-orb" aria-hidden="true"><MercuryOrb state={orbState} size={144} speed={0.85} levelRef={orbLevel} /></div>
             <h3>
               {state === "live"
                 ? label(agentState)
@@ -367,20 +364,18 @@ export default function VoiceTest({ demo = false }: { demo?: boolean }) {
               <button type="button" className="secondary" onClick={() => void end("idle")}>
                 {t("Cancel connection")}</button>
             ) : (
-              <button type="submit" className={demo && state === "idle" ? "primary landing-call-button" : "primary"}>
+              <button type="submit" className={state === "idle" ? "primary voice-call-button" : "primary"}>
                 <Phone size={17} />
                 {state === "idle" ? t(demo ? "Talk to our Bangla caller" : "Start voice call") : t("Start another call")}
               </button>
             )}
           </form>
-          {(demo || turns.length > 0) && (
             <Conversation
               key={state === "idle" ? "preview" : "call"}
               turns={state === "idle" ? previewTurns : turns}
               preview={state === "idle"}
               empty={t(state === "ended" || state === "error" ? "No captions for this call." : "Captions appear here as you speak.")}
             />
-          )}
         </section>
         <p className="consent-note">
           {t("This is a fictional clinic for an assessment demo. Use fake patient details only. Starting a call sends microphone audio to the configured speech providers and stores the transcript and captured details for review. Demo calls end after five minutes.")}</p>
