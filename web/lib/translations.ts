@@ -5,6 +5,7 @@ export const bangla: Record<string, string> = {
   "No microphone was found. Connect one and try again.": "মাইক্রোফোন পাওয়া যায়নি। একটি মাইক্রোফোন সংযোগ দিয়ে আবার চেষ্টা করুন।",
   "Microphone access needs HTTPS or localhost and a supported browser.": "মাইক্রোফোন ব্যবহারের জন্য সমর্থিত ব্রাউজার ও নিরাপদ সংযোগ প্রয়োজন।",
   "The call could not connect. Please try again.": "কল সংযোগ করা যায়নি। আবার চেষ্টা করুন।",
+  "The clinic service returned an unexpected response.": "ক্লিনিকের সেবা থেকে প্রত্যাশিত উত্তর পাওয়া যায়নি। আবার চেষ্টা করুন।",
   "The receptionist did not join. End the call and try again shortly.": "রিসেপশনিস্ট কলটিতে যোগ দিতে পারেননি। কল শেষ করে কিছুক্ষণ পর আবার চেষ্টা করুন।",
   "The receptionist disconnected. Reconnect to continue; any saved details are retained.": "রিসেপশনিস্টের সংযোগ বিচ্ছিন্ন হয়েছে। আবার কল করুন। সংরক্ষিত তথ্য পাওয়া যাবে।",
   "Staff sign in": "কর্মীদের সাইন ইন",

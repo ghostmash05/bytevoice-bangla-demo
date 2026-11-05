@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight, CalendarCheck2, Mic, Phone, ShieldCheck } from "lucide-react";
+import { ArrowDown, ArrowUpRight, AudioLines, CalendarCheck2, Mic, Phone, ShieldCheck } from "lucide-react";
 import { Brand } from "./brand";
 import { LandingMascot } from "./landing-mascot";
 import { useLocale } from "./locale";
@@ -14,6 +14,7 @@ const copy = {
     how: "কীভাবে কাজ করে",
     scenarios: "কী বলে শুরু করবেন",
     portal: "স্টাফ পোর্টাল",
+    sceneLabel: "বাংলা ভয়েস ডেমো",
     title: ["বাংলায় বলুন।", "সময় বুক করুন।"],
     intro: "মাশরাফি’স ডেন্টালের ডেমো রিসেপশনিস্টের সঙ্গে বাংলায় কথা বলুন। সময় জেনে নিন, অ্যাপয়েন্টমেন্ট বুক করুন, অথবা আগের বুকিং বদলান।",
     stepsTitle: "কথা থেকে বুকিং",
@@ -47,6 +48,7 @@ const copy = {
     how: "How it works",
     scenarios: "What to ask",
     portal: "Staff portal",
+    sceneLabel: "Bangla voice demo",
     title: ["Call in Bangla.", "Book a visit."],
     intro: "Talk to the demo receptionist at Mashrafi’s Dental. Ask about availability, book a visit, or change an existing appointment in Bangla.",
     stepsTitle: "From conversation to booking",
@@ -98,52 +100,58 @@ export default function Landing() {
         </div>
       </header>
       <main id="main">
-        <section className="landing-hero landing-width" aria-labelledby="landing-title">
-          <div className="landing-hero-copy">
-            <h1 id="landing-title">{text.title[0]}<br /><span>{text.title[1]}</span></h1>
-            <p className="landing-lede">{text.intro}</p>
-            <VoiceTest hero />
+        <section className="landing-hero" aria-labelledby="landing-title">
+          <div className="landing-hero-light" aria-hidden="true" />
+          <div className="landing-hero-inner landing-width">
+            <div className="landing-hero-copy">
+              <h1 id="landing-title">{text.title[0]}<br /><span>{text.title[1]}</span></h1>
+              <p className="landing-lede">{text.intro}</p>
+              <VoiceTest hero />
+            </div>
+            <div className="landing-hero-art">
+              <LandingMascot />
+              <div className="landing-scene-label"><AudioLines size={21} aria-hidden="true" /><span>{text.sceneLabel}</span></div>
+            </div>
           </div>
-          <div className="landing-hero-art">
-            <LandingMascot />
-            <svg className="landing-signal" viewBox="0 0 440 80" fill="none" aria-hidden="true">
-              <path d="M0 40h125l9-7 8 14 9-24 11 34 9-44 12 57 11-54 12 36 11-23 10 17 10-6h205"
-                stroke="currentColor" strokeWidth="1.5" />
-            </svg>
+          <div className="landing-hero-foot landing-width">
+            <a href="#how" className="landing-scroll"><ArrowDown size={16} aria-hidden="true" />{text.how}</a>
           </div>
-          <a href="#how" className="landing-scroll"><ArrowDown size={16} aria-hidden="true" />{text.how}</a>
         </section>
 
-        <section id="how" className="landing-how landing-width" aria-labelledby="how-title">
-          <div>
-            <h2 id="how-title">{text.stepsTitle}</h2>
-            <ol className="landing-steps">
-              {text.steps.map(([title, body], index) => {
-                const Icon = stepIcons[index];
-                return <li key={title}><Icon size={22} aria-hidden="true" /><div><h3>{title}</h3><p>{body}</p></div></li>;
-              })}
-            </ol>
-          </div>
-          <figure className="landing-record">
-            <div className="landing-record-top">
-              <CalendarCheck2 size={26} aria-hidden="true" />
-              <span>{text.sample}</span>
+        <section id="how" className="landing-how" aria-labelledby="how-title">
+          <div className="landing-how-inner landing-width">
+            <div>
+              <h2 id="how-title">{text.stepsTitle}</h2>
+              <ol className="landing-steps">
+                {text.steps.map(([title, body], index) => {
+                  const Icon = stepIcons[index];
+                  return <li key={title}><Icon size={22} aria-hidden="true" /><div><h3>{title}</h3><p>{body}</p></div></li>;
+                })}
+              </ol>
             </div>
-            <p className="landing-record-outcome">{text.outcome}</p>
-            <div className="landing-record-details"><span>{text.service}</span><span>{text.time}</span></div>
-            <figcaption>{text.recordNote}</figcaption>
-          </figure>
+            <figure className="landing-record">
+              <div className="landing-record-top">
+                <CalendarCheck2 size={26} aria-hidden="true" />
+                <span>{text.sample}</span>
+              </div>
+              <p className="landing-record-outcome">{text.outcome}</p>
+              <div className="landing-record-details"><span>{text.service}</span><span>{text.time}</span></div>
+              <figcaption>{text.recordNote}</figcaption>
+            </figure>
+          </div>
         </section>
 
         <section id="scenarios" className="landing-scenarios" aria-labelledby="scenarios-title">
-          <div className="landing-width">
-            <h2 id="scenarios-title">{text.scenariosTitle}</h2>
+          <div className="landing-scenarios-inner landing-width">
+            <div>
+              <h2 id="scenarios-title">{text.scenariosTitle}</h2>
+              <a className="landing-return" href="#landing-title"><Phone size={16} aria-hidden="true" />{text.call}<ArrowUpRight size={16} aria-hidden="true" /></a>
+            </div>
             <div className="landing-example-list">
               {text.scenariosList.map(([title, example]) => (
                 <article key={title}><h3>{title}</h3><p>{example}</p></article>
               ))}
             </div>
-            <a className="landing-return" href="#landing-title"><Phone size={16} aria-hidden="true" />{text.call}<ArrowUpRight size={16} aria-hidden="true" /></a>
           </div>
         </section>
 
