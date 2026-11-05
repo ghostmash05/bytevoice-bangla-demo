@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowUpRight, CalendarCheck2, Mic, Pause, Phone, Play, ShieldCheck } from "lucide-react";
+import { ArrowDown, ArrowUpRight, CalendarCheck2, Mic, Phone, ShieldCheck } from "lucide-react";
 import { Brand } from "./brand";
 import { useLocale } from "./locale";
 import VoiceTest from "./voice-test";
@@ -18,8 +18,6 @@ const copy = {
     how: "কীভাবে কাজ করে",
     scenarios: "ডেমো",
     portal: "স্টাফ পোর্টাল",
-    pauseScene: "অ্যানিমেশন থামান",
-    playScene: "অ্যানিমেশন চালু করুন",
     title: ["ক্লিনিকের জন্য", "বাংলা ভয়েস এজেন্ট"],
     intro: "বাংলাদেশের ডেন্টাল ক্লিনিক ও হাসপাতালের জন্য ByteVoice বাংলায় রোগীর কল সামলায়, অ্যাপয়েন্টমেন্ট বুক করে এবং স্টাফদের জন্য কলের রেকর্ড রাখে।",
     stepsTitle: "রোগীর কল থেকে স্টাফ পোর্টাল",
@@ -54,8 +52,6 @@ const copy = {
     how: "How it works",
     scenarios: "Demo",
     portal: "Staff portal",
-    pauseScene: "Pause animation",
-    playScene: "Play animation",
     title: ["Bangla voice AI", "for healthcare"],
     intro: "ByteVoice answers patient calls in Bangla, manages appointments, and gives staff a record of every call. Built for dental clinics and hospitals in Bangladesh.",
     stepsTitle: "From patient call to staff portal",
@@ -92,9 +88,9 @@ export default function Landing() {
   const hero = useRef<HTMLElement>(null);
   const [motionAllowed, setMotionAllowed] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [playing, setPlaying] = useState(true);
+  const [introActive, setIntroActive] = useState(false);
   const [flowerReady, setFlowerReady] = useState(false);
-  const active = visible && playing;
+  const active = visible && introActive;
   const text = copy[language];
   const stepIcons = [Mic, CalendarCheck2, ShieldCheck];
 
@@ -119,6 +115,16 @@ export default function Landing() {
       document.removeEventListener("visibilitychange", updateVisibility);
     };
   }, []);
+
+  useEffect(() => {
+    if (!motionAllowed || !visible || !flowerReady) {
+      setIntroActive(false);
+      return;
+    }
+    setIntroActive(true);
+    const timer = window.setTimeout(() => setIntroActive(false), 4600);
+    return () => window.clearTimeout(timer);
+  }, [flowerReady, motionAllowed, visible]);
 
   return (
     <div className="landing">
@@ -151,14 +157,6 @@ export default function Landing() {
                 <img className="flower-still" src="/landing/reference/glass-flower.webp" alt="" />
                 {motionAllowed && <GlassFlower active={active} onReady={setFlowerReady} />}
               </div>
-              {motionAllowed && flowerReady && <button
-                type="button"
-                className="landing-motion-control"
-                aria-label={playing ? text.pauseScene : text.playScene}
-                onClick={() => setPlaying((value) => !value)}
-              >
-                {playing ? <Pause size={15} aria-hidden="true" /> : <Play size={15} aria-hidden="true" />}
-              </button>}
             </div>
           </div>
           <div className="landing-hero-foot landing-width">

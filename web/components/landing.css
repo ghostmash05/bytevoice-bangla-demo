@@ -37,7 +37,7 @@
   gap: 24px;
   border-radius: 18px;
 }
-.landing-nav, .landing-motion-control, .hero-caller .call-console:not(.console-idle) {
+.landing-nav, .hero-caller .call-console:not(.console-idle) {
   border: 1px solid #b6d0ff31;
   border-top-color: #e8e7d655;
   background: linear-gradient(121deg, #dbe9ff23, transparent 45%, #9bbee614), #0b142880;
@@ -79,10 +79,9 @@
   z-index: -1;
   inset: 0;
   background:
-    linear-gradient(90deg, #070d1bf2 5%, #070d1bd9 35%, #070d1b3d 64%),
-    linear-gradient(0deg, #070d1bd9 0%, transparent 23%, transparent 79%, #070d1b48),
-    radial-gradient(ellipse at 75% 51%, #0e202c77, transparent 47%),
-    url("/landing/dhaka-reception.webp") center 57% / cover no-repeat #080f20;
+    linear-gradient(90deg, #070d1bfc 6%, #070d1bea 35%, #070d1b42 73%),
+    linear-gradient(0deg, #070d1bdd 0%, transparent 27%, transparent 72%, #070d1b5e),
+    url("/landing/iridescent-ridges.webp") center / cover no-repeat #080f20;
 }
 .landing-hero-inner {
   position: relative;
@@ -132,22 +131,7 @@
 .flower-still { position: absolute; inset: 0; width: 100%; height: 100%; }
 .flower-still { object-fit: contain; mix-blend-mode: screen; mask-image: radial-gradient(ellipse, #000 30%, transparent 68%); }
 .landing-flower[data-ready="true"] .flower-still { visibility: hidden; }
-.landing-motion-control {
-  position: absolute;
-  z-index: 2;
-  bottom: 2%;
-  right: 3%;
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  padding: 0;
-  border-radius: 50%;
-  color: var(--muted);
-}
-.landing-motion-control:hover { color: var(--ink); background-color: #172641; }
 @media (prefers-reduced-motion: reduce) {
-  .landing-motion-control { display: none; }
   .landing-portal svg { transition: none; }
 }
 .landing-hero-foot { position: absolute; inset: auto 0 23px; }
@@ -252,12 +236,11 @@
   .landing-hero-inner { grid-template-columns: 1fr; gap: 26px; }
   .landing-hero-light {
     background:
-      linear-gradient(180deg, #080f20 8%, #080f20db 43%, transparent 74%, #070d1b),
+      linear-gradient(180deg, #080f20 8%, #080f20ef 46%, #080f20b8 64%, transparent 79%, #070d1b),
       radial-gradient(ellipse at 58% 75%, #42679845, transparent 59%),
-      url("/landing/midnight-satin-mobile.webp") center / cover no-repeat #080f20;
+      url("/landing/iridescent-ridges-mobile.webp") center / cover no-repeat #080f20;
   }
   .landing-hero-art { margin: -8px -6px -9px; }
-  .landing-motion-control { top: 4%; bottom: auto; right: 3%; }
   .landing h1 { font-size: clamp(41px, 10.6vw, 62px); line-height: 1.1; }
   .landing-lede { margin-bottom: 23px; }
   .landing-flower { height: clamp(225px, 69vw, 380px); pointer-events: none; }

@@ -275,11 +275,11 @@ Background, border, text and shadow transition over (.18s ease). Only the connec
 
 ### Landing art and motion
 
-The generated desktop and tablet backdrop (`web/public/landing/dhaka-reception.webp`) depicts a fictional Dhaka reception at dusk with a waterfront skyline. Navy scrims protect the copy. Phones use a portrait crop of the user-supplied Midnight Satin Folds image. The scenario band reuses the wider satin image under a navy gradient.
+The hero uses the user-supplied Iridescent Vertical Ridges backdrop. The right side gives the dark glass a lighter field and navy scrims keep the copy readable. Phones use a portrait crop. The scenario band uses Midnight Satin Folds under a navy gradient.
 
 The hero uses the original pmndrs Glass Flower model, transmission materials, lights and color grading. The Three.js Points Waves grid fills a separate full-width layer anchored to the bottom of the hero.
 
-Glass Flower rotates slowly and can be dragged on desktop. The localized pause/play control pauses both the flower and the floor. Motion suspends offscreen and in hidden tabs. The original Glass Flower thumbnail covers loading, reduced motion and WebGL failure.
+Glass Flower and Points Waves animate for 4.6 seconds when the hero comes into view, then settle. Glass Flower can still be dragged on desktop. The lighting uses softer reflections and smaller transmission buffers. Motion suspends offscreen and in hidden tabs. The original Glass Flower thumbnail covers loading, reduced motion and WebGL failure.
 
 Landing glass combines a (16px) backdrop blur and (1.35) saturation with a cool translucent fill and a brighter top edge. Apply it to the floating header, circular motion control and active call console. The header has (18px) desktop corners and (17px) phone corners. The booking sample uses an upright ivory surface, a warm seam and a diffuse shadow (`6px 20px 46px #40321c24`).
 

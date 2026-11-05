@@ -60,21 +60,28 @@ function Model(props: ThreeElements["group"]) {
         <MeshTransmissionMaterial
           backside
           backsideThickness={1}
-          samples={16}
+          backsideResolution={128}
+          backsideEnvMapIntensity={0.45}
+          samples={6}
+          resolution={256}
           thickness={0.2}
+          roughness={0.16}
           anisotropicBlur={0.1}
           iridescence={1}
           iridescenceIOR={1}
           iridescenceThicknessMinimum={0}
           iridescenceThicknessMaximum={1400}
-          clearcoat={1}
+          clearcoat={0.8}
+          clearcoatRoughness={0.23}
           envMap={environment}
-          envMapIntensity={0.5}
+          envMapIntensity={0.34}
         />
         <mesh geometry={nodes.Sphere.geometry}>
           <MeshTransmissionMaterial
-            samples={6}
-            resolution={512}
+            samples={3}
+            resolution={192}
+            roughness={0.12}
+            envMapIntensity={0.6}
             thickness={-1}
             anisotropy={0.25}
           />
@@ -118,12 +125,13 @@ function FlowerScene({ active, onReady }: { active: boolean; onReady: (ready: bo
       <OrbitControls autoRotate={active} autoRotateSpeed={0.45} enableZoom={false} enablePan={false} />
       <Environment
         files={`${assets}/blue_photo_studio_1k.hdr`}
-        resolution={512}
+        resolution={256}
+        environmentIntensity={0.68}
       >
         <group rotation={[0, 0, 1]}>
           <Lightformer
             form="circle"
-            intensity={10}
+            intensity={1.2}
             position={[0, 10, -10]}
             scale={20}
             onUpdate={(self) => self.lookAt(0, 0, 0)}
@@ -153,9 +161,9 @@ function FlowerScene({ active, onReady }: { active: boolean; onReady: (ready: bo
       </Environment>
       {/* `disableNormalPass` no longer exists in this postprocessing version; the normal pass is already disabled by default */}
       <EffectComposer>
-        <Bloom mipmapBlur luminanceThreshold={1} intensity={2} />
+        <Bloom mipmapBlur luminanceThreshold={1} intensity={0.65} />
         <LUT lut={texture} />
-        <BrightnessContrast brightness={0} contrast={0.1} />
+        <BrightnessContrast brightness={0} contrast={0.04} />
         <HueSaturation hue={0} saturation={-0.25} />
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
       </EffectComposer>
