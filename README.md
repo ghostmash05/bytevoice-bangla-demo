@@ -130,7 +130,7 @@ It can run `web\node_modules\next\dist\bin\next` directly with `build` or `start
   Bangla call action. The hero uses Paul Henschel’s
   [Glass Flower scene](https://github.com/pmndrs/examples/tree/ca032218ce77b7ad4c752ddaa63b0d1625d2b9f3/examples/glass-flower)
   and the [Three.js Points Waves example](https://github.com/mrdoob/three.js/blob/r187/examples/webgl_points_waves.html)
-  as a full-width floor layer. The original model, color lookup table and studio
+  as a full-width layer in the walkthrough. The original model, color lookup table and studio
   lighting are served locally. The [Blue Photo Studio HDRI](https://polyhaven.com/a/blue_photo_studio)
   is from Poly Haven. Source notices are in `web/public/landing/reference`.
 

@@ -38,7 +38,7 @@ function updateWave(positions: Float32Array, scales: Float32Array, count: number
   }
 }
 
-function PointsWaves() {
+function PointsWaves({ color }: { color: number }) {
   const positionAttribute = useRef<BufferAttribute>(null);
   const scaleAttribute = useRef<BufferAttribute>(null);
   const count = useRef(0);
@@ -53,8 +53,8 @@ function PointsWaves() {
       }
     }
     updateWave(positions, scales, 0);
-    return { positions, scales, uniforms: { color: { value: new Color(0xe2d0ae) }, pointScale: { value: 1 } } };
-  }, []);
+    return { positions, scales, uniforms: { color: { value: new Color(color) }, pointScale: { value: 1 } } };
+  }, [color]);
 
   useFrame(({ size }, delta) => {
     if (!positionAttribute.current || !scaleAttribute.current) return;
@@ -76,7 +76,7 @@ function PointsWaves() {
   );
 }
 
-export default function LandingPointsWaves({ active }: { active: boolean }) {
+export default function LandingPointsWaves({ active, color }: { active: boolean; color: number }) {
   return (
     <Canvas
       fallback={null}
@@ -86,7 +86,7 @@ export default function LandingPointsWaves({ active }: { active: boolean }) {
       camera={{ position: [0, 410, 2780], fov: 43, near: 1, far: 10000 }}
       onCreated={({ camera }) => camera.lookAt(0, 0, -300)}
     >
-      <PointsWaves />
+      <PointsWaves color={color} />
     </Canvas>
   );
 }

@@ -257,7 +257,7 @@ Voice-test content is bounded to (1280px), with a main console and (270px) guide
 
 ### Landing layout
 
-The landing uses a (1540px) maximum content width and a full-bleed hero with a (100svh) minimum above phone widths. A (.9fr / 1.1fr) split keeps the localized promise, working call and consent text on the left and gives Glass Flower more room on the right. The cream walkthrough pairs a ruled step list with the sample booking. The navy scenario band places the heading and return-to-call link beside a column of example prompts. Side gutters use `clamp(32px, 5.5vw, 105px)`, then (32px) at (900px) and (18px) at (680px). At (680px), the hero stacks with copy and call controls above Glass Flower, and the lower sections stack. Language and staff portal controls remain visible in the compact header.
+The landing uses a (1540px) maximum content width and a full-bleed hero with a (100svh) minimum above phone widths. A (.9fr / 1.1fr) split keeps the localized promise, working call and consent text on the left and gives Glass Flower more room on the right. The cream walkthrough pairs a ruled step list with the sample booking. The navy demo section places example prompts beside an embedded caller. The hero and demo controls share a single call slot on the page. Side gutters use `clamp(32px, 5.5vw, 105px)`, then (32px) at (900px) and (18px) at (680px). At (680px), the hero stacks with copy and call controls above Glass Flower, and the lower sections stack. Language and staff portal controls remain visible in the compact header.
 
 ## Elevation & Depth
 
@@ -277,9 +277,9 @@ Background, border, text and shadow transition over (.18s ease). Only the connec
 
 The hero uses the user-supplied Iridescent Vertical Ridges backdrop. The right side gives the dark glass a lighter field and navy scrims keep the copy readable. Phones use a portrait crop. The scenario band uses Midnight Satin Folds under a navy gradient.
 
-The hero uses the original pmndrs Glass Flower model, transmission materials, lights and color grading. The Three.js Points Waves grid fills a separate full-width layer anchored to the bottom of the hero.
+The hero uses the original pmndrs Glass Flower model, transmission materials, lights and color grading. The Three.js Points Waves grid fills a separate full-width layer anchored to the bottom of the walkthrough.
 
-Glass Flower and Points Waves animate for 4.6 seconds when the hero comes into view, then settle. Glass Flower can still be dragged on desktop. The lighting uses softer reflections and smaller transmission buffers. Motion suspends offscreen and in hidden tabs. The original Glass Flower thumbnail covers loading, reduced motion and WebGL failure.
+Glass Flower and Points Waves each animate for 4.6 seconds when their section comes into view, then settle. Glass Flower can still be dragged on desktop. The lighting uses softer reflections and smaller transmission buffers. Motion suspends offscreen and in hidden tabs. The original Glass Flower thumbnail covers loading, reduced motion and WebGL failure.
 
 Landing glass combines a (16px) backdrop blur and (1.35) saturation with a cool translucent fill and a brighter top edge. Apply it to the floating header, circular motion control and active call console. The header has (18px) desktop corners and (17px) phone corners. The booking sample uses an upright ivory surface, a warm seam and a diffuse shadow (`6px 20px 46px #40321c24`).
 

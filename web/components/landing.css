@@ -37,7 +37,7 @@
   gap: 24px;
   border-radius: 18px;
 }
-.landing-nav, .hero-caller .call-console:not(.console-idle) {
+.landing-nav, .hero-caller .call-console:not(.console-idle), .demo-caller .console-idle {
   border: 1px solid #b6d0ff31;
   border-top-color: #e8e7d655;
   background: linear-gradient(121deg, #dbe9ff23, transparent 45%, #9bbee614), #0b142880;
@@ -113,11 +113,11 @@
   isolation: isolate;
   margin: 0 -6% -32px -3%;
 }
-.landing-hero-floor {
+.landing-walkthrough-floor {
   position: absolute;
   inset: auto 0 0;
-  height: clamp(170px, 32svh, 320px);
-  opacity: .42;
+  height: clamp(135px, 22svh, 210px);
+  opacity: .3;
   mask-image: linear-gradient(transparent 5%, #000 54%, #000 83%, transparent);
   pointer-events: none;
 }
@@ -176,8 +176,9 @@
 .hero-caller .text-link { margin-top: 12px; }
 
 .landing-how-inner, .landing-faq { display: grid; grid-template-columns: 1fr .85fr; align-items: start; gap: clamp(36px, 8vw, 130px); }
-.landing-how { padding-block: 105px; background: #f0ebe0; color: #111a2c; color-scheme: light; }
-.landing-how h2, .landing-scenarios h2, .landing-faq h2 { font-size: clamp(29px, 4.2vw, 54px); line-height: 1.15; margin: 0 0 28px; }
+.landing-how { position: relative; overflow: clip; padding-block: 105px 165px; background: #f0ebe0; color: #111a2c; color-scheme: light; }
+.landing-how-inner { position: relative; }
+.landing-how h2, #scenarios-title, .landing-faq h2 { font-size: clamp(29px, 4.2vw, 54px); line-height: 1.15; margin: 0 0 28px; }
 .landing-steps { list-style: none; padding: 0; margin: 0; }
 .landing-steps li { display: flex; gap: 20px; padding: 20px 0; border-top: 1px solid #242f422e; }
 .landing-steps svg { color: #775618; margin-top: 4px; }
@@ -202,8 +203,22 @@
   padding-block: 98px;
   background: linear-gradient(90deg, #101a2ef7, #131f379c), url("/landing/midnight-satin.webp") center 52% / cover #131f37;
 }
-.landing-scenarios-inner { display: grid; grid-template-columns: minmax(0, .65fr) minmax(0, 1fr); gap: clamp(36px, 8vw, 130px); }
-.landing-scenarios-intro { max-width: 38ch; margin: -10px 0 24px; color: var(--muted); }
+.landing-scenarios-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .9fr);
+  grid-template-areas: "intro caller" "examples caller";
+  gap: 24px clamp(36px, 8vw, 110px);
+  align-items: start;
+}
+.landing-demo-intro { grid-area: intro; }
+.landing-example-list { grid-area: examples; }
+#demo-call { grid-area: caller; }
+.landing-scenarios-intro { max-width: 38ch; margin: -10px 0 0; color: var(--muted); }
+.demo-caller .console-idle { border: 1px solid #b6d0ff31; border-radius: 16px; background: #101b30; }
+.demo-caller .call-stage { min-height: 170px; display: flex; flex-direction: column; justify-content: center; }
+.demo-caller .console-idle .call-controls { padding: 16px; justify-content: center; border-top: 1px solid var(--line); }
+.hero-caller .primary:disabled { opacity: .55; }
+#hero-call, #demo-call { scroll-margin-top: 24px; min-width: 0; }
 .landing-example-list article {
   padding: 21px 0 24px;
   border-top: 1px solid #53627b;
@@ -244,10 +259,12 @@
   .landing h1 { font-size: clamp(41px, 10.6vw, 62px); line-height: 1.1; }
   .landing-lede { margin-bottom: 23px; }
   .landing-flower { height: clamp(225px, 69vw, 380px); pointer-events: none; }
-  .landing-hero-floor { height: 155px; opacity: .34; }
+  .landing-walkthrough-floor { height: 112px; opacity: .27; }
   .landing-hero-foot { bottom: 18px; }
   .landing-how-inner, .landing-faq, .landing-scenarios-inner { grid-template-columns: 1fr; gap: 19px; }
-  .landing-how, .landing-faq { padding-block: 59px; }
+  .landing-scenarios-inner { grid-template-areas: "intro" "caller" "examples"; }
+  .landing-how { padding-block: 59px 98px; }
+  .landing-faq { padding-block: 59px; }
   .landing-record { margin-top: 8px; }
   .landing-scenarios { padding-block: 59px; }
   .landing-example-list article { padding-block: 18px; }

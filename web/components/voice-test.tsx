@@ -17,7 +17,11 @@ import { api, label as formatLabel } from "@/lib/api";
 type State = "idle" | "connecting" | "live" | "ended" | "error";
 type Turn = { id: string; text: string; speaker: string };
 
-export default function VoiceTest({ hero = false }: { hero?: boolean }) {
+export default function VoiceTest({ hero = false, demo = false, callGate }: {
+  hero?: boolean;
+  demo?: boolean;
+  callGate?: { claim: () => boolean; release: () => void; blocked: boolean };
+}) {
   const { t } = useLocale();
   const label = (value: string) => t(formatLabel(value));
   const [state, setState] = useState<State>("idle"),
@@ -30,6 +34,7 @@ export default function VoiceTest({ hero = false }: { hero?: boolean }) {
     finalizedSegments = useRef(new Set<string>()),
     audio = useRef<HTMLDivElement>(null),
     joining = useRef(false),
+    attempt = useRef(0),
     cancelled = useRef(false),
     expectedEnding = useRef(false),
     timer = useRef<ReturnType<typeof setTimeout> | null>(null),
@@ -37,6 +42,7 @@ export default function VoiceTest({ hero = false }: { hero?: boolean }) {
   useEffect(
     () => () => {
       cancelled.current = true;
+      attempt.current++;
       joining.current = false;
       room.current?.disconnect();
       if (timer.current) clearTimeout(timer.current);
@@ -49,14 +55,22 @@ export default function VoiceTest({ hero = false }: { hero?: boolean }) {
     if (agentTimer.current) clearTimeout(agentTimer.current);
     audio.current?.replaceChildren();
   }
-  async function end() {
+  async function end(nextState: "idle" | "ended" | "error" = "ended") {
     cancelled.current = true;
-    joining.current = false;
+    const endingAttempt = ++attempt.current;
     cleanup();
     const current = room.current;
     room.current = null;
-    setState("ended");
-    await current?.disconnect();
+    if (nextState === "idle") setCallId("");
+    setState(nextState);
+    try {
+      await current?.disconnect();
+    } finally {
+      if (attempt.current === endingAttempt) {
+        joining.current = false;
+        callGate?.release();
+      }
+    }
   }
   function observeAgent(participant: Participant) {
     if (participant.kind === ParticipantKind.AGENT) {
@@ -72,7 +86,8 @@ export default function VoiceTest({ hero = false }: { hero?: boolean }) {
     }
   }
   async function start() {
-    if (joining.current) return;
+    if (joining.current || (callGate && !callGate.claim())) return;
+    const startingAttempt = ++attempt.current;
     joining.current = true;
     cancelled.current = false;
     setState("connecting");
@@ -93,7 +108,7 @@ export default function VoiceTest({ hero = false }: { hero?: boolean }) {
         call_id: string;
         max_duration_s: number;
       }>("/connect", { method: "POST" });
-      if (!joining.current) return;
+      if (attempt.current !== startingAttempt) return;
       setCallId(connection.call_id);
       const current = new Room({ adaptiveStream: true, dynacast: true });
       room.current = current;
@@ -110,12 +125,8 @@ export default function VoiceTest({ hero = false }: { hero?: boolean }) {
       current.on(RoomEvent.ParticipantDisconnected, (participant) => {
         if (participant.kind !== ParticipantKind.AGENT || room.current !== current || cancelled.current) return;
         cancelled.current = true;
-        joining.current = false;
-        room.current = null;
-        cleanup();
         setError(expectedEnding.current ? "" : "The receptionist disconnected. Reconnect to continue; any saved details are retained.");
-        setState(expectedEnding.current ? "ended" : "error");
-        void current.disconnect();
+        void end(expectedEnding.current ? "ended" : "error");
       });
       current.on(
         RoomEvent.ParticipantAttributesChanged,
@@ -176,18 +187,22 @@ export default function VoiceTest({ hero = false }: { hero?: boolean }) {
       });
       current.on(RoomEvent.Disconnected, () => {
         if (room.current !== current) return;
+        attempt.current++;
         room.current = null;
         cleanup();
         joining.current = false;
+        callGate?.release();
         setState((previous) => (previous === "error" ? "error" : "ended"));
       });
       await current.connect(connection.server_url, connection.token);
-      if (!joining.current) {
+      if (attempt.current !== startingAttempt) {
         await current.disconnect();
         return;
       }
       await current.startAudio();
+      if (attempt.current !== startingAttempt) return;
       await current.localParticipant.setMicrophoneEnabled(true);
+      if (attempt.current !== startingAttempt) return;
       setState("live");
       setAgentState("Connecting to receptionist");
       agentTimer.current = setTimeout(() => {
@@ -201,7 +216,7 @@ export default function VoiceTest({ hero = false }: { hero?: boolean }) {
         connection.max_duration_s * 1000,
       );
     } catch (err) {
-      if (cancelled.current) return;
+      if (attempt.current !== startingAttempt || cancelled.current) return;
       const message =
         (err as Error).name === "NotAllowedError"
           ? "Microphone access was blocked. Allow it in your browser’s site settings, then try again."
@@ -209,10 +224,13 @@ export default function VoiceTest({ hero = false }: { hero?: boolean }) {
             ? "No microphone was found. Connect one and try again."
             : (err as Error).message ||
               "The call could not connect. Please try again.";
-      await room.current?.disconnect();
+      const current = room.current;
       room.current = null;
+      await current?.disconnect();
+      if (attempt.current !== startingAttempt) return;
       cleanup();
       joining.current = false;
+      callGate?.release();
       setError(message);
       setState("error");
     }
@@ -229,7 +247,7 @@ export default function VoiceTest({ hero = false }: { hero?: boolean }) {
     }
   }
   return (
-      <div className={hero ? "hero-caller" : "test-layout"}>
+      <div className={demo ? "hero-caller demo-caller" : hero ? "hero-caller" : "test-layout"}>
         {!hero && <header className="voice-page-heading"><div><h1>{t("Talk to your receptionist")}</h1>
         <p>
           {t("Speak naturally in Bangla. You can ask about the demo clinic, book a visit, or change an existing appointment using its reference and phone number.")}</p>
@@ -237,14 +255,14 @@ export default function VoiceTest({ hero = false }: { hero?: boolean }) {
         <div className="voice-workspace">
         <div className="voice-column">
         <section className={`call-console console-${state}`} aria-label={t("Browser voice call")}>
-          {(!hero || state !== "idle") && <div className="call-console-head">
+          {(!hero || demo || state !== "idle") && <div className="call-console-head">
             <h2>{t("Mashrafi’s Dental")}</h2>
             <span className="call-state" role="status">
               <span className={`state-dot ${state === "live" ? "live" : ""}`} />
               {label(state)}
             </span>
           </div>}
-          {(!hero || state !== "idle") && <div className="call-stage">
+          {(!hero || demo || state !== "idle") && <div className="call-stage">
             <div className="voice-mark">
               <Brand mark />
             </div>
@@ -279,15 +297,15 @@ export default function VoiceTest({ hero = false }: { hero?: boolean }) {
                   {muted ? <MicOff size={17} /> : <Mic size={17} />}
                   {muted ? t("Unmute microphone") : t("Mute microphone")}
                 </button>
-                <button className="primary danger" onClick={end}>
+                <button className="primary danger" onClick={() => void end()}>
                   <PhoneOff size={17} />
                   {t("End call")}</button>
               </>
             ) : state === "connecting" ? (
-              <button className="secondary" onClick={end}>
+              <button className="secondary" onClick={() => void end("idle")}>
                 {t("Cancel connection")}</button>
             ) : (
-              <button className="primary" onClick={start}>
+              <button className="primary" onClick={start} disabled={callGate?.blocked}>
                 <Phone size={17} />
                 {state === "idle" ? t(hero ? "Talk to our Bangla caller" : "Start voice call") : t("Start another call")}
               </button>

@@ -1204,7 +1204,7 @@
       {
         "name": "landing-reference-motion",
         "value": "4.6-second entrance with reduced motion support",
-        "purpose": "Glass Flower and the full-width Points Waves floor animate briefly when the hero comes into view, then settle. Motion suspends offscreen and in hidden tabs. The original Glass Flower thumbnail covers loading, reduced motion and WebGL failure."
+        "purpose": "Glass Flower and the full-width Points Waves layer in the walkthrough animate briefly when their section comes into view, then settle. Motion suspends offscreen and in hidden tabs. The original Glass Flower thumbnail covers loading, reduced motion and WebGL failure."
       }
     ],
     "breakpoints": [

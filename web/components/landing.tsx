@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowUpRight, CalendarCheck2, Mic, Phone, ShieldCheck } from "lucide-react";
+import { ArrowDown, ArrowUpRight, CalendarCheck2, Mic, ShieldCheck } from "lucide-react";
 import { Brand } from "./brand";
 import { useLocale } from "./locale";
 import VoiceTest from "./voice-test";
@@ -31,7 +31,7 @@ const copy = {
     service: "স্কেলিং",
     time: "সকাল ১০:০০",
     recordNote: "ডেমো ক্লিনিকের একটি নমুনা রেকর্ড",
-    scenariosTitle: "একটি ডেমো কল করে দেখুন",
+    scenariosTitle: "ডেমোতে কথা বলুন",
     scenariosIntro: "মাশরাফি’স ডেন্টাল একটি কাল্পনিক ক্লিনিক। ডেমোতে রোগীর ভূমিকায় বাংলায় কথা বলে দেখুন।",
     scenariosList: [
       ["সময় নিন", "“শনিবার বিকেলে স্কেলিংয়ের সময় আছে?”"],
@@ -45,7 +45,7 @@ const copy = {
       ["চিকিৎসার পরামর্শ পাওয়া যাবে?", "চিকিৎসার পরামর্শের জন্য একজন দন্তচিকিৎসকের সঙ্গে কথা বলুন। ডেমো রিসেপশনিস্টের কাছে স্টাফের ফলো-আপের অনুরোধ রাখতে পারেন।"],
     ],
     footer: "ByteVoice · বাংলাদেশের স্বাস্থ্যসেবার জন্য বাংলা ভয়েস এজেন্ট",
-    call: "ডেমো কল করুন",
+    activeCall: "চলমান কলের নিয়ন্ত্রণে যান",
   },
   en: {
     skip: "Skip to content",
@@ -79,20 +79,41 @@ const copy = {
       ["Can I get medical advice?", "For medical advice, speak to a dental professional. You can ask the demo receptionist to save a follow-up request for staff."],
     ],
     footer: "ByteVoice · Bangla voice AI for healthcare in Bangladesh",
-    call: "Try a demo call",
+    activeCall: "Go to the active call",
   },
 };
 
 export default function Landing() {
   const { language, toggleLanguage } = useLocale();
   const hero = useRef<HTMLElement>(null);
+  const walkthrough = useRef<HTMLElement>(null);
   const [motionAllowed, setMotionAllowed] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [waveActive, setWaveActive] = useState(false);
   const [introActive, setIntroActive] = useState(false);
   const [flowerReady, setFlowerReady] = useState(false);
+  type CallSlot = "hero-call" | "demo-call";
+  const occupiedBy = useRef<CallSlot | null>(null);
+  const [callOwner, setCallOwner] = useState<CallSlot | null>(null);
   const active = visible && introActive;
   const text = copy[language];
   const stepIcons = [Mic, CalendarCheck2, ShieldCheck];
+  function gateFor(slot: CallSlot) {
+    return {
+      claim: () => {
+        if (occupiedBy.current) return false;
+        occupiedBy.current = slot;
+        setCallOwner(slot);
+        return true;
+      },
+      release: () => {
+        if (occupiedBy.current !== slot) return;
+        occupiedBy.current = null;
+        setCallOwner(null);
+      },
+      blocked: callOwner !== null && callOwner !== slot,
+    };
+  }
 
   useEffect(() => {
     const section = hero.current;
@@ -126,6 +147,30 @@ export default function Landing() {
     return () => window.clearTimeout(timer);
   }, [flowerReady, motionAllowed, visible]);
 
+  useEffect(() => {
+    const section = walkthrough.current;
+    if (!section || !motionAllowed) return;
+    let inView = false;
+    let timer = 0;
+    const update = () => {
+      window.clearTimeout(timer);
+      const playing = inView && !document.hidden;
+      setWaveActive(playing);
+      if (playing) timer = window.setTimeout(() => setWaveActive(false), 4600);
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.intersectionRatio >= 0.22;
+      update();
+    }, { threshold: 0.22 });
+    observer.observe(section);
+    document.addEventListener("visibilitychange", update);
+    return () => {
+      window.clearTimeout(timer);
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", update);
+    };
+  }, [motionAllowed]);
+
   return (
     <div className="landing">
       <a className="skip-link" href="#main">{text.skip}</a>
@@ -145,12 +190,14 @@ export default function Landing() {
       <main id="main">
         <section className="landing-hero" aria-labelledby="landing-title" ref={hero}>
           <div className="landing-hero-light" aria-hidden="true" />
-          {motionAllowed && <div className="landing-hero-floor" aria-hidden="true"><PointsWaves active={active} /></div>}
           <div className="landing-hero-inner landing-width">
             <div className="landing-hero-copy">
               <h1 id="landing-title">{text.title[0]}<br /><span>{text.title[1]}</span></h1>
               <p className="landing-lede">{text.intro}</p>
-              <VoiceTest hero />
+              <div id="hero-call">
+                <VoiceTest hero callGate={gateFor("hero-call")} />
+                {callOwner === "demo-call" && <a className="landing-return" href="#demo-call">{text.activeCall}</a>}
+              </div>
             </div>
             <div className="landing-hero-art">
               <div className="landing-flower" aria-hidden="true" data-ready={motionAllowed && flowerReady}>
@@ -164,7 +211,8 @@ export default function Landing() {
           </div>
         </section>
 
-        <section id="how" className="landing-how" aria-labelledby="how-title">
+        <section id="how" className="landing-how" aria-labelledby="how-title" ref={walkthrough}>
+          {motionAllowed && <div className="landing-walkthrough-floor" aria-hidden="true"><PointsWaves active={waveActive} color={0x6e614c} /></div>}
           <div className="landing-how-inner landing-width">
             <div>
               <h2 id="how-title">{text.stepsTitle}</h2>
@@ -189,10 +237,13 @@ export default function Landing() {
 
         <section id="scenarios" className="landing-scenarios" aria-labelledby="scenarios-title">
           <div className="landing-scenarios-inner landing-width">
-            <div>
+            <div className="landing-demo-intro">
               <h2 id="scenarios-title">{text.scenariosTitle}</h2>
               <p className="landing-scenarios-intro">{text.scenariosIntro}</p>
-              <a className="landing-return" href="#landing-title"><Phone size={16} aria-hidden="true" />{text.call}<ArrowUpRight size={16} aria-hidden="true" /></a>
+            </div>
+            <div id="demo-call">
+              <VoiceTest hero demo callGate={gateFor("demo-call")} />
+              {callOwner === "hero-call" && <a className="landing-return" href="#hero-call">{text.activeCall}</a>}
             </div>
             <div className="landing-example-list">
               {text.scenariosList.map(([title, example]) => (

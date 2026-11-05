@@ -18,7 +18,7 @@ Assessment reviewers must be able to use the browser caller and then find its re
 ## Scope and authorization
 The assessment includes a public Bangla-first landing page, its live browser
 caller and the authenticated staff portal. The landing hero uses ByteVoice as a
-visual reference and presents the Glass Flower scene above a full-width Points Waves floor. The user has
+visual reference and presents the Glass Flower scene in the hero and a full-width Points Waves layer in the walkthrough. The user has
 delegated routine implementation and design decisions.
 
 ## Success
