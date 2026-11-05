@@ -18,7 +18,7 @@
 button,input,select{font:inherit} button,a,input,select{touch-action:manipulation} button,a{-webkit-tap-highlight-color:transparent}
 button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}a{color:inherit;text-underline-offset:4px}svg{flex-shrink:0}
 button,a,input,select{transition:background-color .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease}
-button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+button:focus-visible,a:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 ::selection{background:var(--selected);color:var(--ink)} input{caret-color:var(--accent)}
 *{scrollbar-width:thin;scrollbar-color:var(--control) transparent} ::-webkit-scrollbar{width:7px;height:7px}::-webkit-scrollbar-thumb{background:var(--control);border-radius:8px}
 h1,h2,h3,p{margin-top:0}h1{font-size:28px;line-height:1.3;letter-spacing:-.035em;font-weight:650;margin-bottom:8px;text-wrap:balance}
@@ -149,7 +149,6 @@ html:lang(bn) h1,html:lang(bn) h2,html:lang(bn) h3{letter-spacing:normal}
 .login-form .primary { width: 100%; min-height: 49px; margin: 28px 0 22px; font-size: 14px; }
 .login-form .text-link { min-height: 44px; font-size: 13px; }
 .login-form .error { margin-top: 16px; margin-bottom: 0; }
-.login-demo-note { max-width: 380px; width: 100%; margin: 30px auto 0; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12px; }
 @media(max-width:760px) {
  .login-frame { padding: 16px; }
  .login-frame .public-header { flex-wrap: nowrap; margin-bottom: 16px; }
@@ -160,3 +159,11 @@ html:lang(bn) h1,html:lang(bn) h2,html:lang(bn) h3{letter-spacing:normal}
  .login-art { display: none; }
  .login-entry { padding: 30px 26px; }
 }
+
+input:focus, .login-form input:focus, .search-field:focus-within {
+ outline: none;
+ border-color: var(--focus);
+ background: var(--selected);
+ box-shadow: inset 0 0 0 1px var(--focus);
+}
+.search-field input:focus { border: 0; background: transparent; box-shadow: none; }

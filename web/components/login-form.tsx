@@ -33,7 +33,6 @@ export function LoginForm({ next, unavailable }: { next: string; unavailable: bo
         <button className="primary" disabled={busy}>{t(busy ? "Signing in…" : "Sign in")}<ArrowRight size={17} aria-hidden="true" /></button>
         <Link href="/" className="text-link"><ArrowLeft size={16} aria-hidden="true" />{t("Back to ByteVoice")}</Link>
       </form>
-      <p className="login-demo-note">{t("Assessment demo. Use fictional patient details only.")}</p>
     </div>
   </div>;
 }
