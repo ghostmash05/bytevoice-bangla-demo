@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowUpRight, CalendarCheck2, Check, Mic, ShieldCheck } from "lucide-react";
+import { ArrowDown, ArrowUpRight, CalendarCheck2, Mic, Phone, ShieldCheck } from "lucide-react";
 import { Brand } from "./brand";
 import { useLocale } from "./locale";
 import VoiceTest from "./voice-test";
@@ -20,6 +20,8 @@ const copy = {
     portal: "স্টাফ পোর্টাল",
     title: ["ক্লিনিকের জন্য", "বাংলা ভয়েস এজেন্ট"],
     intro: "বাংলাদেশের ডেন্টাল ক্লিনিক ও হাসপাতালের জন্য ByteVoice বাংলায় রোগীর কল সামলায়, অ্যাপয়েন্টমেন্ট বুক করে এবং স্টাফদের জন্য কলের রেকর্ড রাখে।",
+    call: "বাংলায় কথা বলুন",
+    callNote: "বিনামূল্যে ডেমো · মাইক্রোফোন লাগবে। শুধু কাল্পনিক তথ্য দিন। কলের অডিও ভয়েস সেবায় পাঠানো হয়, আর কথোপকথন পর্যালোচনার জন্য সংরক্ষিত হয়।",
     stepsTitle: "রোগীর কল থেকে স্টাফ পোর্টাল",
     steps: [
       ["রোগীর প্রশ্নের উত্তর", "রোগীরা বাংলায় কথা বলে ক্লিনিকের সেবা, ফি ও খোলার সময় জানতে পারেন। কথার মাঝে ইংরেজি শব্দও ব্যবহার করতে পারেন।"],
@@ -46,16 +48,20 @@ const copy = {
     ],
     footer: "ByteVoice · বাংলাদেশের স্বাস্থ্যসেবার জন্য বাংলা ভয়েস এজেন্ট",
     pricing: "মূল্য ও সেটআপ",
-    pricingIntro: "ব্রাউজারে ডেমো দেখে নিন। আপনার ক্লিনিকের কল ও অ্যাপয়েন্টমেন্টের চাহিদা নিয়ে কথা বলতে আমাদের সঙ্গে যোগাযোগ করুন।",
-    plans: [
-      { name: "ব্রাউজার ডেমো", rate: "বিনামূল্যে", details: ["বাংলায় পাঁচ মিনিট পর্যন্ত কথা বলুন", "নমুনা অ্যাপয়েন্টমেন্ট বুকিং চেষ্টা করুন", "কল চলাকালীন কথোপকথন পড়ুন"], action: "ডেমোতে কথা বলুন", href: "#demo-call" },
-      { name: "ক্লিনিক সেটআপ", rate: "আলোচনা সাপেক্ষে", details: ["কলের পরিমাণ ও সময়সূচি নিয়ে আলোচনা", "অ্যাপয়েন্টমেন্ট প্রক্রিয়া ও স্টাফ পোর্টাল পর্যালোচনা", "আপনার ক্লিনিকের জন্য মূল্য জানতে যোগাযোগ"], action: "মূল্য জানতে যোগাযোগ করুন", href: "mailto:info@bytevoice.com.au" },
+    valueTitle: "রোগী সামলানোর সময় ফোনের চাপ কমান",
+    benefits: [
+      ["রিসেপশন ব্যস্ত থাকলেও রোগী উত্তর পান", "ফি, সেবা ও খোলার সময়ের মতো সাধারণ প্রশ্নের উত্তর রোগী বাংলায় শুনতে পারেন।"],
+      ["বুকিং বদলাতে আবার ফোন করার ঝামেলা কমে", "এক কলেই রোগী খালি সময় জানতে, বুক করতে বা আগের সময় বদলাতে পারেন।"],
+      ["ফলো-আপের জন্য তথ্য হাতের কাছে থাকে", "কে ফোন করেছিলেন, কী ঠিক হয়েছে আর কোথায় ফলো-আপ দরকার, স্টাফরা পোর্টালে দেখতে পারেন।"],
     ],
+    rollout: "ক্লিনিক সেটআপ",
+    rolloutRate: "মূল্য জানতে যোগাযোগ করুন",
+    rolloutNote: "আপনার ক্লিনিকে কত কল আসে, কোন সময়ে কল সামলাতে হবে এবং কীভাবে অ্যাপয়েন্টমেন্ট নেওয়া হয়, তা জানিয়ে সেটআপ ও মূল্য নিয়ে কথা বলুন।",
+    rolloutAction: "ক্লিনিক সেটআপ নিয়ে কথা বলুন",
     explore: "পণ্য সম্পর্কে",
     contact: "যোগাযোগ",
     official: "ByteVoice-এর মূল ওয়েবসাইট",
     demoNote: "বাংলাদেশের জন্য তৈরি পণ্য ডেমো",
-    activeCall: "চলমান কলের নিয়ন্ত্রণে যান",
   },
   en: {
     skip: "Skip to content",
@@ -64,6 +70,8 @@ const copy = {
     portal: "Staff portal",
     title: ["Bangla voice AI", "for healthcare"],
     intro: "ByteVoice answers patient calls in Bangla, manages appointments, and gives staff a record of every call. Built for dental clinics and hospitals in Bangladesh.",
+    call: "Talk to our Bangla caller",
+    callNote: "Free demo · Microphone required. Use fictional details only. Audio goes to the voice provider and the transcript is saved for review.",
     stepsTitle: "From patient call to staff portal",
     steps: [
       ["Answer patient questions", "Patients can ask about services, fees, and opening hours in everyday Bangla and mix in English as they normally would."],
@@ -90,16 +98,20 @@ const copy = {
     ],
     footer: "ByteVoice · Bangla voice AI for healthcare in Bangladesh",
     pricing: "Pricing and setup",
-    pricingIntro: "Try a call in your browser. For a clinic rollout, talk to us about your call volume and appointment workflow.",
-    plans: [
-      { name: "Browser demo", rate: "Free", details: ["Speak Bangla for up to five minutes", "Try a fictional appointment booking", "Read captions during the call"], action: "Try the live demo", href: "#demo-call" },
-      { name: "Clinic rollout", rate: "Contact for pricing", details: ["Discuss call volume and coverage hours", "Review booking workflows and staff access", "Ask about pricing for your clinic"], action: "Ask about clinic pricing", href: "mailto:info@bytevoice.com.au" },
+    valueTitle: "Keep the front desk free to care for patients",
+    benefits: [
+      ["Give patients answers while reception is busy", "Patients can ask about fees, services, and opening hours in Bangla."],
+      ["Cut the back-and-forth on appointments", "Patients can check availability, book a visit, or move an appointment in the same call."],
+      ["Give staff the context to follow up", "The portal shows who called, what was agreed, and which calls need staff attention."],
     ],
+    rollout: "Clinic rollout",
+    rolloutRate: "Contact for pricing",
+    rolloutNote: "Tell us how many calls you receive, when you need coverage, and how your clinic handles appointments. We’ll discuss setup and pricing with you.",
+    rolloutAction: "Discuss your clinic setup",
     explore: "Explore",
     contact: "Contact",
     official: "ByteVoice website",
     demoNote: "Product demo for Bangladesh",
-    activeCall: "Go to the active call",
   },
 };
 
@@ -107,33 +119,15 @@ export default function Landing() {
   const { language, toggleLanguage } = useLocale();
   const hero = useRef<HTMLElement>(null);
   const walkthrough = useRef<HTMLElement>(null);
+  const demoCall = useRef<HTMLDivElement>(null);
   const [motionAllowed, setMotionAllowed] = useState(false);
   const [visible, setVisible] = useState(false);
   const [waveActive, setWaveActive] = useState(false);
   const [introActive, setIntroActive] = useState(false);
   const [flowerReady, setFlowerReady] = useState(false);
-  type CallSlot = "hero-call" | "demo-call";
-  const occupiedBy = useRef<CallSlot | null>(null);
-  const [callOwner, setCallOwner] = useState<CallSlot | null>(null);
   const active = visible && introActive;
   const text = copy[language];
   const stepIcons = [Mic, CalendarCheck2, ShieldCheck];
-  function gateFor(slot: CallSlot) {
-    return {
-      claim: () => {
-        if (occupiedBy.current) return false;
-        occupiedBy.current = slot;
-        setCallOwner(slot);
-        return true;
-      },
-      release: () => {
-        if (occupiedBy.current !== slot) return;
-        occupiedBy.current = null;
-        setCallOwner(null);
-      },
-      blocked: callOwner !== null && callOwner !== slot,
-    };
-  }
 
   useEffect(() => {
     const section = hero.current;
@@ -215,10 +209,13 @@ export default function Landing() {
             <div className="landing-hero-copy">
               <h1 id="landing-title">{text.title[0]}<br /><span>{text.title[1]}</span></h1>
               <p className="landing-lede">{text.intro}</p>
-              <div id="hero-call">
-                <VoiceTest hero callGate={gateFor("hero-call")} />
-                {callOwner === "demo-call" && <a className="landing-return" href="#demo-call">{text.activeCall}</a>}
-              </div>
+              <button type="submit" form="landing-call-form" className="landing-call-button" aria-describedby="hero-call-note" onClick={() => {
+                demoCall.current?.focus({ preventScroll: true });
+                demoCall.current?.scrollIntoView({ block: "start" });
+              }}>
+                <Phone size={17} aria-hidden="true" />{text.call}
+              </button>
+              <p id="hero-call-note" className="landing-call-note">{text.callNote}</p>
             </div>
             <div className="landing-hero-art">
               <div className="landing-flower" aria-hidden="true" data-ready={motionAllowed && flowerReady}>
@@ -262,9 +259,8 @@ export default function Landing() {
               <h2 id="scenarios-title">{text.scenariosTitle}</h2>
               <p className="landing-scenarios-intro">{text.scenariosIntro}</p>
             </div>
-            <div id="demo-call">
-              <VoiceTest hero demo callGate={gateFor("demo-call")} />
-              {callOwner === "hero-call" && <a className="landing-return" href="#hero-call">{text.activeCall}</a>}
+            <div id="demo-call" ref={demoCall} tabIndex={-1} role="group" aria-labelledby="scenarios-title">
+              <VoiceTest demo />
             </div>
             <div className="landing-example-list">
               {text.scenariosList.map(([title, example]) => (
@@ -276,17 +272,17 @@ export default function Landing() {
 
         <section id="pricing" className="landing-pricing" aria-labelledby="pricing-title">
           <div className="landing-width landing-pricing-inner">
-            <h2 id="pricing-title">{text.pricing}</h2>
-            <p>{text.pricingIntro}</p>
-            <div className="landing-plans">
-              {text.plans.map((plan) => (
-                <article key={plan.href}>
-                  <h3>{plan.name}</h3>
-                  <p className="landing-plan-rate">{plan.rate}</p>
-                  <ul>{plan.details.map((item) => <li key={item}><Check size={17} aria-hidden="true" />{item}</li>)}</ul>
-                  <a href={plan.href}>{plan.action}<ArrowUpRight size={16} aria-hidden="true" /></a>
-                </article>
-              ))}
+            <div>
+              <h2 id="pricing-title">{text.valueTitle}</h2>
+              <ul className="landing-benefits">
+                {text.benefits.map(([title, body]) => <li key={title}><h3>{title}</h3><p>{body}</p></li>)}
+              </ul>
+            </div>
+            <div className="landing-rollout">
+              <h3>{text.rollout}</h3>
+              <p className="landing-rollout-rate">{text.rolloutRate}</p>
+              <p>{text.rolloutNote}</p>
+              <a href="mailto:info@bytevoice.com.au">{text.rolloutAction}<ArrowUpRight size={17} aria-hidden="true" /></a>
             </div>
           </div>
         </section>

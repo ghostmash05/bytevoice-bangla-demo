@@ -41,7 +41,7 @@ not constitute a new audio or production-database test.
 
 | Requirement | Evidence | Assessment |
 |---|---|---|
-| Browser microphone conversation; connecting/live/ended and graceful errors (§4, p2) | `/`, `/try`, shared `web/components/voice-test.tsx`, prior human Safari verification on `/try` | The landing hero and direct caller use the same call controls and connection flow |
+| Browser microphone conversation; connecting/live/ended and graceful errors (§4, p2) | `/`, `/try`, shared `web/components/voice-test.tsx`, prior human Safari verification on `/try` | The hero button starts a call in the embedded demo, which shows the controls and live captions |
 | Natural polite Bangla, mixed English/Bangla, Bangladeshi names and accurate numbers/dates (§1.6/§5, p2–3) | Agent prompt, dedicated Bengali STT, validation, confirmation/readback, existing audio tests | Implemented and previously exercised; formal real-speaker accent/recognition quality remains partly unverified |
 | Greeting, name/phone confirmation, reason and preferred date/time (§5, p3) | `agent/prompt.py`, tools/validation, booking service and existing booking evidence | Implemented; no new audio call performed in this UI pass |
 | Book, reschedule, cancel; check doctor/service/availability (§1.5, p1) | Transactional booking/change tools, lookup constraints, prior cross-call audio verification | Implemented; existing verification includes collision/rollback tests |
@@ -55,7 +55,7 @@ not constitute a new audio or production-database test.
 | Deliverable or criterion | Brief | Current status |
 |---|---|---|
 | Public responsive landing page, at least three sections | Required, §3/§7, p2/4; design is 20% of assessment | Implemented at `/` for clinic and hospital teams in Bangladesh, with a product hero, feature walkthrough, fictional dental demo and FAQ |
-| Prominent live-call action in the hero | Required, §4/§7, p2/4 | The hero action starts the browser call in place |
+| Prominent live-call action in the hero | Required, §4/§7, p2/4 | One click on the hero button starts the browser call and takes the visitor to the embedded controls on the same page |
 | Bangla caller | Required, §5; caller quality is 30% | Implemented; subjective and final human-quality limits above remain |
 | Portal live URL and login | Required, §6/§7; data structure/portal is 25% | Deployed at `/portal`; reviewer credentials still need private handoff |
 | GitHub repository and README, with reviewer access | Required, §7, p4 | Repository and README exist; repository remains **private** per user. Reviewer access/publication is pending |

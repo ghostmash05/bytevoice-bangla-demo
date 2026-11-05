@@ -68,11 +68,7 @@ function Conversation({ turns, preview, empty }: { turns: Turn[]; preview: boole
   );
 }
 
-export default function VoiceTest({ hero = false, demo = false, callGate }: {
-  hero?: boolean;
-  demo?: boolean;
-  callGate?: { claim: () => boolean; release: () => void; blocked: boolean };
-}) {
+export default function VoiceTest({ demo = false }: { demo?: boolean }) {
   const { t } = useLocale();
   const label = (value: string) => t(formatLabel(value));
   const [state, setState] = useState<State>("idle"),
@@ -131,7 +127,6 @@ export default function VoiceTest({ hero = false, demo = false, callGate }: {
     } finally {
       if (attempt.current === endingAttempt) {
         joining.current = false;
-        callGate?.release();
       }
     }
   }
@@ -147,7 +142,7 @@ export default function VoiceTest({ hero = false, demo = false, callGate }: {
     }
   }
   async function start() {
-    if (joining.current || (callGate && !callGate.claim())) return;
+    if (joining.current) return;
     const startingAttempt = ++attempt.current;
     joining.current = true;
     cancelled.current = false;
@@ -252,7 +247,6 @@ export default function VoiceTest({ hero = false, demo = false, callGate }: {
         room.current = null;
         cleanup();
         joining.current = false;
-        callGate?.release();
         setState((previous) => (previous === "error" ? "error" : "ended"));
       });
       await current.connect(connection.server_url, connection.token);
@@ -291,7 +285,6 @@ export default function VoiceTest({ hero = false, demo = false, callGate }: {
       if (attempt.current !== startingAttempt) return;
       cleanup();
       joining.current = false;
-      callGate?.release();
       setError(message);
       setState("error");
     }
@@ -313,22 +306,22 @@ export default function VoiceTest({ hero = false, demo = false, callGate }: {
     { id: "reply", speaker: "AI receptionist", text: "অবশ্যই, শনিবার বিকেলে খালি সময় আছে কি না দেখে বলছি" },
   ] : [];
   return (
-      <div className={demo ? "hero-caller demo-caller" : hero ? "hero-caller" : "test-layout"}>
-        {!hero && <header className="voice-page-heading"><div><h1>{t("Talk to your receptionist")}</h1>
+      <div className={demo ? "demo-caller" : "test-layout"}>
+        {!demo && <header className="voice-page-heading"><div><h1>{t("Talk to your receptionist")}</h1>
         <p>
           {t("Speak naturally in Bangla. You can ask about the demo clinic, book a visit, or change an existing appointment using its reference and phone number.")}</p>
         </div></header>}
         <div className="voice-workspace">
         <div className="voice-column">
         <section className={`call-console console-${state}`} aria-label={t("Browser voice call")}>
-          {(!hero || demo || state !== "idle") && <div className="call-console-head">
+          <div className="call-console-head">
             <h2>{t("Mashrafi’s Dental")}</h2>
             <span className="call-state" role="status">
               <span className={`state-dot ${state === "live" ? "live" : ""}`} />
               {label(state)}
             </span>
-          </div>}
-          {(!hero || demo || state !== "idle") && <div className="call-stage">
+          </div>
+          <div className="call-stage">
             {demo ? <div className="voice-orb" aria-hidden="true"><MercuryOrb state={orbState} size={144} speed={0.85} levelRef={orbLevel} /></div> : <div className="voice-mark">
               <Brand mark />
             </div>}
@@ -355,28 +348,31 @@ export default function VoiceTest({ hero = false, demo = false, callGate }: {
                 {t(error)}
               </p>
             )}
-          </div>}
-          <div className="call-controls">
+          </div>
+          <form className="call-controls" id={demo ? "landing-call-form" : undefined} onSubmit={(event) => {
+            event.preventDefault();
+            void start();
+          }}>
             {state === "live" ? (
               <>
-                <button className="secondary" onClick={toggleMute}>
+                <button type="button" className="secondary" onClick={toggleMute}>
                   {muted ? <MicOff size={17} /> : <Mic size={17} />}
                   {muted ? t("Unmute microphone") : t("Mute microphone")}
                 </button>
-                <button className="primary danger" onClick={() => void end()}>
+                <button type="button" className="primary danger" onClick={() => void end()}>
                   <PhoneOff size={17} />
                   {t("End call")}</button>
               </>
             ) : state === "connecting" ? (
-              <button className="secondary" onClick={() => void end("idle")}>
+              <button type="button" className="secondary" onClick={() => void end("idle")}>
                 {t("Cancel connection")}</button>
             ) : (
-              <button className="primary" onClick={start} disabled={callGate?.blocked}>
+              <button type="submit" className={demo && state === "idle" ? "primary landing-call-button" : "primary"}>
                 <Phone size={17} />
-                {state === "idle" ? t(hero ? "Talk to our Bangla caller" : "Start voice call") : t("Start another call")}
+                {state === "idle" ? t(demo ? "Talk to our Bangla caller" : "Start voice call") : t("Start another call")}
               </button>
             )}
-          </div>
+          </form>
           {(demo || turns.length > 0) && (
             <Conversation
               key={state === "idle" ? "preview" : "call"}
@@ -396,7 +392,7 @@ export default function VoiceTest({ hero = false, demo = false, callGate }: {
             {t("View this call in the staff portal")}</Link>
         )}
         </div>
-        {!hero && <aside className="call-guide" aria-label={t("Conversation guide")}>
+        {!demo && <aside className="call-guide" aria-label={t("Conversation guide")}>
           <h2>{t("Try a conversation")}</h2>
           <div className="guide-item"><CalendarCheck2 size={19} aria-hidden="true" /><div><h3>{t("Book an appointment")}</h3><p lang="bn">“কাল সকালে স্কেলিংয়ের জন্য সময় হবে?”</p></div></div>
           <div className="guide-item"><RefreshCw size={18} aria-hidden="true" /><div><h3>{t("Change an existing visit")}</h3><p>{t("Have your booking reference and phone number ready.")}</p></div></div>

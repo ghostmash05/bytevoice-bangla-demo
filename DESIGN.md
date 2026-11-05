@@ -257,7 +257,7 @@ Voice-test content is bounded to (1280px), with a main console and (270px) guide
 
 ### Landing layout
 
-The landing uses a (1540px) maximum content width and a full-bleed hero with a (100svh) minimum above phone widths. A (.9fr / 1.1fr) split keeps the localized promise, working call and consent text on the left and gives Glass Flower more room on the right. The cream walkthrough pairs a ruled step list with the sample booking. The navy demo section puts a voice orb and call controls beside a two-sided conversation. A labeled sample gives way to call captions once the demo starts. Example prompts follow the caller. The hero and demo share a single call slot. A cream pricing section describes the free browser demo and contact-based clinic rollout. The footer groups product navigation and contact details. Side gutters use `clamp(32px, 5.5vw, 105px)`, then (32px) at (900px) and (18px) at (680px). At (680px), the hero stacks with copy and call controls above Glass Flower, and the lower sections stack. Language and staff portal controls remain visible in the compact header.
+The landing uses a (1540px) maximum content width and a full-bleed hero with a (100svh) minimum above phone widths. A (.9fr / 1.1fr) split keeps the localized promise, working call and consent text on the left and gives Glass Flower more room on the right. The cream walkthrough pairs a ruled step list with the sample booking. The navy demo section puts a voice orb and call controls beside a two-sided conversation. A labeled sample gives way to call captions once the demo starts. Example prompts follow the caller. The hero starts the embedded demo caller and moves focus to its controls. A cream clinic-value section pairs a list of operational benefits with a contact-based pricing panel. The footer groups product navigation and contact details. Side gutters use `clamp(32px, 5.5vw, 105px)`, then (32px) at (900px) and (18px) at (680px). At (680px), the hero stacks with copy and call controls above Glass Flower, and the lower sections stack. Language and staff portal controls remain visible in the compact header.
 
 ## Elevation & Depth
 
@@ -325,7 +325,7 @@ Assistant turns use a raised surface and (17px 20px) padding; caller turns remai
 
 ### Landing caller and booking sample
 
-The gold hero action starts the real embedded `VoiceTest` call. At rest it is a (59px) minimum-height pill with a dark circular phone icon and sits above permission and data-use copy. During a call, the hero shows connection state, microphone and end-call controls, errors and live captions as they become available. Keep keyboard focus visible and preserve localized control labels. The booking receipt farther down the page always carries an explicit sample label.
+The gold hero action starts the real embedded `VoiceTest` call in the demo section. It is a (59px) minimum-height pill with a dark circular phone icon and sits above permission and data-use copy. The demo section shows connection state, microphone and end-call controls, errors and live captions as they become available. Keep keyboard focus visible and preserve localized control labels. The booking receipt farther down the page always carries an explicit sample label.
 
 ## Do's and Don'ts
 
