@@ -1,4 +1,4 @@
-# Technical brief cross-check — 4 November 2026
+# Technical brief cross-check — updated 5 November 2026
 
 Source: the supplied four-page `StrategyByte_AI_Engineer_Task_Brief.pdf`, read
 directly and rendered for verification. Section and page references below refer
@@ -19,9 +19,9 @@ the fictional clinic identity remains on the voice console.
 | Patient name, phone, reason, preferred date/time, outcome (§6, p3) | Details fields, selected-record outcome, captured doctor/service/intent/notes | Implemented |
 | Full transcript, speaker labels and timestamps (§6, p3) | Conversation view with speaker and elapsed-time labels | Implemented; original text retained across interface language changes |
 | Booked, enquiry, follow-up, incomplete, failed states (§6, p3) | Outcome labels, separate call status, filters and empty/error views | Implemented; actual result determines the label |
-| Simple login; reviewer details supplied privately (§6–7, p3–4) | Existing server sessions, protected call endpoints and reviewer account; login URL `/portal` | Implemented; credentials must still be included privately in the actual submission |
+| Simple login; reviewer details supplied in the submission (§6–7, p3–4) | Existing server sessions, protected call endpoints and reviewer account; login URL `/portal` | Implemented; credentials must still be included privately in the actual submission |
 | Explain schema and relationships (§6, p3) | `/portal/data-model`, ORM models and README | Implemented |
-| Explain database, region, recordings, ingestion and validation (§6, p3) | Public data-model explorer and flow; README; `docs/deployment.md`; PostgreSQL Mumbai; no application audio recording; digit/phone validation and transactional writes | Covered in the public explanation and repository; the explorer shows key actual fields and relationships rather than a live database console |
+| Explain database, region, recordings, ingestion and validation (§6, p3) | Protected data-model explorer and flow; README; `docs/deployment.md`; PostgreSQL Mumbai; no application audio recording; digit/phone validation and transactional writes | Covered in the authenticated explorer and repository; the explorer shows key actual fields and relationships rather than a live database console |
 | Portal preloaded with own test calls (§7, p4) | Existing verification records distinguish actual synthetic audio calls, human tests and scripted fixtures | Recorded evidence exists; scripted fixtures alone must never be presented as voice-test evidence |
 | Find a new call within a minute or two (§2, p2) | Immediate/partial persistence and portal refresh every ten seconds while visible | Implemented mechanism; this sidebar pass did not run a new timed voice-to-portal benchmark |
 
@@ -42,7 +42,7 @@ not constitute a new audio or production-database test.
 | Requirement | Evidence | Assessment |
 |---|---|---|
 | Browser microphone conversation; connecting/live/ended and graceful errors (§4, p2) | `/`, `/try`, shared `web/components/voice-test.tsx`, prior human Safari verification on `/try` | The hero button starts a call in the embedded demo, which shows the controls and live captions |
-| Natural polite Bangla, mixed English/Bangla, Bangladeshi names and accurate numbers/dates (§1.6/§5, p2–3) | Agent prompt, dedicated Bengali STT, validation, confirmation/readback, existing audio tests | Implemented and previously exercised; formal real-speaker accent/recognition quality remains partly unverified |
+| Natural polite Bangla, mixed English/Bangla, Bangladeshi names and accurate numbers/dates (§1.6/§5, p2–3) | Agent prompt, Google-native captions, validation, confirmation/readback and audio tests | Implemented and previously exercised; formal real-speaker accent/recognition quality remains partly unverified |
 | Greeting, name/phone confirmation, reason and preferred date/time (§5, p3) | `agent/prompt.py`, tools/validation, booking service and existing booking evidence | Implemented; no new audio call performed in this UI pass |
 | Book, reschedule, cancel; check doctor/service/availability (§1.5, p1) | Transactional booking/change tools, lookup constraints, prior cross-call audio verification | Implemented; existing verification includes collision/rollback tests |
 | Hours, fictional location/directions, services, fees and visit preparation (§1.5/§5, p1/3) | `shared/clinic.json`, including `visit_preparation_bn` and demo-address disclosure | Implemented facts; the agent must not invent a real clinic address |

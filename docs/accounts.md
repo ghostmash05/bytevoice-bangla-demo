@@ -20,10 +20,15 @@ The original manually created key was left untouched. Credentials
 belong only in local ignored files and server deployment secrets, never in chat,
 screenshots, client bundles, public READMEs or Git history.
 
+## Google AI Studio
+
+The deployed worker uses a dedicated ByteVoice Bangla Google project and a server-side API key. Set GOOGLE_API_KEY, REALTIME_PROVIDER=google, GOOGLE_REALTIME_MODEL=gemini-3.8-live and REALTIME_STT_MODEL=native. The selected voice is Sulafat.
+
+For a fresh checkout, create credentials in your own Google project and add them to ignored local settings. Free-tier quotas and data policies apply. See [direct Google configuration](google-direct.md) for migration history and [deployment](deployment.md) for server secret placement.
+
 ## Soniox (not set up)
 
-Optional for the alternative chained pipeline. The current realtime path
-uses LiveKit Inference/Gemini Live with dedicated Speechmatics Bengali captions and does not require Soniox or Azure accounts.
+Optional for the alternative chained pipeline. The deployed realtime path uses direct Google Gemini Live and native captions. It requires a Google API key and LiveKit transport credentials.
 
 Create an API account at https://console.soniox.com/ and inspect API credits/billing.
 The Soniox consumer app free plan is not evidence of free API usage. Do not purchase

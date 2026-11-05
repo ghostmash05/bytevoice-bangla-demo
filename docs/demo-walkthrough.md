@@ -1,13 +1,15 @@
 # Three-minute demonstration recording plan
 
+This is an optional outline for the user. Recording is excluded from the agent's current work.
+
 Record the actual deployed app, using fictional patient details. Adapt the spoken
 English outline to your own words. Do not describe synthetic recordings as human
 tests or claim checks that are still pending. Review voice quality before recording.
 
 | Time | Screen and action | Suggested explanation |
 |---|---|---|
-| 0:00–0:15 | Open the hosted `/try` page | “I built a custom Bangla receptionist for a fictional dental clinic, with persistent appointments and a staff portal.” |
-| 0:15–1:15 | Make a short Bangla booking call; provide all details, hear the readback, then confirm | Let the actual audio demonstrate Bangla, digit readback and confirmation. Choose a free slot during opening hours; never silently edit records to match the narration. |
+| 0:00–0:15 | Open the hosted landing page `/` and show the hero | “I built a custom Bangla receptionist for a fictional dental clinic, with persistent appointments and a staff portal.” |
+| 0:15–1:15 | Start a short Bangla booking call from the hero; provide all details, hear the readback, then confirm | Let the actual audio demonstrate Bangla, digit readback and confirmation. Choose a free slot during opening hours; never silently edit records to match the narration. |
 | 1:15–1:50 | Open `/portal`, select the new call, show Conversation and Details | “The staff member sees the speaker-labelled transcript, captured contact details, requested service and outcome.” |
 | 1:50–2:15 | Show Activity, then the three completed synthetic booking/change/cancel records | “These separate test calls retrieved and changed the same stored appointment. The database enforces slot uniqueness, atomic changes and version checks.” |
 | 2:15–2:45 | Show the README architecture and concise source locations | “The browser connects through LiveKit WebRTC. A custom Python worker calls authenticated FastAPI tools. PostgreSQL is the authority for booking state; the browser never receives database or project API secrets.” |
@@ -29,11 +31,9 @@ tests or claim checks that are still pending. Review voice quality before record
 
 ## Submission readiness
 
-The portal and direct caller are deployed. The repository is currently private;
-the user will make it public before submission. Keep it private until then. The landing page remains
-outside the user's active implementation scope. Do not send an HR submission
+The landing page, portal and direct caller are deployed. Verify reviewer access
+to the repository and provide login details privately. Do not send an HR submission
 until the required links and the video are actually accessible.
 
 See docs/submission-readiness.md for the requirement/evidence checklist and unsent
-email draft. It explicitly records the excluded landing page rather than claiming
-that the direct voice page satisfies that item.
+email draft and remaining handoff items.

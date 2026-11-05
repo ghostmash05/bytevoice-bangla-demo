@@ -1,5 +1,7 @@
 # Workspace redesign
 
+Historical design record from November 4. Later landing, typography and palette changes supersede the visual choices below. See [DESIGN.md](../DESIGN.md) for the current system and [README](../README.md) for the current product.
+
 The November 4 redesign uses the installed `design-taste-frontend` skill from
 Leonxlnx/taste-skill together with the on-device Impeccable workflow. The selected
 app direction is `framed-sheet`, seed `257497214`, recorded in

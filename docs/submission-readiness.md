@@ -1,8 +1,8 @@
-# Submission readiness — 4 November 2026
+# Submission readiness — 5 November 2026
 
 This is a checklist and an unsent email draft. It is not evidence of submission.
-The user's explicit scope excludes the landing page. The original assessment
-still requests one; the direct caller does not satisfy that marketing-page item.
+The landing page, embedded caller and protected staff portal are deployed.
+Reviewer credentials, repository access and a video link remain submission items.
 
 | Requirement | Evidence | Remaining action |
 |---|---|---|
@@ -15,12 +15,12 @@ still requests one; the direct caller does not satisfy that marketing-page item.
 | Silence and ending | Check-in/farewell/ROOM_DELETED test; explicit goodbye test passed | Safari retest pending |
 | Failed write behavior | Isolated audio call caused three 503 retries, no appointment, explicit spoken failure | No hosted fault injection performed |
 | Staff portal and real call data | https://bytevoice-bangla-portal.vercel.app/portal; protected login and Conversation/Details/Activity inspected on desktop and 390px mobile layout | No visible defect in reviewed views; actual Safari rendering not separately audited |
-| Schema/storage explanation | /portal/data-model, README and docs/deployment.md; Supabase PostgreSQL Mumbai | Explain why native audio and dedicated STT have separate roles |
-| Validation and persistence | 50 Python tests, 18 PostgreSQL booking tests; SQL constraints, idempotency and atomic changes | Real-speaker digits may still be mistranscribed; readback remains essential |
+| Schema/storage explanation | /portal/data-model, README and docs/deployment.md; Supabase PostgreSQL Mumbai | Current direct Google configuration uses native captions |
+| Validation and persistence | 53 Python tests, 18 PostgreSQL booking tests; SQL constraints, idempotency and atomic changes | Real-speaker digits may still be mistranscribed; readback remains essential |
 | Repository and README | https://github.com/ghostmash05/bytevoice-bangla-demo; CI passed | User will make repository public before submission; keep private until then |
 | Reviewer login | Generated account in ignored .local/reviewer-credentials.txt | Copy credentials privately into the actual submission; never commit the password |
 | Video, maximum 3 minutes | docs/demo-walkthrough.md is the recording plan; no finished video | Recording excluded from agent work by the user; original assessment requirement remains |
-| Landing page/hero | Excluded by user instruction | Not implemented; do not describe /try as a completed landing page |
+| Landing page/hero | Public bilingual page at / with a live hero call button, Glass Flower and embedded Mercury caller | One click starts the call and moves to the demo controls |
 | Submission email | Draft below | User reviews and sends only after all supplied links work |
 
 ## Unsent email draft
@@ -33,7 +33,7 @@ Hi StrategyByte team,
 
 Here is my Bangla receptionist assessment project:
 
-- Browser voice demo: https://bytevoice-bangla-portal.vercel.app/try
+- Landing page and live caller: https://bytevoice-bangla-portal.vercel.app/
 - Staff portal: https://bytevoice-bangla-portal.vercel.app/portal
 - Source and README: https://github.com/ghostmash05/bytevoice-bangla-demo
 - Video overview: [INSERT VERIFIED VIDEO LINK]
@@ -44,10 +44,6 @@ The custom LiveKit agent supports confirmed bookings, enquiries, rescheduling,
 cancellations and staff callbacks, with persistent call transcripts and action
 history. The README explains the architecture, storage, verification and limitations.
 Please use fictional patient details when testing.
-
-[RESOLVE BEFORE SENDING: the assessment requests a landing page. The current
-implementation includes a direct browser caller and portal; no landing page has
-been built. Do not silently present the caller as meeting that requirement.]
 
 Thank you for the opportunity. I look forward to walking you through the build.
 

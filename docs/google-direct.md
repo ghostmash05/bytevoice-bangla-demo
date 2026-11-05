@@ -53,8 +53,19 @@ retained in Bengali script; assistant transcript included the correction readbac
 explicit demo/no-actual-call disclosure and farewell. The database call finalized
 as completed. Ignored evidence: `.local/audio-callback-e2e.json`,
 `.local/call-review/google-native-callback.log` and synthetic received audio.
-This proves the tested audio/tools/storage path, not real-microphone recognition
-or subjective Bangladeshi accent quality. Human device review is pending.
+This establishes the tested audio/tools/storage path. The user later tested the
+direct route successfully and, after the Sulafat/calmer-delivery update, reported
+that the voice was much better. Recognition and accent remain dependent on the
+speaker and call conditions.
+
+## November 5 voice tuning
+
+The deployed voice changed from Kore to Sulafat, with instructions for a calmer,
+steady register. Google automatic activity detection uses low end-of-speech
+sensitivity and 1,400 ms of silence before committing a turn. A hosted synthetic
+call confirmed that a one-second gap between digit groups did not trigger agent
+speech. The full eleven-digit mobile was captured exactly, and no appointment was
+saved without confirmation.
 
 ## References
 

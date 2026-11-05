@@ -1,6 +1,6 @@
 # Demo clinic and conversation contract
 
-All names, addresses, prices and patient records in this project are fictional.
+Clinic facts and demo fees are fictional. Callers must use fictional patient details.
 `shared/clinic.json` is the authoritative clinic configuration. This is an
 assessment demonstration, not a real healthcare service.
 
@@ -43,9 +43,11 @@ implemented in the backend. Registered agent tools use those APIs. Automated
 database tests and actual synthetic WebRTC audio calls verify separate parts of the
 integration. A human Safari booking succeeded and the tester reported a good
 overall experience. Audible interruption, corrected contact details, silence and
-explicit goodbye have separate synthetic evidence. Dedicated Bengali caller STT
-segments are displayed and saved independently of the voice model's native input
-captions. Exact recognition and formal accent review still need human assessment;
+explicit goodbye have separate synthetic evidence. The deployed direct Google
+path uses native caller and assistant captions. Dedicated Bengali STT remains
+an optional configuration with separate inference usage. Exact recognition and formal accent review still need human assessment;
 see docs/verification.md. The alternative Soniox/Azure path is not connected.
 
 The AI receptionist is Fariya / ফারিয়া, with warm, natural Bangladeshi Bangla delivery.
+
+Fariya uses the Sulafat voice with instructions for a calm, steady register. Google end-of-speech detection waits for 1,400 ms of silence. During number dictation, the agent retains partial groups and validates the complete number before saving it. The November 5 synthetic pause test captured all eleven digits across a one-second gap.

@@ -1,6 +1,6 @@
 ---
 name: ByteVoice Bangla workspace
-description: A Bangla-first voice demo and a silver glass workspace for clinic records.
+description: A Bangla-first voice demo and a navy, cream and gold clinic workspace.
 colors:
   ink: "#17223a"
   muted: "#5e5c56"
@@ -195,9 +195,9 @@ components:
 
 ## Overview
 
-**Creative North Star: "The Silver Record Frame"**
+**Creative North Star: "The Warm Record Frame"**
 
-The silver glass frame turns conversations into clear, actionable clinic records. Cool translucent navigation surrounds a clear white sheet; restrained slate actions, fine rules and generous Bengali transcript leading make the workspace feel modern, classy and composed. The authentic ByteVoice waveform anchors the identity.
+The workspace turns conversations into actionable clinic records. Warm translucent navigation surrounds a cream record sheet, with gold actions, fine rules and generous Bengali transcript leading. Dark mode carries the landing page's navy surfaces into the same layout. The original ByteVoice waveform anchors the identity.
 
 Light and Bangla are the defaults, with an explicit dark toggle and BN/EN controls. A saved English language choice takes precedence. Glass is an intentional user-brief override: use it for the framing and voice emblem, while records remain readable solid surfaces. This replaces the former teal system. The visual language serves a fictional clinic operating interface and its browser voice test.
 
@@ -215,11 +215,11 @@ The public landing page at `/` introduces ByteVoice's Bangla voice agent to clin
 
 ## Colors
 
-The palette is cool neutral: slate actions, blue-grey metadata and translucent silver framing. Frontmatter values are normative, extracted from `web/app/globals.css`; `dark-` entries map to the same role under `data-theme="dark"`.
+The palette connects the landing and workspace through warm cream, navy and gold. Frontmatter values are normative, extracted from `web/app/globals.css`; `dark-` entries map to the same role under `data-theme="dark"`.
 
 ### Primary
 
-**Gold action** (`primary` / `primary-ink`) carries principal buttons, with `ink` on hover. **Warm gold** (`accent` / `accent-dark`) marks text links, tab underlines and action icons. **Focus blue** (`focus`) identifies keyboard position.
+**Gold action** (`primary` / `primary-ink`) carries principal buttons, with a warmer gold on hover. **Warm gold** (`accent` / `accent-dark`) marks text links, tab underlines and action icons. **Focus blue** (`focus`) identifies keyboard position.
 
 ### Neutral
 

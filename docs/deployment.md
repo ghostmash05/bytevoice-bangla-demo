@@ -54,7 +54,7 @@ long human conversation still need listening review.
 The dedicated Google project is ByteVoice Bangla, on the free tier;
 no billing is enabled. REALTIME_PROVIDER=livekit is the previous connection, not
 an automatic fallback when Google fails. VOICE_PIPELINE=chained remains an optional Soniox/Azure alternative
-requiring separate accounts. Usage consumes provider/LiveKit inference credits.
+requiring separate accounts. Direct Google speech consumes Google quota, while transport and worker hosting consume LiveKit allowances. Optional LiveKit Inference models consume separate inference credits.
 
 Application audio recording is disabled with session.start(record=False).
 The first historical local fake-audio test ran before that override. Test scripts
@@ -87,7 +87,7 @@ history or weaken repository access controls to fix deployment failures.
 
 ### Dashboard route protection
 
-The public entry points are `/try` and `/login`. Every `/portal` page requires a
+The public entry points are `/`, `/try` and `/login`. Every `/portal` page requires a
 backend-validated session on the server, including `/portal/data-model` and
 `/portal/voice-test`. The route proxy only redirects missing cookies early; it is
 not the authentication authority. The server session fetch uses `BACKEND_URL`
@@ -107,4 +107,4 @@ does not modify call records.
 - Final mobile visual review and full reviewer login/logout from the final origin.
 - Accessible source/reviewer credentials and <=3-minute demonstration video.
 - Keep hosted services within available quotas and running during assessment.
-- Do not send the HR submission automatically. Landing page remains deferred.
+- The landing page is deployed. Submission and repository access are handled by the user.

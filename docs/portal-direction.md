@@ -1,5 +1,7 @@
 # Staff portal direction
 
+Historical design record from November 4. Later landing, typography and palette changes supersede the visual choices below. See [DESIGN.md](../DESIGN.md) for the current system and [README](../README.md) for the current product.
+
 Mode: Operate. The user delegated routine choices and asked for autonomous work;
 there is no marketing surface in this phase. The clinic brief supplies product facts.
 

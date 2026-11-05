@@ -1,6 +1,18 @@
-# Verification record — 4 November 2026
+# Verification record
 
-## Passed
+## Latest recorded state — 5 November 2026
+
+- The public landing page, protected workspace and standalone caller are deployed. The hero starts the embedded caller. The shared Mercury Orb and conversation interface appear in both public and staff voice tests.
+- The active speech path is direct Google Gemini Live with native caller/assistant captions and Sulafat. Speechmatics and the earlier Kore configuration appear below as historical test conditions.
+- The hosted digit-pause test captured an eleven-digit phone number exactly across a one-second gap, with no agent speech during the gap and no booking without confirmation. The caller was synthetic audio.
+- A human tester subsequently reported that the calmer voice was much better and that they liked it. This is user feedback, with recognition and voice consistency still dependent on the speaker and call conditions.
+- The Python suite passed all 53 tests. Eighteen PostgreSQL booking tests are recorded in the earlier runs. The deployed web authentication smoke check passed 17 checks, including anonymous, forged, valid and revoked sessions.
+- Desktop and phone layouts, login, light/dark workspace themes and the shared voice interface were inspected in connected Chromium. These checks supplement the earlier human Safari call report.
+- Reviewer repository access, private credential handoff and the required video link remain submission items. Video recording is excluded from the agent's work.
+
+The sections below preserve the chronological development evidence. Model choices, test counts, transient failures and pending items in those sections describe their original runs. Use [README](../README.md) and [deployment](deployment.md) for current operation.
+
+## Initial checks — 4 November
 
 - 50 hermetic Python tests: phone/reference formats and pipeline configuration; confirmation required; invalid dates,
   doctors, hours and slots; idempotency; concurrent slot collision; cross-call

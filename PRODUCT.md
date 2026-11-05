@@ -34,15 +34,15 @@ helps staff act. All actions need clear loading,
 error, empty and permission-denied states; support mobile and desktop and keyboard.
 
 ## Appearance and language
-The user requested a modern, restrained silver-glass workspace inspired by
-ByteVoice's actual product identity, using its original wordmark and waveform.
+The workspace shares the landing page's navy, cream and gold identity, using
+ByteVoice's original wordmark and waveform. Light mode uses warm paper and
+gold actions. Dark mode uses navy surfaces and gold accents.
 Light is the default, with an explicit dark-mode toggle. Bangla is the default
 interface language; an explicit saved English choice is respected. Language is
 selectable and persists locally; original patient names,
 phone numbers, booking references and transcript text retain their source values.
 The staff portal, sign-in, data-model view and browser voice test share the system.
-The public landing page introduces the demo and starts a call directly from its hero.
+The public landing page introduces the demo. Its hero button starts the embedded caller and moves focus to the demo controls.
 
 ## Open items
-Speech-provider credentials and account access, final voice audition, database and
-web hosting deployment access. LiveKit project/CLI authorization already exists.
+Reviewer repository access, private credential handoff and a finished video link remain submission items. Services are deployed. Continued speech-quality assessment depends on real speakers and current provider quotas.

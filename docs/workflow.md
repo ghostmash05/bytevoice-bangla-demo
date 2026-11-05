@@ -6,7 +6,7 @@ Deadline: 5 November 2026, 23:59 Bangladesh time (UTC+6).
 |---|---|---|
 | 1 | Fictional clinic and conversation rules | Shared clinic JSON and clinic specification |
 | 2 | Voice prototype | Real browser call; accent, interruptions and digit capture auditioned |
-| 3 | Supabase persistence and auth | Migration, protected reviewer login and real records |
+| 3 | PostgreSQL persistence and application auth | Migration, protected reviewer login and real records |
 | 4 | Booking tools | Conflict prevention, confirmations, validation, idempotency |
 | 5 | Voice-to-booking | Confirmed real call produces the correct database appointment |
 | 6 | Portal | Call list/detail, speaker/timestamp transcript and structured fields |
@@ -49,13 +49,10 @@ Include landing URL, portal URL/login, accessible GitHub repo and video URL. Pre
 the portal with actual fake-patient test calls. Keep all services live during review.
 Reserve final three hours for verification, recording and submission.
 
-## Autonomous scope update
+## Current implementation and handoff
 
-The user excluded landing-page work from the active implementation goal. Stage 8
-and the marketing/3D elements of stage 9 remain deferred. A direct `/try` browser
-caller is included so the voice workflow can be tested without the landing page.
-Public deployment, actual voice calls and repository access remain part of the
-project. The user subsequently excluded video recording from the agent's work.
-The original assessment still requests a video; this is a scope exclusion, not
-evidence that its video requirement has been met. Do not resume recording unless
-the user asks.
+The public landing page is implemented, including a live hero action, bilingual content and 3D scene. The landing, standalone caller and protected voice test share the Mercury Orb and conversation interface. The deployed voice path uses direct Google Gemini Live with native captions and Sulafat.
+
+Video recording is excluded from the agent's work. The assessment requests a video, so a finished link remains a submission item. Reviewer credentials are supplied privately. Verify repository access before submitting.
+
+See [submission readiness](submission-readiness.md) for the handoff and [verification](verification.md) for dated evidence.

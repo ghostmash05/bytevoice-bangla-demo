@@ -1,5 +1,7 @@
 # Redundancy and usability pass — 4 November 2026
 
+Historical design record from November 4. Later landing, typography and palette changes supersede the visual choices below. See [DESIGN.md](../DESIGN.md) for the current system and [README](../README.md) for the current product.
+
 The focus is the working portal and voice demo. The silver theme, authenticated
 records, original transcripts, booking logic and existing submission boundaries
 remain the context for this pass.
