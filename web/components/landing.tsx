@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowUpRight, CalendarCheck2, Mic, ShieldCheck } from "lucide-react";
+import { ArrowDown, ArrowUpRight, CalendarCheck2, Check, Mic, ShieldCheck } from "lucide-react";
 import { Brand } from "./brand";
 import { useLocale } from "./locale";
 import VoiceTest from "./voice-test";
@@ -45,6 +45,16 @@ const copy = {
       ["চিকিৎসার পরামর্শ পাওয়া যাবে?", "চিকিৎসার পরামর্শের জন্য একজন দন্তচিকিৎসকের সঙ্গে কথা বলুন। ডেমো রিসেপশনিস্টের কাছে স্টাফের ফলো-আপের অনুরোধ রাখতে পারেন।"],
     ],
     footer: "ByteVoice · বাংলাদেশের স্বাস্থ্যসেবার জন্য বাংলা ভয়েস এজেন্ট",
+    pricing: "মূল্য ও সেটআপ",
+    pricingIntro: "ব্রাউজারে ডেমো দেখে নিন। আপনার ক্লিনিকের কল ও অ্যাপয়েন্টমেন্টের চাহিদা নিয়ে কথা বলতে আমাদের সঙ্গে যোগাযোগ করুন।",
+    plans: [
+      { name: "ব্রাউজার ডেমো", rate: "বিনামূল্যে", details: ["বাংলায় পাঁচ মিনিট পর্যন্ত কথা বলুন", "নমুনা অ্যাপয়েন্টমেন্ট বুকিং চেষ্টা করুন", "কল চলাকালীন কথোপকথন পড়ুন"], action: "ডেমোতে কথা বলুন", href: "#demo-call" },
+      { name: "ক্লিনিক সেটআপ", rate: "আলোচনা সাপেক্ষে", details: ["কলের পরিমাণ ও সময়সূচি নিয়ে আলোচনা", "অ্যাপয়েন্টমেন্ট প্রক্রিয়া ও স্টাফ পোর্টাল পর্যালোচনা", "আপনার ক্লিনিকের জন্য মূল্য জানতে যোগাযোগ"], action: "মূল্য জানতে যোগাযোগ করুন", href: "mailto:info@bytevoice.com.au" },
+    ],
+    explore: "পণ্য সম্পর্কে",
+    contact: "যোগাযোগ",
+    official: "ByteVoice-এর মূল ওয়েবসাইট",
+    demoNote: "বাংলাদেশের জন্য তৈরি পণ্য ডেমো",
     activeCall: "চলমান কলের নিয়ন্ত্রণে যান",
   },
   en: {
@@ -79,6 +89,16 @@ const copy = {
       ["Can I get medical advice?", "For medical advice, speak to a dental professional. You can ask the demo receptionist to save a follow-up request for staff."],
     ],
     footer: "ByteVoice · Bangla voice AI for healthcare in Bangladesh",
+    pricing: "Pricing and setup",
+    pricingIntro: "Try a call in your browser. For a clinic rollout, talk to us about your call volume and appointment workflow.",
+    plans: [
+      { name: "Browser demo", rate: "Free", details: ["Speak Bangla for up to five minutes", "Try a fictional appointment booking", "Read captions during the call"], action: "Try the live demo", href: "#demo-call" },
+      { name: "Clinic rollout", rate: "Contact for pricing", details: ["Discuss call volume and coverage hours", "Review booking workflows and staff access", "Ask about pricing for your clinic"], action: "Ask about clinic pricing", href: "mailto:info@bytevoice.com.au" },
+    ],
+    explore: "Explore",
+    contact: "Contact",
+    official: "ByteVoice website",
+    demoNote: "Product demo for Bangladesh",
     activeCall: "Go to the active call",
   },
 };
@@ -179,6 +199,7 @@ export default function Landing() {
         <nav aria-label={language === "bn" ? "প্রধান নেভিগেশন" : "Main navigation"}>
           <a href="#how">{text.how}</a>
           <a href="#scenarios">{text.scenarios}</a>
+          <a href="#pricing">{text.pricing}</a>
         </nav>
         <div className="landing-nav-actions">
           <button className="landing-language" onClick={toggleLanguage} lang={language === "bn" ? "en" : "bn"}>
@@ -253,14 +274,45 @@ export default function Landing() {
           </div>
         </section>
 
-        <section className="landing-faq landing-width" aria-labelledby="faq-title">
+        <section id="pricing" className="landing-pricing" aria-labelledby="pricing-title">
+          <div className="landing-width landing-pricing-inner">
+            <h2 id="pricing-title">{text.pricing}</h2>
+            <p>{text.pricingIntro}</p>
+            <div className="landing-plans">
+              {text.plans.map((plan) => (
+                <article key={plan.href}>
+                  <h3>{plan.name}</h3>
+                  <p className="landing-plan-rate">{plan.rate}</p>
+                  <ul>{plan.details.map((item) => <li key={item}><Check size={17} aria-hidden="true" />{item}</li>)}</ul>
+                  <a href={plan.href}>{plan.action}<ArrowUpRight size={16} aria-hidden="true" /></a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" className="landing-faq landing-width" aria-labelledby="faq-title">
           <h2 id="faq-title">{text.faq}</h2>
           <div>{text.answers.map(([question, answer]) => (
             <details key={question}><summary>{question}</summary><p>{answer}</p></details>
           ))}</div>
         </section>
       </main>
-      <footer className="landing-footer landing-width"><Brand /><span>{text.footer}</span><Link href="/portal">{text.portal}<ArrowUpRight size={15} aria-hidden="true" /></Link></footer>
+      <footer className="landing-footer landing-width">
+        <div className="landing-footer-brand"><Link href="/" aria-label="ByteVoice"><Brand /></Link><p>{text.footer}</p></div>
+        <nav aria-label={text.explore}>
+          <h2>{text.explore}</h2>
+          <a href="#how">{text.how}</a><a href="#scenarios">{text.scenarios}</a>
+          <a href="#pricing">{text.pricing}</a><a href="#faq">{text.faq}</a>
+        </nav>
+        <div className="landing-footer-contact">
+          <h2>{text.contact}</h2>
+          <a href="mailto:info@bytevoice.com.au">info@bytevoice.com.au</a>
+          <a href="https://bytevoice.com.au/">{text.official}<ArrowUpRight size={15} aria-hidden="true" /></a>
+          <Link href="/portal">{text.portal}<ArrowUpRight size={15} aria-hidden="true" /></Link>
+        </div>
+        <p className="landing-footer-note">{text.demoNote}</p>
+      </footer>
     </div>
   );
 }

@@ -1,4 +1,9 @@
 export const bangla: Record<string, string> = {
+  "Preview conversation": "কথোপকথনের নমুনা",
+  "Call conversation": "কলের কথোপকথন",
+  "You": "আপনি",
+  "Captions appear here as you speak.": "কথা বললে এখানে তা লেখা হবে।",
+  "No captions for this call.": "এই কলের কোনো কথোপকথন পাওয়া যায়নি।",
   "Talk to our Bangla caller": "বাংলায় কথা বলুন",
   "How can I help?": "কীভাবে সাহায্য করতে পারি?",
   "Microphone access was blocked. Allow it in your browser’s site settings, then try again.": "মাইক্রোফোনের অনুমতি বন্ধ আছে। ব্রাউজারের সাইট সেটিংসে অনুমতি দিয়ে আবার চেষ্টা করুন।",

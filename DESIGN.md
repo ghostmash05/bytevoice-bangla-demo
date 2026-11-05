@@ -257,7 +257,7 @@ Voice-test content is bounded to (1280px), with a main console and (270px) guide
 
 ### Landing layout
 
-The landing uses a (1540px) maximum content width and a full-bleed hero with a (100svh) minimum above phone widths. A (.9fr / 1.1fr) split keeps the localized promise, working call and consent text on the left and gives Glass Flower more room on the right. The cream walkthrough pairs a ruled step list with the sample booking. The navy demo section places example prompts beside an embedded caller. The hero and demo controls share a single call slot on the page. Side gutters use `clamp(32px, 5.5vw, 105px)`, then (32px) at (900px) and (18px) at (680px). At (680px), the hero stacks with copy and call controls above Glass Flower, and the lower sections stack. Language and staff portal controls remain visible in the compact header.
+The landing uses a (1540px) maximum content width and a full-bleed hero with a (100svh) minimum above phone widths. A (.9fr / 1.1fr) split keeps the localized promise, working call and consent text on the left and gives Glass Flower more room on the right. The cream walkthrough pairs a ruled step list with the sample booking. The navy demo section puts a voice orb and call controls beside a two-sided conversation. A labeled sample gives way to call captions once the demo starts. Example prompts follow the caller. The hero and demo share a single call slot. A cream pricing section describes the free browser demo and contact-based clinic rollout. The footer groups product navigation and contact details. Side gutters use `clamp(32px, 5.5vw, 105px)`, then (32px) at (900px) and (18px) at (680px). At (680px), the hero stacks with copy and call controls above Glass Flower, and the lower sections stack. Language and staff portal controls remain visible in the compact header.
 
 ## Elevation & Depth
 
@@ -275,7 +275,7 @@ Background, border, text and shadow transition over (.18s ease). Only the connec
 
 ### Landing art and motion
 
-The hero uses the user-supplied Iridescent Vertical Ridges backdrop. The right side gives the dark glass a lighter field and navy scrims keep the copy readable. Phones use a portrait crop. The scenario band uses Midnight Satin Folds under a navy gradient.
+The hero uses a generated widescreen fluted-glass backdrop based on the user-supplied Iridescent Vertical Ridges image. The right side gives the dark glass a lighter field and navy scrims keep the copy readable. Phones use a portrait crop. The demo section uses Midnight Satin Folds under a navy gradient.
 
 The hero uses the original pmndrs Glass Flower model, transmission materials, lights and color grading. The Three.js Points Waves grid fills a separate full-width layer anchored to the bottom of the walkthrough.
 

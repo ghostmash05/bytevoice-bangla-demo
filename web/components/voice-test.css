@@ -1,0 +1,77 @@
+.call-conversation {
+  padding: 20px;
+  min-width: 0;
+  border-top: 1px solid var(--line);
+  background: var(--paper);
+}
+.conversation-title {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+  margin-bottom: 14px;
+}
+.conversation-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 295px;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-color: var(--control) transparent;
+}
+.call-conversation[data-preview="true"] .conversation-messages { max-height: none; }
+.conversation-messages article {
+  width: fit-content;
+  max-width: min(88%, 42ch);
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 13px 13px 13px 4px;
+  background: var(--raised);
+}
+.conversation-messages .conversation-caller {
+  align-self: flex-end;
+  border-radius: 13px 13px 4px 13px;
+  background: var(--selected);
+}
+.conversation-messages article span { font-size: 11px; color: var(--muted); font-weight: 650; }
+.conversation-messages article p {
+  color: var(--ink);
+  font: 400 15px/1.65 "Anek Bangla", "Manrope", sans-serif;
+  margin: 4px 0 0;
+  letter-spacing: normal;
+  overflow-wrap: anywhere;
+}
+.conversation-empty { color: var(--muted); font-size: 14px; margin: 0; }
+
+.voice-orb {
+  width: clamp(106px, 14vw, 155px);
+  aspect-ratio: 1;
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 14px;
+  color: #f3cd78;
+  border-radius: 50%;
+  isolation: isolate;
+  background: radial-gradient(circle at 40% 37%, #cf9c3b24, #192237 44%, #0c1327 72%, transparent 73%);
+}
+.voice-orb::after {
+  content: "";
+  position: absolute;
+  inset: 5%;
+  border-radius: 50%;
+  border: 1px solid #e5bd6a48;
+  box-shadow: 0 10px 28px #0206119e, inset 0 2px 16px #e5bd6a14;
+}
+.voice-orb svg { width: 100%; height: 100%; transition: color 240ms ease; }
+.voice-orb[data-phase="listening"] { color: #abd8ed; }
+.voice-orb[data-phase="thinking"], .voice-orb[data-phase="connecting"] { color: #c5b7f2; }
+.voice-orb[data-phase="muted"], .voice-orb[data-phase="ended"], .voice-orb[data-phase="error"] { color: #a6aebc; }
+.voice-orb[data-phase="speaking"] svg { animation: orb-speech 1.25s ease-in-out infinite; }
+.voice-orb[data-phase="connecting"] svg, .voice-orb[data-phase="thinking"] svg { animation: orb-speech 2.4s ease-in-out infinite; }
+@keyframes orb-speech {
+  50% { transform: scale(1.08) rotate(5deg); opacity: .72; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .voice-orb svg { animation: none !important; transition: none; }
+}

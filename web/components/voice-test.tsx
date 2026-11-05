@@ -13,9 +13,70 @@ import {
   type RemoteTrack,
 } from "livekit-client";
 import { api, label as formatLabel } from "@/lib/api";
+import "./voice-test.css";
 
 type State = "idle" | "connecting" | "live" | "ended" | "error";
 type Turn = { id: string; text: string; speaker: string };
+
+const orbDots = Array.from({ length: 320 }, (_, index) => {
+  const y = 1 - 2 * (index + 0.5) / 320;
+  const angle = index * Math.PI * (3 - Math.sqrt(5));
+  const radius = Math.sqrt(1 - y * y);
+  const depth = radius * Math.sin(angle);
+  return {
+    x: (64 + 52 * radius * Math.cos(angle)).toFixed(2),
+    y: (64 + 52 * y).toFixed(2),
+    radius: (0.64 + (depth + 1) * 0.47).toFixed(2),
+    opacity: (0.18 + (depth + 1) * 0.37).toFixed(2),
+  };
+});
+
+function VoiceOrb({ phase }: { phase: string }) {
+  return (
+    <div className="voice-orb" data-phase={phase} aria-hidden="true">
+      <svg viewBox="0 0 128 128" fill="currentColor">
+        {orbDots.map((dot, index) => (
+          <circle key={index} cx={dot.x} cy={dot.y} r={dot.radius} opacity={dot.opacity} />
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+function Conversation({ turns, preview, empty }: { turns: Turn[]; preview: boolean; empty: string }) {
+  const { t } = useLocale();
+  const viewport = useRef<HTMLDivElement>(null);
+  const follow = useRef(true);
+  useEffect(() => {
+    const element = viewport.current;
+    if (element && !preview && follow.current) element.scrollTop = element.scrollHeight;
+  }, [preview, turns]);
+  const title = t(preview ? "Preview conversation" : "Call conversation");
+  return (
+    <div className="call-conversation" data-preview={preview}>
+      <div className="conversation-title">{title}</div>
+      <div
+        className="conversation-messages"
+        role="region"
+        aria-label={title}
+        tabIndex={0}
+        ref={viewport}
+        onScroll={(event) => {
+          const element = event.currentTarget;
+          follow.current = element.scrollHeight - element.clientHeight - element.scrollTop < 48;
+        }}
+      >
+        {turns.length === 0 && <p className="conversation-empty">{empty}</p>}
+        {turns.map((turn) => (
+          <article key={turn.id} className={turn.speaker === "Caller" ? "conversation-caller" : "conversation-agent"}>
+            <span>{t(turn.speaker === "Caller" ? "You" : "AI receptionist")}</span>
+            <p lang="bn">{turn.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function VoiceTest({ hero = false, demo = false, callGate }: {
   hero?: boolean;
@@ -80,9 +141,7 @@ export default function VoiceTest({ hero = false, demo = false, callGate }: {
         setAgentState("Finishing your call");
         return;
       }
-      setAgentState(
-        label(participant.attributes["lk.agent.state"] || "listening"),
-      );
+      setAgentState(participant.attributes["lk.agent.state"] || "listening");
     }
   }
   async function start() {
@@ -246,6 +305,11 @@ export default function VoiceTest({ hero = false, demo = false, callGate }: {
       );
     }
   }
+  const previewTurns: Turn[] = demo && state === "idle" ? [
+    { id: "welcome", speaker: "AI receptionist", text: "মাশরাফি’স ডেন্টাল থেকে বলছি। কীভাবে সাহায্য করতে পারি?" },
+    { id: "request", speaker: "Caller", text: "শনিবার বিকেলে স্কেলিংয়ের জন্য সময় আছে?" },
+    { id: "reply", speaker: "AI receptionist", text: "অবশ্যই, শনিবার বিকেলে খালি সময় আছে কি না দেখে বলছি" },
+  ] : [];
   return (
       <div className={demo ? "hero-caller demo-caller" : hero ? "hero-caller" : "test-layout"}>
         {!hero && <header className="voice-page-heading"><div><h1>{t("Talk to your receptionist")}</h1>
@@ -263,12 +327,12 @@ export default function VoiceTest({ hero = false, demo = false, callGate }: {
             </span>
           </div>}
           {(!hero || demo || state !== "idle") && <div className="call-stage">
-            <div className="voice-mark">
+            {demo ? <VoiceOrb phase={state === "live" ? (muted && agentState === "listening" ? "muted" : agentState) : state} /> : <div className="voice-mark">
               <Brand mark />
-            </div>
+            </div>}
             <h3>
               {state === "live"
-                ? t(agentState)
+                ? label(agentState)
                 : state === "connecting"
                   ? t("Connecting your call…")
                   : state === "ended"
@@ -311,15 +375,13 @@ export default function VoiceTest({ hero = false, demo = false, callGate }: {
               </button>
             )}
           </div>
-          {turns.length > 0 && (
-            <div className="test-transcript" aria-label={t("Live transcript")}>
-              {turns.map((turn) => (
-                <article key={turn.id}>
-                  <h3>{t(turn.speaker)}</h3>
-                  <p lang="bn">{turn.text}</p>
-                </article>
-              ))}
-            </div>
+          {(demo || turns.length > 0) && (
+            <Conversation
+              key={state === "idle" ? "preview" : "call"}
+              turns={state === "idle" ? previewTurns : turns}
+              preview={state === "idle"}
+              empty={t(state === "ended" || state === "error" ? "No captions for this call." : "Captions appear here as you speak.")}
+            />
           )}
         </section>
         <p className="consent-note">
