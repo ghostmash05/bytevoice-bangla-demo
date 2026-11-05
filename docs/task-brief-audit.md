@@ -54,7 +54,7 @@ not constitute a new audio or production-database test.
 
 | Deliverable or criterion | Brief | Current status |
 |---|---|---|
-| Public responsive landing page, at least three sections | Required, §3/§7, p2/4; design is 20% of assessment | Implemented at `/` with a hero, call walkthrough, example prompts and FAQ |
+| Public responsive landing page, at least three sections | Required, §3/§7, p2/4; design is 20% of assessment | Implemented at `/` for clinic and hospital teams in Bangladesh, with a product hero, feature walkthrough, fictional dental demo and FAQ |
 | Prominent live-call action in the hero | Required, §4/§7, p2/4 | The hero action starts the browser call in place |
 | Bangla caller | Required, §5; caller quality is 30% | Implemented; subjective and final human-quality limits above remain |
 | Portal live URL and login | Required, §6/§7; data structure/portal is 25% | Deployed at `/portal`; reviewer credentials still need private handoff |

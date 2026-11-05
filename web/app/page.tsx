@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Landing from "@/components/landing";
 
 export const metadata: Metadata = {
-  title: "ByteVoice Bangla · মাশরাফি’স ডেন্টাল",
-  description: "বাংলায় কথা বলে ডেমো অ্যাপয়েন্টমেন্ট নিন। Try the Bangla voice receptionist for Mashrafi’s Dental.",
+  title: "ByteVoice Bangla · Voice AI for Healthcare",
+  description: "বাংলাদেশের ডেন্টাল ক্লিনিক ও হাসপাতালের জন্য বাংলা ভয়েস এজেন্ট। Try ByteVoice’s live Bangla caller and see how it handles patient calls and appointments.",
 };
 
 export default function Home() {

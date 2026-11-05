@@ -98,6 +98,9 @@
   text-wrap: initial;
 }
 .landing h1 span { color: var(--accent); }
+@media (min-width: 681px) {
+  .landing h1:lang(bn) { font-size: clamp(34px, 11.6cqi, 86px); }
+}
 .landing-lede {
   font-size: clamp(17px, 1.5vw, 22px);
   max-width: 43ch;
@@ -218,6 +221,7 @@
   background: linear-gradient(90deg, #101a2ef7, #131f379c), url("/landing/midnight-satin.webp") center 52% / cover #131f37;
 }
 .landing-scenarios-inner { display: grid; grid-template-columns: minmax(0, .65fr) minmax(0, 1fr); gap: clamp(36px, 8vw, 130px); }
+.landing-scenarios-intro { max-width: 38ch; margin: -10px 0 24px; color: var(--muted); }
 .landing-example-list article {
   padding: 21px 0 24px;
   border-top: 1px solid #53627b;

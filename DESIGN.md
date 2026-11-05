@@ -211,7 +211,7 @@ Light and Bangla are the defaults, with an explicit dark toggle and BN/EN contro
 
 ### Public landing page
 
-The public demo at `/` opens on a full-viewport reception scene with a folded glass waveform, a large Bangla headline and a gold call pill. A floating glass header carries the ByteVoice wordmark, section links and language switch. A slim divider separates the staff portal link. A warm cream walkthrough follows the hero. Bangla is the default, and the English switch uses the shared saved language preference. The landing palette is independent of the workspace theme setting.
+The public landing page at `/` introduces ByteVoice's Bangla voice agent to clinic and hospital teams in Bangladesh. The full-viewport reception scene pairs a folded glass waveform with a Bangla headline and a gold call button. A floating glass header carries the ByteVoice wordmark, section links and language switch. A slim divider separates the staff portal link. A warm cream product walkthrough follows the hero. Mashrafi’s Dental is the fictional clinic used in the live demo. Bangla is the default, and the English switch uses the shared saved language preference. The landing palette is independent of the workspace theme setting.
 
 ## Colors
 
@@ -243,7 +243,7 @@ Frontmatter records the headline, title, body, label and transcript roles. Main 
 
 ### Landing typography
 
-Anek Bangla handles Bengali glyphs, and Manrope handles Latin. The landing display uses weight (720) and line height (1.04). It scales against the width of its copy column. The two localized headline phrases carry equal typographic weight and can wrap naturally. Gold highlights the booking phrase. The hero introduction is bounded to (43ch). At phone widths the headline uses `clamp(41px, 10.6vw, 62px)` with a line height of (1.1).
+Anek Bangla handles Bengali glyphs, and Manrope handles Latin. The landing display uses weight (720) and line height (1.04). It scales against the width of its copy column, with a smaller scale for the longer desktop Bangla phrase. The localized headline lines omit terminal punctuation. Gold highlights the second phrase. The hero introduction is bounded to (43ch). At phone widths the headline uses `clamp(41px, 10.6vw, 62px)` with a line height of (1.1).
 
 ## Layout
 
