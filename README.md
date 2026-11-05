@@ -172,7 +172,7 @@ The authenticated smoke check uses local reviewer credentials, creates and revok
 - [Accounts and environment setup](docs/accounts.md)
 - [Verification record](docs/verification.md)
 - [Technical brief cross-check](docs/task-brief-audit.md)
-- [Submission checklist and unsent email draft](docs/submission-readiness.md)
+- [Submission checklist](docs/submission-readiness.md)
 - [Optional demonstration outline](docs/demo-walkthrough.md)
 - [Design system](DESIGN.md)
 

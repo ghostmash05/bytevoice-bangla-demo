@@ -35,5 +35,4 @@ The landing page, portal and direct caller are deployed. Verify reviewer access
 to the repository and provide login details privately. Do not send an HR submission
 until the required links and the video are actually accessible.
 
-See docs/submission-readiness.md for the requirement/evidence checklist and unsent
-email draft and remaining handoff items.
+See docs/submission-readiness.md for the requirement/evidence checklist and remaining handoff items.

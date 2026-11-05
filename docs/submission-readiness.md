@@ -1,6 +1,6 @@
 # Submission readiness — 5 November 2026
 
-This is a checklist and an unsent email draft. It is not evidence of submission.
+This checklist records readiness and remaining submission items.
 The landing page, embedded caller and protected staff portal are deployed.
 Reviewer credentials, repository access and a video link remain submission items.
 
@@ -21,34 +21,7 @@ Reviewer credentials, repository access and a video link remain submission items
 | Reviewer login | Generated account in ignored .local/reviewer-credentials.txt | Copy credentials privately into the actual submission; never commit the password |
 | Video, maximum 3 minutes | docs/demo-walkthrough.md is the recording plan; no finished video | Recording excluded from agent work by the user; original assessment requirement remains |
 | Landing page/hero | Public bilingual page at / with a live hero call button, Glass Flower and embedded Mercury caller | One click starts the call and moves to the demo controls |
-| Submission email | Draft below | User reviews and sends only after all supplied links work |
-
-## Unsent email draft
-
-To: hr@strategybyte.com.au
-
-Subject: AI Engineer Task Submission: Mashrafi Rahman
-
-Hi StrategyByte team,
-
-Here is my Bangla receptionist assessment project:
-
-- Landing page and live caller: https://bytevoice-bangla-portal.vercel.app/
-- Staff portal: https://bytevoice-bangla-portal.vercel.app/portal
-- Source and README: https://github.com/ghostmash05/bytevoice-bangla-demo
-- Video overview: [INSERT VERIFIED VIDEO LINK]
-
-Reviewer login: [INSERT USERNAME AND PASSWORD PRIVATELY]
-
-The custom LiveKit agent supports confirmed bookings, enquiries, rescheduling,
-cancellations and staff callbacks, with persistent call transcripts and action
-history. The README explains the architecture, storage, verification and limitations.
-Please use fictional patient details when testing.
-
-Thank you for the opportunity. I look forward to walking you through the build.
-
-Best,
-Mashrafi Rahman
+| Submission email | Include the required links and reviewer login | User reviews and sends after all supplied links work |
 
 ## Final send check
 
