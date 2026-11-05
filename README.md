@@ -133,6 +133,9 @@ It can run `web\node_modules\next\dist\bin\next` directly with `build` or `start
   as a full-width layer in the walkthrough. The original model, color lookup table and studio
   lighting are served locally. The [Blue Photo Studio HDRI](https://polyhaven.com/a/blue_photo_studio)
   is from Poly Haven. Source notices are in `web/public/landing/reference`.
+  The voice demo uses the [Mercury Orb from VoiceOrbs](https://voiceorbs.vercel.app/orbs/mercury-orb)
+  at [upstream revision `8b27999`](https://github.com/amunozdev/voiceorbs/tree/8b2799917734f52c9293a489e08982ca5b0187e9).
+  Its MIT license is included in `web/components/vendor/voiceorbs`.
 
 For optional **local-only scripted fixtures**, run:
 `.\.venv\Scripts\python.exe -m backend.fixtures --confirm-test-data`.

@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Mic, MicOff, Phone, PhoneOff, CalendarCheck2, RefreshCw, MessageSquareText } from "lucide-react";
 import { Brand } from "@/components/brand";
@@ -13,34 +14,23 @@ import {
   type RemoteTrack,
 } from "livekit-client";
 import { api, label as formatLabel } from "@/lib/api";
+import type { OrbState } from "./vendor/voiceorbs/lib/orb-state";
 import "./voice-test.css";
 
 type State = "idle" | "connecting" | "live" | "ended" | "error";
 type Turn = { id: string; text: string; speaker: string };
 
-const orbDots = Array.from({ length: 320 }, (_, index) => {
-  const y = 1 - 2 * (index + 0.5) / 320;
-  const angle = index * Math.PI * (3 - Math.sqrt(5));
-  const radius = Math.sqrt(1 - y * y);
-  const depth = radius * Math.sin(angle);
-  return {
-    x: (64 + 52 * radius * Math.cos(angle)).toFixed(2),
-    y: (64 + 52 * y).toFixed(2),
-    radius: (0.64 + (depth + 1) * 0.47).toFixed(2),
-    opacity: (0.18 + (depth + 1) * 0.37).toFixed(2),
-  };
+const MercuryOrb = dynamic(() => import("./vendor/voiceorbs/orbe/mercury-orb/mercury-orb").then((module) => module.MercuryOrb), {
+  ssr: false,
+  loading: () => <div className="voice-orb-placeholder" />,
 });
 
-function VoiceOrb({ phase }: { phase: string }) {
-  return (
-    <div className="voice-orb" data-phase={phase} aria-hidden="true">
-      <svg viewBox="0 0 128 128" fill="currentColor">
-        {orbDots.map((dot, index) => (
-          <circle key={index} cx={dot.x} cy={dot.y} r={dot.radius} opacity={dot.opacity} />
-        ))}
-      </svg>
-    </div>
-  );
+function getOrbState(state: State, agentState: string, muted: boolean): OrbState {
+  if (state === "ended") return "disabled";
+  if (state !== "live") return state;
+  if (agentState === "listening") return muted ? "disabled" : "listening";
+  if (agentState === "thinking" || agentState === "speaking") return agentState;
+  return "connecting";
 }
 
 function Conversation({ turns, preview, empty }: { turns: Turn[]; preview: boolean; empty: string }) {
@@ -100,6 +90,18 @@ export default function VoiceTest({ hero = false, demo = false, callGate }: {
     expectedEnding = useRef(false),
     timer = useRef<ReturnType<typeof setTimeout> | null>(null),
     agentTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const orbState = getOrbState(state, agentState, muted);
+  const orbLevel = useMemo(() => ({
+    get current() {
+      const currentRoom = room.current;
+      if (!currentRoom) return -1;
+      if (orbState === "listening") return currentRoom.localParticipant.audioLevel;
+      if (orbState === "speaking") {
+        return currentRoom.activeSpeakers.find((participant) => participant.kind === ParticipantKind.AGENT)?.audioLevel ?? -1;
+      }
+      return -1;
+    },
+  }), [orbState]);
   useEffect(
     () => () => {
       cancelled.current = true;
@@ -327,7 +329,7 @@ export default function VoiceTest({ hero = false, demo = false, callGate }: {
             </span>
           </div>}
           {(!hero || demo || state !== "idle") && <div className="call-stage">
-            {demo ? <VoiceOrb phase={state === "live" ? (muted && agentState === "listening" ? "muted" : agentState) : state} /> : <div className="voice-mark">
+            {demo ? <div className="voice-orb" aria-hidden="true"><MercuryOrb state={orbState} size={144} speed={0.85} levelRef={orbLevel} /></div> : <div className="voice-mark">
               <Brand mark />
             </div>}
             <h3>

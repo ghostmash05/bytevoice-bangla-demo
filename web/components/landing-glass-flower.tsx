@@ -73,6 +73,8 @@ function Model(props: ThreeElements["group"]) {
           iridescenceThicknessMaximum={1400}
           clearcoat={0.8}
           clearcoatRoughness={0.23}
+          emissive="#183858"
+          emissiveIntensity={0.28}
           envMap={environment}
           envMapIntensity={0.34}
         />
