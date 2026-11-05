@@ -28,20 +28,20 @@
 .landing-nav {
   position: absolute;
   z-index: 5;
-  inset: 23px 0 auto;
-  min-height: 68px;
+  inset: 25px 0 auto;
+  min-height: 66px;
   padding-inline: clamp(16px, 2.3vw, 36px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  border-radius: 22px;
+  border-radius: 18px;
 }
-.landing-nav, .landing-scene-label, .landing-portal, .hero-caller .call-console:not(.console-idle) {
-  border: 1px solid #b6d0ff40;
-  border-top-color: #e8e7d66b;
-  background: linear-gradient(155deg, #dbe9ff1f, transparent 58%), #0b1428a6;
-  box-shadow: inset 0 1px #fffaeb14, 0 16px 38px #02061558;
+.landing-nav, .landing-motion-control, .hero-caller .call-console:not(.console-idle) {
+  border: 1px solid #b6d0ff31;
+  border-top-color: #e8e7d655;
+  background: linear-gradient(121deg, #dbe9ff23, transparent 45%, #9bbee614), #0b142880;
+  box-shadow: inset 0 1px #fffaeb12, 0 16px 38px #02061558;
   backdrop-filter: blur(16px) saturate(1.35);
 }
 
@@ -60,7 +60,9 @@
   color: var(--ink);
 }
 .landing-language:hover { background: #f0f4ff18; }
-.landing-portal { padding: 9px 16px; border-radius: 99px; color: var(--ink); }
+.landing-portal { padding: 5px 0 5px 20px; border-inline-start: 1px solid #dce7ff32; color: var(--ink); }
+.landing-portal svg { transition: transform 180ms ease-out; }
+.landing-portal:hover svg { transform: translate(2px, -2px); }
 
 .landing-hero {
   position: relative;
@@ -77,10 +79,9 @@
   z-index: -1;
   inset: 0;
   background:
-    linear-gradient(90deg, #070d1b 4%, #070d1bd9 31%, transparent 65%),
-    linear-gradient(0deg, #070d1b 0%, transparent 27%),
-    radial-gradient(ellipse at 74% 48%, #4267984d, transparent 58%),
-    url("/landing/midnight-satin.webp") center 56% / cover no-repeat #080f20;
+    linear-gradient(90deg, #070d1bf2 5%, #070d1bd9 35%, #070d1b28 64%),
+    linear-gradient(0deg, #070d1bd9 0%, transparent 23%, transparent 79%, #070d1b48),
+    url("/landing/dhaka-reception.webp") center 57% / cover no-repeat #080f20;
 }
 .landing-hero-inner {
   display: grid;
@@ -106,10 +107,20 @@
   position: relative;
   min-width: 0;
   isolation: isolate;
-  margin: -24px -6% -46px -3%;
+  margin: 23px -6% -53px -3%;
+}
+.landing-hero-art::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: auto 12% 1% 11%;
+  height: 15%;
+  background: radial-gradient(ellipse, #030610d9 12%, #080e20b3 36%, transparent 69%);
+  transform: translateY(23%);
+  pointer-events: none;
 }
 .landing-mascot {
-  height: clamp(400px, min(55vw, 73svh), 780px);
+  height: clamp(370px, min(49vw, 66svh), 695px);
   position: relative;
   display: grid;
   place-items: center;
@@ -119,19 +130,24 @@
 .mascot-still { object-fit: contain; padding: 10px 16px; }
 .landing-mascot[data-rendered="true"] .mascot-still { visibility: hidden; }
 .landing-mascot canvas { display: block; z-index: 1; }
-.landing-scene-label {
+.landing-motion-control {
   position: absolute;
   z-index: 2;
-  bottom: 15%;
-  right: 1%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 11px 17px;
-  border-radius: 13px;
-  color: var(--ink);
+  bottom: 2%;
+  right: 3%;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 50%;
+  color: var(--muted);
 }
-.landing-scene-label svg { color: var(--accent); }
+.landing-motion-control:hover { color: var(--ink); background-color: #172641; }
+@media (prefers-reduced-motion: reduce) {
+  .landing-motion-control { display: none; }
+  .landing-portal svg { transition: none; }
+}
 .landing-hero-foot { position: absolute; inset: auto 0 23px; }
 .landing-scroll { color: var(--muted); text-decoration: none; }
 .landing-scroll:hover { color: var(--ink); }
@@ -166,7 +182,7 @@
   background: #1a1b21;
   color: #ffe3a1;
 }
-.hero-caller .consent-note { margin: 14px 0 0; color: var(--muted); font-size: 12px; max-width: 60ch; }
+.hero-caller .consent-note { margin: 16px 0 0; color: var(--muted); font-size: 13px; line-height: 1.65; max-width: 59ch; }
 .hero-caller .call-stage { min-height: 0; padding: 22px 18px; background: #17243d; }
 .hero-caller .call-stage .voice-mark { display: none; }
 .hero-caller .call-stage h3 { color: var(--ink); }
@@ -196,7 +212,10 @@
 .landing-record-details { display: flex; justify-content: space-between; gap: 16px; font-size: 18px; border-top: 1px solid #a9a69e; padding-top: 14px; }
 .landing-record figcaption { color: #4d5564; margin-top: 24px; }
 
-.landing-scenarios { padding-block: 98px; background: #131f37; }
+.landing-scenarios {
+  padding-block: 98px;
+  background: linear-gradient(90deg, #101a2ef7, #131f379c), url("/landing/midnight-satin.webp") center 52% / cover #131f37;
+}
 .landing-scenarios-inner { display: grid; grid-template-columns: minmax(0, .65fr) minmax(0, 1fr); gap: clamp(36px, 8vw, 130px); }
 .landing-example-list article {
   padding: 21px 0 24px;
@@ -217,7 +236,6 @@
   .landing-width { width: calc(100% - 64px); }
   .landing-nav nav { gap: 16px; }
   .landing-nav-actions { gap: 13px; }
-  .landing-scene-label { display: none; }
 }
 @media (max-width: 680px) {
   .landing-width { width: calc(100% - 36px); }
@@ -225,7 +243,7 @@
   .landing .brand-logo { width: 86px; }
   .landing-nav nav { display: none; }
   .landing-nav-actions { gap: 4px; }
-  .landing-portal { font-size: 12px; padding: 7px 9px; }
+  .landing-portal { font-size: 12px; padding: 5px 0 5px 8px; }
   .landing-language { padding-inline: 7px; }
   .landing-hero { min-height: 0; padding-block: 112px 58px; }
   .landing-hero-inner { grid-template-columns: 1fr; gap: 26px; }
@@ -236,6 +254,7 @@
       url("/landing/midnight-satin-mobile.webp") center / cover no-repeat #080f20;
   }
   .landing-hero-art { margin: -8px -6px -9px; }
+  .landing-motion-control { top: 4%; bottom: auto; right: 3%; }
   .landing h1 { font-size: clamp(41px, 10.6vw, 62px); line-height: 1.1; }
   .landing-lede { margin-bottom: 23px; }
   .landing-mascot { height: clamp(280px, 84vw, 420px); }

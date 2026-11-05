@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-05T09:12:05.386174+00:00",
+  "generatedAt": "2026-11-05T09:28:20.292427+00:00",
   "title": "Design System: ByteVoice Bangla workspace",
   "extensions": {
     "colorMeta": {
@@ -1176,8 +1176,8 @@
       },
       {
         "name": "landing-glass",
-        "value": "inset 0 1px #fffaeb14, 0 16px 38px #02061558",
-        "purpose": "Glass header, scene label and active call console."
+        "value": "inset 0 1px #fffaeb12, 0 16px 38px #02061558",
+        "purpose": "Glass header, circular motion control and active call console."
       },
       {
         "name": "landing-call-pill",
@@ -1202,9 +1202,9 @@
         "purpose": "Connecting opacity reaches .55 at midpoint; disabled for reduced motion."
       },
       {
-        "name": "landing-portrait-parallax",
-        "value": "rotation interpolation .13 per frame",
-        "purpose": "Pointer tilt settles at rest. The still remains available with reduced motion or unavailable WebGL."
+        "name": "landing-mascot-motion",
+        "value": "30 fps target with 0.13 pointer rotation interpolation",
+        "purpose": "A subdivided mesh animates the parrot head, neck and breath. Pause/play controls motion. Offscreen and hidden tabs suspend rendering. Reduced motion at page load uses the still."
       }
     ],
     "breakpoints": [
@@ -1319,9 +1319,9 @@
       "name": "Landing glass navigation",
       "kind": "nav",
       "refersTo": "landing-navigation",
-      "description": "Floating navigation with language and staff portal controls.",
+      "description": "Floating glass navigation with a slim divider before the staff portal link.",
       "html": "<div class=\"ds-landing-nav-stage\"><nav class=\"ds-landing-nav\" aria-label=\"Landing navigation\"><strong>ByteVoice</strong><a class=\"ds-landing-nav-section\" href=\"#how\">How it works</a><span class=\"ds-landing-actions\"><button type=\"button\" lang=\"bn\">বাংলা</button><a class=\"ds-landing-portal\" href=\"/portal\">Staff portal <svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a></span></nav></div>",
-      "css": ".ds-landing-nav-stage{padding:18px;background:radial-gradient(ellipse at 78% 44%,#3c5682 0%,#1b2c4e 32%,#080f20 77%)}.ds-landing-nav,.ds-landing-portal{border:1px solid #b6d0ff40;border-top-color:#e8e7d66b;background:linear-gradient(155deg,#dbe9ff1f,transparent 58%),#0b1428a6;box-shadow:inset 0 1px #fffaeb14,0 16px 38px #02061558;backdrop-filter:blur(16px) saturate(1.35)}.ds-landing-nav{font-family:Manrope,\"Anek Bangla\",sans-serif;min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-inline:clamp(16px,2.3vw,36px);border-radius:22px;color:#f6f1e6}.ds-landing-nav a{color:#bec8d9;text-decoration:none}.ds-landing-nav a:hover,.ds-landing-nav .ds-landing-portal{color:#f6f1e6}.ds-landing-actions,.ds-landing-portal{display:inline-flex;align-items:center;gap:8px}.ds-landing-portal{border-radius:99px;padding:9px 16px}.ds-landing-actions button{font:inherit;min-height:42px;padding:7px 15px;border:0;border-radius:99px;background:transparent;color:inherit;cursor:pointer}.ds-landing-actions button:hover{background:#f0f4ff18}.ds-landing-nav :is(a,button):focus-visible{outline:3px solid #f0c96d;outline-offset:3px}@media(max-width:680px){.ds-landing-nav{min-height:59px;padding-inline:12px;border-radius:17px}.ds-landing-nav .ds-landing-nav-section{display:none}.ds-landing-portal{font-size:12px;padding:7px 9px}.ds-landing-actions button{padding-inline:7px}}"
+      "css": ".ds-landing-nav-stage{padding:18px;background:radial-gradient(ellipse at 78% 44%,#3c5682 0%,#1b2c4e 32%,#080f20 77%)}.ds-landing-nav{border:1px solid #b6d0ff31;border-top-color:#e8e7d655;background:linear-gradient(121deg,#dbe9ff23,transparent 45%,#9bbee614),#0b142880;box-shadow:inset 0 1px #fffaeb12,0 16px 38px #02061558;backdrop-filter:blur(16px) saturate(1.35)}.ds-landing-nav{font-family:Manrope,\"Anek Bangla\",sans-serif;min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding-inline:clamp(16px,2.3vw,36px);border-radius:18px;color:#f6f1e6}.ds-landing-nav a{color:#bec8d9;text-decoration:none}.ds-landing-nav a:hover,.ds-landing-nav .ds-landing-portal{color:#f6f1e6}.ds-landing-actions,.ds-landing-portal{display:inline-flex;align-items:center;gap:8px}.ds-landing-portal{padding:5px 0 5px 20px;border-inline-start:1px solid #dce7ff32}.ds-landing-portal svg{transition:transform 180ms ease-out}.ds-landing-portal:hover svg{transform:translate(2px,-2px)}.ds-landing-actions button{font:inherit;min-height:42px;padding:7px 15px;border:0;border-radius:99px;background:transparent;color:inherit;cursor:pointer}.ds-landing-actions button:hover{background:#f0f4ff18}.ds-landing-nav :is(a,button):focus-visible{outline:3px solid #f0c96d;outline-offset:3px}@media(max-width:680px){.ds-landing-nav{min-height:59px;padding-inline:12px;border-radius:17px}.ds-landing-nav .ds-landing-nav-section{display:none}.ds-landing-portal{font-size:12px;padding:5px 0 5px 8px}.ds-landing-actions button{padding-inline:7px}}@media(prefers-reduced-motion:reduce){.ds-landing-portal svg{transition:none}}"
     },
     {
       "name": "Landing example booking",
@@ -1334,7 +1334,7 @@
   ],
   "narrative": {
     "northStar": "The Silver Record Frame",
-    "overview": "The silver glass frame turns conversations into clear, actionable clinic records. Cool translucent navigation surrounds a clear white sheet; restrained slate actions, fine rules and generous Bengali transcript leading make the workspace feel modern, classy and composed. The authentic ByteVoice waveform anchors the identity.\n\nLight and Bangla are the defaults, with an explicit dark toggle and BN/EN controls. A saved English language choice takes precedence. Glass is an intentional user-brief override: use it for the framing and voice emblem, while records remain readable solid surfaces. This replaces the former teal system. The visual language serves a fictional clinic operating interface and its browser voice test.\n\nThe public demo at `/` opens on a full-viewport navy scene. The original ByteVoice receptionist shares the scene with a large Bangla headline and a gold call pill. A floating glass header carries the ByteVoice wordmark, section links, language switch and staff portal link. A warm cream walkthrough follows the hero. Bangla is the default, and the English switch uses the shared saved language preference. The landing palette is independent of the workspace theme setting.",
+    "overview": "The silver glass frame turns conversations into clear, actionable clinic records. Cool translucent navigation surrounds a clear white sheet; restrained slate actions, fine rules and generous Bengali transcript leading make the workspace feel modern, classy and composed. The authentic ByteVoice waveform anchors the identity.\n\nLight and Bangla are the defaults, with an explicit dark toggle and BN/EN controls. A saved English language choice takes precedence. Glass is an intentional user-brief override: use it for the framing and voice emblem, while records remain readable solid surfaces. This replaces the former teal system. The visual language serves a fictional clinic operating interface and its browser voice test.\n\nThe public demo at `/` opens on a full-viewport reception scene with the ByteVoice mascot, a large Bangla headline and a gold call pill. A floating glass header carries the ByteVoice wordmark, section links and language switch. A slim divider separates the staff portal link. A warm cream walkthrough follows the hero. Bangla is the default, and the English switch uses the shared saved language preference. The landing palette is independent of the workspace theme setting.",
     "keyCharacteristics": [
       "Cool silver framing and clear record sheets.",
       "Authentic ByteVoice emblem, preserved from the supplied asset.",

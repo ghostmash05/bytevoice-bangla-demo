@@ -72,8 +72,8 @@ colors:
   landing-ink: "#f6f1e6"
   landing-muted: "#bec8d9"
   landing-line: "#33415a"
-  landing-glass: "#0b1428a6"
-  landing-glass-edge: "#b6d0ff40"
+  landing-glass: "#0b142880"
+  landing-glass-edge: "#b6d0ff31"
   landing-gold: "#f0c96d"
   landing-gold-light: "#ffe7a5"
   landing-gold-deep: "#e9b94e"
@@ -121,7 +121,7 @@ rounded:
   transcript: "12px"
   container: "16px"
   sheet: "20px"
-  landing-glass-nav: "22px"
+  landing-glass-nav: "18px"
   landing-pill: "99px"
   landing-receipt: "18px"
 spacing:
@@ -211,7 +211,7 @@ Light and Bangla are the defaults, with an explicit dark toggle and BN/EN contro
 
 ### Public landing page
 
-The public demo at `/` opens on a full-viewport navy scene. The original ByteVoice receptionist shares the scene with a large Bangla headline and a gold call pill. A floating glass header carries the ByteVoice wordmark, section links, language switch and staff portal link. A warm cream walkthrough follows the hero. Bangla is the default, and the English switch uses the shared saved language preference. The landing palette is independent of the workspace theme setting.
+The public demo at `/` opens on a full-viewport reception scene with the ByteVoice mascot, a large Bangla headline and a gold call pill. A floating glass header carries the ByteVoice wordmark, section links and language switch. A slim divider separates the staff portal link. A warm cream walkthrough follows the hero. Bangla is the default, and the English switch uses the shared saved language preference. The landing palette is independent of the workspace theme setting.
 
 ## Colors
 
@@ -257,7 +257,7 @@ Voice-test content is bounded to (1280px), with a main console and (270px) guide
 
 ### Landing layout
 
-The landing uses a (1540px) maximum content width and a full-bleed hero with a (100svh) minimum above phone widths. A (.9fr / 1.1fr) split keeps the localized promise, working call and consent text on the left and gives the unboxed mascot more room on the right. The cream walkthrough pairs a ruled step list with the sample booking. The navy scenario band places the heading and return-to-call link beside a column of example prompts. Side gutters use `clamp(32px, 5.5vw, 105px)`, then (32px) at (900px) and (18px) at (680px). The small scene label hides at (900px). At (680px), the hero stacks with copy and call controls above the mascot, and the lower sections stack. Language and staff portal controls remain visible in the compact header.
+The landing uses a (1540px) maximum content width and a full-bleed hero with a (100svh) minimum above phone widths. A (.9fr / 1.1fr) split keeps the localized promise, working call and consent text on the left and gives the unboxed mascot more room on the right. The cream walkthrough pairs a ruled step list with the sample booking. The navy scenario band places the heading and return-to-call link beside a column of example prompts. Side gutters use `clamp(32px, 5.5vw, 105px)`, then (32px) at (900px) and (18px) at (680px). At (680px), the hero stacks with copy and call controls above the mascot, and the lower sections stack. Language and staff portal controls remain visible in the compact header.
 
 ## Elevation & Depth
 
@@ -275,9 +275,11 @@ Background, border, text and shadow transition over (.18s ease). Only the connec
 
 ### Landing art and motion
 
-The original mascot render shows a blue parrot in a headset at a gold-trimmed reception desk. It lives at `web/public/landing/byte-mascot.webp`. The user-supplied Midnight Satin Folds backdrop fills the viewport, with a navy scrim behind the copy and a tighter portrait crop on phones. Three.js places the portrait texture on a plane in a perspective scene with three gold rings at different depths. Pointer movement tilts the portrait gently, then it eases back to center. Touch input keeps a steady composition. Rendering settles when the motion does. The still uses the same artwork and remains available during loading, with reduced motion or if WebGL cannot initialize or loses context.
+The generated desktop and tablet backdrop (`web/public/landing/dhaka-reception.webp`) depicts a fictional Dhaka reception at dusk with a waterfront skyline. Navy scrims protect the copy and floor reflections ground the desk. Phones use a portrait crop of the user-supplied Midnight Satin Folds image. The scenario band reuses the wider satin image under a navy gradient.
 
-Landing glass combines a (16px) backdrop blur and (1.35) saturation with a cool translucent fill and a brighter top edge. Apply it to the floating header, portal link, scene label and active call console. The booking sample uses an upright ivory surface, a warm seam and a diffuse shadow (`6px 20px 46px #40321c24`).
+Three.js maps the original blue parrot portrait (`web/public/landing/byte-mascot.webp`) onto a subdivided mesh. Gentle head and neck movement and a subtle breath keep the desk and tablet steady within the portrait. Two restrained gold rings sit behind the mascot. Desktop pointer movement adds a small tilt to the portrait. A localized circular pause/play control (44px) appears after the canvas is ready, at the lower right of the art on desktop and upper right on phones. Rendering suspends offscreen and in hidden tabs. The still is used during loading, when reduced motion is enabled at page load, and if WebGL cannot initialize or loses context.
+
+Landing glass combines a (16px) backdrop blur and (1.35) saturation with a cool translucent fill and a brighter top edge. Apply it to the floating header, circular motion control and active call console. The header has (18px) desktop corners and (17px) phone corners. The booking sample uses an upright ivory surface, a warm seam and a diffuse shadow (`6px 20px 46px #40321c24`).
 
 ## Shapes
 

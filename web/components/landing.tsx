@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowDown, ArrowUpRight, AudioLines, CalendarCheck2, Mic, Phone, ShieldCheck } from "lucide-react";
+import { ArrowDown, ArrowUpRight, CalendarCheck2, Mic, Phone, ShieldCheck } from "lucide-react";
 import { Brand } from "./brand";
 import { LandingMascot } from "./landing-mascot";
 import { useLocale } from "./locale";
@@ -14,7 +14,8 @@ const copy = {
     how: "কীভাবে কাজ করে",
     scenarios: "কী বলে শুরু করবেন",
     portal: "স্টাফ পোর্টাল",
-    sceneLabel: "বাংলা ভয়েস ডেমো",
+    pauseScene: "অ্যানিমেশন থামান",
+    playScene: "অ্যানিমেশন চালু করুন",
     title: ["বাংলায় বলুন।", "সময় বুক করুন।"],
     intro: "মাশরাফি’স ডেন্টালের ডেমো রিসেপশনিস্টের সঙ্গে বাংলায় কথা বলুন। সময় জেনে নিন, অ্যাপয়েন্টমেন্ট বুক করুন, অথবা আগের বুকিং বদলান।",
     stepsTitle: "কথা থেকে বুকিং",
@@ -48,7 +49,8 @@ const copy = {
     how: "How it works",
     scenarios: "What to ask",
     portal: "Staff portal",
-    sceneLabel: "Bangla voice demo",
+    pauseScene: "Pause animation",
+    playScene: "Play animation",
     title: ["Call in Bangla.", "Book a visit."],
     intro: "Talk to the demo receptionist at Mashrafi’s Dental. Ask about availability, book a visit, or change an existing appointment in Bangla.",
     stepsTitle: "From conversation to booking",
@@ -109,8 +111,7 @@ export default function Landing() {
               <VoiceTest hero />
             </div>
             <div className="landing-hero-art">
-              <LandingMascot />
-              <div className="landing-scene-label"><AudioLines size={21} aria-hidden="true" /><span>{text.sceneLabel}</span></div>
+              <LandingMascot pauseLabel={text.pauseScene} playLabel={text.playScene} />
             </div>
           </div>
           <div className="landing-hero-foot landing-width">
