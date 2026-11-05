@@ -14,6 +14,7 @@ export const bangla: Record<string, string> = {
   "The receptionist did not join. End the call and try again shortly.": "রিসেপশনিস্ট কলটিতে যোগ দিতে পারেননি। কল শেষ করে কিছুক্ষণ পর আবার চেষ্টা করুন।",
   "The receptionist disconnected. Reconnect to continue; any saved details are retained.": "রিসেপশনিস্টের সংযোগ বিচ্ছিন্ন হয়েছে। আবার কল করুন। সংরক্ষিত তথ্য পাওয়া যাবে।",
   "Staff sign in": "কর্মীদের সাইন ইন",
+  "Back to ByteVoice": "ByteVoice-এ ফিরে যান",
   "Session service is unavailable. Please try signing in again shortly.": "লগইন সেবা এখন পাওয়া যাচ্ছে না। কিছুক্ষণ পরে আবার সাইন ইন করুন।",
   "Try a conversation": "কথা বলে দেখুন",
   "Clear filters": "সব ফিল্টার সরান", "Copy phone number": "ফোন নম্বর কপি করুন", "Copy booking reference": "বুকিং রেফারেন্স কপি করুন", "Copied": "কপি হয়েছে", "Could not copy. Select and copy the text.": "কপি করা যায়নি। লেখাটি বেছে নিয়ে কপি করুন।",

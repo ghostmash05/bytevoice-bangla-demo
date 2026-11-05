@@ -2,45 +2,45 @@
 name: ByteVoice Bangla workspace
 description: A Bangla-first voice demo and a silver glass workspace for clinic records.
 colors:
-  ink: "#202936"
-  muted: "#5d6876"
-  faint: "#657383"
-  line: "#e3e8ee"
-  control: "#c7d0db"
-  paper: "#fff"
-  workspace: "#f0f3f7"
-  nav: "rgba(248,250,253,.66)"
-  raised: "#f7f9fc"
-  selected: "#eaf0f7"
-  accent: "#335d7e"
-  accent-dark: "#244963"
-  primary: "#273749"
-  primary-ink: "#fff"
+  ink: "#17223a"
+  muted: "#5e5c56"
+  faint: "#736b5f"
+  line: "#e5dfd4"
+  control: "#c8bfaf"
+  paper: "#fffdf8"
+  workspace: "#f0ebe0"
+  nav: "rgba(255,251,241,.78)"
+  raised: "#f7f3eb"
+  selected: "#f7eccf"
+  accent: "#805d18"
+  accent-dark: "#61430b"
+  primary: "#f0c96d"
+  primary-ink: "#141d30"
   error: "#a52e40"
   error-bg: "#fff3f4"
-  focus: "#467caf"
+  focus: "#946a15"
   glass-edge: "rgba(255,255,255,.9)"
-  assistant: "#f2f5f9"
-  rule: "#edf0f4"
-  dark-ink: "#edf1f7"
-  dark-muted: "#b3bdcb"
-  dark-faint: "#a2afc0"
-  dark-line: "#303b49"
-  dark-control: "#4c5a6c"
-  dark-paper: "#1a222e"
-  dark-workspace: "#101722"
-  dark-nav: "rgba(25,34,48,.78)"
-  dark-raised: "#222d3c"
-  dark-selected: "#2c3c50"
-  dark-accent: "#accce9"
-  dark-accent-dark: "#d1e5f8"
-  dark-primary: "#dce8f4"
-  dark-primary-ink: "#172534"
+  assistant: "#f5f0e6"
+  rule: "#eee8dd"
+  dark-ink: "#f6f1e6"
+  dark-muted: "#bec8d9"
+  dark-faint: "#a5afc0"
+  dark-line: "#33415a"
+  dark-control: "#526078"
+  dark-paper: "#111b30"
+  dark-workspace: "#080f20"
+  dark-nav: "rgba(17,27,48,.78)"
+  dark-raised: "#19243b"
+  dark-selected: "#3c3422"
+  dark-accent: "#f0c96d"
+  dark-accent-dark: "#ffe2a1"
+  dark-primary: "#f0c96d"
+  dark-primary-ink: "#141d30"
   dark-error: "#ffb5bf"
   dark-error-bg: "#3a2631"
-  dark-focus: "#a7cff8"
-  dark-glass-edge: "rgba(181,203,229,.12)"
-  dark-assistant: "#222e3d"
+  dark-focus: "#f0c96d"
+  dark-glass-edge: "rgba(182,208,255,.15)"
+  dark-assistant: "#19243b"
   dark-rule: "#2b3543"
   booked-surface: "#eaf5ef"
   booked-ink: "#31664a"
@@ -203,7 +203,7 @@ Light and Bangla are the defaults, with an explicit dark toggle and BN/EN contro
 
 **Key Characteristics:**
 
-- Cool silver framing and clear record sheets.
+- Warm cream framing, clear record sheets and gold actions.
 - Authentic ByteVoice emblem, preserved from the supplied asset.
 - Manrope interface text with Anek Bangla conversations.
 - Light by default; deliberate dark and BN/EN controls.
@@ -219,7 +219,7 @@ The palette is cool neutral: slate actions, blue-grey metadata and translucent s
 
 ### Primary
 
-**Slate action** (`primary` / `primary-ink`) carries principal buttons, with `ink` on hover. **Steel blue** (`accent` / `accent-dark`) marks text links, tab underlines and action icons. **Focus blue** (`focus`) identifies keyboard position.
+**Gold action** (`primary` / `primary-ink`) carries principal buttons, with `ink` on hover. **Warm gold** (`accent` / `accent-dark`) marks text links, tab underlines and action icons. **Focus blue** (`focus`) identifies keyboard position.
 
 ### Neutral
 
@@ -343,3 +343,7 @@ The gold hero action starts the real embedded `VoiceTest` call in the demo secti
 - Don't spread glass blur onto transcript or field reading surfaces.
 - Don't introduce invented business metrics or medical claims.
 - Don't treat documentation as proof of deployment or speech quality.
+
+### Landing and workspace continuity
+
+The landing rollout panel uses navy fluted glass, cream text and a gold contact action. Staff sign-in pairs the same navy glass with a warm paper form, one sign-in heading and a return-to-home link. The form stacks below a compact introduction on phones. Workspace surfaces use warm cream in light mode and landing navy in dark mode, with gold primary actions and warm gold link/focus colors.

@@ -241,19 +241,24 @@
 .landing-pricing-inner { max-width: 1120px; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); align-items: center; gap: clamp(28px, 7vw, 104px); }
 .landing-pricing h2 { font-size: clamp(32px, 4.2vw, 54px); line-height: 1.13; margin: 0 0 28px; text-wrap: balance; }
 .landing-benefits { list-style: none; margin: 0; padding: 0; }
-.landing-benefits li { border-top: 1px solid #242f422e; padding-block: 14px; }
+.landing-benefits li { border-top: 1px solid #242f422e; padding-block: 20px; }
 .landing-benefits h3 { margin: 0 0 4px; font-size: 18px; }
 .landing-benefits p, .landing-rollout > p:not(.landing-rollout-rate) { color: #404957; margin: 0; }
 .landing-rollout {
-  padding: clamp(24px, 3.5vw, 42px);
-  border: 1px solid #b7a88c72;
-  border-radius: 18px;
-  background: #fffbf1;
-  box-shadow: 6px 20px 46px #40321c1a;
+  position: relative;
+  overflow: hidden;
+  padding: clamp(28px, 3.5vw, 48px);
+  border: 1px solid #b6d0ff38;
+  border-radius: 22px;
+  color: #f6f1e6;
+  background: linear-gradient(140deg, #111b30fa 18%, #111b30cc 70%, #17233bd9), url("/landing/fluted-glass.webp") center / cover #111b30;
+  box-shadow: 8px 24px 48px #40321c26, inset 0 1px #f8f2d326;
 }
-.landing-rollout h3 { font-size: 17px; margin: 0 0 12px; color: #62460d; }
-.landing-rollout-rate { color: #17223a; font-size: clamp(27px, 3vw, 38px); line-height: 1.12; font-weight: 700; margin: 0 0 16px; }
-.landing-rollout a { display: inline-flex; align-items: center; gap: 8px; color: #62460d; font-weight: 700; margin-top: 18px; min-height: 44px; }
+.landing-rollout h3 { font-size: clamp(29px, 3vw, 39px); line-height: 1.2; margin: 0 0 18px; }
+.landing-rollout-rate { color: #f0c96d; font-size: 19px; line-height: 1.5; font-weight: 600; margin: 0 0 24px; padding-bottom: 24px; border-bottom: 1px solid #b6d0ff38; }
+.landing-rollout > p:not(.landing-rollout-rate) { color: #bec8d9; line-height: 1.8; }
+.landing-rollout a { display: inline-flex; align-items: center; justify-content: center; gap: 10px; color: #141d30; background: #f0c96d; padding: 13px 20px; border-radius: 99px; text-decoration: none; font-weight: 700; margin-top: 30px; min-height: 49px; }
+.landing-rollout a:hover { background: #ffdb88; }
 .landing-rollout a svg { flex: none; }
 .landing-faq { padding-block: 95px; grid-template-columns: .65fr 1fr; }
 .landing-faq details { border-top: 1px solid var(--line); }
