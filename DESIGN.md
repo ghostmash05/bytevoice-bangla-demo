@@ -1,6 +1,6 @@
 ---
 name: ByteVoice Bangla workspace
-description: Cool silver glass framing clear, actionable clinic records.
+description: A Bangla-first voice demo and a silver glass workspace for clinic records.
 colors:
   ink: "#202936"
   muted: "#5d6876"
@@ -65,7 +65,23 @@ colors:
   live: "#44896b"
   danger: "#8e3946"
   danger-hover: "#762b37"
+  landing-navy: "#0c1426"
+  landing-console: "#111b30"
+  landing-scenarios: "#1a2b48"
+  landing-ink: "#f6f1e6"
+  landing-muted: "#bec8d9"
+  landing-line: "#33415a"
+  landing-gold: "#f0c96d"
+  landing-gold-hover: "#ffdb88"
+  landing-action-ink: "#141d30"
+  landing-receipt: "#e9e4d8"
+  landing-receipt-ink: "#17223a"
 typography:
+  landing-display:
+    fontFamily: '"Manrope", "Anek Bangla", sans-serif'
+    fontSize: "clamp(47px, 5.7vw, 84px)"
+    fontWeight: 650
+    lineHeight: 1.13
   headline:
     fontFamily: '"Manrope", "Anek Bangla", sans-serif'
     fontSize: "28px"
@@ -98,6 +114,7 @@ rounded:
   transcript: "12px"
   container: "16px"
   sheet: "20px"
+  landing-art: "25px"
 spacing:
   tight: "8px"
   compact: "12px"
@@ -106,6 +123,18 @@ spacing:
   section: "24px"
   sheet-gutter: "32px"
 components:
+  landing-call-button:
+    backgroundColor: "{colors.landing-gold}"
+    textColor: "{colors.landing-action-ink}"
+    rounded: "{rounded.button}"
+    padding: "14px 21px"
+  landing-call-button-hover:
+    backgroundColor: "{colors.landing-gold-hover}"
+  landing-example-booking:
+    backgroundColor: "{colors.landing-receipt}"
+    textColor: "{colors.landing-receipt-ink}"
+    rounded: "{rounded.transcript}"
+    padding: "clamp(25px, 4vw, 52px)"
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.primary-ink}"
@@ -166,6 +195,10 @@ Light and Bangla are the defaults, with an explicit dark toggle and BN/EN contro
 - Light by default; deliberate dark and BN/EN controls.
 - Quiet depth, explicit statuses and visible keyboard focus.
 
+### Public landing page
+
+The public demo at `/` gives the voice experience a navy and gold identity. A large Bangla headline and a gold call button lead the hero beside the original illustrated ByteVoice receptionist. The same ByteVoice wordmark connects the landing to the staff workspace. Bangla is the default, and the English switch uses the shared saved language preference. The page uses a dark color scheme independently of the workspace theme setting.
+
 ## Colors
 
 The palette is cool neutral: slate actions, blue-grey metadata and translucent silver framing. Frontmatter values are normative, extracted from `web/app/globals.css`; `dark-` entries map to the same role under `data-theme="dark"`.
@@ -182,6 +215,10 @@ Outcome pairs remain semantic: booked is muted green, rescheduled steel blue, ca
 
 **The Status Label Rule.** Always pair outcome color with a readable label.
 
+### Landing palette
+
+Use midnight navy for the page, lighter navy for the active call console and a blue band for scenario examples. Warm ivory carries headlines and cool grey carries explanations. Gold marks the second headline line, the main action and keyboard focus. A warm paper booking sample carries dark navy text. These values are scoped to the landing wrapper in `web/components/landing.css`.
+
 ## Typography
 
 The interface uses locally hosted variable **Manrope** (400–800), followed by **Anek Bangla** (variable 100–800 at normal width; original shaping tables retained), then sans-serif. Conversation text reverses those first two families. Both font faces use `font-display: swap`. No separate display face is established.
@@ -189,6 +226,10 @@ The interface uses locally hosted variable **Manrope** (400–800), followed by 
 Frontmatter records the headline, title, body, label and transcript roles. Main headings reduce to (24px) on phones; record headings use (21px). Operational metadata is commonly (11–13px). Buttons use (12px, weight 600), and badges use (11px, weight 600). Transcript leading is deliberately open. Dates, phone numbers and durations use tabular numerals. Phone inputs use (16px) to keep focus stable in Safari.
 
 **The Bilingual Reading Rule.** Preserve Bengali shaping and generous transcript leading; do not force English label metrics onto conversations.
+
+### Landing typography
+
+Anek Bangla handles Bengali glyphs, and Manrope handles Latin. The landing display uses weight (650) and line height (1.13). The two localized headline phrases carry equal typographic weight and can wrap naturally. Gold highlights the booking phrase. The hero introduction is bounded to (39ch). At phone widths the headline uses `clamp(40px, 10vw, 61px)`.
 
 ## Layout
 
@@ -199,6 +240,10 @@ The call index starts at (`minmax(300px, 34%)`). At (1800px) and wider it become
 At (760px) and below, the shell becomes sticky top navigation, the sheet loses its outer border/radius/shadow, and content gutters become (20px). Call list and selected record become separate views with an explicit return action and focus restoration. Filters disclose from a button. Navigation and theme/language controls retain (44px) minimum targets; compact header/filter/icon controls also have (44px) phone targets. These describe responsive patterns, not a universal call-record composition for every future screen.
 
 Voice-test content is bounded to (1280px), with a main console and (270px) guide separated by (38px); compact desktop uses a (225px) guide and (25px) gap. Record transcripts are bounded to (780px). Data-model content is bounded to (1280px). Its flow precedes an entity selector and field/relationship view; at (980px) and below a native picker replaces the entity list. Storage and validation use one readable column at that breakpoint.
+
+### Landing layout
+
+The public page uses a (1260px) maximum content width and starts with a near-even hero split. Keep the localized promise, working call and consent text together on the left, with art in its own panel on the right. A ruled sequence follows with the call-to-booking steps, a labelled sample booking, example prompts and expandable FAQs. Side gutters narrow from (56px) to (32px) at (900px) and (18px) at (680px). At the smallest breakpoint the hero, steps and FAQ stack. Language and staff portal controls remain in the header while the section links move out of the compact navigation.
 
 ## Elevation & Depth
 
@@ -213,6 +258,12 @@ Glass, tonal layering and restrained ambient shadows work together. Navigation u
 **The Clear Record Rule.** Keep the record reading surface solid; confine translucent glass to framing and the voice emblem.
 
 Background, border, text and shadow transition over (.18s ease). Only the connecting voice emblem breathes (2s ease-in-out, opacity .55 at midpoint). Reduced-motion preference disables animations and transitions.
+
+### Landing art and motion
+
+The original mascot render shows a blue parrot in a headset at a gold-trimmed reception desk. It lives at `web/public/landing/byte-mascot.webp`. The art panel pairs a radial navy backdrop with a quiet gold waveform. Three.js places the portrait texture on a plane in a perspective scene with three gold rings at different depths. Pointer movement tilts the portrait gently, then it eases back to center. Touch input keeps a steady composition. Rendering settles when the motion does. The still uses the same artwork and remains available during loading, with reduced motion or if WebGL cannot initialize or loses context.
+
+The example booking sits on warm paper, tilted (−2°) above a solid navy offset shadow (`12px 18px 0 #1b2a46`). Keep this depth treatment with the sample and reserve the portal sheet's glass edges for the workspace.
 
 ## Shapes
 
@@ -253,6 +304,10 @@ Inline phone/reference copy controls use (32px) desktop and (44px) phone targets
 ### Transcript turns and voice emblem
 
 Assistant turns use a raised surface and (17px 20px) padding; caller turns remain on paper. Turns are separated by (22px). Speaker and timestamp precede Bangla text. The voice-stage emblem crops the authentic brand asset inside a circular material frame; connection/live states change material and opacity subtly. Keep loading, empty, connection and failure messages explicit.
+
+### Landing caller and booking sample
+
+The gold hero action starts the real embedded `VoiceTest` call. At rest it sits above concise permission and data-use copy. During a call, the hero shows connection state, microphone and end-call controls, errors and live captions as they become available. Keep keyboard focus visible and preserve localized control labels. The booking receipt farther down the page always carries an explicit sample label.
 
 ## Do's and Don'ts
 

@@ -41,7 +41,7 @@ not constitute a new audio or production-database test.
 
 | Requirement | Evidence | Assessment |
 |---|---|---|
-| Browser microphone conversation; connecting/live/ended and graceful errors (§4, p2) | `/try`, `web/app/try/page.tsx`, existing microphone/error and human Safari verification | Implemented direct caller; it is not a hero section |
+| Browser microphone conversation; connecting/live/ended and graceful errors (§4, p2) | `/`, `/try`, shared `web/components/voice-test.tsx`, prior human Safari verification on `/try` | The landing hero and direct caller use the same call controls and connection flow |
 | Natural polite Bangla, mixed English/Bangla, Bangladeshi names and accurate numbers/dates (§1.6/§5, p2–3) | Agent prompt, dedicated Bengali STT, validation, confirmation/readback, existing audio tests | Implemented and previously exercised; formal real-speaker accent/recognition quality remains partly unverified |
 | Greeting, name/phone confirmation, reason and preferred date/time (§5, p3) | `agent/prompt.py`, tools/validation, booking service and existing booking evidence | Implemented; no new audio call performed in this UI pass |
 | Book, reschedule, cancel; check doctor/service/availability (§1.5, p1) | Transactional booking/change tools, lookup constraints, prior cross-call audio verification | Implemented; existing verification includes collision/rollback tests |
@@ -54,14 +54,14 @@ not constitute a new audio or production-database test.
 
 | Deliverable or criterion | Brief | Current status |
 |---|---|---|
-| Public responsive landing page, at least three sections | Required, §3/§7, p2/4; design is 20% of assessment | **Missing by explicit user scope.** `/try` is a direct working caller, not this landing page |
-| Prominent live-call action in the hero | Required, §4/§7, p2/4 | **Missing hero integration.** The browser caller itself exists |
+| Public responsive landing page, at least three sections | Required, §3/§7, p2/4; design is 20% of assessment | Implemented at `/` with a hero, call walkthrough, example prompts and FAQ |
+| Prominent live-call action in the hero | Required, §4/§7, p2/4 | The hero action starts the browser call in place |
 | Bangla caller | Required, §5; caller quality is 30% | Implemented; subjective and final human-quality limits above remain |
 | Portal live URL and login | Required, §6/§7; data structure/portal is 25% | Deployed at `/portal`; reviewer credentials still need private handoff |
 | GitHub repository and README, with reviewer access | Required, §7, p4 | Repository and README exist; repository remains **private** per user. Reviewer access/publication is pending |
 | Video overview, maximum three minutes, showing landing/call/record | Required, §7, p4; documentation/presentation is 10% | **Not produced.** User explicitly excluded recording from agent work; original requirement still stands |
 | Code quality, architecture and secrets | 15%, §8, p4 | Source, configuration separation and CI exist; this audit does not replace an independent security audit |
-| Bilingual landing page and 3D hero | Bonuses, §3/§8, p2/4 | Optional. Dashboard BN/EN is implemented but does not substitute for the missing landing page |
+| Bilingual landing page and 3D hero | Bonuses, §3/§8, p2/4 | Bangla by default with an English switch and a Three.js parallax scene using an original mascot render |
 | Fake patient data; keep secrets out; keep services live | §9, p4 | Demo labels and secret separation are implemented. User-controlled hosting must remain online until assessment ends |
 
 The deadline printed in §10 (p4) is **Thursday 5 November 2026, 11:59 PM
@@ -72,11 +72,9 @@ No email was sent and no visibility setting was changed by this audit.
 
 ## Practical priorities
 
-1. Decide separately how to cover the required landing page and hero entry.
-2. Provide a short video yourself or explicitly change the earlier recording scope.
-3. Grant repository access or make it public before submission, as already planned.
-4. Include reviewer credentials privately and perform the final human call-through.
+1. Provide the short overview video.
+2. Grant repository access or make it public before submission, as already planned.
+3. Include reviewer credentials privately and perform the final human call-through.
 
-The portal's required fields are covered. The full assessment is **not yet a
-complete submission**, primarily because of the explicitly excluded landing/video
-deliverables and pending repository access.
+The landing page and portal are implemented. Submission handoff still requires
+the overview video, reviewer credentials and repository access.

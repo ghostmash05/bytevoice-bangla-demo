@@ -47,9 +47,8 @@ Gemini Live using a dedicated free-tier ByteVoice project. See
 
 **Remaining review and handoff:** consistent real-speaker Bengali captions and
 formal accent review remain unverified. The repository stays private until the
-user makes it public before submission. Landing-page work and video recording are
-excluded by the user's instructions; neither is claimed complete against the
-original assessment. Detailed evidence and limits are in `docs/verification.md`.
+user makes it public before submission. The overview video remains a separate
+submission deliverable. Detailed evidence and limits are in `docs/verification.md`.
 The requirement-by-requirement cross-check against the supplied four-page brief is
 in [docs/task-brief-audit.md](docs/task-brief-audit.md), including remaining
 submission deliverables and the exact deadline.
@@ -127,7 +126,9 @@ It can run `web\node_modules\next\dist\bin\next` directly with `build` or `start
 - Browser voice test: http://127.0.0.1:3000/try
 - API health: http://127.0.0.1:8000/api/health
 - Development API documentation: http://127.0.0.1:8000/api/docs
-- `/` redirects to the staff portal; no landing page has been created.
+- `/` is the Bangla-first public landing page with an English switch and a live
+  Bangla call action. Its original mascot render sits in a Three.js scene with
+  a still fallback.
 
 For optional **local-only scripted fixtures**, run:
 `.\.venv\Scripts\python.exe -m backend.fixtures --confirm-test-data`.

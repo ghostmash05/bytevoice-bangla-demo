@@ -13,7 +13,13 @@ const contract = {
   seed: "257497214",
   mode: "operate",
   form: "silver glass framed workspace",
-  scope: "Staff portal and voice test; landing page excluded",
+  scope: "Staff portal and voice test",
+  landing: {
+    mode: "persuade",
+    thesis: "A conversation in Bangla becomes a clinic booking.",
+    form: "Dark navy stage with a gold call action and rendered receptionist beside it",
+    interaction: "Direct browser calling and a pointer-responsive Three.js portrait scene",
+  },
 };
 
 export const metadata: Metadata = {

@@ -17,7 +17,7 @@ import { api, label as formatLabel } from "@/lib/api";
 type State = "idle" | "connecting" | "live" | "ended" | "error";
 type Turn = { id: string; text: string; speaker: string };
 
-export default function VoiceTest() {
+export default function VoiceTest({ hero = false }: { hero?: boolean }) {
   const { t } = useLocale();
   const label = (value: string) => t(formatLabel(value));
   const [state, setState] = useState<State>("idle"),
@@ -229,22 +229,22 @@ export default function VoiceTest() {
     }
   }
   return (
-      <div className="test-layout">
-        <header className="voice-page-heading"><div><h1>{t("Talk to your receptionist")}</h1>
+      <div className={hero ? "hero-caller" : "test-layout"}>
+        {!hero && <header className="voice-page-heading"><div><h1>{t("Talk to your receptionist")}</h1>
         <p>
           {t("Speak naturally in Bangla. You can ask about the demo clinic, book a visit, or change an existing appointment using its reference and phone number.")}</p>
-        </div></header>
+        </div></header>}
         <div className="voice-workspace">
         <div className="voice-column">
         <section className={`call-console console-${state}`} aria-label={t("Browser voice call")}>
-          <div className="call-console-head">
+          {(!hero || state !== "idle") && <div className="call-console-head">
             <h2>{t("Mashrafi’s Dental")}</h2>
             <span className="call-state" role="status">
               <span className={`state-dot ${state === "live" ? "live" : ""}`} />
               {label(state)}
             </span>
-          </div>
-          <div className="call-stage">
+          </div>}
+          {(!hero || state !== "idle") && <div className="call-stage">
             <div className="voice-mark">
               <Brand mark />
             </div>
@@ -257,7 +257,7 @@ export default function VoiceTest() {
                     ? t("The call has ended")
                     : state === "error"
                       ? t("Let’s try that again")
-                      : "কীভাবে সাহায্য করতে পারি?"}
+              : t("How can I help?")}
             </h3>
             <p>
               {state === "live"
@@ -268,10 +268,10 @@ export default function VoiceTest() {
             </p>
             {error && (
               <p className="error" role="alert">
-                {error}
+                {t(error)}
               </p>
             )}
-          </div>
+          </div>}
           <div className="call-controls">
             {state === "live" ? (
               <>
@@ -289,7 +289,7 @@ export default function VoiceTest() {
             ) : (
               <button className="primary" onClick={start}>
                 <Phone size={17} />
-                {state === "idle" ? t("Start voice call") : t("Start another call")}
+                {state === "idle" ? t(hero ? "Talk to our Bangla caller" : "Start voice call") : t("Start another call")}
               </button>
             )}
           </div>
@@ -314,12 +314,12 @@ export default function VoiceTest() {
             {t("View this call in the staff portal")}</Link>
         )}
         </div>
-        <aside className="call-guide" aria-label={t("Conversation guide")}>
+        {!hero && <aside className="call-guide" aria-label={t("Conversation guide")}>
           <h2>{t("Try a conversation")}</h2>
           <div className="guide-item"><CalendarCheck2 size={19} aria-hidden="true" /><div><h3>{t("Book an appointment")}</h3><p lang="bn">“কাল সকালে স্কেলিংয়ের জন্য সময় হবে?”</p></div></div>
           <div className="guide-item"><RefreshCw size={18} aria-hidden="true" /><div><h3>{t("Change an existing visit")}</h3><p>{t("Have your booking reference and phone number ready.")}</p></div></div>
           <div className="guide-item"><MessageSquareText size={19} aria-hidden="true" /><div><h3>{t("Ask about the clinic")}</h3><p>{t("Opening hours, services, demo fees or a staff callback.")}</p></div></div>
-        </aside>
+        </aside>}
         </div>
         <div ref={audio} aria-hidden="true" />
       </div>

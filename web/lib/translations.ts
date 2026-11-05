@@ -1,4 +1,12 @@
 export const bangla: Record<string, string> = {
+  "Talk to our Bangla caller": "বাংলায় কথা বলুন",
+  "How can I help?": "কীভাবে সাহায্য করতে পারি?",
+  "Microphone access was blocked. Allow it in your browser’s site settings, then try again.": "মাইক্রোফোনের অনুমতি বন্ধ আছে। ব্রাউজারের সাইট সেটিংসে অনুমতি দিয়ে আবার চেষ্টা করুন।",
+  "No microphone was found. Connect one and try again.": "মাইক্রোফোন পাওয়া যায়নি। একটি মাইক্রোফোন সংযোগ দিয়ে আবার চেষ্টা করুন।",
+  "Microphone access needs HTTPS or localhost and a supported browser.": "মাইক্রোফোন ব্যবহারের জন্য সমর্থিত ব্রাউজার ও নিরাপদ সংযোগ প্রয়োজন।",
+  "The call could not connect. Please try again.": "কল সংযোগ করা যায়নি। আবার চেষ্টা করুন।",
+  "The receptionist did not join. End the call and try again shortly.": "রিসেপশনিস্ট কলটিতে যোগ দিতে পারেননি। কল শেষ করে কিছুক্ষণ পর আবার চেষ্টা করুন।",
+  "The receptionist disconnected. Reconnect to continue; any saved details are retained.": "রিসেপশনিস্টের সংযোগ বিচ্ছিন্ন হয়েছে। আবার কল করুন। সংরক্ষিত তথ্য পাওয়া যাবে।",
   "Staff sign in": "কর্মীদের সাইন ইন",
   "Session service is unavailable. Please try signing in again shortly.": "লগইন সেবা এখন পাওয়া যাচ্ছে না। কিছুক্ষণ পরে আবার সাইন ইন করুন।",
   "Try a conversation": "কথা বলে দেখুন",
